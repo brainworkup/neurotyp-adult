@@ -1,5 +1,5 @@
 ---
-title: Untitled
+title: NEUROCOGNITIVE EXAMINATION
 format:
   neurotyp-typst: default
 ---
@@ -13,6 +13,3 @@ format:
 You can learn more about creating custom Typst templates here: 
 
 <https://quarto.org/docs/prerelease/1.4/typst.html#custom-formats>
-
-
-
