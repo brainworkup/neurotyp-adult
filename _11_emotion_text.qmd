@@ -23,8 +23,8 @@ reported some preoccupation with physical symptoms and bodily complaints
 (_elevated SOM-H_); it is possible that `r params$he_she` may express `r
 params$his_her` psychological distress through somatic symptoms. `r
 params$first_name` reported high perceived stress, a great deal of tension, and
-having difficulty relaxing (_elevated ANX-A_). (ref:he-she-cap) appears to have
-a tendency to be impulsive and `r params$his_her` impulsive behaviors may
+having difficulty relaxing (_elevated ANX-A_). `r params$he_she_cap` appears to
+have a tendency to be impulsive and `r params$his_her` impulsive behaviors may
 interfere with interpersonal problems and school functioning (_elevated BOR-S_).
 As a result of `r params$his_her` desire for excitement and stimulation, `r
 params$first_name` may often become easily bored by routine activities

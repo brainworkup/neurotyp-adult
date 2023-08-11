@@ -254,7 +254,7 @@ pathwork +
 
 ```{r}
 #| label: table-md-adhd
-#| eval: true
+#| eval: false
 #| tbl-cap: "ADHD and Executive Functioning"
 # markdown table; change label if want to use
 markdown_table_typst <- function(data) {
@@ -271,13 +271,13 @@ markdown_table_typst <- function(data) {
       col.names = c("**Scale**", "**Score**", "**‰ Rank**", "**Range**")
     )
 }
-
 tbl_md <- markdown_table_typst(data[, c(2, 4, 5, 6)])
 tbl_md
 ```
 
 ```{r}
 #| label: csv-adhd
+#| eval: false
 adhd <- data[, c(2, 4, 5, 6)]
 readr::write_csv(adhd, "adhd.csv", col_names = FALSE)
 ```

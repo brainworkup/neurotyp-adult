@@ -1,5 +1,9 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
+patient: Biggie Smalls
+doe: 2023-01-01
+firstname: Biggie
+lastname: Smalls
 format:
   neurotyp-typst:
     keep-typ: true
@@ -44,15 +48,6 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```
 
 ```{=typst}
-#let patient = [
-  Biggie Smalls
-]
-#let doe = [
-  2023-04-04
-]
-```
-
-```{=typst}
 #v(2pt, weak: true)
 *PATIENT NAME:* `r params$first_name` `r params$last_name` \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, `r params$doe3` \ 
@@ -91,11 +86,11 @@ Evaluation and Research (NIH EXAMINER):
 #| eval: false
 #| include: false
 # construct file path
-patient <- "Biggie"
+name <- "Biggie"
 scale <- "NeuropsychEval-NSE-"
 ext <- ".txt"
 result <- ""
-file <- file.path(paste0(scale, patient, ext))
+file <- file.path(paste0(scale, name, ext))
 ```
 
 ## Referral
@@ -170,7 +165,7 @@ maintained this job for the past 6 years.
 #| label: make-neuropsych
 #| include: false
 library(tidyverse)
-patient <- "Biggie"
+# patient <- "Biggie"
 data_path <- here::here("csv")
 files <- dir(data_path, pattern = "*.csv")
 neuropsych <-
@@ -314,9 +309,7 @@ readr::write_csv(validity, here::here("validity.csv"))
 - *Cognitive process:* Coherent and goal directed.
 - *Motivation/effort:* Normal.
 
-## Intelligence/General Ability
-
-<!-- {{< include _02_iq_text.qmd >}} -->
+## General Cognitive Ability
 
 <!-- {{< include _02_iq.qmd >}} -->
 
@@ -461,7 +454,7 @@ gt::gtsave(table_iq, glue("table_iq", ".pdf"), expand = 10)
 
 ```{=typst}
 <qtbl-iq>
-#figure([#image("table_iq.png", width: 70%)],
+#figure([#image("table_iq.png", width: 50%)],
   caption: [
     Composite intellectual and neuropsychological index scores
   ],
@@ -472,6 +465,7 @@ gt::gtsave(table_iq, glue("table_iq", ".pdf"), expand = 10)
 ```{r}
 #| label: fig-iq
 #| eval: true
+#| out-width: 70%
 #| fig-cap: "*General Ability* refers to an overall capacity to reason, to solve problems, and to learn useful information. *Crystallized Knowledge* refers to the ability to learn and use language to reason and understand how the world works. *Fluid Reasoning* refers to the ability to use logical reasoning to figure things out without being told exactly how things work, analyze and solve novel problems, identify patterns and relationships that underpin these problems, and apply logic."
 
 # load packages

@@ -271,6 +271,7 @@ tbl_md
 
 ```{r}
 #| label: csv-emotion
+#| eval: false
 emotion <- data[, c(2, 4, 5, 6)]
 readr::write_csv(emotion, "emotion.csv", col_names = FALSE)
 ```

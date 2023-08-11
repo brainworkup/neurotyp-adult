@@ -219,10 +219,8 @@ table_executive <- bwu::tbl_gt(
   source_note = source_note
 )
 table_executive
-
 gt::gtsave(table_executive, glue("table_executive", ".png"), expand = 10)
 gt::gtsave(table_executive, glue("table_executive", ".pdf"), expand = 10)
-
 ```
 
 ```{=typst}
@@ -255,10 +253,8 @@ fig_executive <- bwu::dotplot(
   fill = x
 )
 fig_executive
-
 ggplot2::ggsave("fig_executive.png")
 ggplot2::ggsave("fig_executive.pdf")
-
 ```
 
 ```{r}
@@ -282,13 +278,13 @@ markdown_table_typst <- function(data) {
       col.names = c("**Scale**", "**Score**", "**‰ Rank**", "**Range**")
     )
 }
-
 tbl_md <- markdown_table_typst(data[, c(2, 4, 5, 6)])
 tbl_md
 ```
 
 ```{r}
 #| label: csv-executive
+#| eval: false
 executive <- data[, c(2, 4, 5, 6)]
 readr::write_csv(executive, "executive.csv", col_names = FALSE)
 ```

@@ -14,7 +14,9 @@ format:
     toc: true
 ---
 
-<!-- ### General Cognitive Ability -->
+<!-- ## General Cognitive Ability -->
+
+{{< include _02_iq_text.qmd >}}
 
 ```{r}
 #| label: data-g
