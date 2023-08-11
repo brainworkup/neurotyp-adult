@@ -21,3 +21,17 @@ execute:
 
 <!-- Glue -->
  
+ 
+A composite screening measure of Lilith's visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Above Average classification range. 
+A composite measure of the examinee's verbal and visual memory functioning was High Average. 
+An estimate of fluid intelligence (*G*f) was classified as High Average. 
+Crystallized intelligence (*G*c) was classified as High Average and ranked at the 86th percentile. 
+An estimate of higher cognitive reasoning and acquired knowledge (*g*) was High Average and ranked at the 82th percentile, indicating performance as good as or better than 82% of same-age peers from the general population. 
+An estimate of premorbid verbal ability level fell within the Average range.^[(ref:premorbid)] 
+A composite screening measure of language comprehension and word-finding abilities fell in the Average classification range. 
+Finally, a comprehensive measure of neuropsychological functioning (independent of general intelligence) in the domains of attentional and executive functioning, language, spatial processing, and memory fell in the Average range. 
+Collective performance across measures of processing speed and cognitive efficiency^[(ref:processing-speed)] was Average and a relative strength|weakness. 
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Low Average range. 
+A composite estimate of working memory^[(ref:working-memory)] and processing speed^[(ref:processing-speed)] (i.e., cognitive proficiency) was Low Average and a relative strength|weakness. 
+An estimate of working memory capacity^[(ref:working-memory)] fell in the Below Average range and was and a relative strength|weakness. 
+An overall screening measure of the examinee's attentional functioning was Below Average.

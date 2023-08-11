@@ -367,7 +367,7 @@ data <- readr::read_csv(file_path)
 # filter by broad domain
 domain <- "Intelligence/General Ability"
 data <- data |>
-  dplyr::filter(domain == !!domain) |> 
+  dplyr::filter(domain == !!domain) |>
   dplyr::filter(!is.na(percentile))
 
 # filter by scale
@@ -481,8 +481,8 @@ xfun::pkg_attach(c(
 ))
 
 # more filtering for plots
-data_dotplot <- 
-  dplyr::filter(data, scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")) |> 
+data_dotplot <-
+  dplyr::filter(data, scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")) |>
   dplyr::filter(!is.na(percentile))
 
 # will need to change these for each domain
@@ -605,11 +605,11 @@ ggplot2::ggsave("fig_g.png")
 ggplot2::ggsave("fig_g.pdf")
 ```
 
-{{< include _sirf.qmd >}}
+{{< include _13_sirf.qmd >}}
 
 # RECOMMENDATIONS
 
-{{< include _recs.qmd >}}
+{{< include _14_recs.qmd >}}
 
 It was a pleasure to work with Biggie. Please contact me with any questions or concerns regarding this patient.
 
@@ -621,7 +621,7 @@ Sincerely,
 #| fig-align: left
 #| cache: true
 #| eval: true
-knitr::include_graphics("./jwt_sig.png")
+knitr::include_graphics("jwt_sig.png")
 ```
 
 **Joey W. Trampush, Ph.D.**\

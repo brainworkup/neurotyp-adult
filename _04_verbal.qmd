@@ -222,6 +222,7 @@ tbl_md
 
 ```{r}
 #| label: csv-verbal
+#| eval: false
 verbal <- data[, c(2, 4, 5, 6)]
 readr::write_csv(verbal, "verbal.csv", col_names = FALSE)
 ```

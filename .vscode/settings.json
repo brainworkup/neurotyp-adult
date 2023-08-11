@@ -15,5 +15,9 @@
     "sideBar.border": "#b0b0eb",
     "tab.activeBorder": "#b0b0eb"
   },
-  "peacock.color": "#8887e1"
+  "peacock.color": "#8887e1",
+  "files.exclude": {
+    ".history": true,
+    ".vscode": true
+  }
 }

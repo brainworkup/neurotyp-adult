@@ -6,5 +6,5 @@ contributes:
   formats:
     typst:
       template-partials:
-        - neurotyp.typ
-        - show-neurotyp.typ
+        - typst-template.typ
+        - typst-show.typ
