@@ -1,5 +1,5 @@
 ---
-title: NEUROCOGNITIVE EXAMINATION
+title: "NEUROCOGNITIVE EXAMINATION"
 patient: Biggie Smalls
 doe: 2023-01-01
 firstname: Biggie
@@ -48,9 +48,10 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```
 
 ```{=typst}
+#let patient = "Biggie Smalls"
 #v(2pt, weak: true)
-*PATIENT NAME:* `r params$first_name` `r params$last_name` \ 
-*DATES OF EXAM:* `r params$doe1`, `r params$doe2`, `r params$doe3` \ 
+*PATIENT NAME:* #patient \  
+*DATES OF EXAM:* #doe \  
 ```
 # TESTS ADMINISTERED
 
@@ -68,8 +69,7 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 - Wide Range Achievement Test, 5th ed (WRAT-5): Word Reading
 - Neuropsychological Assessment Battery, Screener (NAB):
   - Attention, Language, Memory, Spatial, and Executive Functions Modules
-- NIH Executive Abilities: Measures and Instruments for Neurobehavioral
-Evaluation and Research (NIH EXAMINER):
+- NIH Executive Abilities: Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
   - Unstructured Task, Verbal Fluency, and Behavioral Rating Scale
 - California Verbal Learning Test, 3rd ed (CVLT-3), Brief Form
 - Rey-Osterrieth Complex Figure Test (ROCFT)
@@ -98,6 +98,21 @@ file <- file.path(paste0(scale, name, ext))
 Biggie was referred for neuropsychological testing as part of a comprehensive
 presurgical work-up of her epilepsy syndrome. The results will be used in
 surgical and treatment planning
+
+```{=typst}
+#import "@preview/tablex:0.0.4": tablex
+
+#tablex(
+  columns: (auto, 1em, 1fr, 1fr),  // 4 columns
+  rows: auto,  // at least 1 row of auto size
+  fill: red,
+  align: center + horizon,
+  stroke: green,
+  [WAIS-4], [b], [c], [d],
+  [], [f], [g], [h],
+  [], [j], [k], [l]
+)
+```
 
 ## Background
 
