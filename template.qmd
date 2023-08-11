@@ -42,16 +42,14 @@ execute:
 #| eval: false
 # Setting the environment variable
 Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
-
 # Getting the value of the environment variable
 patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```
 
 ```{=typst}
-#let patient = "Biggie Smalls"
 #v(2pt, weak: true)
-*PATIENT NAME:* #patient \  
-*DATES OF EXAM:* #doe \  
+*PATIENT NAME:* Biggie Smalls \  
+*DATES OF EXAM:* 2023-01-01 \  
 ```
 # TESTS ADMINISTERED
 
@@ -79,100 +77,7 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 
 # NEUROBEHAVIORAL STATUS EXAM
 
-<!-- {{< include _nse.qmd >}} -->
-
-```{r}
-#| label: import-nse-txt
-#| eval: false
-#| include: false
-# construct file path
-name <- "Biggie"
-scale <- "NeuropsychEval-NSE-"
-ext <- ".txt"
-result <- ""
-file <- file.path(paste0(scale, name, ext))
-```
-
-## Referral
-
-Biggie was referred for neuropsychological testing as part of a comprehensive
-presurgical work-up of her epilepsy syndrome. The results will be used in
-surgical and treatment planning
-
-```{=typst}
-#import "@preview/tablex:0.0.4": tablex
-
-#tablex(
-  columns: (auto, 1em, 1fr, 1fr),  // 4 columns
-  rows: auto,  // at least 1 row of auto size
-  fill: red,
-  align: center + horizon,
-  stroke: green,
-  [WAIS-4], [b], [c], [d],
-  [], [f], [g], [h],
-  [], [j], [k], [l]
-)
-```
-
-## Background
-
-The following information was obtained during an interview with Biggie and from
-review of available medical records. Biggie "Saw a post online of someone
-recently diagnosed with ADHD, and experiences very similar to mine, which
-brought this possibility to my attention." She has been experiencing symptoms of
-procrastination, distractibility, and difficulty with organization and time.
-Biggie has been experiencing these symptoms since childhood, but they have been
-more problematic in the past few years. She has been able to compensate for her
-difficulties by working harder and longer than her peers.
-
-Cognitive complaints: sustained attention, working memory, and word-finding issues over the last 2 years.
-
-## History
-
-### Past Neuropsychological Test Results
-
-Patient denied having prior testing.
-
-### Developmental History
-
-- No birth complications.
-- Developmental milestones: Normal.
-
-### Other Medical History
-
--   Frequent sinus infections.
--   Other medications: Femcon, folic acid.
--   Appetite/weight: Normal, no changes.
--   Sleep: Normal, no changes.
--   Alcohol/tobacco: No history of abuse; denied current use.
-
-### Surgical History
-
-Sinus surgery.
-
-### Psychiatric History
-
-Patient denied.
-
-### Family History
-
-Patient denied a family history of neurological conditions. Her brother was
-diagnosed with ADHD.
-
-### Cultural/Social Background
-
-Biggie is a Caucasian female who was born and raised in XXXX. She is single,
-never married, and has no children.
-
-### Educational History
-
-Biggie graduated from college and completed some Master's-level courses. She
-did not endorse any difficulties with advancing through school.
-
-### Occupational History
-
-Biggie has worked full time as an administrator in a small company. She has
-maintained this job for the past 6 years.
+{{< include _nse.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS
 
