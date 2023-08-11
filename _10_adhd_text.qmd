@@ -1,0 +1,18 @@
+---
+title-meta: adhd-text
+execute:
+  cache: true
+---
+
+<!-- ## ADHD/Executive Functioning -->
+
+`r params$first_name` completed self-report rating scales of adult ADHD symptoms
+and executive functioning in everyday life. Consistent and overlapping difficulties were reported in the areas of:
+
+<!-- insert 2-3 scores -->
+
+On the companion observer-reports, `r params$observer`, `r params$first_name`'s
+`r params$observer_relation`, reported that `r params$first_name` evidences
+moderate to severe difficulties in the areas of:
+
+<!-- insert 2-3 scores -->

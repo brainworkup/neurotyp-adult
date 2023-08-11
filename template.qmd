@@ -1,15 +1,661 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
 format:
-  neurotyp-typst: default
+  neurotyp-typst:
+    keep-typ: true
+params:
+  patient: Biggie
+  first_name: Biggie
+  last_name: Smalls
+  dob: 1991-01-01
+  doe1: 2023-01-01
+  doe2: 2023-01-01
+  doe3: 2023-01-01
+  sex: female
+  sex_cap: Female
+  age: 20
+  educyrs: 15
+  hand: right
+  referral: Dr. Dre
+  observer: Mrs. Wallace
+  observer_relation: mother
+  he_she: she
+  he_she_cap: She
+  his_her: her
+  his_her_cap: Her
+  him_her: her
+  him_her_cap: Her
+  dx1: attention-deficit/hyperactivity disorder (ADHD)
+  dx2: anxiety
+  dx3: depression
+execute:
+  warning: false
+  echo: false
+  message: false
 ---
 
-## Introduction
+```{r}
+#| eval: false
+# Setting the environment variable
+Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
 
-*TODO* Create an example file that demonstrates the formatting and features of your format.
+# Getting the value of the environment variable
+patient <- Sys.getenv("PATIENT_FIRST_NAME")
+```
 
-## More Information
+```{=typst}
+#let patient = [
+  Biggie Smalls
+]
+#let doe = [
+  2023-04-04
+]
+```
 
-You can learn more about creating custom Typst templates here: 
+```{=typst}
+#v(2pt, weak: true)
+*PATIENT NAME:* `r params$first_name` `r params$last_name` \ 
+*DATES OF EXAM:* `r params$doe1`, `r params$doe2`, `r params$doe3` \ 
+```
+# TESTS ADMINISTERED
 
-<https://quarto.org/docs/prerelease/1.4/typst.html#custom-formats>
+```{=typst}
+- Comprehensive Neuropsychiatric Symptom and History Interview
+- Conners' Adult ADHD Diagnostic Interview for DSM-IV (CAADID), Part I: History
+- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
+- Conners' Adult ADHD Rating Scales--Observer Report: Long Version (CAARS--O:L)
+- Comprehensive Executive Function Inventory Adult (CEFI Adult) Self-Report Form
+- Comprehensive Executive Function Inventory Adult (CEFI Adult) Observer Form
+- Advanced Clinical Solutions (ACS):
+  - Word Choice, Test of Premorbid Functioning (TOPF)
+- Dot Counting Test
+- Wechsler Adult Intelligence Scale, 4th ed (WAIS-IV)
+- Wide Range Achievement Test, 5th ed (WRAT-5): Word Reading
+- Neuropsychological Assessment Battery, Screener (NAB):
+  - Attention, Language, Memory, Spatial, and Executive Functions Modules
+- NIH Executive Abilities: Measures and Instruments for Neurobehavioral
+Evaluation and Research (NIH EXAMINER):
+  - Unstructured Task, Verbal Fluency, and Behavioral Rating Scale
+- California Verbal Learning Test, 3rd ed (CVLT-3), Brief Form
+- Rey-Osterrieth Complex Figure Test (ROCFT)
+- Trail Making Test
+- Personality Assessment Inventory (PAI)
+```
+
+# NEUROBEHAVIORAL STATUS EXAM
+
+<!-- {{< include _nse.qmd >}} -->
+
+```{r}
+#| label: import-nse-txt
+#| eval: false
+#| include: false
+# construct file path
+patient <- "Biggie"
+scale <- "NeuropsychEval-NSE-"
+ext <- ".txt"
+result <- ""
+file <- file.path(paste0(scale, patient, ext))
+```
+
+## Referral
+
+Biggie was referred for neuropsychological testing as part of a comprehensive
+presurgical work-up of her epilepsy syndrome. The results will be used in
+surgical and treatment planning
+
+## Background
+
+The following information was obtained during an interview with Biggie and from
+review of available medical records. Biggie "Saw a post online of someone
+recently diagnosed with ADHD, and experiences very similar to mine, which
+brought this possibility to my attention." She has been experiencing symptoms of
+procrastination, distractibility, and difficulty with organization and time.
+Biggie has been experiencing these symptoms since childhood, but they have been
+more problematic in the past few years. She has been able to compensate for her
+difficulties by working harder and longer than her peers.
+
+Cognitive complaints: sustained attention, working memory, and word-finding issues over the last 2 years.
+
+## History
+
+### Past Neuropsychological Test Results
+
+Patient denied having prior testing.
+
+### Developmental History
+
+- No birth complications.
+- Developmental milestones: Normal.
+
+### Other Medical History
+
+-   Frequent sinus infections.
+-   Other medications: Femcon, folic acid.
+-   Appetite/weight: Normal, no changes.
+-   Sleep: Normal, no changes.
+-   Alcohol/tobacco: No history of abuse; denied current use.
+
+### Surgical History
+
+Sinus surgery.
+
+### Psychiatric History
+
+Patient denied.
+
+### Family History
+
+Patient denied a family history of neurological conditions. Her brother was
+diagnosed with ADHD.
+
+### Cultural/Social Background
+
+Biggie is a Caucasian female who was born and raised in XXXX. She is single,
+never married, and has no children.
+
+### Educational History
+
+Biggie graduated from college and completed some Master's-level courses. She
+did not endorse any difficulties with advancing through school.
+
+### Occupational History
+
+Biggie has worked full time as an administrator in a small company. She has
+maintained this job for the past 6 years.
+
+# NEUROCOGNITIVE FINDINGS
+
+```{r}
+#| label: make-neuropsych
+#| include: false
+library(tidyverse)
+patient <- "Biggie"
+data_path <- here::here("csv")
+files <- dir(data_path, pattern = "*.csv")
+neuropsych <-
+  files |>
+  purrr::set_names() |>
+  purrr::map_df(
+    ~ readr::read_csv(file.path(data_path, .), show_col_types = FALSE),
+    na = c("", "NA", "--", "-"),
+    .id = "filename"
+  ) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::distinct() |>
+  dplyr::mutate(z = qnorm(percentile / 100)) |>
+  dplyr::mutate(domain = forcats::as_factor(domain)) |>
+  dplyr::mutate(subdomain = forcats::as_factor(subdomain)) |>
+  dplyr::mutate(narrow = forcats::as_factor(narrow)) |>
+  dplyr::mutate(pass = forcats::as_factor(pass)) |>
+  dplyr::mutate(verbal = forcats::as_factor(verbal)) |>
+  dplyr::mutate(timed = forcats::as_factor(timed))
+```
+
+```{r}
+#| label: subset-domains
+# Subset neurocognitive data
+neurocog <-
+  neuropsych |>
+  dplyr::filter(test_type == "npsych_test")
+# domain
+neurocog <-
+  neurocog |>
+  dplyr::group_by(domain, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+  dplyr::ungroup()
+# subdomain
+neurocog <-
+  neurocog |>
+  dplyr::group_by(subdomain, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
+  dplyr::ungroup()
+# narrow
+neurocog <-
+  neurocog |>
+  dplyr::group_by(narrow, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
+  dplyr::ungroup()
+# pass
+neurocog <-
+  neurocog |>
+  dplyr::group_by(pass, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_pass = mean(z), z_sd_pass = sd(z)) |>
+  dplyr::ungroup()
+# verbal
+neurocog <-
+  neurocog |>
+  dplyr::group_by(verbal, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_verbal = mean(z), z_sd_verbal = sd(z)) |>
+  dplyr::ungroup()
+# timed
+neurocog <-
+  neurocog |>
+  dplyr::group_by(timed, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_timed = mean(z), z_sd_timed = sd(z)) |>
+  dplyr::ungroup()
+
+# Subset neurobehavioral data
+neurobehav <-
+  neuropsych |>
+  dplyr::filter(test_type == "rating_scale")
+# domain
+neurobehav <-
+  neurobehav |>
+  dplyr::group_by(domain, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+  dplyr::ungroup()
+# subdomain
+neurobehav <-
+  neurobehav |>
+  dplyr::group_by(subdomain, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
+  dplyr::ungroup()
+# narrow
+neurobehav <-
+  neurobehav |>
+  dplyr::group_by(narrow, .add = TRUE) |>
+  dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
+  dplyr::ungroup()
+
+# Subset validity data
+validity <-
+  neuropsych |>
+  dplyr::filter(test_type %in% c("performance_validity", "symptom_validity"))
+# domain
+validity <-
+  validity |>
+  dplyr::group_by(domain, .add = TRUE) |>
+  # dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+  dplyr::ungroup()
+# subdomain
+validity <-
+  validity |>
+  dplyr::group_by(subdomain, .add = TRUE) |>
+  # dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
+  dplyr::ungroup()
+# narrow
+validity <-
+  validity |>
+  dplyr::group_by(narrow, .add = TRUE) |>
+  # dplyr::filter(!is.na(percentile)) |>
+  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
+  dplyr::ungroup()
+```
+
+```{r}
+#| label: write-neuro-data
+readr::write_csv(neuropsych, here::here("neuropsych.csv"))
+readr::write_csv(neurocog, here::here("neurocog.csv"))
+readr::write_csv(neurobehav, here::here("neurobehav.csv"))
+readr::write_csv(validity, here::here("validity.csv"))
+```
+
+## Behavioral Observations
+
+<!-- {{< include _01_behav_obs.qmd >}} -->
+
+- *Appearance:* Appropriate grooming and dress for context.
+- *Behavior/attitude:* Cooperative, engaged.
+- *Speech/language:* Fluent and normal in rate, volume, and prosody.
+- *Mood/affect:* Neutral, range was full and appropriate.
+- *Sensory/motor:* Performance was not limited by any obvious sensory or motor difficulties.
+- *Cognitive process:* Coherent and goal directed.
+- *Motivation/effort:* Normal.
+
+## Intelligence/General Ability
+
+<!-- {{< include _02_iq_text.qmd >}} -->
+
+<!-- {{< include _02_iq.qmd >}} -->
+
+An estimate of premorbid verbal ability level fell within the Average
+range. General Intelligence (_G_) was Average and ranked at
+the 50th percentile, indicating performance as good as or better than 50% of
+same-aged peers from the general population. An estimate of Crystallized
+Intelligence (*G*c) was classified as Average and ranked at the 50th percentile.
+Fluid Reasoning (*G*f) was classified as Average. Working Memory (*G*wm) was a
+relative {strength,weakness}, falling in the Average range.
+Processing Speed (*G*s) was Average. Finally, broad neurocognitive
+functioning (independent of general intelligence) across domains of attentional
+and executive functioning, language and spatial processing, and learning and
+memory was Average.
+
+
+```{r}
+#| label: data-g
+library(readr)
+library(dplyr)
+library(bwu)
+patient <- "~/neurocog"
+g <- bwu::gpluck_get_index_scores(patient = patient)
+```
+
+```{r}
+#| label: data-iq
+
+# which csv file to use
+pheno <- "iq"
+
+if (pheno == "adhd" || pheno == "emotion") {
+  csv <- "neurobehav.csv"
+} else {
+  csv <- "neurocog.csv"
+}
+
+# read data
+file_path <- file.path(csv)
+data <- readr::read_csv(file_path)
+```
+
+```{r}
+#| label: filter-iq
+#| cache: true
+
+# FILTER DATA
+# filter by broad domain
+domain <- "Intelligence/General Ability"
+data <- data |>
+  dplyr::filter(domain == !!domain) |> 
+  dplyr::filter(!is.na(percentile))
+
+# filter by scale
+filter_file <- c(
+  "Cognitive Efficiency",
+  "Cognitive Proficiency (CPI)",
+  "Cognitive Proficiency Index",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge Index",
+  "Crystallized Knowledge",
+  "Fluid Reasoning (FRI)",
+  "Fluid Reasoning Index",
+  "Fluid Reasoning",
+  "Full Scale (FSIQ)",
+  "General Ability (GAI)",
+  "General Ability Index",
+  "General Ability",
+  "General Intelligence",
+  "NAB Attention Index",
+  "NAB Executive Functions Index",
+  "NAB Language Index",
+  "NAB Memory Index",
+  "NAB Spatial Index",
+  "NAB Total Index",
+  "Nonverbal (NVI)",
+  "Perceptual Reasoning (PRI)",
+  "Processing Speed (PSI)",
+  "Processing Speed Index",
+  "Processing Speed",
+  "RBANS Total Index",
+  "Test of Premorbid Functioning",
+  "TOPF Standard Score",
+  "Verbal Comprehension (VCI)",
+  "Visual Spatial (VSI)",
+  "Vocabulary Acquisition (VAI)",
+  "Word Reading",
+  "Working Memory (WMI)",
+  "Working Memory Index",
+  "Working Memory"
+)
+data <- dplyr::filter(data, scale %in% filter_file)
+```
+
+```{r}
+#| label: text-iq
+#| cache: true
+xfun::pkg_attach(c("glue", "purrr", "dplyr", "epoxy"))
+
+# This code sorts the data by percentile and then removes duplicate rows based on the percentile variable. The resulting data is then converted to text and appended to the _academics_raw.qmd file.
+data_text <-
+  data |>
+  dplyr::arrange(dplyr::desc(percentile)) |>
+  dplyr::distinct(.keep_all = FALSE)
+
+data_text |>
+  glue::glue_data() |>
+  purrr::modify(purrr::as_mapper(~ paste0(.x))) |>
+  cat(data_text$result,
+    file = "_02_iq_raw.qmd",
+    fill = TRUE,
+    append = TRUE
+  )
+# subscale <- split(data_text, data_text$scale)
+```
+
+```{r}
+#| label: qtbl-iq
+
+# GT table
+xfun::pkg_attach2(c("gt", "dplyr", "glue", "webshot2", "gtExtras", "bwu"))
+
+# more filtering for tables
+data <- dplyr::arrange(data, test_name, absort, .by_group = TRUE)
+
+# source note
+source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
+
+# run fc
+table_iq <- bwu::tbl_gt(
+  data,
+  table_name = "table_iq",
+  source_note = source_note,
+  title = NULL
+)
+table_iq
+
+# save
+gt::gtsave(table_iq, glue("table_iq", ".png"), expand = 10)
+gt::gtsave(table_iq, glue("table_iq", ".pdf"), expand = 10)
+```
+
+```{=typst}
+<qtbl-iq>
+#figure([#image("table_iq.png", width: 70%)],
+  caption: [
+    Composite intellectual and neuropsychological index scores
+  ],
+  kind: "qtbl",
+  supplement: [Table],
+)
+```
+```{r}
+#| label: fig-iq
+#| eval: true
+#| fig-cap: "*General Ability* refers to an overall capacity to reason, to solve problems, and to learn useful information. *Crystallized Knowledge* refers to the ability to learn and use language to reason and understand how the world works. *Fluid Reasoning* refers to the ability to use logical reasoning to figure things out without being told exactly how things work, analyze and solve novel problems, identify patterns and relationships that underpin these problems, and apply logic."
+
+# load packages
+xfun::pkg_attach(c(
+  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
+  "scales", "bwu"
+))
+
+# more filtering for plots
+data_dotplot <- 
+  dplyr::filter(data, scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")) |> 
+  dplyr::filter(!is.na(percentile))
+
+# will need to change these for each domain
+fig_iq <- bwu::dotplot(
+  data = data_dotplot,
+  x = data_dotplot$z_mean_narrow,
+  y = data_dotplot$narrow,
+  fill = x
+)
+fig_iq
+ggplot2::ggsave("fig_iq.png")
+ggplot2::ggsave("fig_iq.pdf")
+```
+
+```{r}
+#| label: csv-iq
+iq <- data[, c(2, 4, 5, 6)]
+readr::write_csv(iq, "iq.csv", col_names = FALSE)
+```
+
+<!-- ## Academic Skills -->
+
+<!-- {{< include _03_academics_text.qmd >}}
+
+{{< include _03_academics.qmd >}} -->
+
+## Verbal/Language
+
+{{< include _04_verbal_text.qmd >}}
+
+{{< include _04_verbal.qmd >}}
+
+## Visual Perception/Construction
+
+<!-- {{< include _05_spatial_text.qmd >}} -->
+
+{{< include _05_spatial.qmd >}}
+
+## Attention/Executive
+
+{{< include _06_executive_text.qmd >}}
+
+{{< include _06_executive.qmd >}}
+
+## Memory
+
+{{< include _07_memory_text.qmd >}}
+
+{{< include _07_memory.qmd >}}
+
+## ADHD/Executive Functioning
+
+{{< include _10_adhd_text.qmd >}}
+
+{{< include _10_adhd.qmd >}}
+
+## Emotional/Behavioral/Personality
+
+{{< include _11_emotion_text.qmd >}}
+
+{{< include _11_emotion.qmd >}}
+
+{{< pagebreak >}}
+
+# SUMMARY/IMPRESSION
+
+```{r}
+#| label: fig-domain-plot
+#| eval: true
+#| column: page
+#| fig-cap-location: margin
+#| fig-cap: "*Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
+
+library(readr)
+library(ggplot2)
+library(ggthemes)
+library(scales)
+library(readxl)
+library(dplyr)
+
+keep <- c(
+  "General Ability",
+  "Academic Skills",
+  "Crystallized Knowledge",
+  "Fluid Reasoning",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Attention/Executive",
+  "Memory",
+  "Processing Speed",
+  "Working Memory",
+  "Cognitive Proficiency",
+  "Attention",
+  "Executive Functions",
+  "Cognitive Efficiency",
+  "Learning Efficiency",
+  "Delayed Recall",
+  "Planning",
+  "Fluency",
+  "Psychomotor Speed",
+  "Attentional Fluency"
+)
+
+g <-
+  read_excel("index_scores.xlsx") |>
+  janitor::clean_names() |>
+  mutate(z = (index - 100) / 15) |>
+  filter(composite_name %in% keep) |>
+  filter(!is.na(z))
+
+# will need to change these for each domain
+fig_g <- bwu::dotplot(
+  data = g,
+  x = g$z,
+  y = g$composite_name,
+  fill = x
+)
+fig_g
+ggplot2::ggsave("fig_g.png")
+ggplot2::ggsave("fig_g.pdf")
+```
+
+{{< include _sirf.qmd >}}
+
+# RECOMMENDATIONS
+
+{{< include _recs.qmd >}}
+
+It was a pleasure to work with Biggie. Please contact me with any questions or concerns regarding this patient.
+
+Sincerely,
+
+```{r}
+#| label: signature
+#| out-width: 20%
+#| fig-align: left
+#| cache: true
+#| eval: true
+knitr::include_graphics("./jwt_sig.png")
+```
+
+**Joey W. Trampush, Ph.D.**\
+Assistant Professor of Psychiatry\
+Department of Psychiatry and the Behavioral Sciences\
+University of Southern California Keck School of Medicine\
+CA License PSY29212
+
+{{< pagebreak >}}
+
+# APPENDIX
+
+## Test Selection Procedures
+
+Neuropsychological tests are intrinsically performance-based, and cognitive performance assessed during this neuropsychological evaluation is summarized above.
+Where appropriate, qualitative observations are included.
+Cultural considerations were made when selecting measures, interpreting results, and making diagnostic impressions and recommendations.
+Results from formal tests are reported in comparison to other individuals the same age, sex, and educational level as range of functioning (e.g., below average, average, above average).
+Test score labels are intended solely to be descriptive, identifying positions of scores relative to a normal curve distribution, and should be interpreted within the context of the patient's individual presentation and history.
+Although standardized scores provide the clinician with an important and necessary understanding of the patient's test performance compared with a normative group, they do not on their own lead to accurate diagnosis or treatment recommendations.
+
+## Conversion of Test Scores
+
+```{r}
+#| label: ranges
+#| eval: true
+#| cache: true
+#| double-escape: true
+#| escape: false
+range <- readr::read_csv("test_score_ranges.csv")
+tbl_range <- gt::gt(range) |>
+  gt::tab_header(title = "Test Score Labels/Ranges") |>
+  gt::cols_align(align = "center") |>
+  gtExtras::gt_theme_538()
+gt::gtsave(tbl_range, glue("tbl_range", ".png"))
+knitr::include_graphics("tbl_range.png")
+```

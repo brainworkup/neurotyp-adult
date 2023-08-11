@@ -1,0 +1,191 @@
+---
+title-meta: motor
+execute:
+  warning: false
+  echo: false
+  message: false
+format:
+  typst:
+    keep-typ: true
+  pdf:
+    keep-md: true
+    keep-tex: true
+  html: 
+    toc: true
+---
+
+<!-- ## Motor -->
+
+```{r}
+#| label: data-motor
+library(readr)
+library(dplyr)
+library(bwu)
+
+# which csv file to use
+pheno <- "motor"
+
+if (pheno == "adhd" || pheno == "emotion") {
+  csv <- "neurobehav.csv"
+} else {
+  csv <- "neurocog.csv"
+}
+
+# read data
+file_path <- file.path(csv)
+data <- readr::read_csv(file_path)
+
+```
+
+```{r}
+#| label: filter-motor
+#| cache: true
+
+# FILTER DATA
+# filter by broad domain
+domain <- "Motor"
+data <- dplyr::filter(data, domain == !!domain)
+
+# filter by scale
+filter_file <- c(
+  # Grooved Pegboard
+  "Right-Hand Time",
+  "Left-Hand Time",
+  "Dominant Hand",
+  "Nondominant Hand",
+  # NEPSY-2
+  "Fingertip Tapping Dominant Hand",
+  "Fingertip Tapping Nondominant Hand",
+  "Fingertip Tapping Repetitions",
+  "Fingertip Tapping Sequences",
+  "FT Dominant Hand vs. Nondominant Hand",
+  "Dominant vs. Nondominant",
+  "Repetitions vs. Sequences",
+  "Imitating Hand Positions",
+  "Imitating Hand Positions-Dominant",
+  "Imitating Hand Positions-Nondominant",
+  "Visuomotor Precision"
+  # "Visuomotor Precision Time",
+  # "Visuomotor Precision Errors",
+  # "Visuomotor Precision Pencil Lifts"
+)
+data <- dplyr::filter(data, scale %in% filter_file)
+
+```
+
+```{r}
+#| label: text-motor
+#| cache: true
+xfun::pkg_attach(c("glue", "purrr", "dplyr", "epoxy"))
+
+# This code sorts the data by percentile and then removes duplicate rows based on the percentile variable. The resulting data is then converted to text and appended to the _motor_raw.qmd file.
+data_text <-
+  data |>
+  dplyr::arrange(dplyr::desc(percentile)) |>
+  dplyr::distinct(.keep_all = FALSE)
+
+data_text |>
+  glue::glue_data() |>
+  purrr::modify(purrr::as_mapper(~ paste0(.x))) |>
+  cat(data_text$result,
+    file = "_08_motor_text.qmd",
+    fill = TRUE,
+    append = TRUE
+  )
+
+# subscale <- split(data_text, data_text$scale)
+```
+
+{{< include _motor_text.qmd >}}
+
+```{r}
+
+# GT table
+xfun::pkg_attach2(c("gt", "dplyr", "glue", "webshot2", "gtExtras", "bwu"))
+
+# more filtering for tables
+# data <- dplyr::filter(data, scale != "Orientation")
+data <- dplyr::arrange(data, test_name)
+
+# source note
+source_note <- gt::md("*Note:* T-scores have a mean of 50 and a standard deviation of 10.")
+
+# run fc
+table_motor <- bwu::tbl_gt(
+  data,
+  table_name = "table_motor",
+  source_note = source_note,
+  title = NULL
+)
+table_motor
+
+gt:gt::gtsave(table_motor, glue("table_motor", ".pdf"), expand = 10)
+
+```
+
+```{=typst}
+<qtbl-motor>
+#figure([#image("table_motor.png", width: 70%)],
+  caption: [
+    Composite intellectual and neuropsychological index scores
+  ],
+  kind: "qtbl",
+  supplement: [Table],
+)
+```
+
+```{r}
+#| label: fig-motor
+#| #| eval: true
+#| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
+
+# load packages
+xfun::pkg_attach(c(
+  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
+  "scales", "bwu"
+))
+
+# data for dotplot
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
+
+# will need to change these for each domain
+fig_motor <- bwu::dotplot(
+  data = data_dotplot,
+  x = data_dotplot$z_mean_narrow,
+  y = data_dotplot$narrow,
+  fill = x
+)
+fig_motor
+ggplot2::ggsave("fig_motor.png")
+ggplot2::ggsave("fig_motor.pdf")
+```
+
+```{r}
+#| label: _tbl-md-motor
+#| eval: false
+#| tbl-cap: "Motor"
+
+# markdown table; change label if want to use
+markdown_table_typst <- function(data) {
+  data.frame(
+    data
+  ) |>
+    kableExtra::kbl(
+      format = "markdown",
+      table.envir = "figure",
+      longtable = FALSE,
+      booktabs = TRUE,
+      linesep = "",
+      align = c("lccc"),
+      col.names = c("**Scale**", "**Score**", "**‰ Rank**", "**Range**")
+    )
+}
+tbl_md <- markdown_table_typst(data[, c(2, 4, 5, 6)])
+tbl_md
+```
+
+```{r}
+#| label: csv-motor
+motor <- data[, c(2, 4, 5, 6)]
+readr::write_csv(motor, "motor.csv", col_names = FALSE)
+```
