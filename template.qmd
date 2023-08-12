@@ -18,17 +18,17 @@ params:
   sex: female
   sex_cap: Female
   age: 20
-  educyrs: 15
-  hand: right
+  education: 15
+  handedness: right
   referral: Dr. Dre
   observer: Mrs. Wallace
   observer_relation: mother
-  he_she: she
-  he_she_cap: She
-  his_her: her
-  his_her_cap: Her
-  him_her: her
-  him_her_cap: Her
+  he_she: they
+  he_she_cap: They
+  his_her: their
+  his_her_cap: Their
+  him_her: them
+  him_her_cap: Them
   dx1: attention-deficit/hyperactivity disorder (ADHD)
   dx2: anxiety
   dx3: depression
@@ -77,7 +77,7 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 
 # NEUROBEHAVIORAL STATUS EXAM
 
-{{< include _nse.qmd >}}
+{{< include _00_nse.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS
 
@@ -85,8 +85,8 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 #| label: make-neuropsych
 #| include: false
 library(tidyverse)
-# patient <- "Biggie"
-data_path <- here::here("csv")
+patient <- "Biggie"
+data_path <- here::here(patient, "csv")
 files <- dir(data_path, pattern = "*.csv")
 neuropsych <-
   files |>
@@ -155,12 +155,12 @@ neurocog <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_timed = mean(z), z_sd_timed = sd(z)) |>
   dplyr::ungroup()
-
+  
 # Subset neurobehavioral data
 neurobehav <-
   neuropsych |>
   dplyr::filter(test_type == "rating_scale")
-# domain
+#   domain
 neurobehav <-
   neurobehav |>
   dplyr::group_by(domain, .add = TRUE) |>
@@ -181,7 +181,7 @@ neurobehav <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
-
+  
 # Subset validity data
 validity <-
   neuropsych |>
@@ -207,10 +207,8 @@ validity <-
   # dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
-```
-
-```{r}
-#| label: write-neuro-data
+  
+# write-neuro-data
 readr::write_csv(neuropsych, here::here("neuropsych.csv"))
 readr::write_csv(neurocog, here::here("neurocog.csv"))
 readr::write_csv(neurobehav, here::here("neurobehav.csv"))
@@ -229,9 +227,11 @@ readr::write_csv(validity, here::here("validity.csv"))
 - *Cognitive process:* Coherent and goal directed.
 - *Motivation/effort:* Normal.
 
-## General Cognitive Ability
+#| label: csv-iq
+iq <- data[, c(2, 4, 5, 6)]
+readr::write_csv(iq, "iq.csv", col_names = FALSE)## General Cognitive Ability
 
-<!-- {{< include _02_iq.qmd >}} -->
+{{< include _02_iq.qmd >}}
 
 An estimate of premorbid verbal ability level fell within the Average
 range. General Intelligence (_G_) was Average and ranked at

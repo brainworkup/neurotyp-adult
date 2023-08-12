@@ -1,55 +1,31 @@
----
-title-meta: iq
-execute:
-  warning: false
-  echo: false
-  message: false
-format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-  html: 
-    toc: true
----
-
-<!-- ## General Cognitive Ability -->
-
-{{< include _02_iq_text.qmd >}}
-
-```{r}
 #| label: data-g
-library(readr)
-library(dplyr)
-library(bwu)
+xfun::pkg_attach2(c("readr", "dplyr", "bwu"))
 patient <- "~/neurocog"
 g <- bwu::gpluck_get_index_scores(patient = patient)
-```
 
-```{r}
 #| label: data-iq
 #| tidy: true
-
 # which csv file to use
 pheno <- "iq"
+
 if (pheno == "adhd" || pheno == "emotion") {
   csv <- "neurobehav.csv"
 } else {
   csv <- "neurocog.csv"
 }
+
 # read data
 file_path <- file.path(csv)
 data <- readr::read_csv(file_path)
-```
 
-```{r}
 #| label: filter-iq
 # filter by broad domain
 domain <- "Intelligence/General Ability"
+
 data <- data |>
   dplyr::filter(domain == !!domain) |>
   dplyr::filter(!is.na(percentile))
+
 # filter by scale
 filter_file <- c(
   "Cognitive Efficiency",
@@ -89,12 +65,10 @@ filter_file <- c(
   "Working Memory"
 )
 data <- dplyr::filter(data, scale %in% filter_file)
-```
 
-```{r}
 #| label: text-iq
 #| cache: true
-xfun::pkg_attach(c("glue", "purrr", "dplyr", "epoxy"))
+xfun::pkg_attach2(c("glue", "purrr", "dplyr", "epoxy"))
 
 # Sorting the data by percentile and removing duplicates
 data_text <-
@@ -108,17 +82,14 @@ cat(paste0(data_text$result),
   sep = "\n",
   append = TRUE
 )
-```
 
-```{r}
 #| label: qtbl-iq
-
 # GT table
 xfun::pkg_attach2(c("gt", "dplyr", "glue", "webshot2", "gtExtras", "bwu"))
-# more filtering for tables
-data <- dplyr::arrange(data, test_name, absort, .by_group = TRUE)
+
 # source note
 source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
+
 # run fc
 table_iq <- bwu::tbl_gt(
   data,
@@ -127,28 +98,17 @@ table_iq <- bwu::tbl_gt(
   title = NULL
 )
 table_iq
+
 # save
 gt::gtsave(table_iq, glue("table_iq", ".png"), expand = 10)
 gt::gtsave(table_iq, glue("table_iq", ".pdf"), expand = 10)
-```
 
-```{=typst}
-<qtbl-iq>
-#figure([#image("table_iq.png", width: 70%)],
-  caption: [
-    Composite intellectual and neuropsychological index scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-```
-```{r}
 #| label: fig-iq
 #| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
 # load packages
-xfun::pkg_attach(c(
+xfun::pkg_attach2(c(
   "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
   "scales", "bwu"
 ))
@@ -167,23 +127,18 @@ fig_iq <- bwu::dotplot(
   fill = x
 )
 fig_iq
+
 ggplot2::ggsave("fig_iq.png")
 ggplot2::ggsave("fig_iq.pdf")
-```
 
-```{r}
 #| label: tbl-md-typ-iq
-#| eval: false
+#| eval: true
 #| tbl-cap: "General Cognitive Ability"
 
 # markdown table; change label if want to use
 tbl_md <- bwu::tbl_md_typ(data[, c(2, 4, 5, 6)])
 tbl_md
-```
 
-```{r}
 #| label: csv-iq
-#| eval: false
 iq <- data[, c(2, 4, 5, 6)]
 readr::write_csv(iq, "iq.csv", col_names = FALSE)
-```

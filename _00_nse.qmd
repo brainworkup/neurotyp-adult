@@ -20,21 +20,21 @@ file <- file.path(paste0(scale, patient, ext))
 ## Referral
 
 Biggie was referred for neuropsychological testing as part of a comprehensive
-presurgical work-up of her epilepsy syndrome. The results will be used in
-surgical and treatment planning
+work-up for attention-deficit/hyperactivity disorder (ADHD). The results and
+recommendations were discussed with `r params$first_name` during the feedback
+visit on the final day of the evaluation.will be used in academic and treatment
+planning.
 
 ## Background
 
 The following information was obtained during an interview with Biggie and from
-review of available medical records. Biggie "Saw a post online of someone
-recently diagnosed with ADHD, and experiences very similar to mine, which
-brought this possibility to my attention." She has been experiencing symptoms of
+review of available medical records. Biggie has been experiencing symptoms of
 procrastination, distractibility, and difficulty with organization and time.
-Biggie has been experiencing these symptoms since childhood, but they have been
+She has been experiencing these symptoms since childhood, but they have been
 more problematic in the past few years. She has been able to compensate for her
 difficulties by working harder and longer than her peers.
 
-Cognitive complaints: sustained attention, working memory, and word-finding issues over the last 2 years.
+Cognitive complaints: sustained attention, working memory, and organization.
 
 ## History
 
@@ -50,14 +50,14 @@ Patient denied having prior testing.
 ### Other Medical History
 
 -   Frequent sinus infections.
--   Other medications: Femcon, folic acid.
+-   Other medications: vitamins, folic acid.
 -   Appetite/weight: Normal, no changes.
 -   Sleep: Normal, no changes.
 -   Alcohol/tobacco: No history of abuse; denied current use.
 
 ### Surgical History
 
-Sinus surgery.
+Patient denied.
 
 ### Psychiatric History
 
