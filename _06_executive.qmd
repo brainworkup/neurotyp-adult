@@ -12,6 +12,8 @@ format:
     keep-tex: true
   html: 
     toc: true
+params:
+  pheno: spatial
 ---
 
 <!-- ## Attention/Executive -->

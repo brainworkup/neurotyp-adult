@@ -219,9 +219,8 @@ readr::write_csv(validity, here::here("validity.csv"))
 
 ```{r}
 #| label: data-g
-xfun::pkg_attach2(c("readr", "dplyr", "bwu"))
-# patient <- "~/neurotyp"
-patient <- "Biggie"
+patient <- "~/neurotyp"
+# patient <- "Biggie"
 g <- bwu::gpluck_get_index_scores(patient = patient)
 ```
 

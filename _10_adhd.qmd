@@ -10,189 +10,174 @@ format:
   pdf:
     keep-md: true
     keep-tex: true
+params:
+  pheno: adhd
 ---
 
-<!-- ### ADHD/Executive Functioning -->
+<!-- ## ADHD/Executive Functioning -->
+
+{{< include _10_adhd_text.qmd >}}
+
+```{r}
+#| label: setup
+xfun::pkg_attach2(c(
+  "gt",
+  "dplyr",
+  "glue",
+  "webshot2",
+  "ggplot2",
+  "ggthemes",
+  "scales",
+  "bwu"
+))
+```
 
 ```{r}
 #| label: data-adhd
-library(readr)
-library(dplyr)
-library(bwu)
-
-# which csv file to use
-pheno <- "adhd"
-
-if (pheno == "adhd" || pheno == "emotion") {
-  csv <- "neurobehav.csv"
-} else {
-  csv <- "neurocog.csv"
-}
-
-# read data
-file_path <- file.path(csv)
-data <- readr::read_csv(file_path)
+data <- bwu::read_data(pheno = "adhd")
 ```
 
 ```{r}
 #| label: filter-adhd
-
-# FILTER DATA
-# filter by broad domain
-domain <- c("ADHD", "Executive Functioning")
-data <- dplyr::filter(data, domain %in% !!domain)
-
-# list of scales to include in the table
 filter_file <- c(
-  # Brown Scales
-  "Activation",
-  "Focus",
-  "Effort",
-  "Emotion",
-  "Memory",
   "Action",
-  "Total Composite",
-  # CAARS
-  "Inattention/Memory Problems",
-  "Hyperactivity/Restlessness",
-  "Impulsivity/Emotional Lability",
-  "Problems with Self-Concept",
-  "DSM-5 Inattentive Symptoms",
-  "DSM-5 Hyperactive-Impulsive Symptoms",
-  "DSM-5 ADHD Symptoms Total",
+  "Activation",
   "ADHD Index",
-  "CAARS-SR Inattention/Memory Problems",
-  "CAARS-SR Hyperactivity/Restlessness",
-  "CAARS-SR Impulsivity/Emotional Lability",
-  "CAARS-SR Problems with Self-Concept",
-  "CAARS-SR DSM-5 Inattentive Symptoms",
-  "CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms",
-  "CAARS-SR DSM-5 ADHD Symptoms Total",
-  "CAARS-SR ADHD Index",
-  "CAARS-OR Inattention/Memory Problems",
+  "Attention",
+  "CAARS-OR ADHD Index",
+  "CAARS-OR DSM-5 ADHD Symptoms Total",
+  "CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms",
+  "CAARS-OR DSM-5 Inattentive Symptoms",
   "CAARS-OR Hyperactivity/Restlessness",
   "CAARS-OR Impulsivity/Emotional Lability",
+  "CAARS-OR Inattention/Memory Problems",
   "CAARS-OR Problems with Self-Concept",
-  "CAARS-OR DSM-5 Inattentive Symptoms",
-  "CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms",
-  "CAARS-OR DSM-5 ADHD Symptoms Total",
-  "CAARS-OR ADHD Index",
-  # CEFI
-  "Full Scale",
-  "Attention",
-  "Emotion Regulation",
-  "Flexibility",
-  "Inhibitory Control",
-  "Initiation",
-  "Organization",
-  "Planning",
-  "Self-Monitoring",
-  "Working Memory",
-  "CEFI-SR Full Scale",
+  "CAARS-SR ADHD Index",
+  "CAARS-SR DSM-5 ADHD Symptoms Total",
+  "CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms",
+  "CAARS-SR DSM-5 Inattentive Symptoms",
+  "CAARS-SR Hyperactivity/Restlessness",
+  "CAARS-SR Impulsivity/Emotional Lability",
+  "CAARS-SR Inattention/Memory Problems",
+  "CAARS-SR Problems with Self-Concept",
+  "CEFI-OR Attention",
+  "CEFI-OR Emotion Regulation",
+  "CEFI-OR Flexibility",
+  "CEFI-OR Full Scale",
+  "CEFI-OR Inhibitory Control",
+  "CEFI-OR Initiation",
+  "CEFI-OR Organization",
+  "CEFI-OR Planning",
+  "CEFI-OR Self-Monitoring",
+  "CEFI-OR Working Memory",
   "CEFI-SR Attention",
   "CEFI-SR Emotion Regulation",
   "CEFI-SR Flexibility",
+  "CEFI-SR Full Scale",
   "CEFI-SR Inhibitory Control",
   "CEFI-SR Initiation",
   "CEFI-SR Organization",
   "CEFI-SR Planning",
   "CEFI-SR Self-Monitoring",
   "CEFI-SR Working Memory",
-  "CEFI-OR Full Scale",
-  "CEFI-OR Attention",
-  "CEFI-OR Emotion Regulation",
-  "CEFI-OR Flexibility",
-  "CEFI-OR Inhibitory Control",
-  "CEFI-OR Initiation",
-  "CEFI-OR Organization",
-  "CEFI-OR Planning",
-  "CEFI-OR Self-Monitoring",
-  "CEFI-OR Working Memory"
+  "DSM-5 ADHD Symptoms Total",
+  "DSM-5 Hyperactive-Impulsive Symptoms",
+  "DSM-5 Inattentive Symptoms",
+  "Effort",
+  "Emotion Regulation",
+  "Emotion",
+  "Flexibility",
+  "Focus",
+  "Full Scale",
+  "Hyperactivity/Restlessness",
+  "Impulsivity/Emotional Lability",
+  "Inattention/Memory Problems",
+  "Inhibitory Control",
+  "Initiation",
+  "Memory",
+  "Organization",
+  "Planning",
+  "Problems with Self-Concept",
+  "Self-Monitoring",
+  "Total Composite",
+  "Working Memory"
 )
+data_adhd <- bwu::filter_domain(data, domain = "ADHD", filter_file = filter_file)
+data_ef <- bwu::filter_domain(data,
+  domain = "Executive Functioning",
+  filter_file = filter_file
+)
+data <- dplyr::bind_rows(data_adhd, data_ef)
+```
 
-# filter by scales
-data <- dplyr::filter(data, scale %in% filter_file)
+
+```{r}
+#| label: text-adhd
+#| cache: true
+bwu::flatten_scale_text(data, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-sr
 #| cache: true
-library(glue)
-library(purrr)
-library(dplyr)
-
-# self-report
+# Self-report
 data_sr <-
   data |>
   dplyr::filter(test == "cefi_sr" | test == "caars_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
-
-data_sr |>
-  glue::glue_data() |>
-  purrr::modify(purrr::as_mapper(~ paste0(.x))) |>
-  cat(data_sr$result,
-    file = "_10_adhd_raw.qmd",
-    fill = TRUE,
+flatten_scale_text <- function(data, file) {
+  cat(
+    paste0(data$result),
+    file = file,
+    sep = "\n",
     append = TRUE
   )
+}
+flatten_scale_text(data = data_sr, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-or
-#| cache: false
-
+#| cache: true
 # Observer reports
 data_or <-
   data |>
   dplyr::filter(test == "cefi_or" | test == "caars_or") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
-
-data_or |>
-  glue::glue_data() |>
-  purrr::modify(purrr::as_mapper(~ paste0(.x))) |>
-  cat(data_or$result,
-    file = "_10_adhd_raw.qmd",
-    fill = TRUE,
+flatten_scale_text <- function(data, file) {
+  cat(
+    paste0(data$result),
+    file = file,
+    sep = "\n",
     append = TRUE
   )
+}
+flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 ```
-
 
 ```{r}
 #| label: qtbl-adhd
-#| fig-align: center
-#| cache: false
-
-# GT table
-xfun::pkg_attach2(c("gt", "dplyr", "glue", "webshot2", "gtExtras", "bwu"))
-
-# more filtering
-data <- dplyr::arrange(data, test_name)
-
+#| dev: tikz
+#| fig-process: pdf2png
+options(tikzDefaultEngine = "xetex")
 # source note
 source_note <- gt::md("*Note:* CAARS Standard scores have a mean of 50 and a standard deviation of 10, and higher scores reflect reduced functioning.
 
 CEFI Standard scores have a mean of 100 and a standard deviation of 15, and lower scores reflect reduced functioning.")
-
-# run fc
-table_adhd <- bwu::tbl_gt(
-  data,
-  table_name = "table_adhd",
-  source_note = source_note
-)
-table_adhd
-
-gt::gtsave(table_adhd, glue("table_adhd", ".png"))
-gt::gtsave(table_adhd, glue("table_adhd", ".pdf"))
+table_name <- "table_adhd"
+pheno <- "adhd"
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
+
 ```{=typst}
+#let domain = "ADHD/Executive Functioning"
 <qtbl-adhd>
-#figure([#image("table_adhd.png", width: 70%)],
+#figure([#image("table_adhd.png", width: 50%)],
   caption: [
-    ADHD related rating scales
+    #domain Test Scores
   ],
   kind: "qtbl",
   supplement: [Table],
@@ -201,83 +186,43 @@ gt::gtsave(table_adhd, glue("table_adhd", ".pdf"))
 
 ```{r}
 #| label: fig-adhd
-#| eval: true
-#| cache: false
+#| out-width: 70%
 #| fig-height: 7
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
-
-# plots
+#| fig-subcap: "ADHD Subdomain Plots"
 xfun::pkg_attach(c(
   "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
   "scales", "bwu", "patchwork"
 ))
-
+roma <- c(
+  "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
+  "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
+  "#C0E9C2", "#ACE7D0", "#93DFD5", "#77D1D7", "#5DC0D2", "#47AECD",
+  "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
+  "#023198"
+)
 # data for caars dotplot
-data <- dplyr::filter(data, !is.na(percentile))
+pheno <- "caars"
 data_caars <- dplyr::filter(data, filename %in% c("caars_sr.csv", "caars_or.csv"))
-
-# caars dotplot
-fig_caars <- bwu::dotplot(
+fig_caars <- bwu::make_fig(
   data = data_caars,
+  pheno = pheno,
   x = data_caars$z_mean_subdomain,
   y = data_caars$subdomain,
-  fill = x
+  colors = roma
 )
-ggplot2::ggsave("fig_caars.png")
-ggplot2::ggsave("fig_caars.pdf")
-
 # data for cefi dotplot
-data <- dplyr::filter(data, !is.na(percentile))
+pheno <- "cefi"
 data_cefi <- dplyr::filter(data, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
-
-# cefi dotplot
-fig_cefi <- bwu::dotplot(
+fig_cefi <- bwu::make_fig(
   data = data_cefi,
+  pheno = pheno,
   x = data_cefi$z_mean_subdomain,
   y = data_cefi$subdomain,
-  fill = x
+  colors = roma
 )
-ggplot2::ggsave("fig_cefi.png")
-ggplot2::ggsave("fig_cefi.pdf")
-
 # combine plots
 pathwork <- fig_caars / fig_cefi
-
 pathwork +
   plot_annotation()
-
-# pathwork +
-#   plot_annotation(tag_levels = "A", tag_prefix = "Fig. ") &
-#   theme(text = element_text(size = 8, hjust = 0, vjust = 0))
-# theme(text = element_text("mono", size = 8, hjust = 0, vjust = 0))
-```
-
-```{r}
-#| label: table-md-adhd
-#| eval: false
-#| tbl-cap: "ADHD and Executive Functioning"
-# markdown table; change label if want to use
-markdown_table_typst <- function(data) {
-  data.frame(
-    data
-  ) |>
-    kableExtra::kbl(
-      format = "markdown",
-      table.envir = "figure",
-      longtable = FALSE,
-      booktabs = TRUE,
-      linesep = "",
-      align = c("lccc"),
-      col.names = c("**Scale**", "**Score**", "**‰ Rank**", "**Range**")
-    )
-}
-tbl_md <- markdown_table_typst(data[, c(2, 4, 5, 6)])
-tbl_md
-```
-
-```{r}
-#| label: csv-adhd
-#| eval: false
-adhd <- data[, c(2, 4, 5, 6)]
-readr::write_csv(adhd, "adhd.csv", col_names = FALSE)
 ```
