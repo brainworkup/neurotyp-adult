@@ -20,7 +20,6 @@ params:
 
 {{< include _02_iq_text.qmd >}}
 
-
 ```{r}
 #| label: data-iq
 data <- bwu::read_data(pheno = "iq")
@@ -28,7 +27,7 @@ data <- bwu::read_data(pheno = "iq")
 
 ```{r}
 #| label: filter-iq
-domains <- "Intelligence/General Ability"
+domains <- c("Intelligence/General Ability")
 scales <- c(
   "Cognitive Efficiency",
   "Cognitive Proficiency (CPI)",
@@ -103,7 +102,7 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 #| label: fig-iq
 #| out-width: 70%
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
-#| fig-subcap: "General Cognitive Ability Subdomain Plots"
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -111,17 +110,17 @@ roma <- c(
   "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
   "#023198"
 )
-filter_plot <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
+
 pheno <- "iq"
-data_dotplot <- dplyr::filter(
+iq <- dplyr::filter(
   data,
-  scale %in% filter_plot
+  scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 )
 bwu::make_fig(
-  data = data_dotplot,
+  data = iq,
   pheno = pheno,
-  x = data_dotplot$z_mean_narrow,
-  y = data_dotplot$narrow,
+  x = iq$z_mean_narrow,
+  y = iq$narrow,
   colors = roma
 )
 ```

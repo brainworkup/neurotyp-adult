@@ -1,7 +1,7 @@
 ---
 title-meta: Neurobehavioral Status Exam
 format:
-  neurocog-typst:
+  neurotyp-typst:
     keep-typ: true
 ---
 
@@ -9,7 +9,7 @@ format:
 #| label: import-nse-txt
 #| eval: false
 #| include: false
-# construct file path
+
 patient <- "Biggie"
 scale <- "NeuropsychEval-NSE-"
 ext <- ".txt"
@@ -19,7 +19,7 @@ file <- file.path(paste0(scale, patient, ext))
 
 ## Referral
 
-Biggie was referred for neuropsychological testing as part of a comprehensive
+#patient was referred for neuropsychological testing as part of a comprehensive
 work-up for attention-deficit/hyperactivity disorder (ADHD). The results and
 recommendations were discussed with `r params$first_name` during the feedback
 visit on the final day of the evaluation.will be used in academic and treatment
@@ -27,8 +27,8 @@ planning.
 
 ## Background
 
-The following information was obtained during an interview with Biggie and from
-review of available medical records. Biggie has been experiencing symptoms of
+The following information was obtained during an interview with #patient and from
+review of available medical records. #patient has been experiencing symptoms of
 procrastination, distractibility, and difficulty with organization and time.
 She has been experiencing these symptoms since childhood, but they have been
 more problematic in the past few years. She has been able to compensate for her
@@ -70,15 +70,15 @@ diagnosed with ADHD.
 
 ### Cultural/Social Background
 
-Biggie is a Caucasian female who was born and raised in XXXX. She is single,
+#patient is a Caucasian female who was born and raised in XXXX. She is single,
 never married, and has no children.
 
 ### Educational History
 
-Biggie graduated from college and completed some Master's-level courses. She
+#patient graduated from college and completed some Master's-level courses. She
 did not endorse any difficulties with advancing through school.
 
 ### Occupational History
 
-Biggie has worked full time as an administrator in a small company. She has
+#patient has worked full time as an administrator in a small company. She has
 maintained this job for the past 6 years.

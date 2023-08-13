@@ -1,9 +1,9 @@
 ---
 title: "NEUROCOGNITIVE EXAMINATION"
-patient: Biggie Smalls
+name: Biggie Smalls
 doe: 2023-01-01
-firstname: Biggie
-lastname: Smalls
+first: Biggie
+last: Smalls
 format:
   neurotyp-typst:
     keep-typ: true
@@ -36,22 +36,76 @@ execute:
   warning: false
   echo: false
   message: false
+knitr:
+  opts_chunk: 
+    R.options:
+      knitr.graphics.auto_pdf: true
 ---
 
 ```{r}
 #| label: setup
 #| include: false
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "tidyverse",
-  "bwu"
-))
+xfun::pkg_load2(
+  c(
+    "arrow",
+    "bookdown",
+    "crosstalk",
+    "data.table",
+    "dplyr",
+    "forcats",
+    "fs",
+    "gdtools",
+    "ggthemes",
+    "glue",
+    "gptstudio",
+    "gpttools",
+    "grid",
+    "gt",
+    "gtExtras",
+    "hablar",
+    "here",
+    "highcharter",
+    "htmlwidgets",
+    "janitor",
+    "kableExtra",
+    "knitr",
+    "magick",
+    "magrittr",
+    "manipulateWidget",
+    "pak",
+    "patchwork",
+    "pdftables",
+    "pdftools",
+    "png",
+    "psycheval",
+    "qpdf",
+    "quarto",
+    "readxl",
+    "rJava",
+    "rlist",
+    "rmarkdown",
+    "scales",
+    "shiny",
+    "snakecase",
+    "stats",
+    "stringr",
+    "svglite",
+    "tabulizer",
+    "tabulizerjars",
+    "tidyr",
+    "tidyselect",
+    "tidytable",
+    "tidytext",
+    "tidyverse",
+    "tinytex",
+    "vroom",
+    "webshot2",
+    "widgetframe",
+    "xfun",
+    "yaml",
+    "bwu"
+  )
+)
 ```
 
 ```{r}
@@ -63,9 +117,12 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```
 
 ```{=typst}
+#let name = [Biggie Smalls]
+#let doe = [2023-01-01]
+#let patient = [Biggie]
 #v(2pt, weak: true)
-*PATIENT NAME:* Biggie Smalls \  
-*DATES OF EXAM:* 2023-01-01 \  
+*PATIENT NAME:* #name \  
+*DATES OF EXAM:* #doe \  
 ```
 # TESTS ADMINISTERED
 
@@ -125,6 +182,41 @@ neuropsych <-
   dplyr::mutate(pass = forcats::as_factor(pass)) |>
   dplyr::mutate(verbal = forcats::as_factor(verbal)) |>
   dplyr::mutate(timed = forcats::as_factor(timed))
+
+```
+
+```{r}
+#| label: make-g
+#| include: false
+
+scales <- c(
+  "Academic Skills",
+  "Attention",
+  "Attention/Executive",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge",
+  "Delayed Recall",
+  "Executive Functions",
+  "Fluency",
+  "Fluid Reasoning",
+  "General Ability",
+  "Learning Efficiency",
+  "Memory",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory"
+)
+g <-
+  readxl::read_excel("index_scores.xlsx") |>
+  janitor::clean_names() |>
+  dplyr::mutate(z = (index - 100) / 15) |>
+  dplyr::filter(composite_name %in% scales) |>
+  dplyr::filter(!is.na(z))
 ```
 
 ```{r}
@@ -208,36 +300,28 @@ validity <-
 validity <-
   validity |>
   dplyr::group_by(domain, .add = TRUE) |>
-  # dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
   dplyr::ungroup()
 # subdomain
 validity <-
   validity |>
   dplyr::group_by(subdomain, .add = TRUE) |>
-  # dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
   dplyr::ungroup()
 # narrow
 validity <-
   validity |>
   dplyr::group_by(narrow, .add = TRUE) |>
-  # dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
+
+
+
 # write-neuro-data
 readr::write_csv(neuropsych, here::here("neuropsych.csv"))
 readr::write_csv(neurocog, here::here("neurocog.csv"))
 readr::write_csv(neurobehav, here::here("neurobehav.csv"))
 readr::write_csv(validity, here::here("validity.csv"))
-```
-
-```{r}
-#| label: data-g
-#| eval: false
-# patient <- "~/neurotyp"
-patient <- "Biggie"
-g <- bwu::gpluck_get_index_scores(patient = patient)
 ```
 
 ## General Cognitive Ability
@@ -276,6 +360,14 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 <!-- {{< pagebreak >}} -->
 
+## Motor
+
+{{< include _08_motor.qmd >}}
+
+<!-- ## Social Cognition
+
+{{< include _09_social.qmd >}} -->
+
 ## ADHD/Executive Functioning
 
 {{< include _10_adhd.qmd >}}
@@ -290,58 +382,25 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 ```{r}
 #| label: fig-domain-plot
-#| eval: true
 #| column: page
-#| fig-cap-location: margin
-#| fig-cap: "*Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
+#| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
 
-library(readr)
-library(ggplot2)
-library(ggthemes)
-library(scales)
-library(readxl)
-library(dplyr)
-
-keep <- c(
-  "General Ability",
-  "Academic Skills",
-  "Crystallized Knowledge",
-  "Fluid Reasoning",
-  "Verbal/Language",
-  "Visual Perception/Construction",
-  "Attention/Executive",
-  "Memory",
-  "Processing Speed",
-  "Working Memory",
-  "Cognitive Proficiency",
-  "Attention",
-  "Executive Functions",
-  "Cognitive Efficiency",
-  "Learning Efficiency",
-  "Delayed Recall",
-  "Planning",
-  "Fluency",
-  "Psychomotor Speed",
-  "Attentional Fluency"
+roma <- c(
+  "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
+  "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
+  "#C0E9C2", "#ACE7D0", "#93DFD5", "#77D1D7", "#5DC0D2", "#47AECD",
+  "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
+  "#023198"
 )
-
-g <-
-  read_excel("index_scores.xlsx") |>
-  janitor::clean_names() |>
-  mutate(z = (index - 100) / 15) |>
-  filter(composite_name %in% keep) |>
-  filter(!is.na(z))
-
-# will need to change these for each domain
-fig_g <- bwu::dotplot(
+pheno <- "g"
+bwu::dotplot(
   data = g,
+  pheno = pheno,
   x = g$z,
   y = g$composite_name,
-  fill = x
+  fill = x,
+  colors = roma
 )
-fig_g
-ggplot2::ggsave("fig_g.png")
-ggplot2::ggsave("fig_g.pdf")
 ```
 
 {{< include _13_sirf.qmd >}}

@@ -183,7 +183,8 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 #| out-width: 70%
 #| fig-height: 7
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
-#| fig-subcap: "ADHD Subdomain Plots"
+
+
 xfun::pkg_attach(c(
   "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
   "scales", "bwu", "patchwork"

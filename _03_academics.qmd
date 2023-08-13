@@ -20,7 +20,6 @@ params:
 
 {{< include _03_academics_text.qmd >}}
 
-
 ```{r}
 #| label: data-academics
 data <- bwu::read_data(pheno = "academics")
@@ -28,7 +27,7 @@ data <- bwu::read_data(pheno = "academics")
 
 ```{r}
 #| label: filter-academics
-domains <- "Academic Skills"
+domains <- c("Academic Skills")
 scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
@@ -134,7 +133,8 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 #| label: fig-academics
 #| out-width: 70%
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
-#| fig-subcap: "Verbal/Language Subdomain Plots"
+#| column: page
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -143,12 +143,12 @@ roma <- c(
   "#023198"
 )
 pheno <- "academics"
-data_dotplot <- dplyr::filter(data, !is.na(percentile))
+academics <- dplyr::filter(data, !is.na(percentile))
 bwu::make_fig(
-  data = data_dotplot,
+  data = academics,
   pheno = pheno,
-  x = data_dotplot$z_mean_subdomain,
-  y = data_dotplot$subdomain,
+  x = academics$z_mean_subdomain,
+  y = academics$subdomain,
   colors = roma
 )
 ```

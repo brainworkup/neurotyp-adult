@@ -84,7 +84,7 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
-domains <- "Verbal/Language"
+domains <- c("Verbal/Language")
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
@@ -123,7 +123,7 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 #| label: fig-verbal
 #| out-width: 70%
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
-#| fig-subcap: "Verbal/Language Subdomain Plots"
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",

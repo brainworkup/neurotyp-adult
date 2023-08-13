@@ -27,6 +27,7 @@ data <- bwu::read_data(pheno = "memory")
 
 ```{r}
 #| label: filter-memory
+domains <- c("Memory")
 scales <- c(
   "CVLT-3 Forced-Choice Recognition Hits",
   "CVLT-3 Total Intrusions",
@@ -103,7 +104,6 @@ scales <- c(
   "Word List Interference-Recall",
   "Word List Interference-Repetition"
 )
-domains <- "Memory"
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
@@ -141,8 +141,8 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```{r}
 #| label: fig-memory
 #| out-width: 70%
-#| fig-cap: "*Learning and memory* refer to the rate and ease with which new information (e. g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
-#| fig-subcap: "Learning and Memory Subdomain Plots"
+#| fig-cap: "Learning and memory refer to the rate and ease with which new information (e. g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",

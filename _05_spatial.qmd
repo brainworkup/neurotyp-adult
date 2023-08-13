@@ -20,7 +20,6 @@ params:
 
 {{< include _05_spatial_text.qmd >}}
 
-
 ```{r}
 #| label: data-spatial
 data <- bwu::read_data(pheno = "spatial")
@@ -94,10 +93,9 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```
 
 ```{r}
-#| label: fig-spatial
 #| out-width: 70%
 #| fig-cap: "*Visuoperception, visuoconstruction, and visuospatial processing* refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
-#| fig-subcap: "Visual Perception/Construction Subdomain Plots"
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -114,4 +112,18 @@ bwu::make_fig(
   y = data_dotplot$narrow,
   colors = roma
 )
+```
+
+
+
+```{r}
+#| fig-subcap: "Visual Perception/Construction Subdomain Plots"
+xfun::pkg_attach(c(
+  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
+  "scales", "bwu", "patchwork"
+))
+# combine plots
+pathwork <- table_spatial + fig_spatial
+pathwork +
+  plot_annotation()
 ```

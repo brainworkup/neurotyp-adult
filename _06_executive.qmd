@@ -178,7 +178,7 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 #| label: fig-executive
 #| out-width: 70%
 #| fig-cap: "Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met."
-#| fig-subcap: "Attention/Executive Subdomain Plots"
+
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -186,13 +186,15 @@ roma <- c(
   "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
   "#023198"
 )
+
 pheno <- "executive"
-data_dotplot <- dplyr::filter(data, !is.na(percentile))
+executive <- dplyr::filter(data, !is.na(percentile))
+
 bwu::make_fig(
-  data = data_dotplot,
+  data = executive,
   pheno = pheno,
-  x = data_dotplot$z_mean_subdomain,
-  y = data_dotplot$subdomain,
+  x = executive$z_mean_subdomain,
+  y = executive$subdomain,
   colors = roma
 )
 ```
