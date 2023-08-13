@@ -1,14 +1,3 @@
----
-title-meta: executive-raw
-execute:
-  cache: true
----
-
-<<PROMPT>>
-
-Summarize and interpret these neuropsychological test scores as if you are an experienced neuropsychologist. For scores that are below average, give a brief example of how this could impact the patient's daily life and functioning. Organize your summary and interpretation from scores that are above average to below average to delineate relative strengths and weaknesses.
-
-<<START>>
 Total number of intrusive response errors was High Average.
 Basic psychomotor processing speed was Average.
 Efficiency of psychomotor speed, visual scanning ability, and visual-motor coordination was Average.

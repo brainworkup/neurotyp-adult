@@ -26,3 +26,7 @@ secure_data
 local_data
 *.pkg
 *.dmg
+_02_iq_bk.qmd
+_02_iq.typ
+_02_iq_functions.R
+bk/

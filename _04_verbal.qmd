@@ -10,161 +10,121 @@ format:
   pdf:
     keep-md: true
     keep-tex: true
+  html: 
+    toc: true
 ---
 
-<!-- ### Verbal/Language -->
+<!-- ## Verbal/Language -->
+
+{{< include _04_verbal_text.qmd >}}
+
+```{r}
+#| label: setup
+xfun::pkg_attach2(c(
+  "gt",
+  "dplyr",
+  "glue",
+  "webshot2",
+  "ggplot2",
+  "ggthemes",
+  "scales",
+  "bwu"
+))
+```
 
 ```{r}
 #| label: data-verbal
-library(readr)
-library(dplyr)
-library(bwu)
-
-# which csv file to use
-pheno <- "verbal"
-
-if (pheno == "adhd" || pheno == "emotion") {
-  csv <- "neurobehav.csv"
-} else {
-  csv <- "neurocog.csv"
-}
-
-# read data
-file_path <- file.path(csv)
-data <- readr::read_csv(file_path)
+data <- bwu::read_data(pheno = "verbal")
 ```
 
 ```{r}
 #| label: filter-verbal
-
-# FILTER DATA
-# filter by broad domain
-domain <- "Verbal/Language"
-data <- dplyr::filter(data, domain == !!domain)
-
-# filter by scale
 filter_file <- c(
-  ## NAB/NABS
-  "Language Domain",
-  "NAB Language Index",
-  "Auditory Comprehension",
+  "Academic Language Readiness Index",
   "Auditory Comprehension Colors",
-  "Auditory Comprehension Shapes",
   "Auditory Comprehension Colors/Shapes/Numbers",
-  "Naming",
-  "Naming Semantic Cuing",
-  "Naming Phonemic Cuing",
-  "Reading Comprehension",
-  "Oral Production",
-  "Writing",
+  "Auditory Comprehension Shapes",
+  "Auditory Comprehension",
+  "Basic Concepts",
   "Bill Payment",
-  ## from EF
-  "Word Generation",
-  ## WAIS/WISC/WPPSI
-  "Information",
-  "Similarities",
-  "Vocabulary",
+  "Body Part Identification",
+  "Body Part Naming",
+  "Category Fluency",
+  "Comprehension of Instructions",
   "Comprehension",
-  "Receptive Vocabulary",
-  "Picture Naming",
-  # RBANS
-  "Language Index",
-  "Semantic Fluency",
-  "Picture Naming",
-  # DKEFS
+  "Core Language Score",
   "D-KEFS Color Naming",
   "D-KEFS Word Reading",
-  # NEPSY
-  "Comprehension of Instructions",
-  "Word Generation-Semantic",
-  "Word Generation-Initial Letter",
-  "Body Part Naming",
-  "Body Part Identification",
-  # "Naming vs Identification",
-  "Oromotor Sequences",
-  "Speeded Naming",
-  ## "Speeded Naming Time",
-  ## "Speeded Naming Correct",
-  ## "Speeded Naming Errors",
-  # CELF-3 Preschool
-  "Sentence Comprehension",
-  "Word Structure",
+  "Descriptive Pragmatics Profile",
+  "Early Literacy Index",
+  "Expressive Language Index",
   "Expressive Vocabulary",
   "Following Directions",
-  "Recalling Sentences",
-  "Basic Concepts",
-  "Word Classes",
-  "Phonological Awareness",
-  "Descriptive Pragmatics Profile",
-  "Preliteracy Rating Scale",
-  "Core Language Score",
-  "Receptive Language Index",
-  "Expressive Language Index",
+  "Information",
   "Language Content Index",
+  "Language Domain",
+  "Language Index",
   "Language Structure Index",
-  "Academic Language Readiness Index",
-  "Early Literacy Index",
-  # NIH EXAMINER
   "Letter Fluency",
-  "Category Fluency"
+  "NAB Language Index",
+  "Naming Phonemic Cuing",
+  "Naming Semantic Cuing",
+  "Naming vs Identification",
+  "Naming",
+  "Oral Production",
+  "Oromotor Sequences",
+  "Phonological Awareness",
+  "Picture Naming",
+  "Picture Naming",
+  "Preliteracy Rating Scale",
+  "Reading Comprehension",
+  "Recalling Sentences",
+  "Receptive Language Index",
+  "Receptive Vocabulary",
+  "Semantic Fluency",
+  "Sentence Comprehension",
+  "Similarities",
+  "Speeded Naming Correct",
+  "Speeded Naming Errors",
+  "Speeded Naming Time",
+  "Speeded Naming",
+  "Vocabulary",
+  "Word Classes",
+  "Word Generation-Initial Letter",
+  "Word Generation-Semantic",
+  "Word Generation",
+  "Word Structure",
+  "Writing"
 )
-data <- dplyr::filter(data, scale %in% filter_file)
+data <- bwu::filter_domain(data, domain = "Verbal/Language", filter_file = filter_file)
 ```
 
 ```{r}
 #| label: text-verbal
 #| cache: true
-library(glue)
-library(purrr)
-library(dplyr)
-
-data_text <-
-  data |>
-  dplyr::arrange(dplyr::desc(percentile)) |>
-  dplyr::distinct(.keep_all = FALSE)
-
-data_text |>
-  glue::glue_data() |>
-  purrr::modify(purrr::as_mapper(~ paste0(.x))) |>
-  cat(data_text$result,
-    file = "_04_verbal_raw.qmd",
-    fill = TRUE,
-    append = TRUE
-  )
+bwu::flatten_scale_text(data, file = "_02_verbal_raw.qmd")
 ```
 
 ```{r}
 #| label: qtbl-verbal
-
-# GT table
-xfun::pkg_attach2(c("gt", "dplyr", "glue", "webshot2", "gtExtras", "bwu"))
-
-# more filtering for tables
-data <- dplyr::arrange(data, test_name)
-
+#| dev: tikz
+#| fig-process: pdf2png
+options(tikzDefaultEngine = "xetex")
 # source note
-source_note <- gt::md("*Note:* T-scores have a mean of 50 and a standard
-deviation of 10.
-
-Scaled scores have a mean of 10 and a standard deviation of 3.")
-
-# run fc
-table_verbal <- bwu::tbl_gt(
-  data,
-  table_name = "table_verbal",
-  source_note = source_note
-)
-table_verbal
-
-gt::gtsave(table_verbal, glue("table_verbal", ".png"), expand = 10)
-gt::gtsave(table_verbal, glue("table_verbal", ".pdf"), expand = 10)
+source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
+10, SD = 3).")
+table_name <- "table_verbal"
+pheno <- "verbal"
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
+
 ```{=typst}
+#let domain = "Verbal/Language"
 <qtbl-verbal>
-#figure([#image("table_verbal.png", width: 70%)],
+#figure([#image("table_verbal.png", width: 50%)],
   caption: [
-    Language processing test scores
+    #domain Test Scores
   ],
   kind: "qtbl",
   supplement: [Table],
@@ -173,56 +133,23 @@ gt::gtsave(table_verbal, glue("table_verbal", ".pdf"), expand = 10)
 
 ```{r}
 #| label: fig-verbal
-#| eval: true
-#| fig-align: center
-#| fig-cap: "Verbal/Language refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
-xfun::pkg_attach(c(
-  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
-  "scales", "bwu"
-))
-
-# data for dotplot
-data <- dplyr::filter(data, !is.na(percentile))
-
-# will need to change these for each domain
-fig_verbal <- bwu::dotplot(
-  data = data,
-  x = data$z_mean_subdomain,
-  y = data$subdomain,
-  fill = x
+#| out-width: 70%
+#| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
+#| fig-subcap: "Verbal/Language Subdomain Plots"
+roma <- c(
+  "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
+  "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
+  "#C0E9C2", "#ACE7D0", "#93DFD5", "#77D1D7", "#5DC0D2", "#47AECD",
+  "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
+  "#023198"
 )
-fig_verbal
-
-ggplot2::ggsave("fig_verbal.png")
-ggplot2::ggsave("fig_verbal.pdf")
-```
-
-```{r}
-#| label: table-md-verbal
-#| eval: false
-#| tbl-cap: "Verbal/Language"
-# markdown table; change label if want to use
-markdown_table_typst <- function(data) {
-  data.frame(
-    data
-  ) |>
-    kableExtra::kbl(
-      format = "markdown",
-      table.envir = "figure",
-      longtable = FALSE,
-      booktabs = TRUE,
-      linesep = "",
-      align = c("lccc"),
-      col.names = c("**Scale**", "**Score**", "**‰ Rank**", "**Range**")
-    )
-}
-tbl_md <- markdown_table_typst(data[, c(2, 4, 5, 6)])
-tbl_md
-```
-
-```{r}
-#| label: csv-verbal
-#| eval: false
-verbal <- data[, c(2, 4, 5, 6)]
-readr::write_csv(verbal, "verbal.csv", col_names = FALSE)
+pheno <- "verbal"
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
+bwu::make_fig(
+  data = data_dotplot,
+  pheno = pheno,
+  x = data_dotplot$z_mean_subdomain,
+  y = data_dotplot$subdomain,
+  colors = roma
+)
 ```

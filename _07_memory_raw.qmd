@@ -1,58 +1,37 @@
 ---
-title-meta: memory-raw
+title-meta: iq-raw
 execute:
   cache: true
 ---
 
-```{r}
-#| include: false
+<<PROMPT>>
 
-# <!-- <<PROMPT>> -->
+Summarize and interpret these neuropsychological test scores as if you are an experienced neuropsychologist. For scores that are below average, give a brief example of how this could impact the patient's daily life and functioning. Organize your summary and interpretation from scores that are above average to below average to delineate relative strengths and weaknesses.
 
-# Summarize and interpret these neuropsychological test scores as if you are an experienced clinical neuropsychologist. For scores that are below average, give a brief example of how this could impact the patient's daily life and functioning. Organize your summary and interpretation from scores that are above average to below average to delineate relative strengths and weaknesses.
-
-# <!-- <<START>> -->
-
-```
-
-<!-- glue -->
- 
- 
-Performance on a more complex one-trial verbal learning and recall task (story learning) was High Average. 
-Delayed recall of the story details over time was High Average. 
-Learning and recognition of visual material (abstract shapes) was High Average. 
-Recall of the list after a long (20-minute) delay was Average. 
-Recall of the list after a long (20-minute) delay with cues was Average. 
-Recognition of the target visual material among nontarget distractors after a delay period was Average. 
-Recall of the list after a short delay was Average. 
-The percentage of story detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Spontaneous, long-term delayed recall (20-25 min) recall and reproduction of a complex abstract figure fell within the Average range. 
-Yes/no recognition discriminability was Average. 
-Percentage of visual detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Learning and recall of rote verbal information (word list) was Low Average.
- 
-Performance on a more complex one-trial verbal learning and recall task (story learning) was High Average. 
-Delayed recall of the story details over time was High Average. 
-Learning and recognition of visual material (abstract shapes) was High Average. 
-Recall of the list after a long (20-minute) delay was Average. 
-Recall of the list after a long (20-minute) delay with cues was Average. 
-Recognition of the target visual material among nontarget distractors after a delay period was Average. 
-Recall of the list after a short delay was Average. 
-The percentage of story detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Spontaneous, long-term delayed recall (20-25 min) recall and reproduction of a complex abstract figure fell within the Average range. 
-Yes/no recognition discriminability was Average. 
-Percentage of visual detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Learning and recall of rote verbal information (word list) was Low Average.
- 
-Performance on a more complex one-trial verbal learning and recall task (story learning) was High Average. 
-Delayed recall of the story details over time was High Average. 
-Learning and recognition of visual material (abstract shapes) was High Average. 
-Recall of the list after a long (20-minute) delay was Average. 
-Recall of the list after a long (20-minute) delay with cues was Average. 
-Recognition of the target visual material among nontarget distractors after a delay period was Average. 
-Recall of the list after a short delay was Average. 
-The percentage of story detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Spontaneous, long-term delayed recall (20-25 min) recall and reproduction of a complex abstract figure fell within the Average range. 
-Yes/no recognition discriminability was Average. 
-Percentage of visual detail retained over time, scaled to how much was initially learned fell in the Average range. 
-Learning and recall of rote verbal information (word list) was Low Average.
+<<START>>
+A composite screening measure of Lilith's visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Above Average classification range.
+A composite measure of the examinee's verbal and visual memory functioning was High Average.
+An estimate of fluid intelligence (*G*f) was classified as High Average.
+Crystallized intelligence (*G*c) was classified as High Average and ranked at the 86th percentile.
+An estimate of higher cognitive reasoning and acquired knowledge (*g*) was High Average and ranked at the 82th percentile, indicating performance as good as or better than 82% of same-age peers from the general population.
+An estimate of premorbid verbal ability level fell within the Average range.^[(ref:premorbid)]
+A composite screening measure of language comprehension and word-finding abilities fell in the Average classification range.
+Finally, a comprehensive measure of neuropsychological functioning (independent of general intelligence) in the domains of attentional and executive functioning, language, spatial processing, and memory fell in the Average range.
+Collective performance across measures of processing speed and cognitive efficiency^[(ref:processing-speed)] was Average and a relative strength|weakness.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Low Average range.
+A composite estimate of working memory^[(ref:working-memory)] and processing speed^[(ref:processing-speed)] (i.e., cognitive proficiency) was Low Average and a relative strength|weakness.
+An estimate of working memory capacity^[(ref:working-memory)] fell in the Below Average range and was and a relative strength|weakness.
+An overall screening measure of the examinee's attentional functioning was Below Average.
+A composite screening measure of Lilith's visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Above Average classification range.
+A composite measure of the examinee's verbal and visual memory functioning was High Average.
+An estimate of fluid intelligence (*G*f) was classified as High Average.
+Crystallized intelligence (*G*c) was classified as High Average and ranked at the 86th percentile.
+An estimate of higher cognitive reasoning and acquired knowledge (*g*) was High Average and ranked at the 82th percentile, indicating performance as good as or better than 82% of same-age peers from the general population.
+An estimate of premorbid verbal ability level fell within the Average range.^[(ref:premorbid)]
+A composite screening measure of language comprehension and word-finding abilities fell in the Average classification range.
+Finally, a comprehensive measure of neuropsychological functioning (independent of general intelligence) in the domains of attentional and executive functioning, language, spatial processing, and memory fell in the Average range.
+Collective performance across measures of processing speed and cognitive efficiency^[(ref:processing-speed)] was Average and a relative strength|weakness.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Low Average range.
+A composite estimate of working memory^[(ref:working-memory)] and processing speed^[(ref:processing-speed)] (i.e., cognitive proficiency) was Low Average and a relative strength|weakness.
+An estimate of working memory capacity^[(ref:working-memory)] fell in the Below Average range and was and a relative strength|weakness.
+An overall screening measure of the examinee's attentional functioning was Below Average.

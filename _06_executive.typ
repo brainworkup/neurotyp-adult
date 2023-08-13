@@ -106,18 +106,23 @@
 )
 
 
-Biggie showed particularly strong performance on tests measuring working memory capacity and higher cognitive reasoning, both of which ranked in the Exceptionally High and Above Average ranges respectively. Other estimates of her verbal and visual memory functioning, crystallized intelligence, language comprehension, and premorbid verbal ability level all fell within the Above Average range. These scores suggest that Biggie is highly versatile with regards to her cognitive abilities, particularly in the domains of working memory capacity, higher cognitive reasoning, and verbal/visual memory functioning.
+Formal testing of an array of attention and executive functions revealed heterogeneous skills. A composite index of both basic and complex verbal and nonverbal attentional capacity/functioning was Average. A composite index of higher executive skills was Average. Orientation to person, place, time, and situation was intact. No gross behavioral apathy or disinhibition observed. Auditory attentional capacity was Average (\# digits forward). Working memory for orally presented information was Average (\# digits backward).
 
-However, attentional function and aggregate performance across metrics of processing speed and cognitive efficiency were categorized as Average. This may pose challenges in her ability to concentrate on tasks, retain instructions, or attend to intricate details. Relative deficiencies in these areas may suggest difficulties in managing time-sensitive tasks or demonstrating self-discipline in routine activities. Such factors could result in challenges when undertaking complex work tasks necessitating efficient multitasking, as well as subtler impairments such as difficulty staying focused during conversations.
-
-<qtbl-iq>
-#figure([#image("table_iq.png", width: 70%)],
+#let domain = "Attention/Executive"
+<qtbl-executive>
+#figure([#image("table_executive.png", width: 50%)],
   caption: [
-    Composite intellectual and neuropsychological index scores
+    #domain Test Scores
   ],
   kind: "qtbl",
   supplement: [Table],
 )
-```
-fig_iq.pdf
-```
+<fig-executive>
+#figure([#image("_06_executive_files/figure-typst/fig-executive-1.svg", width: 70%)],
+  caption: [
+    (a) Attention/Executive Subdomain Plots
+  ]
+)
+<fig-executive>
+
+Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met.
