@@ -19,6 +19,19 @@ format:
 {{< include _02_iq_text.qmd >}}
 
 ```{r}
+#| label: setup
+xfun::pkg_attach2(c(
+  "gt",
+  "dplyr",
+  "glue",
+  "webshot2",
+  "ggplot2",
+  "ggthemes",
+  "scales",
+  "bwu"
+))
+```
+```{r}
 #| label: data-iq
 data <- bwu::read_data(pheno = "iq")
 ```
@@ -73,16 +86,14 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 
 ```{r}
 #| label: qtbl-iq
-#| fig-align: center
 #| dev: tikz
 #| fig-process: pdf2png
-#| cache: false
 options(tikzDefaultEngine = "xetex")
 
-index_score <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
+source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
 table_name <- "table_iq"
 pheno <- "iq"
-bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = table_name)
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
 
@@ -102,17 +113,7 @@ bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = ta
 #| label: fig-iq
 #| out-width: 70%
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
-# load packages
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
+#| fig-subcap: "General Cognitive Ability Subdomain Plots"
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -126,12 +127,11 @@ data_dotplot <- dplyr::filter(
   data,
   scale %in% filter_plot
 )
-fig_iq <- bwu::make_fig(
+bwu::make_fig(
   data = data_dotplot,
+  pheno = pheno,
   x = data_dotplot$z_mean_narrow,
   y = data_dotplot$narrow,
-  pheno = pheno,
   colors = roma
 )
-fig_iq
 ```

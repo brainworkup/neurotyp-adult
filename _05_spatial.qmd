@@ -12,11 +12,27 @@ format:
     keep-tex: true
   html: 
     toc: true
+params:
+  pheno: spatial
 ---
 
 <!-- ## Visual Perception/Construction -->
 
 {{< include _05_spatial_text.qmd >}}
+
+```{r}
+#| label: setup
+xfun::pkg_attach2(c(
+  "gt",
+  "dplyr",
+  "glue",
+  "webshot2",
+  "ggplot2",
+  "ggthemes",
+  "scales",
+  "bwu"
+))
+```
 
 ```{r}
 #| label: data-spatial
@@ -66,17 +82,15 @@ bwu::flatten_scale_text(data, file = "_02_spatial_raw.qmd")
 
 ```{r}
 #| label: qtbl-spatial
-#| fig-align: center
 #| dev: tikz
 #| fig-process: pdf2png
-#| cache: false
 options(tikzDefaultEngine = "xetex")
 
-index_score <- "*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10,
+source_note <- "*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10,
 SD = 3)."
 table_name <- "table_spatial"
 pheno <- "spatial"
-bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = table_name)
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
 
@@ -95,19 +109,8 @@ bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = ta
 ```{r}
 #| label: fig-spatial
 #| out-width: 70%
-#| fig-cap: "Visual Perception/Construction"
-
-# load packages
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
+#| fig-cap: "*Visuoperception, visuoconstruction, and visuospatial processing* refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
+#| fig-subcap: "Visual Perception/Construction Subdomain Plots"
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -116,16 +119,12 @@ roma <- c(
   "#023198"
 )
 pheno <- "spatial"
-data_dotplot <- dplyr::filter(
-  data,
-  scale %in% filter_plot
-)
-fig_spatial <- bwu::make_fig(
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
+bwu::make_fig(
   data = data_dotplot,
+  pheno = pheno,
   x = data_dotplot$z_mean_narrow,
   y = data_dotplot$narrow,
-  pheno = pheno,
   colors = roma
 )
-fig_spatial
 ```
