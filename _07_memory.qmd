@@ -41,7 +41,7 @@ data <- bwu::read_data(pheno = "memory")
 
 ```{r}
 #| label: filter-memory
-filter_file <- c(
+scales <- c(
   "CVLT-3 Forced-Choice Recognition Hits",
   "CVLT-3 Total Intrusions",
   "CVLT-3 Total Repetitions",
@@ -117,7 +117,7 @@ filter_file <- c(
   "Word List Interference-Recall",
   "Word List Interference-Repetition"
 )
-data <- bwu::filter_domain(data, domain = "Memory", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Memory", scale = scales)
 ```
 
 ```{r}

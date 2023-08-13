@@ -41,7 +41,7 @@ data <- bwu::read_data(pheno = "verbal")
 
 ```{r}
 #| label: filter-verbal
-filter_file <- c(
+scales <- c(
   "Academic Language Readiness Index",
   "Auditory Comprehension Colors",
   "Auditory Comprehension Colors/Shapes/Numbers",
@@ -98,7 +98,7 @@ filter_file <- c(
   "Word Structure",
   "Writing"
 )
-data <- bwu::filter_domain(data, domain = "Verbal/Language", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Verbal/Language", scale = scales)
 ```
 
 ```{r}

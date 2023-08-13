@@ -39,7 +39,7 @@ data <- bwu::read_data(pheno = "adhd")
 
 ```{r}
 #| label: filter-adhd
-filter_file <- c(
+scales <- c(
   "Action",
   "Activation",
   "ADHD Index",
@@ -102,10 +102,10 @@ filter_file <- c(
   "Total Composite",
   "Working Memory"
 )
-data_adhd <- bwu::filter_domain(data, domain = "ADHD", filter_file = filter_file)
-data_ef <- bwu::filter_domain(data,
+data_adhd <- bwu::filter_domain_scale(data, domain = "ADHD", scale = scales)
+data_ef <- bwu::filter_domain_scale(data,
   domain = "Executive Functioning",
-  filter_file = filter_file
+  scale = scales
 )
 data <- dplyr::bind_rows(data_adhd, data_ef)
 ```

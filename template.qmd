@@ -246,15 +246,11 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 ## Visual Perception/Construction
 
-{{< include _05_spatial_text.qmd >}}
-
 {{< include _05_spatial.qmd >}}
 
 {{< pagebreak >}}
 
 ## Attention/Executive
-
-{{< include _06_executive_text.qmd >}}
 
 {{< include _06_executive.qmd >}}
 
@@ -262,21 +258,15 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 ## Memory
 
-{{< include _07_memory_text.qmd >}}
-
 {{< include _07_memory.qmd >}}
 
 {{< pagebreak >}}
 
 ## ADHD/Executive Functioning
 
-{{< include _10_adhd_text.qmd >}}
-
 {{< include _10_adhd.qmd >}}
 
 ## Emotional/Behavioral/Personality
-
-{{< include _11_emotion_text.qmd >}}
 
 {{< include _11_emotion.qmd >}}
 

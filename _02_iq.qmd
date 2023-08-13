@@ -38,7 +38,7 @@ data <- bwu::read_data(pheno = "iq")
 
 ```{r}
 #| label: filter-iq
-filter_file <- c(
+scales <- c(
   "Cognitive Efficiency",
   "Cognitive Proficiency (CPI)",
   "Cognitive Proficiency Index",
@@ -75,7 +75,7 @@ filter_file <- c(
   "Working Memory Index",
   "Working Memory"
 )
-data <- bwu::filter_domain(data, domain = "Intelligence/General Ability", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Intelligence/General Ability", scale = scales)
 ```
 
 ```{r}
@@ -89,7 +89,6 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-
 source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
 table_name <- "table_iq"
 pheno <- "iq"

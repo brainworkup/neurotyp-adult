@@ -41,7 +41,7 @@ data <- bwu::read_data(pheno = "spatial")
 
 ```{r}
 #| label: filter-spatial
-filter_file <- c(
+scales <- c(
   "Arrows",
   "Bicycle Drawing",
   "Block Design No Time Bonus",
@@ -71,13 +71,13 @@ filter_file <- c(
   "Visual Puzzles",
   "Visuospatial/Constructional Index"
 )
-data <- bwu::filter_domain(data, domain = "Visual Perception/Construction", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Visual Perception/Construction", scale = scales)
 ```
 
 ```{r}
 #| label: text-spatial
 #| cache: true
-bwu::flatten_scale_text(data, file = "_02_spatial_raw.qmd")
+bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 ```
 
 ```{r}

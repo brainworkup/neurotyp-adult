@@ -19,6 +19,7 @@ params:
 <!-- ## Academic Skills -->
 
 {{< include _03_academics_text.qmd >}}
+
 ```{r}
 #| label: setup
 xfun::pkg_attach2(c(
@@ -40,7 +41,7 @@ data <- bwu::read_data(pheno = "academics")
 
 ```{r}
 #| label: filter-academics
-filter_file <- c(
+scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
   "Academic Skills Battery (ASB) Composite",
@@ -108,13 +109,13 @@ filter_file <- c(
   "Written Expression",
   "Written Language Composite"
 )
-data <- bwu::filter_domain(data, domain = "Academic Skills", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Academic Skills", scale = scales)
 ```
 
 ```{r}
 #| label: text-academics
 #| cache: true
-bwu::flatten_scale_text(data, file = "_02_academics_raw.qmd")
+bwu::flatten_scale_text(data, file = "_03_academics_raw.qmd")
 ```
 
 ```{r}

@@ -41,7 +41,7 @@ data <- bwu::read_data(pheno = "motor")
 
 ```{r}
 #| label: filter-motor
-filter_file <- c(
+scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
   "Dominant vs. Nondominant",
@@ -71,7 +71,7 @@ filter_file <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-data <- bwu::filter_domain(data, domain = "Motor", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Motor", scale = scales)
 ```
 
 ```{r}
@@ -85,7 +85,6 @@ bwu::flatten_scale_text(data, file = "_08_motor_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-# source note
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
 table_name <- "table_motor"

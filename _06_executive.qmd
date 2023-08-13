@@ -13,7 +13,7 @@ format:
   html: 
     toc: true
 params:
-  pheno: spatial
+  pheno: executive
 ---
 
 <!-- ## Attention/Executive -->
@@ -40,7 +40,7 @@ data <- bwu::read_data(pheno = "executive")
 
 ```{r}
 #| label: filter-executive
-filter_file <- c(
+scales <- c(
   "Animal Coding",
   "Arithmetic",
   "Attention Domain",
@@ -113,7 +113,7 @@ filter_file <- c(
   "Working Memory (WMI)",
   "Zoo Locations"
 )
-data <- bwu::filter_domain(data, domain = "Attention/Executive", filter_file = filter_file)
+data <- bwu::filter_domain_scale(data, domain = "Attention/Executive", scale = scales)
 ```
 
 ```{r}
@@ -127,9 +127,7 @@ bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-# source note
-source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
-10, SD = 3).")
+source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10, SD = 3).")
 table_name <- "table_executive"
 pheno <- "executive"
 # more filtering for exe tables

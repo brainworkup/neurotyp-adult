@@ -14,9 +14,9 @@ params:
   pheno: emotion
 ---
 
-## Emotional/Behavioral/Personality
+<!-- ## Emotional/Behavioral/Personality -->
 
-<!-- {{< include _11_emotion_text.qmd >}} -->
+{{< include _11_emotion_text.qmd >}}
 
 ```{r}
 #| label: setup
