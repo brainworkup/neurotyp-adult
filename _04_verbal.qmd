@@ -20,7 +20,6 @@ params:
 
 {{< include _04_verbal_text.qmd >}}
 
-
 ```{r}
 #| label: data-verbal
 data <- bwu::read_data(pheno = "verbal")
@@ -85,7 +84,8 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
-data <- bwu::filter_domain_scale(data, domain = "Verbal/Language", scale = scales)
+domains <- "Verbal/Language"
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -99,7 +99,6 @@ bwu::flatten_scale_text(data, file = "_04_verbal_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-# source note
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
 table_name <- "table_verbal"

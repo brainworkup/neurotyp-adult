@@ -57,7 +57,10 @@ scales <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-data <- bwu::filter_domain_scale(data, domain = "Motor", scale = scales)
+domains <- c(
+  "Motor"
+)
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}

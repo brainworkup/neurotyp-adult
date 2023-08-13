@@ -20,8 +20,6 @@ params:
 
 {{< include _07_memory_text.qmd >}}
 
-
-
 ```{r}
 #| label: data-memory
 data <- bwu::read_data(pheno = "memory")
@@ -105,7 +103,8 @@ scales <- c(
   "Word List Interference-Recall",
   "Word List Interference-Repetition"
 )
-data <- bwu::filter_domain_scale(data, domain = "Memory", scale = scales)
+domains <- "Memory"
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -119,7 +118,6 @@ bwu::flatten_scale_text(data, file = "_07_memory_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-# source note
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
 table_name <- "table_memory"

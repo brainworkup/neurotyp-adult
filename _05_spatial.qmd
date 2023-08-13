@@ -58,7 +58,8 @@ scales <- c(
   "Visual Puzzles",
   "Visuospatial/Constructional Index"
 )
-data <- bwu::filter_domain_scale(data, domain = "Visual Perception/Construction", scale = scales)
+domains <- "Visual Perception/Construction"
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -72,7 +73,6 @@ bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-
 source_note <- "*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10,
 SD = 3)."
 table_name <- "table_spatial"

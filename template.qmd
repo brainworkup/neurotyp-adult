@@ -244,38 +244,37 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 {{< include _02_iq.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## Academic Skills
 
 {{< include _03_academics.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## Verbal/Language
 
-
 {{< include _04_verbal.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## Visual Perception/Construction
 
 {{< include _05_spatial.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## Attention/Executive
 
 {{< include _06_executive.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## Memory
 
 {{< include _07_memory.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 ## ADHD/Executive Functioning
 

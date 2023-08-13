@@ -18,19 +18,6 @@ params:
 
 {{< include _10_adhd_text.qmd >}}
 
-```{r}
-#| label: setup
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
-```
 
 ```{r}
 #| label: data-adhd
@@ -102,9 +89,16 @@ scales <- c(
   "Total Composite",
   "Working Memory"
 )
-data_adhd <- bwu::filter_domain_scale(data, domain = "ADHD", scale = scales)
+domains <- c(
+  "ADHD"
+)
+data_adhd <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+
+domains <- c(
+  "Executive Functioning"
+)
 data_ef <- bwu::filter_domain_scale(data,
-  domain = "Executive Functioning",
+  domain = domains,
   scale = scales
 )
 data <- dplyr::bind_rows(data_adhd, data_ef)

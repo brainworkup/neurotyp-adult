@@ -28,6 +28,7 @@ data <- bwu::read_data(pheno = "academics")
 
 ```{r}
 #| label: filter-academics
+domains <- "Academic Skills"
 scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
@@ -96,7 +97,7 @@ scales <- c(
   "Written Expression",
   "Written Language Composite"
 )
-data <- bwu::filter_domain_scale(data, domain = "Academic Skills", scale = scales)
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -110,7 +111,6 @@ bwu::flatten_scale_text(data, file = "_03_academics_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-
 source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
 table_name <- "table_academics"
 pheno <- "academics"

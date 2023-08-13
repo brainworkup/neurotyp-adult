@@ -100,7 +100,8 @@ scales <- c(
   "Working Memory (WMI)",
   "Zoo Locations"
 )
-data <- bwu::filter_domain_scale(data, domain = "Attention/Executive", scale = scales)
+domains <- "Attention/Executive"
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
