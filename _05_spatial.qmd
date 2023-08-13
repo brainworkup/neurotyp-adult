@@ -153,7 +153,7 @@ gt::gtsave(table_spatial, glue("table_spatial", ".pdf"), expand = 10)
 #| label: fig-spatial
 #| eval: true
 #| fig-cap: "*Visuoperception, visuoconstruction, and visuospatial processing* refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
-xfun::pkg_attach(c(
+xfun::pkg_attach2(c(
   "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
   "scales", "bwu"
 ))

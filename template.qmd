@@ -155,7 +155,6 @@ neurocog <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_timed = mean(z), z_sd_timed = sd(z)) |>
   dplyr::ungroup()
-  
 # Subset neurobehavioral data
 neurobehav <-
   neuropsych |>
@@ -181,7 +180,6 @@ neurobehav <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
-  
 # Subset validity data
 validity <-
   neuropsych |>
@@ -207,7 +205,6 @@ validity <-
   # dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
-  
 # write-neuro-data
 readr::write_csv(neuropsych, here::here("neuropsych.csv"))
 readr::write_csv(neurocog, here::here("neurocog.csv"))
