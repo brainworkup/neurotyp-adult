@@ -20,8 +20,8 @@ blackbox.config.json
 .env*
 .flaskenv*
 !.env.project
-!.env.vault
-.env.vault
+
+
 secure_data
 local_data
 *.pkg
@@ -33,4 +33,5 @@ bk/
 _03_academics.typ
 _04_verbal.typ
 
-_05_spatial.typ
+_*_*.typ
+_*_*.html

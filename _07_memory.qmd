@@ -1,5 +1,5 @@
 ---
-title-meta: academics
+title-meta: memory
 execute:
   warning: false
   echo: false
@@ -12,129 +12,16 @@ format:
     keep-tex: true
   html: 
     toc: true
+params:
+  pheno: memory
 ---
 
-<!-- ## Academic Skills -->
+<!-- ## Memory -->
 
-{{< include _02_academics_text.qmd >}}
-
-```{r}
-#| label: data-academics
-data <- bwu::read_data(pheno = "academics")
-```
+{{< include _07_memory_text.qmd >}}
 
 ```{r}
-#| label: filter-academics
-filter_file <- c(
-  "Academic Fluency Composite",
-  "Academic Language Readiness Index",
-  "Academic Skills Battery (ASB) Composite",
-  "Alphabet Writing Fluency",
-  "Associational Fluency",
-  "Basic Reading",
-  "Comprehension Composite",
-  "Decoding Composite",
-  "Decoding Fluency",
-  "Decoding",
-  "Dyslexia Index",
-  "Essay Composition",
-  "Expression Composite",
-  "Expressive Vocabulary",
-  "Letter & Word Recognition",
-  "Letter Naming Facility",
-  "Listening Comprehension",
-  "Math Composite",
-  "Math Computation",
-  "Math Concepts & Applications",
-  "Math Fluency-Addition",
-  "Math Fluency-Multiplication",
-  "Math Fluency-Subtraction",
-  "Math Fluency",
-  "Math Problem Solving",
-  "Mathematics",
-  "Nonsense Word Decoding",
-  "Numerical Operations",
-  "Object Naming Facility",
-  "Oral Discourse Comprehension",
-  "Oral Expression",
-  "Oral Fluency Composite",
-  "Oral Language Composite",
-  "Oral Reading Fluency",
-  "Oral Word Fluency",
-  "Orthographic Choice",
-  "Orthographic Fluency",
-  "Orthographic Processing Composite",
-  "Orthographic Processing Extended",
-  "Orthographic Processing",
-  "Phonemic Proficiency",
-  "Phonological Processing",
-  "Pseudoword Decoding",
-  "Reading Composite",
-  "Reading Comprehension",
-  "Reading Comprehension",
-  "Reading Fluency Composite",
-  "Reading Fluency",
-  "Reading Index",
-  "Reading Understanding Composite",
-  "Reading Vocabulary",
-  "Reading",
-  "Receptive Vocabulary",
-  "Sentence Composition",
-  "Sentence Comprehension",
-  "Sentence Repetition",
-  "Sentence Writing Fluency",
-  "Silent Reading Fluency",
-  "Sound-Symbol Composite",
-  "Spelling",
-  "Total Achievement",
-  "Word Reading",
-  "Word Recognition Fluency",
-  "Writing Fluency",
-  "Written Expression",
-  "Written Language Composite"
-)
-data <- bwu::filter_domain(data, domain = "Academic Skills", filter_file = filter_file)
-```
-
-```{r}
-#| label: text-academics
-#| cache: true
-bwu::flatten_scale_text(data, file = "_02_academics_raw.qmd")
-```
-
-```{r}
-#| label: qtbl-academics
-#| fig-align: center
-#| dev: tikz
-#| fig-process: pdf2png
-#| cache: false
-options(tikzDefaultEngine = "xetex")
-
-index_score <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
-table_name <- "table_academics"
-pheno <- "academics"
-bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = table_name)
-```
-
-
-```{=typst}
-#let domain = "Academic Skills"
-<qtbl-academics>
-#figure([#image("table_academics.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-```
-
-```{r}
-#| label: fig-academics
-#| out-width: 70%
-#| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
-
-# load packages
+#| label: setup
 xfun::pkg_attach2(c(
   "gt",
   "dplyr",
@@ -145,6 +32,131 @@ xfun::pkg_attach2(c(
   "scales",
   "bwu"
 ))
+```
+
+```{r}
+#| label: data-memory
+data <- bwu::read_data(pheno = "memory")
+```
+
+```{r}
+#| label: filter-memory
+filter_file <- c(
+  "CVLT-3 Forced-Choice Recognition Hits",
+  "CVLT-3 Total Intrusions",
+  "CVLT-3 Total Repetitions",
+  "Daily Living Memory Delayed Recall",
+  "Daily Living Memory Immediate Recall",
+  "Delayed Memory Index",
+  "Designs I",
+  "Designs II",
+  "Figure Recall",
+  "Immediate Memory Index",
+  "List B Correct",
+  "List B Free Recall Correct",
+  "List Learning Immediate Recall",
+  "List Learning Long Delayed Recall",
+  "List Learning Short Delayed Recall",
+  "List Learning",
+  "List Recall",
+  "List Recognition",
+  "Logical Memory I",
+  "Logical Memory II",
+  "Long Delay Cued Recall",
+  "Long Delay Free Recall",
+  "Long-Delay Cued Recall",
+  "Long-Delay Free Recall",
+  "Long-Delay Recognition Discriminability",
+  "Long-Delay Recognition Response Bias",
+  "Memory Domain",
+  "Memory for Designs Content",
+  "Memory for Designs Delayed Content",
+  "Memory for Designs Delayed Spatial",
+  "Memory for Designs Delayed",
+  "Memory for Designs Spatial",
+  "Memory for Designs",
+  "Memory for Faces Delayed",
+  "Memory for Faces",
+  "NAB Memory Index",
+  "Narrative Memory Free and Cued Recall",
+  "Narrative Memory Free Recall",
+  "Narrative Memory Recall",
+  "Narrative Memory Recognition",
+  "Recognition Discriminability (d')",
+  "Recognition Discriminability Nonparametric",
+  "ROCFT Delayed Recall",
+  "Sentence Repetition",
+  "Shape Learning Delayed Recognition",
+  "Shape Learning Immediate Recognition",
+  "Shape Learning Percent Retention",
+  "Short Delay Cued Recall",
+  "Short Delay Free Recall",
+  "Short-Delay Cued Recall",
+  "Short-Delay Free Recall",
+  "Story Learning Delayed Recall",
+  "Story Learning Immediate Recall",
+  "Story Learning Percent Retention",
+  "Story Memory",
+  "Story Recall",
+  "Total False Positives",
+  "Total Hits",
+  "Total Intrusions",
+  "Total Repetitions",
+  "Trial 1 Correct",
+  "Trial 1 Free Recall Correct",
+  "Trial 2 Correct",
+  "Trial 3 Correct",
+  "Trial 4 Correct",
+  "Trial 5 Correct",
+  "Trial 5 Free Recall Correct",
+  "Trials 1-4 Correct",
+  "Trials 1-5 Correct",
+  "Trials 1-5 Free Recall Correct",
+  "Visual Reproduction I",
+  "Visual Reproduction II",
+  "Word List Interference-Recall",
+  "Word List Interference-Repetition"
+)
+data <- bwu::filter_domain(data, domain = "Memory", filter_file = filter_file)
+```
+
+```{r}
+#| label: text-memory
+#| cache: true
+bwu::flatten_scale_text(data, file = "_07_memory_raw.qmd")
+```
+
+```{r}
+#| label: qtbl-memory
+#| dev: tikz
+#| fig-process: pdf2png
+options(tikzDefaultEngine = "xetex")
+# source note
+source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
+10, SD = 3).")
+table_name <- "table_memory"
+pheno <- "memory"
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+```
+
+
+```{=typst}
+#let domain = "Memory"
+<qtbl-memory>
+#figure([#image("table_memory.png", width: 50%)],
+  caption: [
+    #domain Test Scores
+  ],
+  kind: "qtbl",
+  supplement: [Table],
+)
+```
+
+```{r}
+#| label: fig-memory
+#| out-width: 70%
+#| fig-cap: "*Learning and memory* refer to the rate and ease with which new information (e. g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
+#| fig-subcap: "Learning and Memory Subdomain Plots"
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -152,17 +164,14 @@ roma <- c(
   "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
   "#023198"
 )
-pheno <- "academics"
-data_dotplot <- dplyr::filter(
-  data,
-  scale %in% filter_plot
-)
-fig_academics <- bwu::make_fig(
+pheno <- "memory"
+exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
+bwu::make_fig(
   data = data_dotplot,
-  x = data_dotplot$z_mean_subdomain,
-  y = data_dotplot$subdomain,
   pheno = pheno,
+  x = data_dotplot$z_mean_narrow,
+  y = data_dotplot$narrow,
   colors = roma
 )
-fig_academics
 ```

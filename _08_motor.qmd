@@ -1,5 +1,5 @@
 ---
-title-meta: academics
+title-meta: motor
 execute:
   warning: false
   echo: false
@@ -12,129 +12,16 @@ format:
     keep-tex: true
   html: 
     toc: true
+params:
+  pheno: motor
 ---
 
-<!-- ## Academic Skills -->
+<!-- ## Motor -->
 
-{{< include _02_academics_text.qmd >}}
-
-```{r}
-#| label: data-academics
-data <- bwu::read_data(pheno = "academics")
-```
+{{< include _08_motor_text.qmd >}}
 
 ```{r}
-#| label: filter-academics
-filter_file <- c(
-  "Academic Fluency Composite",
-  "Academic Language Readiness Index",
-  "Academic Skills Battery (ASB) Composite",
-  "Alphabet Writing Fluency",
-  "Associational Fluency",
-  "Basic Reading",
-  "Comprehension Composite",
-  "Decoding Composite",
-  "Decoding Fluency",
-  "Decoding",
-  "Dyslexia Index",
-  "Essay Composition",
-  "Expression Composite",
-  "Expressive Vocabulary",
-  "Letter & Word Recognition",
-  "Letter Naming Facility",
-  "Listening Comprehension",
-  "Math Composite",
-  "Math Computation",
-  "Math Concepts & Applications",
-  "Math Fluency-Addition",
-  "Math Fluency-Multiplication",
-  "Math Fluency-Subtraction",
-  "Math Fluency",
-  "Math Problem Solving",
-  "Mathematics",
-  "Nonsense Word Decoding",
-  "Numerical Operations",
-  "Object Naming Facility",
-  "Oral Discourse Comprehension",
-  "Oral Expression",
-  "Oral Fluency Composite",
-  "Oral Language Composite",
-  "Oral Reading Fluency",
-  "Oral Word Fluency",
-  "Orthographic Choice",
-  "Orthographic Fluency",
-  "Orthographic Processing Composite",
-  "Orthographic Processing Extended",
-  "Orthographic Processing",
-  "Phonemic Proficiency",
-  "Phonological Processing",
-  "Pseudoword Decoding",
-  "Reading Composite",
-  "Reading Comprehension",
-  "Reading Comprehension",
-  "Reading Fluency Composite",
-  "Reading Fluency",
-  "Reading Index",
-  "Reading Understanding Composite",
-  "Reading Vocabulary",
-  "Reading",
-  "Receptive Vocabulary",
-  "Sentence Composition",
-  "Sentence Comprehension",
-  "Sentence Repetition",
-  "Sentence Writing Fluency",
-  "Silent Reading Fluency",
-  "Sound-Symbol Composite",
-  "Spelling",
-  "Total Achievement",
-  "Word Reading",
-  "Word Recognition Fluency",
-  "Writing Fluency",
-  "Written Expression",
-  "Written Language Composite"
-)
-data <- bwu::filter_domain(data, domain = "Academic Skills", filter_file = filter_file)
-```
-
-```{r}
-#| label: text-academics
-#| cache: true
-bwu::flatten_scale_text(data, file = "_02_academics_raw.qmd")
-```
-
-```{r}
-#| label: qtbl-academics
-#| fig-align: center
-#| dev: tikz
-#| fig-process: pdf2png
-#| cache: false
-options(tikzDefaultEngine = "xetex")
-
-index_score <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
-table_name <- "table_academics"
-pheno <- "academics"
-bwu::make_tbl_gt(data, pheno = pheno, index_score = index_score, table_name = table_name)
-```
-
-
-```{=typst}
-#let domain = "Academic Skills"
-<qtbl-academics>
-#figure([#image("table_academics.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-```
-
-```{r}
-#| label: fig-academics
-#| out-width: 70%
-#| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
-
-# load packages
+#| label: setup
 xfun::pkg_attach2(c(
   "gt",
   "dplyr",
@@ -145,6 +32,85 @@ xfun::pkg_attach2(c(
   "scales",
   "bwu"
 ))
+```
+
+```{r}
+#| label: data-motor
+data <- bwu::read_data(pheno = "motor")
+```
+
+```{r}
+#| label: filter-motor
+filter_file <- c(
+  "Dominant Hand Time",
+  "Dominant Hand",
+  "Dominant vs. Nondominant",
+  "Fingertip Tapping Dominant Hand Repetitions",
+  "Fingertip Tapping Dominant Hand Sequences",
+  "Fingertip Tapping Dominant Hand",
+  "Fingertip Tapping Dominant Hand",
+  "Fingertip Tapping Nondominant Hand Repetitions",
+  "Fingertip Tapping Nondominant Hand Sequences",
+  "Fingertip Tapping Nondominant Hand",
+  "Fingertip Tapping Nondominant Hand",
+  "Fingertip Tapping Repetitions",
+  "Fingertip Tapping Repetitions",
+  "Fingertip Tapping Sequences",
+  "Fingertip Tapping Sequences",
+  "FT Dominant Hand vs. Nondominant Hand",
+  "Imitating Hand Positions-Dominant",
+  "Imitating Hand Positions-Nondominant",
+  "Imitating Hand Positions",
+  "Left-Hand Time",
+  "Non-Dominant Hand Time",
+  "Nondominant Hand",
+  "Repetitions vs. Sequences",
+  "Right-Hand Time",
+  "Visuomotor Precision Errors",
+  "Visuomotor Precision Pencil Lifts",
+  "Visuomotor Precision Time",
+  "Visuomotor Precision"
+)
+data <- bwu::filter_domain(data, domain = "Motor", filter_file = filter_file)
+```
+
+```{r}
+#| label: text-motor
+#| cache: true
+bwu::flatten_scale_text(data, file = "_08_motor_raw.qmd")
+```
+
+```{r}
+#| label: qtbl-motor
+#| dev: tikz
+#| fig-process: pdf2png
+options(tikzDefaultEngine = "xetex")
+# source note
+source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
+10, SD = 3).")
+table_name <- "table_motor"
+pheno <- "motor"
+bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+```
+
+
+```{=typst}
+#let domain = "Motor"
+<qtbl-motor>
+#figure([#image("table_motor.png", width: 50%)],
+  caption: [
+    #domain Test Scores
+  ],
+  kind: "qtbl",
+  supplement: [Table],
+)
+```
+
+```{r}
+#| label: fig-motor
+#| out-width: 70%
+#| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
+#| fig-subcap: "Sensorimotor Subdomain Plots"
 roma <- c(
   "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
   "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
@@ -152,17 +118,13 @@ roma <- c(
   "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
   "#023198"
 )
-pheno <- "academics"
-data_dotplot <- dplyr::filter(
-  data,
-  scale %in% filter_plot
-)
-fig_academics <- bwu::make_fig(
+pheno <- "motor"
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
+bwu::make_fig(
   data = data_dotplot,
-  x = data_dotplot$z_mean_subdomain,
-  y = data_dotplot$subdomain,
   pheno = pheno,
+  x = data_dotplot$z_mean_narrow,
+  y = data_dotplot$narrow,
   colors = roma
 )
-fig_academics
 ```
