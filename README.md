@@ -1,8 +1,7 @@
-# Neurotyp Format
+# Neurotyp Format for Typst using Quarto
 
 ## Installing
 
-_TODO_: Replace the `<github-organization>` with your GitHub organization.
 
 ```bash
 quarto use template brainworkup/neurotyp
