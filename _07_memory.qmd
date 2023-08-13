@@ -20,19 +20,7 @@ params:
 
 {{< include _07_memory_text.qmd >}}
 
-```{r}
-#| label: setup
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
-```
+
 
 ```{r}
 #| label: data-memory

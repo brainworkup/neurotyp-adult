@@ -21,20 +21,6 @@ params:
 {{< include _08_motor_text.qmd >}}
 
 ```{r}
-#| label: setup
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
-```
-
-```{r}
 #| label: data-motor
 data <- bwu::read_data(pheno = "motor")
 ```

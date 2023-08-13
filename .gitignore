@@ -1,37 +1,34 @@
-/.quarto/
-.Rproj.user
-.history/
-.vscode/
-_extensions/
-*.png
-*.pdf
-*.jpg
-# *.qmd
-_freeze/
-notes.sh
-params.yml
-*_files/
-data/
-cache/
-*_cache/
-neuropsych_report_cache/
-/.luarc.json
-blackbox.config.json
-.env*
-.flaskenv*
-!.env.project
-
-
-secure_data
-local_data
-*.pkg
-*.dmg
 _02_iq_bk.qmd
-_02_iq.typ
 _02_iq_functions.R
-bk/
+_02_iq.typ
 _03_academics.typ
 _04_verbal.typ
-
-_*_*.typ
-_*_*.html
+_freeze/
+!.env.project
+.env*
+.flaskenv*
+.history/
+.Rproj.user
+.vscode/
+*_cache/
+*_files/
+*.dmg
+*.pkg
+/.luarc.json
+/.quarto/
+# _*_*.html
+# _*_*.typ
+# _extensions/
+# *.jpg
+# *.pdf
+# *.png
+# *.qmd
+bk/
+blackbox.config.json
+cache/
+data/
+local_data
+neuropsych_report_cache/
+notes.sh
+# params.yml
+secure_data

@@ -39,6 +39,22 @@ execute:
 ---
 
 ```{r}
+#| label: setup
+#| include: false
+xfun::pkg_attach2(c(
+  "gt",
+  "dplyr",
+  "glue",
+  "webshot2",
+  "ggplot2",
+  "ggthemes",
+  "scales",
+  "tidyverse",
+  "bwu"
+))
+```
+
+```{r}
 #| eval: false
 # Setting the environment variable
 Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
@@ -89,9 +105,8 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 #| label: make-neuropsych
 #| include: false
 library(tidyverse)
-# patient <- "Biggie"
-data_path <- here::here("csv")
-# data_path <- here::here(patient, "csv")
+patient <- "Biggie"
+data_path <- here::here(patient, "csv")
 files <- dir(data_path, pattern = "*.csv")
 neuropsych <-
   files |>
@@ -219,8 +234,9 @@ readr::write_csv(validity, here::here("validity.csv"))
 
 ```{r}
 #| label: data-g
-patient <- "~/neurotyp"
-# patient <- "Biggie"
+#| eval: false
+# patient <- "~/neurotyp"
+patient <- "Biggie"
 g <- bwu::gpluck_get_index_scores(patient = patient)
 ```
 
@@ -238,7 +254,6 @@ g <- bwu::gpluck_get_index_scores(patient = patient)
 
 ## Verbal/Language
 
-{{< include _04_verbal_text.qmd >}}
 
 {{< include _04_verbal.qmd >}}
 

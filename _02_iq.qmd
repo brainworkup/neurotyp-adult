@@ -12,25 +12,15 @@ format:
     keep-tex: true
   html: 
     toc: true
+params:
+  pheno: iq
 ---
 
 <!-- ## General Cognitive Ability -->
 
 {{< include _02_iq_text.qmd >}}
 
-```{r}
-#| label: setup
-xfun::pkg_attach2(c(
-  "gt",
-  "dplyr",
-  "glue",
-  "webshot2",
-  "ggplot2",
-  "ggthemes",
-  "scales",
-  "bwu"
-))
-```
+
 ```{r}
 #| label: data-iq
 data <- bwu::read_data(pheno = "iq")
@@ -38,6 +28,7 @@ data <- bwu::read_data(pheno = "iq")
 
 ```{r}
 #| label: filter-iq
+domains <- "Intelligence/General Ability"
 scales <- c(
   "Cognitive Efficiency",
   "Cognitive Proficiency (CPI)",
@@ -75,7 +66,7 @@ scales <- c(
   "Working Memory Index",
   "Working Memory"
 )
-data <- bwu::filter_domain_scale(data, domain = "Intelligence/General Ability", scale = scales)
+data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
