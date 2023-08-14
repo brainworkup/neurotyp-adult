@@ -9,13 +9,3 @@ execute:
 Summarize and interpret these neuropsychological test scores as if you are an experienced neuropsychologist. For scores that are below average, give a brief example of how this could impact the patient's daily life and functioning. Organize your summary and interpretation from scores that are above average to below average to delineate relative strengths and weaknesses.
 
 <<START>>
-Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus fell in the Above Average range.
-NA
-NA
-Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail was High Average.
-Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was High Average.
-NA
-Inductive reasoning and nonverbal problem-solving was Average.
-NA
-NA
-NA

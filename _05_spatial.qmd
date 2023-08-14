@@ -27,6 +27,7 @@ data <- bwu::read_data(pheno = "spatial")
 
 ```{r}
 #| label: filter-spatial
+domains <- "Visual Perception/Construction"
 scales <- c(
   "Arrows",
   "Bicycle Drawing",
@@ -57,7 +58,6 @@ scales <- c(
   "Visual Puzzles",
   "Visuospatial/Constructional Index"
 )
-domains <- "Visual Perception/Construction"
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
@@ -76,7 +76,11 @@ source_note <- "*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10,
 SD = 3)."
 table_name <- "table_spatial"
 pheno <- "spatial"
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt(data,
+    pheno = pheno, 
+    source_note = source_note, 
+    table_name = table_name
+)
 ```
 
 
@@ -103,27 +107,13 @@ roma <- c(
   "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
   "#023198"
 )
-pheno <- "spatial"
+
 data_dotplot <- dplyr::filter(data, !is.na(percentile))
 bwu::make_fig(
-  data = data_dotplot,
-  pheno = pheno,
-  x = data_dotplot$z_mean_narrow,
-  y = data_dotplot$narrow,
-  colors = roma
+    data = data_dotplot,
+    pheno = pheno,
+    x = data_dotplot$z_mean_narrow,
+    y = data_dotplot$narrow,
+    colors = roma
 )
-```
-
-
-
-```{r}
-#| fig-subcap: "Visual Perception/Construction Subdomain Plots"
-xfun::pkg_attach(c(
-  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
-  "scales", "bwu", "patchwork"
-))
-# combine plots
-pathwork <- table_spatial + fig_spatial
-pathwork +
-  plot_annotation()
 ```

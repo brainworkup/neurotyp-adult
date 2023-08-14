@@ -45,6 +45,7 @@ knitr:
 ```{r}
 #| label: setup
 #| include: false
+
 xfun::pkg_load2(
   c(
     "arrow",
@@ -162,8 +163,9 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 #| label: make-neuropsych
 #| include: false
 library(tidyverse)
-patient <- "Biggie"
-data_path <- here::here(patient, "csv")
+# patient <- "Biggie"
+data_path <- here::here("csv")
+# data_path <- here::here(patient, "csv")
 files <- dir(data_path, pattern = "*.csv")
 neuropsych <-
   files |>
@@ -182,45 +184,11 @@ neuropsych <-
   dplyr::mutate(pass = forcats::as_factor(pass)) |>
   dplyr::mutate(verbal = forcats::as_factor(verbal)) |>
   dplyr::mutate(timed = forcats::as_factor(timed))
-
-```
-
-```{r}
-#| label: make-g
-#| include: false
-
-scales <- c(
-  "Academic Skills",
-  "Attention",
-  "Attention/Executive",
-  "Attentional Fluency",
-  "Cognitive Efficiency",
-  "Cognitive Proficiency",
-  "Crystallized Knowledge",
-  "Delayed Recall",
-  "Executive Functions",
-  "Fluency",
-  "Fluid Reasoning",
-  "General Ability",
-  "Learning Efficiency",
-  "Memory",
-  "Planning",
-  "Processing Speed",
-  "Psychomotor Speed",
-  "Verbal/Language",
-  "Visual Perception/Construction",
-  "Working Memory"
-)
-g <-
-  readxl::read_excel("index_scores.xlsx") |>
-  janitor::clean_names() |>
-  dplyr::mutate(z = (index - 100) / 15) |>
-  dplyr::filter(composite_name %in% scales) |>
-  dplyr::filter(!is.na(z))
 ```
 
 ```{r}
 #| label: subset-domains
+
 # Subset neurocognitive data
 neurocog <-
   neuropsych |>
@@ -315,14 +283,47 @@ validity <-
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
 
-
-
 # write-neuro-data
 readr::write_csv(neuropsych, here::here("neuropsych.csv"))
 readr::write_csv(neurocog, here::here("neurocog.csv"))
 readr::write_csv(neurobehav, here::here("neurobehav.csv"))
 readr::write_csv(validity, here::here("validity.csv"))
 ```
+
+```{r}
+#| label: make-g
+#| include: false
+
+scales <- c(
+  "Academic Skills",
+  "Attention",
+  "Attention/Executive",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge",
+  "Delayed Recall",
+  "Executive Functions",
+  "Fluency",
+  "Fluid Reasoning",
+  "General Ability",
+  "Learning Efficiency",
+  "Memory",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory"
+)
+g <-
+  readxl::read_excel("index_scores.xlsx") |>
+  janitor::clean_names() |>
+  dplyr::mutate(z = (index - 100) / 15) |>
+  dplyr::filter(composite_name %in% scales) |>
+  dplyr::filter(!is.na(z))
+```
+
 
 ## General Cognitive Ability
 
