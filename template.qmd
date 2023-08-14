@@ -324,7 +324,6 @@ g <-
   dplyr::filter(!is.na(z))
 ```
 
-
 ## General Cognitive Ability
 
 {{< include _02_iq.qmd >}}
@@ -419,7 +418,7 @@ Sincerely,
 #| out-width: 20%
 #| fig-align: left
 #| cache: true
-#| eval: true
+#| eval: false
 knitr::include_graphics("jwt_sig.png")
 ```
 
