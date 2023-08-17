@@ -93,7 +93,8 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```{r}
 #| label: fig-iq
 #| out-width: 70%
-#| eval: true # false
+#| fig-height: 5
+#| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
 pheno <- "iq"
@@ -118,7 +119,7 @@ bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [

@@ -218,7 +218,7 @@ fig_cefi <- bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [

@@ -27,6 +27,9 @@ data <- bwu::read_data(pheno = "motor")
 
 ```{r}
 #| label: filter-motor
+
+domains <- c("Motor")
+
 scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
@@ -57,15 +60,14 @@ scales <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-domains <- c(
-  "Motor"
-)
+
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-motor
 #| cache: true
+
 bwu::flatten_scale_text(data, file = "_08_motor_raw.qmd")
 ```
 
@@ -73,6 +75,7 @@ bwu::flatten_scale_text(data, file = "_08_motor_raw.qmd")
 #| label: qtbl-motor
 #| dev: tikz
 #| fig-process: pdf2png
+
 options(tikzDefaultEngine = "xetex")
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
@@ -96,13 +99,11 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 
 ```{r}
 #| label: fig-motor
-#| out-width: 70%
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
-#| fig-subcap: "Sensorimotor Subdomain Plots"
-
 
 pheno <- "motor"
 motor <- dplyr::filter(data, !is.na(percentile))
+
 bwu::make_fig(
   data = motor,
   pheno = pheno,
@@ -117,7 +118,7 @@ bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [

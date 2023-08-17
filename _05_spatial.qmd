@@ -91,7 +91,6 @@ bwu::make_tbl_gt(data,
 
 ```{r}
 #| label: fig-spatial
-#| out-width: 70%
 #| eval: true
 #| fig-cap: "Visuoperception, visuoconstruction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
@@ -112,7 +111,7 @@ bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [

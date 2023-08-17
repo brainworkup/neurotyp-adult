@@ -168,7 +168,6 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 
 ```{r}
 #| label: fig-executive
-#| out-width: 70%
 #| eval: true
 #| fig-cap: "Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met."
 
@@ -189,7 +188,7 @@ bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [

@@ -20,6 +20,7 @@ params:
 
 ```{r}
 #| label: data-emotion
+
 data <- bwu::read_data(pheno = "emotion")
 ```
 
@@ -121,13 +122,16 @@ data_emotion <-
   )) |>
   dplyr::arrange(test_name) |>
   dplyr::arrange(subdomain)
+
 data_emotion <- data_emotion[, c(11, 2, 4, 5, 6)]
 colnames(data_emotion)[1] <- "test_name"
+
 bwu::make_tbl_gt(data_emotion, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
 ```{r}
 #| eval: false
+
 tbl1 <-
   dplyr::filter(data_emotion, domain == "Psychiatric Disorders") |>
   dplyr::arrange(test_name) |>
@@ -198,7 +202,7 @@ bwu::make_fig(
   let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
-  columns: (40%, 60%),
+  columns: (50%, 50%),
   gutter: 8pt,
 figure([#image(file_qtbl)],
   caption: [
