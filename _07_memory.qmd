@@ -136,6 +136,7 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```{r}
 #| label: fig-memory
 #| eval: true
+#| fig-asp: 0.95
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
 
 pheno <- "memory"
