@@ -1,5 +1,5 @@
 ---
-title-meta: emotion-text
+title-meta: emotion text
 execute:
   cache: true
 ---

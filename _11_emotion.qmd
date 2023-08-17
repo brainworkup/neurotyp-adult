@@ -18,7 +18,6 @@ params:
 
 {{< include _11_emotion_text.qmd >}}
 
-
 ```{r}
 #| label: data-emotion
 data <- bwu::read_data(pheno = "emotion")
@@ -86,19 +85,21 @@ scales <- c(
   "Warmth"
   # ADD BASC3 SRP
 )
+
 filter_domain_scale <- function(data, domain, scale) {
   data <- data |>
     dplyr::filter(domain %in% domains, !is.na(percentile)) |>
     dplyr::filter(scale %in% scales)
-
   return(data)
 }
+
 data_emotion <- filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-emotion
 #| cache: true
+
 bwu::flatten_scale_text(data = data_emotion, file = "_11_emotion_raw.qmd")
 ```
 
@@ -108,6 +109,7 @@ bwu::flatten_scale_text(data = data_emotion, file = "_11_emotion_raw.qmd")
 #| fig-process: pdf2png
 #| fig-height: 7
 #| eval: false
+
 options(tikzDefaultEngine = "xetex")
 source_note <- gt::md("*Note:* T-scores have a mean of 50 and a standard deviation of 10.")
 table_name <- "table_emotion"
@@ -122,22 +124,6 @@ data_emotion <-
 data_emotion <- data_emotion[, c(11, 2, 4, 5, 6)]
 colnames(data_emotion)[1] <- "test_name"
 bwu::make_tbl_gt(data_emotion, pheno = pheno, source_note = source_note, table_name = table_name)
-```
-
-<!-- ```{=typst}
-#let domain = "Emotional/Behavioral/Personality"
-<qtbl-emotion>
-#figure([#image("table_emotion.png", height: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-``` -->
-
-```{r}
-
 ```
 
 ```{r}
@@ -188,31 +174,64 @@ table_social <- bwu::tbl_gt(
 )
 ```
 
-`r params$first_name` completed an objective, self-report inventory of
-personality and emotional functioning. Given their scores on the validity
-scales, there are no problems with interpreting the clinical profile. They
-responded in an open and forthright manner, indicating only modestly elevated
-levels of stress and anxiety. They seem to have a positive self-image and are
-likely viewed by others as warm and friendly. There do not appear to be any
-contributing emotional factors that would account for their current cognitive
-difficulties.
-
-
 ```{r}
 #| label: fig-emotion
 #| out-width: 70%
-#| fig-cap: "On the clinical scales, `r params$first_name`'s profile revealed no elevations above the clinical skyline that would indicate the presence of clinical psychopathology in the areas that are tapped by the individual clinical scales. Based on interpretation of `r params$first_name`'s scores, `r params$he_she` reported some preoccupation with physical symptoms and bodily complaints (_elevated SOM-H_); it is possible that `r params$he_she` may express `r params$his_her` psychological distress through somatic symptoms. `r params$first_name` reported high perceived stress, a great deal of tension, and having difficulty relaxing (_elevated ANX-A_). `r params$he_she_cap` appears to have a tendency to be impulsive and `r params$his_her` impulsive behaviors may interfere with interpersonal problems and school functioning (_elevated BOR-S_). As a result of `r params$his_her` desire for excitement and stimulation, `r params$first_name` may often become easily bored by routine activities (_elevated ANT-S_). Furthermore, `r params$first_name`'s profile suggests `r params$he_she` tends to be egocentric and have little regard for others. Although `r params$he_she` may feel guilt over past misbehaviors, `r params$he_she` may feel little long-standing remorse (_elevated ANT-E_). On the NON scales, `r params$first_name`'s score suggests `r params$he_she` generally feels `r params$his_her` family is a source of social support. However, `r params$he_she` may have few close interpersonal relationships. Finally, `r params$first_name`'s RXR score suggests `r params$he_she` acknowledges the need to make changes and reports having a generally positive attitude towards making personal change. Given the patient's diagnosis of ADHD and Mood Disorder, the patient's personality profile appears to explain some of `r params$his_her` classic symptoms such as concentration difficulties, stimulus seeking, irritability, and impulsive behavior."
+#| fig-cap: "On the clinical scales ...."
 #| fig-subcap: "Mood/Self-Report Subdomain Plots"
-roma <- c( '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717', '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336', '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A', '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2', '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0', '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7', '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C', '#023198' )
+
 pheno <- "emotion"
-data_dotplot <-
+emotion <-
   dplyr::filter(data, !is.na(percentile)) |>
   dplyr::filter(domain %in% c("Psychiatric Disorders", "Personality Disorders", "Substance Use"))
 bwu::make_fig(
-  data = data_dotplot,
+  data = emotion,
   pheno = pheno,
-  x = data_dotplot$z_mean_subdomain,
-  y = data_dotplot$subdomain,
-  colors = roma
+  x = emotion$z_mean_subdomain,
+  y = emotion$subdomain,
+  colors = NULL
+)
+```
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Inria Serif", size: 9pt)
+  set text(..font)
+  grid(
+  columns: (40%, 60%),
+  gutter: 8pt,
+figure([#image(file_qtbl)],
+  caption: [
+    #title
+  ],
+  caption-pos: top,
+  kind: "qtbl",
+  supplement: [*Table*],
+),
+figure(
+  placement: bottom,
+  caption: [
+    Mood/Self-Report ... Subdomain Plots
+  ],
+  kind: "image",
+  supplement: [
+    *Figure*
+    ],
+  gap: 1em,
+  [
+   #image(file_fig)
+   ],
+),
+)
+}
+```
+
+```{=typst}
+#let file_qtbl = "table_emotion.png"
+#let file_fig = "_11_emotion_files/figure-typst/fig-emotion-1.svg"
+#domain(
+  title: "emotion Test Scores",
+  file_qtbl,
+  file_fig
 )
 ```

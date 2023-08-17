@@ -154,6 +154,7 @@ bwu::make_fig(
 )
 ```
 
+
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Inria Serif", size: 9pt)

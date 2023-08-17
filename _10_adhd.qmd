@@ -18,14 +18,15 @@ params:
 
 {{< include _10_adhd_text.qmd >}}
 
-
 ```{r}
 #| label: data-adhd
+
 data <- bwu::read_data(pheno = "adhd")
 ```
 
 ```{r}
 #| label: filter-adhd
+
 scales <- c(
   "Action",
   "Activation",
@@ -89,10 +90,14 @@ scales <- c(
   "Total Composite",
   "Working Memory"
 )
+
 domains <- c(
   "ADHD"
 )
-data_adhd <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data_adhd <- bwu::filter_domain_scale(data,
+  domain = domains,
+  scale = scales
+)
 
 domains <- c(
   "Executive Functioning"
@@ -108,12 +113,14 @@ data <- dplyr::bind_rows(data_adhd, data_ef)
 ```{r}
 #| label: text-adhd
 #| cache: true
+
 bwu::flatten_scale_text(data, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-sr
 #| cache: true
+
 # Self-report
 data_sr <-
   data |>
@@ -134,6 +141,7 @@ flatten_scale_text(data = data_sr, file = "_10_adhd_raw.qmd")
 ```{r}
 #| label: text-adhd-or
 #| cache: true
+
 # Observer reports
 data_or <-
   data |>
@@ -155,41 +163,27 @@ flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 #| label: qtbl-adhd
 #| dev: tikz
 #| fig-process: pdf2png
+
 options(tikzDefaultEngine = "xetex")
-# source note
 source_note <- gt::md("*Note:* CAARS Standard scores have a mean of 50 and a standard deviation of 10, and higher scores reflect reduced functioning.
 
 CEFI Standard scores have a mean of 100 and a standard deviation of 15, and lower scores reflect reduced functioning.")
+
 table_name <- "table_adhd"
 pheno <- "adhd"
+
 bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
-```
-
-
-```{=typst}
-#let domain = "ADHD/Executive Functioning"
-<qtbl-adhd>
-#figure([#image("table_adhd.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
 ```
 
 ```{r}
 #| label: fig-adhd
 #| out-width: 70%
+#| eval: true
 #| fig-height: 7
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
-
-xfun::pkg_attach(c(
-  "gt", "tidyverse", "glue", "webshot2", "ggplot2", "ggthemes",
-  "scales", "bwu", "patchwork"
-))
-
-roma <- c("#7E1700", "#832504", "#883008", "#8E3B0B", "#92450F", "#984E14", "#9C5717", "#A05F1B", "#A4671E", "#A86F22", "#AD7826", "#B0802B", "#B58A30", "#B99336", "#BD9C3D", "#C2A647", "#C7B051", "#CBBA5D", "#CEC56C", "#D0CE7A", "#D2D78A", "#D1DE98", "#CFE4A6", "#CBE7B3", "#C4EABD", "#BCEAC6", "#B2E8CD", "#A7E6D2", "#9BE2D4", "#8EDDD7", "#80D6D7", "#73CED5", "#65C6D5", "#59BDD2", "#4FB5D0", "#45ABCB", "#3DA3C8", "#379BC5", "#3292C2", "#2E8ABF", "#2A81BA", "#2779B7", "#2471B4", "#2269B0", "#1F60AD", "#1B57A8", "#184EA4", "#1344A0", "#0C3B9C", "#023198")
+#| fig-subcap:
+#| - "ADHD"
+#| - "Executive Functioning"
 
 # data for caars dotplot
 pheno <- "caars"
@@ -199,8 +193,9 @@ fig_caars <- bwu::make_fig(
   pheno = pheno,
   x = data_caars$z_mean_subdomain,
   y = data_caars$subdomain,
-  colors = roma
+  colors = NULL
 )
+
 # data for cefi dotplot
 pheno <- "cefi"
 data_cefi <- dplyr::filter(data, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
@@ -209,10 +204,54 @@ fig_cefi <- bwu::make_fig(
   pheno = pheno,
   x = data_cefi$z_mean_subdomain,
   y = data_cefi$subdomain,
-  colors = roma
+  colors = NULL
 )
+
 # combine plots
-pathwork <- fig_caars / fig_cefi
-pathwork +
-  plot_annotation()
+# pathwork <- fig_caars / fig_cefi
+# pathwork +
+#   plot_annotation()
+```
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Inria Serif", size: 9pt)
+  set text(..font)
+  grid(
+  columns: (40%, 60%),
+  gutter: 8pt,
+figure([#image(file_qtbl)],
+  caption: [
+    #title
+  ],
+  caption-pos: top,
+  kind: "qtbl",
+  supplement: [*Table*],
+),
+figure(
+  placement: bottom,
+  caption: [
+    Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other.
+  ],
+  kind: "image",
+  supplement: [
+    *Figure*
+    ],
+  gap: 1em,
+  [
+    #image(file_fig)
+    ],
+),
+)
+}
+```
+
+```{=typst}
+#let file_qtbl = "table_adhd.png"
+#let file_fig = "fig_cefi.png"
+#domain(
+  title: "ADHD/Executive Functioning Test Scores",
+  file_qtbl,
+  file_fig
+  )
 ```

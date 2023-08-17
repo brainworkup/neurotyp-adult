@@ -22,11 +22,13 @@ params:
 
 ```{r}
 #| label: data-academics
+
 data <- bwu::read_data(pheno = "academics")
 ```
 
 ```{r}
 #| label: filter-academics
+
 domains <- c("Academic Skills")
 scales <- c(
   "Academic Fluency Composite",
@@ -117,25 +119,11 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```
 
 
-```{=typst}
-#let domain = "Academic Skills"
-<qtbl-academics>
-#figure([#image("table_academics.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-```
-
 ```{r}
 #| label: fig-academics
 #| out-width: 70%
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 #| column: page
-
-roma <- c( '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717', '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336', '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A', '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2', '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0', '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7', '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C', '#023198' )
 
 pheno <- "academics"
 academics <- dplyr::filter(data, !is.na(percentile))
@@ -151,7 +139,7 @@ bwu::make_fig(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt) // 0.71em gives different sizes as opposed to 10pt
+  let font = (font: "Inria Serif", size: 9pt)
   set text(..font)
   grid(
   columns: (40%, 60%),
@@ -167,7 +155,7 @@ figure([#image(file_qtbl)],
 figure(
   placement: bottom,
   caption: [
-    _Premorbid Ability_ is an estimate of a person’s intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
+    _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
   ],
   kind: "image",
   supplement: [
@@ -183,10 +171,10 @@ figure(
 ```
 
 ```{=typst}
-#let file_qtbl = "table_iq.png"
-#let file_fig = "_02_iq_files/figure-typst/fig-iq-1.svg"
+#let file_qtbl = "table_academics.png"
+#let file_fig = "_03_academics_files/figure-typst/fig-academics-1.svg"
 #domain(
-  title: "Intellectual/Neuropsychological Functioning Test Scores",
+  title: "Academic Achievement Test Scores",
   file_qtbl,
   file_fig
   )
