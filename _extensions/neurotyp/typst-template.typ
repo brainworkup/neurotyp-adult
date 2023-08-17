@@ -1,6 +1,6 @@
 #let report(
   title: none,
-  author: none,
+  author: "Joey Trampush, PhD",
   patient: [],
   firstname: none,
   lastname: none,
@@ -20,7 +20,7 @@
   // Metadata
   set document(
   title: title,
-  author: "author"
+  author: author
   )
   
   // Set page size, margins, and header.
@@ -42,7 +42,7 @@
         }
     ),
   numbering: "1/1",
-  number-align: right,
+  number-align: left,
   columns: cols
 )
   // Set paragraph justification and leading.
@@ -51,8 +51,8 @@
   leading: 0.52em,
 )
   // Save heading and body font families in variables.
-  let body-font = "Ale­greya"
-  let sans-font = "Ale­greya Sans"
+  let body-font = "Linux Libertine"
+  let sans-font = "IBM Plex Sans"
 
   // Set text and body font family.
   set text(font: body-font, lang: lang, region: region, size: fontsize)
@@ -65,7 +65,7 @@
   show par: set block(above: 1.2em, below: 1.2em)
   
   // Set heading font.
-  show heading: set text(font: sans-font) 
+  show heading: set text(font: sans-font, weight: "medium") 
 
   // Set run-in subheadings, starting at level 4.
   show heading: it => {
@@ -78,8 +78,8 @@
   }
 
   // Configure lists and links.
-  set enum(indent: 5pt, body-indent: 5pt)
-  set list(indent: 5pt, body-indent: 5pt)
+  set enum(indent: 0.5em, body-indent: 0.5em)
+  set list(indent: 0.5em, body-indent: 0.5em, marker: ([•], [--]))
   show link: set text(font: "New Computer Modern Mono")
 
   // Logo
@@ -91,7 +91,7 @@
 
   // Title row.
   align(center)[
-    #block(text(font: sans-font, weight: 700, 1.75em, title))
+    #block(text(font: sans-font, weight: 600, 1.75em, title))
     #v(2.2em, weak: true)
   ]
 
@@ -107,3 +107,4 @@
     columns(cols, doc)
   }
 }
+--  

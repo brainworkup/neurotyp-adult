@@ -111,3 +111,46 @@ bwu::make_fig(
     colors = roma
 )
 ```
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Inria Serif", size: 9pt) // 0.71em gives different sizes as opposed to 10pt
+  set text(..font)
+  grid(
+  columns: (40%, 60%),
+  gutter: 8pt,
+figure([#image(file_qtbl)],
+  caption: [
+    #title
+  ],
+  caption-pos: top,
+  kind: "qtbl",
+  supplement: [*Table*],
+),
+figure(
+  placement: bottom,
+  caption: [
+    _Premorbid Ability_ is an estimate of a person’s intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
+  ],
+  kind: "image",
+  supplement: [
+    *Figure*
+    ],
+  gap: 1em,
+  [
+    #image(file_fig)
+    ],
+),
+)
+}
+```
+
+```{=typst}
+#let file_qtbl = "table_iq.png"
+#let file_fig = "_02_iq_files/figure-typst/fig-iq-1.svg"
+#domain(
+  title: "Intellectual/Neuropsychological Functioning Test Scores",
+  file_qtbl,
+  file_fig
+  )
+```

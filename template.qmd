@@ -7,6 +7,7 @@ last: Smalls
 format:
   neurotyp-typst:
     keep-typ: true
+    fontsize: 12pt
 params:
   patient: Biggie
   first_name: Biggie
@@ -160,12 +161,14 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 # NEUROCOGNITIVE FINDINGS
 
 ```{r}
-#| label: make-neuropsych
+#| label: tidy-data
 #| include: false
+
 library(tidyverse)
-# patient <- "Biggie"
-data_path <- here::here("csv")
-# data_path <- here::here(patient, "csv")
+
+patient <- "Alexandra"
+
+data_path <- here::here(patient, "csv")
 files <- dir(data_path, pattern = "*.csv")
 neuropsych <-
   files |>
@@ -184,10 +187,6 @@ neuropsych <-
   dplyr::mutate(pass = forcats::as_factor(pass)) |>
   dplyr::mutate(verbal = forcats::as_factor(verbal)) |>
   dplyr::mutate(timed = forcats::as_factor(timed))
-```
-
-```{r}
-#| label: subset-domains
 
 # Subset neurocognitive data
 neurocog <-
@@ -235,11 +234,12 @@ neurocog <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_timed = mean(z), z_sd_timed = sd(z)) |>
   dplyr::ungroup()
+
 # Subset neurobehavioral data
 neurobehav <-
   neuropsych |>
   dplyr::filter(test_type == "rating_scale")
-#   domain
+# domain
 neurobehav <-
   neurobehav |>
   dplyr::group_by(domain, .add = TRUE) |>
@@ -260,6 +260,7 @@ neurobehav <-
   dplyr::filter(!is.na(percentile)) |>
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
+
 # Subset validity data
 validity <-
   neuropsych |>
@@ -283,11 +284,11 @@ validity <-
   dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
   dplyr::ungroup()
 
-# write-neuro-data
-readr::write_csv(neuropsych, here::here("neuropsych.csv"))
-readr::write_csv(neurocog, here::here("neurocog.csv"))
-readr::write_csv(neurobehav, here::here("neurobehav.csv"))
-readr::write_csv(validity, here::here("validity.csv"))
+# Write neuro data
+readr::write_csv(neuropsych, here::here(patient, "neuropsych.csv"))
+readr::write_csv(neurocog, here::here(patient, "neurocog.csv"))
+readr::write_csv(neurobehav, here::here(patient, "neurobehav.csv"))
+readr::write_csv(validity, here::here(patient, "validity.csv"))
 ```
 
 ```{r}
@@ -322,6 +323,8 @@ g <-
   dplyr::mutate(z = (index - 100) / 15) |>
   dplyr::filter(composite_name %in% scales) |>
   dplyr::filter(!is.na(z))
+# extra for now
+write.csv(g, "g_full.csv", row.names = FALSE)
 ```
 
 ## General Cognitive Ability
@@ -385,8 +388,19 @@ g <-
 #| column: page
 #| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
 
-roma <- c( '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717', '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336', '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A', '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2', '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0', '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7', '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C', '#023198' )
+roma <- c(
+  '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717',
+  '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336',
+  '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A',
+  '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2',
+  '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0',
+  '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7',
+  '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C',
+  '#023198'
+  )
+
 pheno <- "g"
+
 bwu::dotplot(
   data = g,
   pheno = pheno,

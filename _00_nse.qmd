@@ -10,11 +10,19 @@ format:
 #| eval: false
 #| include: false
 
+# Construct file path
 patient <- "Biggie"
 scale <- "NeuropsychEval-NSE-"
 ext <- ".txt"
 result <- ""
 file <- file.path(paste0(scale, patient, ext))
+# Check all this
+TODO:
+start_pattern <- "Biggie"
+end_pattern <- "FirstName LastName"
+output_path <- file.path(here::here(patient, file))
+txt <- bwu::extract_text(patient, file_path, start_pattern, end_pattern)
+bwu::save_as_markdown(text = txt, output_path)
 ```
 
 ## Referral
@@ -36,7 +44,7 @@ difficulties by working harder and longer than her peers.
 
 Cognitive complaints: sustained attention, working memory, and organization.
 
-## History
+## Medical History
 
 ### Past Neuropsychological Test Results
 
@@ -47,7 +55,7 @@ Patient denied having prior testing.
 - No birth complications.
 - Developmental milestones: Normal.
 
-### Other Medical History
+### Medical History
 
 -   Frequent sinus infections.
 -   Other medications: vitamins, folic acid.
@@ -82,3 +90,9 @@ did not endorse any difficulties with advancing through school.
 
 #patient has worked full time as an administrator in a small company. She has
 maintained this job for the past 6 years.
+
+## Diagnostic Considerations
+
+- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
+  Presentation
+- [DSM-5/ICD-10 Codes](03.01_dsm5_icd10_dx.md)

@@ -114,6 +114,7 @@ bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
 #| label: qtbl-executive
 #| dev: tikz
 #| fig-process: pdf2png
+
 options(tikzDefaultEngine = "xetex")
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10, SD = 3).")
 table_name <- "table_executive"
@@ -162,24 +163,11 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 ```
 
 
-```{=typst}
-#let domain = "Attention/Executive"
-<qtbl-executive>
-#figure([#image("table_executive.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
-)
-```
-
 ```{r}
 #| label: fig-executive
 #| out-width: 70%
+#| eval: false
 #| fig-cap: "Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met."
-
-roma <- c( '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717', '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336', '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A', '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2', '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0', '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7', '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C', '#023198' )
 
 pheno <- "executive"
 executive <- dplyr::filter(data, !is.na(percentile))
@@ -189,6 +177,49 @@ bwu::make_fig(
   pheno = pheno,
   x = executive$z_mean_subdomain,
   y = executive$subdomain,
-  colors = roma
+  colors = NULL
 )
+```
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Inria Serif", size: 9pt)
+  set text(..font)
+  grid(
+  columns: (40%, 60%),
+  gutter: 8pt,
+figure([#image(file_qtbl)],
+  caption: [
+    #title
+  ],
+  caption-pos: top,
+  kind: "qtbl",
+  supplement: [*Table*],
+) <qtbl-executive>,
+figure(
+  placement: bottom,
+  caption: [
+    "Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met."
+  ],
+  kind: "image",
+  supplement: [
+    *Figure*
+    ],
+  gap: 1em,
+  [
+    #image(file_fig)
+    ],
+) <fig-executive>,
+)
+}
+```
+
+```{=typst}
+#let file_qtbl = "table_executive.png"
+#let file_fig = "_06_executive_files/figure-typst/fig-executive-1.svg"
+#domain(
+  title: "Attention/Executive Functioning Test Scores",
+  file_qtbl,
+  file_fig
+  )
 ```
