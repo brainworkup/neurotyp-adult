@@ -10,7 +10,67 @@ format:
   pdf:
     keep-md: true
     keep-tex: true
+params:
+  pheno: "g"
+  patient: "Biggie"
 ---
+
+```{r}
+#| label: make-g
+#| include: false
+
+patient <- params$patient
+scales <- c(
+  "Academic Skills",
+  "Attention",
+  "Attention/Executive",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge",
+  "Delayed Recall",
+  "Executive Functions",
+  "Fluency",
+  "Fluid Reasoning",
+  "General Ability",
+  "Learning Efficiency",
+  "Memory",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory"
+)
+
+g <-
+  readxl::read_excel("index_scores.xlsx") |>
+  janitor::clean_names() |>
+  dplyr::mutate(z = (index - 100) / 15) |>
+  dplyr::filter(composite_name %in% scales) |>
+  dplyr::filter(!is.na(z))
+
+# extra for now
+write.csv(g, paste(patient, "csv", "g.csv"), row.names = FALSE)
+```
+
+```{r}
+#| label: fig-domain-plot
+#| column: page
+#| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
+
+pheno <- "g"
+
+bwu::dotplot(
+  data = g,
+  pheno = pheno,
+  x = g$z,
+  y = g$composite_name,
+  fill = x,
+  colors = NULL
+)
+```
+
 
 ## Summary and Formulation
 

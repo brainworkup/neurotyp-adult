@@ -291,42 +291,6 @@ readr::write_csv(neurobehav, here::here(patient, "neurobehav.csv"))
 readr::write_csv(validity, here::here(patient, "validity.csv"))
 ```
 
-```{r}
-#| label: make-g
-#| include: false
-
-scales <- c(
-  "Academic Skills",
-  "Attention",
-  "Attention/Executive",
-  "Attentional Fluency",
-  "Cognitive Efficiency",
-  "Cognitive Proficiency",
-  "Crystallized Knowledge",
-  "Delayed Recall",
-  "Executive Functions",
-  "Fluency",
-  "Fluid Reasoning",
-  "General Ability",
-  "Learning Efficiency",
-  "Memory",
-  "Planning",
-  "Processing Speed",
-  "Psychomotor Speed",
-  "Verbal/Language",
-  "Visual Perception/Construction",
-  "Working Memory"
-)
-g <-
-  readxl::read_excel("index_scores.xlsx") |>
-  janitor::clean_names() |>
-  dplyr::mutate(z = (index - 100) / 15) |>
-  dplyr::filter(composite_name %in% scales) |>
-  dplyr::filter(!is.na(z))
-# extra for now
-write.csv(g, "g_full.csv", row.names = FALSE)
-```
-
 ## General Cognitive Ability
 
 {{< include _02_iq.qmd >}}
@@ -382,34 +346,6 @@ write.csv(g, "g_full.csv", row.names = FALSE)
 {{< pagebreak >}}
 
 # SUMMARY/IMPRESSION
-
-```{r}
-#| label: fig-domain-plot
-#| column: page
-#| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
-
-roma <- c(
-  '#7E1700', '#832504', '#883008', '#8E3B0B', '#92450F', '#984E14', '#9C5717',
-  '#A05F1B', '#A4671E', '#A86F22', '#AD7826', '#B0802B', '#B58A30', '#B99336',
-  '#BD9C3D', '#C2A647', '#C7B051', '#CBBA5D', '#CEC56C', '#D0CE7A', '#D2D78A',
-  '#D1DE98', '#CFE4A6', '#CBE7B3', '#C4EABD', '#BCEAC6', '#B2E8CD', '#A7E6D2',
-  '#9BE2D4', '#8EDDD7', '#80D6D7', '#73CED5', '#65C6D5', '#59BDD2', '#4FB5D0',
-  '#45ABCB', '#3DA3C8', '#379BC5', '#3292C2', '#2E8ABF', '#2A81BA', '#2779B7',
-  '#2471B4', '#2269B0', '#1F60AD', '#1B57A8', '#184EA4', '#1344A0', '#0C3B9C',
-  '#023198'
-  )
-
-pheno <- "g"
-
-bwu::dotplot(
-  data = g,
-  pheno = pheno,
-  x = g$z,
-  y = g$composite_name,
-  fill = x,
-  colors = roma
-)
-```
 
 {{< include _13_sirf.qmd >}}
 
