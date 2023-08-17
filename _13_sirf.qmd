@@ -51,7 +51,7 @@ g <-
   dplyr::filter(!is.na(z))
 
 # extra for now
-write.csv(g, paste(patient, "csv", "g.csv"), row.names = FALSE)
+write.csv(g, paste("g_v2.csv"), row.names = FALSE)
 ```
 
 ```{r}
