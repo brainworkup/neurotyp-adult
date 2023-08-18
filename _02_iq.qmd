@@ -13,7 +13,7 @@ format:
   html: 
     toc: true
 params:
-  pheno: iq
+  pheno: "iq"
 ---
 
 <!-- ## General Cognitive Ability -->
@@ -22,8 +22,8 @@ params:
 
 ```{r}
 #| label: data-iq
-
-data <- bwu::read_data(pheno = "iq")
+pheno <- "iq"
+data <- bwu::read_data(pheno = pheno)
 ```
 
 ```{r}
@@ -83,16 +83,14 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 #| fig-process: pdf2png
 
 options(tikzDefaultEngine = "xetex")
-source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
+source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
 table_name <- "table_iq"
-pheno <- "iq"
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_name = table_name)
 ```
 
 
 ```{r}
 #| label: fig-iq
-#| out-width: 70%
 #| fig-height: 5
 #| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."

@@ -11,7 +11,7 @@ format:
     keep-md: true
     keep-tex: true
 params:
-  pheno: adhd
+  pheno: "adhd"
 ---
 
 <!-- ## ADHD/Executive Functioning -->
@@ -20,13 +20,13 @@ params:
 
 ```{r}
 #| label: data-adhd
-
-data <- bwu::read_data(pheno = "adhd")
+data <- bwu::read_data(pheno = params$pheno)
 ```
 
 ```{r}
 #| label: filter-adhd
 
+# ADHD/EF Scales
 scales <- c(
   "Action",
   "Activation",
@@ -90,31 +90,20 @@ scales <- c(
   "Total Composite",
   "Working Memory"
 )
-
-domains <- c(
-  "ADHD"
-)
+# ADHD
+domains <- c("ADHD")
 data_adhd <- bwu::filter_domain_scale(data,
   domain = domains,
   scale = scales
 )
-
-domains <- c(
-  "Executive Functioning"
-)
+# EF
+domains <- c("Executive Functioning")
 data_ef <- bwu::filter_domain_scale(data,
   domain = domains,
   scale = scales
 )
+# Merge/bind the two data sets
 data <- dplyr::bind_rows(data_adhd, data_ef)
-```
-
-
-```{r}
-#| label: text-adhd
-#| cache: true
-
-bwu::flatten_scale_text(data, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
@@ -127,15 +116,9 @@ data_sr <-
   dplyr::filter(test == "cefi_sr" | test == "caars_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
-flatten_scale_text <- function(data, file) {
-  cat(
-    paste0(data$result),
-    file = file,
-    sep = "\n",
-    append = TRUE
-  )
-}
-flatten_scale_text(data = data_sr, file = "_10_adhd_raw.qmd")
+
+# Flatten the text
+bwu::flatten_scale_text(data = data_sr, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
@@ -148,15 +131,9 @@ data_or <-
   dplyr::filter(test == "cefi_or" | test == "caars_or") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
-flatten_scale_text <- function(data, file) {
-  cat(
-    paste0(data$result),
-    file = file,
-    sep = "\n",
-    append = TRUE
-  )
-}
-flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
+
+# Flatten the text
+bwu::flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
@@ -165,19 +142,17 @@ flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 #| fig-process: pdf2png
 
 options(tikzDefaultEngine = "xetex")
-source_note <- gt::md("*Note:* CAARS Standard scores have a mean of 50 and a standard deviation of 10, and higher scores reflect reduced functioning.
+source_note <- gt::md("*Note:* CAARS: Standard scores (Mean = 50, SD = 10), higher scores reflect reduced functioning.
 
-CEFI Standard scores have a mean of 100 and a standard deviation of 15, and lower scores reflect reduced functioning.")
+CEFI: Standard scores (Mean = 100, SD = 15), lower scores reflect reduced
+functioning.")
 
 table_name <- "table_adhd"
-pheno <- "adhd"
-
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_name = table_name)
 ```
 
 ```{r}
 #| label: fig-adhd
-#| out-width: 70%
 #| eval: true
 #| fig-height: 7
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
