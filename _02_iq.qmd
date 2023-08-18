@@ -95,15 +95,13 @@ bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_na
 #| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-pheno <- "iq"
-
 iq <- dplyr::filter(
   data,
   scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning",
   "Premorbid Ability", "TOPF Standard Score", "Word Reading")
 )
 
-bwu::make_fig(
+bwu::make_dotplot_typ(
   data = iq,
   pheno = pheno,
   x = iq$z_mean_narrow,

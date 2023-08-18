@@ -163,7 +163,7 @@ bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_na
 # data for caars dotplot
 pheno <- "caars"
 data_caars <- dplyr::filter(data, filename %in% c("caars_sr.csv", "caars_or.csv"))
-fig_caars <- bwu::make_fig(
+fig_caars <- bwu::make_dotplot_typ(
   data = data_caars,
   pheno = pheno,
   x = data_caars$z_mean_subdomain,
@@ -174,7 +174,7 @@ fig_caars <- bwu::make_fig(
 # data for cefi dotplot
 pheno <- "cefi"
 data_cefi <- dplyr::filter(data, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
-fig_cefi <- bwu::make_fig(
+fig_cefi <- bwu::make_dotplot_typ(
   data = data_cefi,
   pheno = pheno,
   x = data_cefi$z_mean_subdomain,

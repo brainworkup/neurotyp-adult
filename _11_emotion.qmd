@@ -188,7 +188,7 @@ pheno <- "emotion"
 emotion <-
   dplyr::filter(data, !is.na(percentile)) |>
   dplyr::filter(domain %in% c("Psychiatric Disorders", "Personality Disorders", "Substance Use"))
-bwu::make_fig(
+bwu::make_dotplot_typ(
   data = emotion,
   pheno = pheno,
   x = emotion$z_mean_subdomain,

@@ -145,7 +145,7 @@ exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forc
 
 memory <- dplyr::filter(data, !is.na(percentile))
 
-bwu::make_fig(
+bwu::make_dotplot_typ(
   data = memory,
   pheno = pheno,
   x = memory$z_mean_narrow,

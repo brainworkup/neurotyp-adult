@@ -97,7 +97,7 @@ bwu::make_tbl_gt(data,
 pheno <- "spatial"
 spatial <- dplyr::filter(data, !is.na(percentile))
 
-bwu::make_fig(
+bwu::make_dotplot_typ(
     data = spatial,
     pheno = pheno,
     x = spatial$z_mean_narrow,

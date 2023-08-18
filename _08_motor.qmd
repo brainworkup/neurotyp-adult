@@ -104,7 +104,7 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 pheno <- "motor"
 motor <- dplyr::filter(data, !is.na(percentile))
 
-bwu::make_fig(
+bwu::make_dotplot_typ(
   data = motor,
   pheno = pheno,
   x = motor$z_mean_narrow,
