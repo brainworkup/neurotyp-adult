@@ -166,8 +166,10 @@ exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forc
 
 # Arguments
 pheno <- "memory"
+
 memory <- dplyr::filter(data, !is.na(percentile), subdomain != "Memory", scale
 %in% exclude)
+
 data <- memory
 x <- data$z_mean_narrow
 y <- data$narrow

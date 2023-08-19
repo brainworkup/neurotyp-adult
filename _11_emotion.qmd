@@ -12,6 +12,7 @@ format:
     keep-tex: true
 params:
   pheno: "emotion"
+  return_plot: TRUE
 ---
 
 <!-- ## Emotional/Behavioral/Personality -->
@@ -22,10 +23,6 @@ params:
 #| label: data-emotion
 pheno <- "emotion"
 data <- bwu::read_data(pheno = pheno)
-```
-
-```{r}
-#| label: filter-emotion
 domains <- c(
   "Psychiatric Disorders", "Personality Disorders", "Substance Use",
   "Psychosocial Problems"
@@ -86,21 +83,20 @@ scales <- c(
   "Warmth"
   # ADD BASC3 SRP
 )
-
-filter_domain_scale <- function(data, domain, scale) {
-  data <- data |>
-    dplyr::filter(domain %in% domains, !is.na(percentile)) |>
-    dplyr::filter(scale %in% scales)
-  return(data)
-}
-
-data_emotion <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- 
+  bwu::filter_domain_scale(
+    data, 
+    domain = domains, 
+    scale = scales
+  )
 ```
 
 ```{r}
 #| label: text-emotion
 #| cache: true
 
+# Concatenate text from neuro*.csv files per scale and domain
+# Glue results together and insert into text
 bwu::flatten_scale_text(data = data_emotion, file = "_11_emotion_raw.qmd")
 ```
 
@@ -108,13 +104,25 @@ bwu::flatten_scale_text(data = data_emotion, file = "_11_emotion_raw.qmd")
 #| label: qtbl-emotion
 #| dev: tikz
 #| fig-process: pdf2png
-#| fig-height: 7
 #| eval: false
-
 options(tikzDefaultEngine = "xetex")
+
 source_note <- gt::md("*Note:* T-scores have a mean of 50 and a standard deviation of 10.")
-table_name <- "table_emotion"
+# footnotes
+footnote_t_score <- gt::md(
+  "*T* Score (Mean = 50, SD = 10)"
+)
+footnote_scaled_score <- gt::md(
+  "Scaled Score (Mean = 10, SD = 3)"
+)
+footnote_standard_score <- gt::md(
+  "Index Score (Mean = 100, SD = 15)"
+)
+
 pheno <- "emotion"
+table_name <- "table_emotion"
+groups_t_score <- c("PAI")
+
 data_emotion <-
   dplyr::filter(data_emotion, domain %in% c(
     "Psychiatric Disorders",
@@ -126,7 +134,15 @@ data_emotion <-
 data_emotion <- data_emotion[, c(11, 2, 4, 5, 6)]
 colnames(data_emotion)[1] <- "test_name"
 
-bwu::make_tbl_gt(data_emotion, pheno = pheno, source_note = source_note, table_name = table_name)
+emotion <- bwu::table_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = groups_t_score,
+  groups_scaled_score = groups_scaled_score,
+  multiline = TRUE
+)
 ```
 
 ```{r}
@@ -180,19 +196,29 @@ table_social <- bwu::tbl_gt(
 
 ```{r}
 #| label: fig-emotion
-#| out-width: 70%
 #| fig-cap: "Mood/Self-Report"
 
 pheno <- "emotion"
 emotion <-
   dplyr::filter(data, !is.na(percentile)) |>
   dplyr::filter(domain %in% c("Psychiatric Disorders", "Personality Disorders", "Substance Use"))
+
+data <- emotion
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
+
+# Make dotplot
 bwu::make_dotplot_typ(
-  data = emotion,
+  data = data,
   pheno = pheno,
-  x = emotion$z_mean_subdomain,
-  y = emotion$subdomain,
-  colors = NULL
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 

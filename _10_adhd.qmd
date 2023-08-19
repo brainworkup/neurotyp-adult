@@ -166,8 +166,8 @@ functioning.")
 
 pheno <- "adhd"
 table_name <- "table_adhd"
-groups_standard_score <- c("NAB", "CVLT-3 Brief")
-groups_t_score <- c("NAB", "Rey Complex Figure")
+groups_standard_score <- c("CEFI Self-Report", "CEFI Observer-Report")
+groups_t_score <- c("CAARS Self-Report", "CAARS Observer-Report")
 
 adhd <- bwu::table_gt(data,
   pheno = pheno,
