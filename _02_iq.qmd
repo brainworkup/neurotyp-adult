@@ -103,7 +103,7 @@ bwu::make_tbl_gt(data,
 
 ```{r}
 #| label: fig-iq
-#| eval: true
+#| eval: false
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
 # Arguments
@@ -164,7 +164,7 @@ figure(
     #image(file_fig)
     ],
   ),
-  )
+)
 }
 ```
 

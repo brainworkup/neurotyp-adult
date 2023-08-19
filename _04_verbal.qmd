@@ -22,13 +22,8 @@ params:
 
 ```{r}
 #| label: data-verbal
-
-data <- bwu::read_data(pheno = "verbal")
-```
-
-```{r}
-#| label: filter-verbal
-
+pheno <- "verbal"
+data <- bwu::read_data(pheno = pheno)
 domains <- c("Verbal/Language")
 scales <- c(
   "Academic Language Readiness Index",
@@ -87,14 +82,19 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
-
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <-
+  bwu::filter_domain_scale(data,
+    domain = domains,
+    scale = scales
+  )
 ```
 
 ```{r}
 #| label: text-verbal
 #| cache: true
 
+# Concatenate text from neuro*.csv files per scale and domain
+# Glue results together and insert into text
 bwu::flatten_scale_text(data, file = "_04_verbal_raw.qmd")
 ```
 
@@ -102,38 +102,50 @@ bwu::flatten_scale_text(data, file = "_04_verbal_raw.qmd")
 #| label: qtbl-verbal
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
 
+pheno <- "verbal"
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
 table_name <- "table_verbal"
-pheno <- "verbal"
 
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt(data, 
+  pheno = pheno,
+  source_note = source_note, 
+  table_name = table_name
+)
 ```
-
 
 ```{r}
 #| label: fig-verbal
-#| eval: true
+#| eval: false
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
+# Arguments
 pheno <- "verbal"
 verbal <- dplyr::filter(data, !is.na(percentile))
+data <- verbal
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
 
+# Make dotplot
 bwu::make_dotplot_typ(
-  data = verbal,
+  data = data,
   pheno = pheno,
-  x = verbal$z_mean_subdomain,
-  y = verbal$subdomain,
-  colors = NULL
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -159,16 +171,17 @@ figure(
   [
     #image(file_fig)
     ],
-),
+  ),
 )
 }
 ```
 
 ```{=typst}
+#let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
 #let file_fig = "_04_verbal_files/figure-typst/fig-verbal-1.svg"
 #domain(
-  title: "Verbal/Language Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
   file_fig
   )
