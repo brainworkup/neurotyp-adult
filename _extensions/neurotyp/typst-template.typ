@@ -42,7 +42,7 @@
         }
     ),
   numbering: "1/1",
-  number-align: left,
+  number-align: right,
   columns: cols
 )
   // Set paragraph justification and leading.
@@ -65,7 +65,7 @@
   show par: set block(above: 1.2em, below: 1.2em)
   
   // Set heading font.
-  show heading: set text(font: sans-font, weight: "medium") 
+  show heading: set text(font: sans-font, weight: "semibold") 
 
   // Set run-in subheadings, starting at level 4.
   show heading: it => {
@@ -78,8 +78,8 @@
   }
 
   // Configure lists and links.
-  set enum(indent: 0.5em, body-indent: 0.5em)
-  set list(indent: 0.5em, body-indent: 0.5em, marker: ([•], [--]))
+  set enum(indent: 0pt, body-indent: 0.5em)
+  set list(indent: 0pt, body-indent: 0.5em, marker: ([•], [--]))
   show link: set text(font: "New Computer Modern Mono")
 
   // Logo
