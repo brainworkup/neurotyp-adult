@@ -139,6 +139,7 @@ footnote_standard_score <- gt::md(
 footnote_z_score <- gt::md(
   "*z* Score (Mean = 0, SD = 1)"
 )
+
 pheno <- "memory"
 table_name <- "table_memory"
 groups_standard_score <- c("NAB", "CVLT-3 Brief")

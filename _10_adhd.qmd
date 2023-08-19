@@ -12,6 +12,7 @@ format:
     keep-tex: true
 params:
   pheno: "adhd"
+  return_plot: TRUE
 ---
 
 <!-- ## ADHD/Executive Functioning -->
@@ -141,17 +142,42 @@ bwu::flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 #| label: qtbl-adhd
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
-source_note <- gt::md("*Note:* CAARS: Standard scores (Mean = 50, SD = 10), higher scores reflect reduced functioning.
+
+# footnotes
+footnote_t_score <- gt::md(
+  "*T* Score (Mean = 50, SD = 10)"
+)
+footnote_scaled_score <- gt::md(
+  "Scaled Score (Mean = 10, SD = 3)"
+)
+footnote_standard_score <- gt::md(
+  "Index Score (Mean = 100, SD = 15)"
+)
+footnote_z_score <- gt::md(
+  "*z* Score (Mean = 0, SD = 1)"
+)
+
+source_note <- gt::md("*Note:* CAARS: 
+Standard scores (Mean = 50, SD = 10), higher scores reflect reduced functioning.
 
 CEFI: Standard scores (Mean = 100, SD = 15), lower scores reflect reduced
 functioning.")
 
 pheno <- "adhd"
 table_name <- "table_adhd"
+groups_standard_score <- c("NAB", "CVLT-3 Brief")
+groups_t_score <- c("NAB", "Rey Complex Figure")
 
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+adhd <- bwu::table_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = groups_t_score,
+  groups_scaled_score = NULL,
+  multiline = TRUE
+)
 ```
 
 ```{r}
@@ -166,29 +192,41 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 # data for caars dotplot
 pheno <- "caars"
 data_caars <- dplyr::filter(data, filename %in% c("caars_sr.csv", "caars_or.csv"))
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
+
 fig_caars <- bwu::make_dotplot_typ(
   data = data_caars,
   pheno = pheno,
   x = data_caars$z_mean_subdomain,
   y = data_caars$subdomain,
-  colors = NULL
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 
 # data for cefi dotplot
 pheno <- "cefi"
 data_cefi <- dplyr::filter(data, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
+
 fig_cefi <- bwu::make_dotplot_typ(
   data = data_cefi,
   pheno = pheno,
   x = data_cefi$z_mean_subdomain,
   y = data_cefi$subdomain,
-  colors = NULL
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 
 # combine plots
-# pathwork <- fig_caars / fig_cefi
-# pathwork +
-#   plot_annotation()
+library(ggplot2)
+library(patchwork)
+
+patchwork <- fig_caars / fig_cefi
+patchwork +
+  plot_annotation()
 ```
 
 ```{=typst}
@@ -219,7 +257,7 @@ figure(
   [
     #image(file_fig)
     ],
-),
+  ),
 )
 }
 ```
@@ -229,7 +267,7 @@ figure(
 #let file_qtbl = "table_adhd.png"
 #let file_fig = "_10_cefi_files/figure-typst/fig-cefi-1.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Rating Scales],
   file_qtbl,
   file_fig
   )
