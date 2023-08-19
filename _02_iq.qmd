@@ -89,9 +89,11 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
+
 pheno <- "iq"
 source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
 table_name <- "table_iq"
+
 bwu::make_tbl_gt(data, 
   pheno = pheno,
   source_note = source_note, 
@@ -101,7 +103,6 @@ bwu::make_tbl_gt(data,
 
 ```{r}
 #| label: fig-iq
-#| fig-height: 5
 #| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
@@ -112,15 +113,14 @@ iq <-
     data,
     scale %in% c(
       "General Ability", "Crystallized Knowledge", "Fluid Reasoning",
-      "Premorbid Ability", "TOPF Standard Score", "Word Reading"
+      "Premorbid Ability", "TOPF Standard Score", "Word Reading", "NAB Total Index"
     )
   )
-
 data <- iq
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
-return_plot <- FALSE
+return_plot <- TRUE
 filename <- "svg"
 
 # Make dotplot
@@ -169,7 +169,7 @@ figure(
 ```
 
 ```{=typst}
-#let title = "Intellectual/Neuropsychological Subdomain"
+#let title = "Intellectual/Neuropsychological Functioning"
 #let file_qtbl = "table_iq.png"
 #let file_fig = "_02_iq_files/figure-typst/fig-iq-1.svg"
 #domain(
