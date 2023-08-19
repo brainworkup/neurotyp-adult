@@ -13,7 +13,7 @@ format:
   html: 
     toc: true
 params:
-  pheno: spatial
+  pheno: "spatial"
 ---
 
 <!-- ## Visual Perception/Construction -->
@@ -22,13 +22,8 @@ params:
 
 ```{r}
 #| label: data-spatial
-
-data <- bwu::read_data(pheno = "spatial")
-```
-
-```{r}
-#| label: filter-spatial
-
+pheno <- "spatial"
+data <- bwu::read_data(pheno = pheno)
 domains <- "Visual Perception/Construction"
 scales <- c(
   "Arrows",
@@ -66,7 +61,6 @@ data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-spatial
 #| cache: true
-
 bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 ```
 
@@ -74,41 +68,49 @@ bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 #| label: qtbl-spatial
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
-source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
-10, SD = 3).")
 
-table_name <- "table_spatial"
 pheno <- "spatial"
+source_note <-
+  gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
+10, SD = 3).")
+table_name <- "table_spatial"
 
 bwu::make_tbl_gt(data,
-    pheno = pheno, 
-    source_note = source_note, 
-    table_name = table_name
+  pheno = pheno, 
+  source_note = source_note, 
+  table_name = table_name
 )
 ```
 
 ```{r}
 #| label: fig-spatial
-#| eval: true
-#| fig-cap: "Visuoperception, visuoconstruction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
+#| eval: false
+#| fig-cap: "Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
 pheno <- "spatial"
 spatial <- dplyr::filter(data, !is.na(percentile))
+data <- spatial
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
 
 bwu::make_dotplot_typ(
-    data = spatial,
-    pheno = pheno,
-    x = spatial$z_mean_narrow,
-    y = spatial$narrow,
-    colors = NULL
+  data = data,
+  pheno = pheno,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -140,10 +142,11 @@ figure(
 ```
 
 ```{=typst}
+#let title = "Visual Perception/Construction"
 #let file_qtbl = "table_spatial.png"
 #let file_fig = "_05_spatial_files/figure-typst/fig-spatial-1.svg"
 #domain(
-  title: "Visual Perception/Construction Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
   file_fig
 )
