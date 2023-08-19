@@ -29,7 +29,10 @@ data <- bwu::read_data(pheno = pheno)
 ```{r}
 #| label: filter-iq
 
+# Filter by domain
 domains <- c("Intelligence/General Ability")
+
+# Filter by scale
 scales <- c(
   "Cognitive Efficiency",
   "Cognitive Proficiency (CPI)",
@@ -67,6 +70,8 @@ scales <- c(
   "Working Memory Index",
   "Working Memory"
 )
+
+# Filter data
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
@@ -74,6 +79,8 @@ data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 #| label: text-iq
 #| cache: true
 
+# Concatenate text from neuro*.csv files per scale and domain
+# Glue results together and insert into text
 bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 ```
 
@@ -81,13 +88,16 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 #| label: qtbl-iq
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
+pheno <- "iq"
 source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
 table_name <- "table_iq"
-bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt(data, 
+  pheno = pheno,
+  source_note = source_note, 
+  table_name = table_name
+)
 ```
-
 
 ```{r}
 #| label: fig-iq
@@ -95,24 +105,39 @@ bwu::make_tbl_gt(data, pheno = params$pheno, source_note = source_note, table_na
 #| eval: true
 #| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-iq <- dplyr::filter(
-  data,
-  scale %in% c("General Ability", "Crystallized Knowledge", "Fluid Reasoning",
-  "Premorbid Ability", "TOPF Standard Score", "Word Reading")
-)
+# Arguments
+pheno <- "iq"
+iq <-
+  dplyr::filter(
+    data,
+    scale %in% c(
+      "General Ability", "Crystallized Knowledge", "Fluid Reasoning",
+      "Premorbid Ability", "TOPF Standard Score", "Word Reading"
+    )
+  )
 
+data <- iq
+x <- data$z_mean_narrow
+y <- data$narrow
+colors <- NULL
+return_plot <- FALSE
+filename <- "svg"
+
+# Make dotplot
 bwu::make_dotplot_typ(
-  data = iq,
+  data = data,
   pheno = pheno,
-  x = iq$z_mean_narrow,
-  y = iq$narrow,
-  colors = NULL
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -128,7 +153,7 @@ figure([#image(file_qtbl)],
 figure(
   placement: bottom,
   caption: [
-    _Premorbid Ability_ is an estimate of a person’s intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
+    _Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
   ],
   kind: "image",
   supplement: [
@@ -138,16 +163,17 @@ figure(
   [
     #image(file_fig)
     ],
-),
-)
+  ),
+  )
 }
 ```
 
 ```{=typst}
+#let title = "Intellectual/Neuropsychological Subdomain"
 #let file_qtbl = "table_iq.png"
 #let file_fig = "_02_iq_files/figure-typst/fig-iq-1.svg"
 #domain(
-  title: "Intellectual/Neuropsychological Functioning Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
   file_fig
   )

@@ -12,7 +12,7 @@ example of how this could impact the patient's daily functioning.
 Organize your summary and interpretation from scores that are Above Average to
 Below Average to delineate relative strengths and weaknesses, respectively.
 
-<<SAMPLE SUMMARY>>
+<<EXAMPLE>>
 
 ### Attentional Skills
 - _Attention Index:_ Average; Biggie's general attentional

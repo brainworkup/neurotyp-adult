@@ -2,6 +2,7 @@
   title: none,
   author: "Joey Trampush, PhD",
   patient: [],
+  name: none,
   firstname: none,
   lastname: none,
   doe: [],
@@ -35,7 +36,7 @@
               #set text(9pt)
               #smallcaps[
                *CONFIDENTIAL* \ 
-               #patient \ 
+               #name \ 
                #doe
              ]
            ]
@@ -107,4 +108,3 @@
     columns(cols, doc)
   }
 }
---  
