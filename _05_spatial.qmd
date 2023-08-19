@@ -89,7 +89,7 @@ bwu::make_tbl_gt(data,
 #| fig-cap: "Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
 pheno <- "spatial"
-spatial <- dplyr::filter(data, !is.na(percentile))
+spatial <- dplyr::filter(data, !is.na(percentile), scale != c("NAB Spatial Index"))
 data <- spatial
 x <- data$z_mean_subdomain
 y <- data$subdomain

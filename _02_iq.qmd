@@ -14,6 +14,7 @@ format:
     toc: true
 params:
   pheno: "iq"
+  return_plot: TRUE
 ---
 
 <!-- ## General Cognitive Ability -->
@@ -22,16 +23,13 @@ params:
 
 ```{r}
 #| label: data-iq
+
+# phenotype
 pheno <- "iq"
+# data
 data <- bwu::read_data(pheno = pheno)
-```
-
-```{r}
-#| label: filter-iq
-
 # Filter by domain
 domains <- c("Intelligence/General Ability")
-
 # Filter by scale
 scales <- c(
   "Cognitive Efficiency",
@@ -49,7 +47,7 @@ scales <- c(
   "General Ability",
   "General Intelligence",
   "NAB Attention Index",
-  "NAB Executive Functions Index",
+  "NAB iq Functions Index",
   "NAB Language Index",
   "NAB Memory Index",
   "NAB Spatial Index",
@@ -70,7 +68,6 @@ scales <- c(
   "Working Memory Index",
   "Working Memory"
 )
-
 # Filter data
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
@@ -88,25 +85,40 @@ bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
 #| label: qtbl-iq
 #| dev: tikz
 #| fig-process: pdf2png
-options(tikzDefaultEngine = "xetex")
+options(tikzDefaltEngine = "xetex")
 
 pheno <- "iq"
-source_note <- gt::md("*Note:* Index scores have a mean of 100 and a standard deviation of 15.")
 table_name <- "table_iq"
 
-bwu::make_tbl_gt(data, 
+# footnotes
+footnote_t_score <- gt::md("*T* Score (Mean = 50, SD = 10)")
+footnote_scaled_score <- gt::md("Scaled Score (Mean = 10, SD = 3)")
+footnote_standard_score <- gt::md("Index Score (Mean = 100, SD = 15)")
+footnote_z_score <- gt::md("*z* Score (Mean = 0, SD = 1)")
+
+# variables
+pheno <- "iq"
+table_name <- "table_iq"
+# try to use data$score_type instead ...
+groups_standard_score <- c("Composite Scores", "NAB", "Test of Premorbid Functioning")
+
+iq <- bwu::table_gt(data,
   pheno = pheno,
-  source_note = source_note, 
-  table_name = table_name
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = NULL,
+  groups_scaled_score = NULL,
+  groups_z_score = NULL,
+  multiline = TRUE
 )
 ```
 
 ```{r}
 #| label: fig-iq
-#| eval: false
-#| fig-cap: "*General Ability* is the overall skill to reason, solve problems, and gain useful knowledge. *Crystallized Knowledge* involves understanding the world through language and reasoning. *Fluid Reasoning* is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
+#| eval: true
+#| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-# Arguments
 pheno <- "iq"
 iq <-
   dplyr::filter(
@@ -116,6 +128,7 @@ iq <-
       "Premorbid Ability", "TOPF Standard Score", "Word Reading", "NAB Total Index"
     )
   )
+
 data <- iq
 x <- data$z_mean_narrow
 y <- data$narrow
@@ -163,7 +176,7 @@ figure(
   [
     #image(file_fig)
     ],
-  ),
+),
 )
 }
 ```
@@ -175,6 +188,6 @@ figure(
 #domain(
   title: [#title Test Scores],
   file_qtbl,
-  file_fig
+  file_fig,
   )
 ```

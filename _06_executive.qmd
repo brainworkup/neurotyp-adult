@@ -13,7 +13,8 @@ format:
   html: 
     toc: true
 params:
-  pheno: executive
+  pheno: "executive"
+  return_plot: TRUE
 ---
 
 <!-- ## Attention/Executive -->
@@ -22,13 +23,8 @@ params:
 
 ```{r}
 #| label: data-executive
-
-data <- bwu::read_data(pheno = "executive")
-```
-
-```{r}
-#| label: filter-executive
-
+pheno <- "executive"
+data <- bwu::read_data(pheno = pheno)
 domains <- "Attention/Executive"
 scales <- c(
   "Animal Coding",
@@ -95,22 +91,18 @@ scales <- c(
   "TMT, Part A",
   "TMT, Part B",
   "Total Deviation Score",
-  "Trails A",
-  "Trails B",
   "Unstructured Task",
-  "Word Generation Perseverations",
   "Word Generation",
+  "Word Generation Perseverations",
   "Working Memory (WMI)",
   "Zoo Locations"
 )
-
 data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-executive
 #| cache: true
-
 bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
 ```
 
@@ -118,75 +110,114 @@ bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
 #| label: qtbl-executive
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
-source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean = 10, SD = 3).")
-table_name <- "table_executive"
+
+# footnotes
+footnote_t_score <- gt::md(
+  "*T* Score (Mean = 50, SD = 10)"
+)
+footnote_scaled_score <- gt::md(
+  "Scaled Score (Mean = 10, SD = 3)"
+)
+footnote_standard_score <- gt::md(
+  "Index Score (Mean = 100, SD = 15)"
+)
+footnote_z_score <- gt::md(
+  "*z* Score (Mean = 0, SD = 1)"
+)
+
 pheno <- "executive"
+table_name <- "table_executive"
 # more filtering for exe tables
-data <- dplyr::filter(data, test_name != "CVLT-3 Brief")
-data <- dplyr::filter(data, scale != "Orientation")
-data <- dplyr::filter(data, scale %in% c(
-  "NAB Attention Index",
-  "Digits Forward",
-  "Digits Forward Longest Span",
-  "Digits Backward",
-  "Digits Backward Longest Span",
-  "Dots",
-  "Numbers & Letters Part A Efficiency",
-  "Numbers & Letters Part B Efficiency",
-  "Numbers & Letters Part C Efficiency",
-  "Numbers & Letters Part D Efficiency",
-  "Driving Scenes",
-  "NAB Executive Functions Index",
-  "Mazes",
-  "Categories",
-  "Word Generation",
-  "Word Generation Perseverations",
-  "Judgment",
-  "Working Memory (WMI)",
-  "Arithmetic",
-  "Digit Span",
-  "Longest Digit Span Forward",
-  "Longest Digit Span Backward",
-  "Longest Digit Span Sequence",
-  "Letter-Number Sequencing",
-  "Symbol Span",
-  "Spatial Span",
-  "Picture Span",
-  "Processing Speed (PSI)",
-  "Coding",
-  "Cancellation",
-  "Symbol Search",
-  "TMT, Part A",
-  "TMT, Part B",
-  "Unstructured Task",
-  "Attention Index"
-))
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+data <- dplyr::filter(data, test_name != "CVLT-3 Brief") |>
+  dplyr::filter(scale != "Orientation") |>
+  dplyr::filter(scale %in% c(
+    "NAB Attention Index",
+    "Digits Forward",
+    # "Digits Forward Longest Span",
+    "Digits Backward",
+    # "Digits Backward Longest Span",
+    "Dots",
+    "Numbers & Letters Part A Efficiency",
+    "Numbers & Letters Part B Efficiency",
+    "Numbers & Letters Part C Efficiency",
+    "Numbers & Letters Part D Efficiency",
+    "Driving Scenes",
+    "NAB Executive Functions Index",
+    "Mazes",
+    "Categories",
+    "Word Generation",
+    # "Word Generation Perseverations",
+    "Judgment",
+    "Working Memory (WMI)",
+    "Arithmetic",
+    "Digit Span",
+    "Longest Digit Span Forward",
+    "Longest Digit Span Backward",
+    "Longest Digit Span Sequence",
+    "Letter-Number Sequencing",
+    "Symbol Span",
+    "Spatial Span",
+    "Picture Span",
+    "Processing Speed (PSI)",
+    "Coding",
+    "Cancellation",
+    "Symbol Search",
+    "TMT, Part A",
+    "TMT, Part B",
+    "Unstructured Task",
+    "Attention Index"
+  ))
+
+pheno <- "executive"
+table_name <- "table_executive"
+groups_standard_score <- c("NAB")
+groups_t_score <- c("NAB", "NIH EXAMINER", "Trail Making Test")
+groups_scaled_score <- c("WAIS-IV")
+
+executive <- bwu::table_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = groups_t_score,
+  groups_scaled_score = groups_scaled_score,
+  multiline = TRUE
+)
+executive
 ```
 
 ```{r}
 #| label: fig-executive
 #| eval: true
 #| fig-asp: 0.95
-#| fig-cap: "Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met."
+#| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
+# Arguments
 pheno <- "executive"
 executive <- dplyr::filter(data, !is.na(percentile))
+data <- executive
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
 
+# Make dotplot
 bwu::make_dotplot_typ(
-  data = executive,
+  data = data,
   pheno = pheno,
-  x = executive$z_mean_subdomain,
-  y = executive$subdomain,
-  colors = NULL
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -202,7 +233,7 @@ figure([#image(file_qtbl)],
 figure(
   placement: bottom,
   caption: [
-    Attention and executive functions underlie most, if not all, domains of cognitive performance. These are behaviors and skills that allow individuals to successfully carry-out instrumental and social activities, academic work, engage with others effectively, problem solve, and successfully interact with the environment to get needs met.
+    Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment.
   ],
   kind: "image",
   supplement: [
@@ -212,16 +243,17 @@ figure(
   [
     #image(file_fig)
     ],
-),
+  ),
 )
 }
 ```
 
 ```{=typst}
+#let title = "Attention/Executive"
 #let file_qtbl = "table_executive.png"
 #let file_fig = "_06_executive_files/figure-typst/fig-executive-1.svg"
 #domain(
-  title: "Attention/Executive Functioning Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
   file_fig
   )
