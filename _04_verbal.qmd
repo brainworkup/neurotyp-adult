@@ -142,12 +142,11 @@ verbal <- bwu::table_gt(data,
 ```{r}
 #| label: fig-verbal
 #| eval: true
-#| fig-asp: 0.95
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
 # Arguments
 pheno <- "verbal"
-verbal <- dplyr::filter(data, !is.na(percentile))
+verbal <- dplyr::filter(data, !is.na(percentile), subdomain != "Language")
 data <- verbal
 x <- data$z_mean_subdomain
 y <- data$subdomain

@@ -13,7 +13,8 @@ format:
   html: 
     toc: true
 params:
-  pheno: memory
+  pheno: "memory"
+  return_plot: TRUE
 ---
 
 <!-- ## Memory -->
@@ -22,13 +23,8 @@ params:
 
 ```{r}
 #| label: data-memory
-
-data <- bwu::read_data(pheno = "memory")
-```
-
-```{r}
-#| label: filter-memory
-
+pheno <- "memory"
+data <- bwu::read_data(pheno = pheno)
 domains <- c("Memory")
 scales <- c(
   "CVLT-3 Forced-Choice Recognition Hits",
@@ -60,9 +56,9 @@ scales <- c(
   "Memory Domain",
   "Memory for Designs Content",
   "Memory for Designs Delayed Content",
-  "Memory for Designs Delayed Spatial",
+  "Memory for Designs Delayed memory",
   "Memory for Designs Delayed",
-  "Memory for Designs Spatial",
+  "Memory for Designs memory",
   "Memory for Designs",
   "Memory for Faces Delayed",
   "Memory for Faces",
@@ -106,13 +102,21 @@ scales <- c(
   "Word List Interference-Recall",
   "Word List Interference-Repetition"
 )
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- 
+  bwu::filter_domain_scale(
+    data, 
+    domain = domains, 
+    scale = scales
+  )
 ```
+
 
 ```{r}
 #| label: text-memory
 #| cache: true
 
+# Concatenate text from neuro*.csv files per scale and domain
+# Glue results together and insert into text
 bwu::flatten_scale_text(data, file = "_07_memory_raw.qmd")
 ```
 
@@ -120,44 +124,72 @@ bwu::flatten_scale_text(data, file = "_07_memory_raw.qmd")
 #| label: qtbl-memory
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
 
-source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
-10, SD = 3).")
-
-table_name <- "table_memory"
-
+# footnotes
+footnote_t_score <- gt::md(
+  "*T* Score (Mean = 50, SD = 10)"
+)
+footnote_scaled_score <- gt::md(
+  "Scaled Score (Mean = 10, SD = 3)"
+)
+footnote_standard_score <- gt::md(
+  "Index Score (Mean = 100, SD = 15)"
+)
+footnote_z_score <- gt::md(
+  "*z* Score (Mean = 0, SD = 1)"
+)
 pheno <- "memory"
+table_name <- "table_memory"
+groups_standard_score <- c("NAB", "CVLT-3 Brief")
+groups_t_score <- c("NAB", "Rey Complex Figure")
+groups_scaled_score <- c("CVLT-3 Brief")
 
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+memory <- bwu::table_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = groups_t_score,
+  groups_scaled_score = groups_scaled_score,
+  multiline = TRUE
+)
 ```
 
 ```{r}
 #| label: fig-memory
 #| eval: true
-#| fig-asp: 0.95
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
-
-pheno <- "memory"
 
 exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
 
-memory <- dplyr::filter(data, !is.na(percentile))
+# Arguments
+pheno <- "memory"
+memory <- dplyr::filter(data, !is.na(percentile), subdomain != "Memory", scale
+%in% exclude)
+data <- memory
+x <- data$z_mean_narrow
+y <- data$narrow
+colors <- NULL
+return_plot <- TRUE
+filename <- "svg"
 
+# Make dotplot
 bwu::make_dotplot_typ(
-  data = memory,
+  data = data,
   pheno = pheno,
-  x = memory$z_mean_narrow,
-  y = memory$narrow,
-  colors = NULL
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -183,16 +215,17 @@ figure(
   [
    #image(file_fig)
    ],
-),
+  ),
 )
 }
 ```
 
 ```{=typst}
+#let title: "Learning and Memory",
 #let file_qtbl = "table_memory.png"
 #let file_fig = "_07_memory_files/figure-typst/fig-memory-1.svg"
 #domain(
-  title: "Learning and Memory Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
   file_fig
 )

@@ -14,6 +14,7 @@ format:
     toc: true
 params:
   pheno: "spatial"
+  return_plot: TRUE
 ---
 
 <!-- ## Visual Perception/Construction -->
@@ -55,12 +56,20 @@ scales <- c(
   "Visual Puzzles",
   "Visuospatial/Constructional Index"
 )
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <-
+  bwu::filter_domain_scale(
+    data,
+    domain = domains,
+    scale = scales
+  )
 ```
 
 ```{r}
 #| label: text-spatial
 #| cache: true
+
+# Concatenate text from neuro*.csv files per scale and domain
+# Glue results together and insert into text
 bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 ```
 
@@ -70,26 +79,46 @@ bwu::flatten_scale_text(data, file = "_05_spatial_raw.qmd")
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
 
-pheno <- "spatial"
-source_note <-
-  gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
-10, SD = 3).")
-table_name <- "table_spatial"
+# footnotes
+footnote_t_score <- gt::md(
+  "*T* Score (Mean = 50, SD = 10)"
+)
+footnote_scaled_score <- gt::md(
+  "Scaled Score (Mean = 10, SD = 3)"
+)
+footnote_standard_score <- gt::md(
+  "Index Score (Mean = 100, SD = 15)"
+)
+footnote_z_score <- gt::md(
+  "*z* Score (Mean = 0, SD = 1)"
+)
 
-bwu::make_tbl_gt(data,
-  pheno = pheno, 
-  source_note = source_note, 
-  table_name = table_name
+pheno <- "spatial"
+table_name <- "table_spatial"
+groups_standard_score <- c("NAB")
+groups_t_score <- c("NAB", "Rey Complex Figure")
+groups_scaled_score <- c("WAIS-IV")
+
+spatial <- bwu::table_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = 0.10,
+  groups_standard_score = groups_standard_score,
+  groups_t_score = groups_t_score,
+  groups_scaled_score = groups_scaled_score,
+  multiline = TRUE
 )
 ```
 
 ```{r}
 #| label: fig-spatial
-#| eval: false
+#| eval: true
 #| fig-cap: "Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
+# Arguments
 pheno <- "spatial"
-spatial <- dplyr::filter(data, !is.na(percentile), scale != c("NAB Spatial Index"))
+# spatial <- dplyr::filter(data, !is.na(percentile) & subdomain != "Spatial")
+spatial <- dplyr::filter(data, !is.na(percentile), subdomain != "Spatial")
 data <- spatial
 x <- data$z_mean_subdomain
 y <- data$subdomain
@@ -97,6 +126,7 @@ colors <- NULL
 return_plot <- TRUE
 filename <- "svg"
 
+# Make dotplot
 bwu::make_dotplot_typ(
   data = data,
   pheno = pheno,
@@ -126,7 +156,7 @@ figure([#image(file_qtbl)],
 figure(
   placement: bottom,
   caption: [
-    Visuoperception, visuoconstruction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper.
+    Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper.
   ],
   kind: "image",
   supplement: [
@@ -136,7 +166,7 @@ figure(
   [
     #image(file_fig)
     ],
-),
+  ),
 )
 }
 ```
