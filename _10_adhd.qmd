@@ -94,13 +94,13 @@ scales <- c(
 )
 # ADHD
 domains <- c("ADHD")
-data_adhd <- bwu::filter_domain_scale(data,
+data_adhd <- bwu::filter_data(data,
   domain = domains,
   scale = scales
 )
 # EF
 domains <- c("Executive Functioning")
-data_ef <- bwu::filter_domain_scale(data,
+data_ef <- bwu::filter_data(data,
   domain = domains,
   scale = scales
 )
@@ -120,7 +120,7 @@ data_sr <-
   dplyr::distinct(.keep_all = FALSE)
 
 # Flatten the text
-bwu::flatten_scale_text(data = data_sr, file = "_10_adhd_raw.qmd")
+bwu::cat_neuropsych_results(data = data_sr, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
@@ -135,7 +135,7 @@ data_or <-
   dplyr::distinct(.keep_all = FALSE)
 
 # Flatten the text
-bwu::flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
+bwu::cat_neuropsych_results(data = data_or, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
@@ -145,18 +145,12 @@ bwu::flatten_scale_text(data = data_or, file = "_10_adhd_raw.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-footnote_t_score <- gt::md(
+fn_t_score <- gt::md(
   "*T* Score (Mean = 50, SD = 10)"
 )
-footnote_scaled_score <- gt::md(
-  "Scaled Score (Mean = 10, SD = 3)"
-)
-footnote_standard_score <- gt::md(
-  "Index Score (Mean = 100, SD = 15)"
-)
-footnote_z_score <- gt::md(
-  "*z* Score (Mean = 0, SD = 1)"
-)
+fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 source_note <- gt::md("*Note:* CAARS: 
 Standard scores (Mean = 50, SD = 10), higher scores reflect reduced functioning.
@@ -166,16 +160,16 @@ functioning.")
 
 pheno <- "adhd"
 table_name <- "table_adhd"
-groups_standard_score <- c("CEFI Self-Report", "CEFI Observer-Report")
-groups_t_score <- c("CAARS Self-Report", "CAARS Observer-Report")
+grp_standard_score <- c("CEFI Self-Report", "CEFI Observer-Report")
+grp_t_score <- c("CAARS Self-Report", "CAARS Observer-Report")
 
-adhd <- bwu::table_gt(data,
+adhd <- bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.10,
-  groups_standard_score = groups_standard_score,
-  groups_t_score = groups_t_score,
-  groups_scaled_score = NULL,
+  vertical_padding = 0.25,
+  grp_standard_score = grp_standard_score,
+  grp_t_score = grp_t_score,
+  grp_scaled_score = NULL,
   multiline = TRUE
 )
 ```

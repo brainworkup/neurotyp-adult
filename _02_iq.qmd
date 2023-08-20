@@ -69,7 +69,7 @@ scales <- c(
   "Working Memory"
 )
 # Filter data
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -78,7 +78,7 @@ data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
 
 # Concatenate text from neuro*.csv files per scale and domain
 # Glue results together and insert into text
-bwu::flatten_scale_text(data, file = "_02_iq_raw.qmd")
+bwu::cat_neuropsych_results(data, file = "_02_iq_raw.qmd")
 ```
 
 ```{r}
@@ -91,7 +91,7 @@ pheno <- "iq"
 table_name <- "table_iq"
 
 # footnotes
-footnote_t_score <- gt::md("*T* Score (Mean = 50, SD = 10)")
+fn_t_score <- gt::md("*T* Score (Mean = 50, SD = 10)")
 footnote_scaled_score <- gt::md("Scaled Score (Mean = 10, SD = 3)")
 footnote_standard_score <- gt::md("Index Score (Mean = 100, SD = 15)")
 footnote_z_score <- gt::md("*z* Score (Mean = 0, SD = 1)")
@@ -100,15 +100,15 @@ footnote_z_score <- gt::md("*z* Score (Mean = 0, SD = 1)")
 pheno <- "iq"
 table_name <- "table_iq"
 # try to use data$score_type instead ...
-groups_standard_score <- c("Composite Scores", "NAB", "Test of Premorbid Functioning")
+grp_standard_score <- c("Composite Scores", "NAB", "Test of Premorbid Functioning")
 
-iq <- bwu::table_gt(data,
+iq <- bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.10,
-  groups_standard_score = groups_standard_score,
-  groups_t_score = NULL,
-  groups_scaled_score = NULL,
+  vertical_padding = 0.25,
+  grp_standard_score = grp_standard_score,
+  grp_t_score = NULL,
+  grp_scaled_score = NULL,
   groups_z_score = NULL,
   multiline = TRUE
 )

@@ -23,6 +23,8 @@ params:
 
 ```{r}
 #| label: data-executive
+
+# read and filter data
 pheno <- "executive"
 data <- bwu::read_data(pheno = pheno)
 domains <- "Attention/Executive"
@@ -97,13 +99,15 @@ scales <- c(
   "Working Memory (WMI)",
   "Zoo Locations"
 )
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-executive
 #| cache: true
-bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
+
+# concatenate text for neuropsych results and insert into Quarto/Markdown files
+bwu::cat_neuropsych_results(data, file = "_06_executive_raw.qmd")
 ```
 
 ```{r}
@@ -112,19 +116,10 @@ bwu::flatten_scale_text(data, file = "_06_executive_raw.qmd")
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
 
-# footnotes
-footnote_t_score <- gt::md(
-  "*T* Score (Mean = 50, SD = 10)"
-)
-footnote_scaled_score <- gt::md(
-  "Scaled Score (Mean = 10, SD = 3)"
-)
-footnote_standard_score <- gt::md(
-  "Index Score (Mean = 100, SD = 15)"
-)
-footnote_z_score <- gt::md(
-  "*z* Score (Mean = 0, SD = 1)"
-)
+fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 pheno <- "executive"
 table_name <- "table_executive"
@@ -171,26 +166,41 @@ data <- dplyr::filter(data, test_name != "CVLT-3 Brief") |>
 
 pheno <- "executive"
 table_name <- "table_executive"
-groups_standard_score <- c("NAB")
-groups_t_score <- c("NAB", "NIH EXAMINER", "Trail Making Test")
-groups_scaled_score <- c("WAIS-IV")
+grp_standard_score <- c("NAB")
+grp_t_score <- c("NIH EXAMINER", "NAB", "Trail Making Test")
+grp_scaled_score <- c("WAIS-IV")
 
-executive <- bwu::table_gt(data,
+grp_executive <- list(
+  "scaled_score" = c("WAIS-IV"),
+  "standard_score" = c("NAB"),
+  "t_score" = c("NIH EXAMINER", "NAB", "Trail Making Test")
+)
+
+fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+
+source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.10,
-  groups_standard_score = groups_standard_score,
-  groups_t_score = groups_t_score,
-  groups_scaled_score = groups_scaled_score,
+  vertical_padding = 0.20,
+  fn_scaled_score = fn_scaled_score,
+  fn_standard_score = fn_standard_score,
+  fn_t_score = fn_t_score,
+  fn_z_score = fn_z_score,
+  grp_standard_score = grp_standard_score,
+  grp_t_score = grp_t_score,
+  grp_scaled_score = grp_scaled_score,
   multiline = TRUE
 )
-executive
 ```
 
 ```{r}
 #| label: fig-executive
 #| eval: true
-#| fig-asp: 0.95
+#| fig-asp: 1.0
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
 # Arguments
@@ -200,54 +210,51 @@ data <- executive
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- TRUE
+return_plot <- FALSE
 filename <- "svg"
+z_score_label <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
-# Make dotplot
-bwu::make_dotplot_typ(
+source(here::here("R", "dotplot.R"))
+dotplot(
   data = data,
   pheno = pheno,
   x = x,
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  z_score_label = z_score_label
 )
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Fira Sans", size: 0.80em)
   set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: [
-    #title
-  ],
-  caption-pos: top,
-  kind: "qtbl",
-  supplement: [*Table*],
-),
-figure(
-  placement: bottom,
-  caption: [
-    Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment.
-  ],
-  kind: "image",
-  supplement: [
-    *Figure*
-    ],
-  gap: 1em,
-  [
-    #image(file_fig)
-    ],
-  ),
-)
-}
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: [#title],
+          caption-pos: top,
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: [
+            Attention and executive functions are essential for successful
+            cognitive functioning, enabling us to perform everyday tasks, handle
+            academic challenges, solve problems, manage our emotions, and
+            interact effectively with others and our environment.
+            ],
+          placement: bottom,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
 ```
-
 ```{=typst}
 #let title = "Attention/Executive"
 #let file_qtbl = "table_executive.png"

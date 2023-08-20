@@ -61,14 +61,14 @@ scales <- c(
   "Visuomotor Precision"
 )
 
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-motor
 #| cache: true
 
-bwu::flatten_scale_text(data, file = "_08_motor_raw.qmd")
+bwu::cat_neuropsych_results(data, file = "_08_motor_raw.qmd")
 ```
 
 ```{r}

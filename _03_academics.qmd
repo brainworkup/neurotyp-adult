@@ -100,14 +100,14 @@ scales <- c(
   "Written Language Composite"
 )
 
-data <- bwu::filter_domain_scale(data, domain = domains, scale = scales)
+data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-academics
 #| cache: true
 
-bwu::flatten_scale_text(data, file = "_03_academics_raw.qmd")
+bwu::cat_neuropsych_results(data, file = "_03_academics_raw.qmd")
 ```
 
 ```{r}
