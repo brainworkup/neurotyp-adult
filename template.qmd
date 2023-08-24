@@ -166,7 +166,7 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 
 library(tidyverse)
 
-patient <- "Alexandra"
+patient <- "Biggie"
 
 data_path <- here::here(patient, "csv")
 files <- dir(data_path, pattern = "*.csv")
