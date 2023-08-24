@@ -11,7 +11,8 @@ format:
     keep-md: true
     keep-tex: true
 params:
-  pheno: emotion
+  pheno: "emotion"
+  return_plot: TRUE
 ---
 
 <!-- ## Emotional/Behavioral/Personality -->
@@ -20,11 +21,9 @@ params:
 
 ```{r}
 #| label: data-emotion
-data <- bwu::read_data(pheno = "emotion")
-```
-
-```{r}
-#| label: filter-emotion
+library(bwu)
+pheno <- "emotion"
+data <- bwu::read_data(pheno = pheno)
 domains <- c(
   "Psychiatric Disorders", "Personality Disorders", "Substance Use",
   "Psychosocial Problems"
@@ -85,57 +84,64 @@ scales <- c(
   "Warmth"
   # ADD BASC3 SRP
 )
-
-filter_data <- function(data, domain, scale) {
-  data <- data |>
-    dplyr::filter(domain %in% domains, !is.na(percentile)) |>
-    dplyr::filter(scale %in% scales)
-  return(data)
-}
-
-data_emotion <- filter_data(data, domain = domains, scale = scales)
+data <-
+  bwu::filter_data(
+    data,
+    domain = domains,
+    scale = scales
+)
 ```
 
 ```{r}
 #| label: text-emotion
 #| cache: true
 
-bwu::cat_neuropsych_results(data = data_emotion, file = "_11_emotion_raw.qmd")
+# Concatenate text from neuro*.csv files per scale and domain
+bwu::cat_neuropsych_results(data = data, file = "_11_emotion_raw.qmd")
 ```
 
 ```{r}
 #| label: qtbl-emotion
 #| dev: tikz
 #| fig-process: pdf2png
-#| fig-height: 7
-#| eval: false
-
+#| eval: true
 options(tikzDefaultEngine = "xetex")
 
-source_note <- gt::md("*Note:* T-scores have a mean of 50 and a standard deviation of 10.")
-
-table_name <- "table_emotion"
+# # footnotes
+# fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+# fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+# fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+# fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 pheno <- "emotion"
+table_name <- "table_emotion"
+# grp_t_score <- c("PAI")
+vertical_padding <- 0.18
 
-data_emotion <-
-  dplyr::filter(data_emotion, domain %in% c(
+data2 <-
+  dplyr::filter(data, domain %in% c(
     "Psychiatric Disorders",
-    "Personality Disorders"
-    # "Substance Use"
+    "Personality Disorders", "Substance Use"
   )) |>
   dplyr::arrange(test_name) |>
   dplyr::arrange(subdomain)
 
-data_emotion <- data_emotion[, c(11, 2, 4, 5, 6)]
-
+data_emotion <- data2[, c(10, 1, 3, 4, 5)]
 colnames(data_emotion)[1] <- "test_name"
+data3 <- data_emotion
 
-bwu::make_tbl_gt_typ(data_emotion, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::tbl_gt(
+  data = data3,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = vertical_padding,
+  multiline = FALSE
+)
 ```
 
 ```{r}
 #| eval: false
+
 tbl1 <-
   dplyr::filter(data_emotion, domain == "Psychiatric Disorders") |>
   dplyr::arrange(test_name) |>
@@ -171,6 +177,7 @@ table_sud <- bwu::tbl_gt(
   table_name = "table_sud",
   source_note = source_note
 )
+
 tbl4 <-
   dplyr::filter(data_emotion, domain == "Psychosocial Problems") |>
   dplyr::arrange(test_name) |>
@@ -186,36 +193,68 @@ table_social <- bwu::tbl_gt(
 
 ```{r}
 #| label: fig-emotion
-#| out-width: 70%
-#| fig-height: 7
 #| eval: true
-#| fig-cap: "Mood/Self-Report Subdomain Plots"
+#| fig-asp: 1.0
+#| fig-cap: "Mood/Self-Report"
 
+# Arguments
 pheno <- "emotion"
-
 emotion <-
-  dplyr::filter(data, !is.na(percentile)) |>
+  dplyr::filter(data) |>
   dplyr::filter(domain %in% c("Psychiatric Disorders", "Personality Disorders", "Substance Use"))
 
 data <- emotion
-pheno <- "emotion"
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
 return_plot <- TRUE
-filename <- "svg"
-z_score_label <- NULL
+filename <- "fig_emotion.svg"
 
 # Make dotplot
-# source(here::here("R", "dotplot.R"))
 bwu::dotplot(
   data = data,
-  pheno = pheno,
   x = x,
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename,
-  z_score_label = NULL
+  filename = filename
 )
 ```
+
+<!-- ```{=typst}
+#| eval: false
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Fira Sans", size: 0.80em)
+  set text(..font)
+  grid(
+  columns: (50%, 50%),
+  gutter: 8pt,
+figure([#image(file_qtbl)],
+  caption: [#title],
+  caption-pos: top,
+  kind: "qtbl",
+  supplement: [*Table*],
+),
+figure([#image(file_fig)],
+  placement: bottom,
+  caption: [
+    Mood/Self-Report ... Subdomain Plots
+  ],
+  kind: "image",
+  supplement: [*Fig.*],
+  gap: 1em,
+  ),
+  )
+}
+``` -->
+
+<!-- ```{=typst}
+#let title = "Emotional/Behavioral/Personality"
+#let file_qtbl = "table_emotion.png"
+#let file_fig = "_11_emotion_files/figure-typst/fig-emotion-1.svg"
+#domain(
+  title: [#title],
+  file_qtbl,
+  file_fig
+)
+``` -->
