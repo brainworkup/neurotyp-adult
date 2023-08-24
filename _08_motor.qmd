@@ -13,7 +13,8 @@ format:
   html: 
     toc: true
 params:
-  pheno: motor
+  pheno: "motor"
+  return_plot: TRUE
 ---
 
 <!-- ## Motor -->
@@ -22,11 +23,9 @@ params:
 
 ```{r}
 #| label: data-motor
-data <- bwu::read_data(pheno = "motor")
-```
 
-```{r}
-#| label: filter-motor
+data <- bwu::read_data(pheno = "motor")
+domains <- c("Motor")
 scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
@@ -57,15 +56,13 @@ scales <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-domains <- c(
-  "Motor"
-)
 data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-motor
 #| cache: true
+
 bwu::cat_neuropsych_results(data, file = "_08_motor_raw.qmd")
 ```
 
@@ -74,45 +71,96 @@ bwu::cat_neuropsych_results(data, file = "_08_motor_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
-10, SD = 3).")
-table_name <- "table_motor"
+
+# footnotes
+fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+z_score_label <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
+
 pheno <- "motor"
-bwu::make_tbl_gt_typ(data, pheno = pheno, source_note = source_note, table_name = table_name)
-```
+table_name <- "table_motor"
+grp_motor <- list(
+  "t_score" = c("Grooved Pegboard", "NEPSY-2")
+)
+vertical_padding <- 0.18
+multiline <- TRUE
 
-
-```{=typst}
-#let domain = "Motor"
-<qtbl-motor>
-#figure([#image("table_motor.png", width: 50%)],
-  caption: [
-    #domain Test Scores
-  ],
-  kind: "qtbl",
-  supplement: [Table],
+# source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  fn_scaled_score = fn_scaled_score,
+  fn_t_score = fn_t_score,
+  grp_scaled_score = grp_motor[["scaled_score"]],
+  grp_t_score = grp_motor[["t_score"]],
+  vertical_padding = vertical_padding,
+  multiline = multiline
 )
 ```
 
 ```{r}
 #| label: fig-motor
-#| out-width: 70%
+#| eval: true
+#| fig-asp: 1.0
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
-#| fig-subcap: "Sensorimotor Subdomain Plots"
-roma <- c(
-  "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
-  "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
-  "#C0E9C2", "#ACE7D0", "#93DFD5", "#77D1D7", "#5DC0D2", "#47AECD",
-  "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
-  "#023198"
+
+# Arguments
+motor <- dplyr::filter(data, !is.na(percentile))
+data <- motor
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- FALSE
+filename <- "fig_motor.svg"
+
+# source(here::here("R", "dotplot.R"))
+bwu::dotplot(
+  data = data,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
-pheno <- "motor"
-data_dotplot <- dplyr::filter(data, !is.na(percentile))
-bwu::make_dotplot_typ(
-  data = data_dotplot,
-  pheno = pheno,
-  x = data_dotplot$z_mean_narrow,
-  y = data_dotplot$narrow,
-  colors = roma
-)
+```
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
+  set text(..font)
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: [#title],
+          caption-pos: top,
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: [
+            Attention and executive functions are essential for successful
+            cognitive functioning, enabling us to perform everyday tasks, handle
+            academic challenges, solve problems, manage our emotions, and
+            interact effectively with others and our environment.
+            ],
+          placement: bottom,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
+```
+```{=typst}
+#let title = "Motor"
+#let file_qtbl = "table_motor.png"
+#let file_fig = "_08_motor_files/figure-typst/fig-motor-1.svg"
+#domain(
+  title: [#title Test Scores],
+  file_qtbl,
+  file_fig
+  )
 ```
