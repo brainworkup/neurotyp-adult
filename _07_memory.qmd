@@ -23,6 +23,8 @@ params:
 
 ```{r}
 #| label: data-memory
+library(bwu)
+# read and filter data
 pheno <- "memory"
 data <- bwu::read_data(pheno = pheno)
 domains <- c("Memory")
@@ -115,8 +117,7 @@ data <-
 #| label: text-memory
 #| cache: true
 
-# Concatenate text from neuro*.csv files per scale and domain
-# Glue results together and insert into text
+# Concatenate text for neuropsych results and insert into Quarto/Markdown files
 bwu::cat_neuropsych_results(data, file = "_07_memory_raw.qmd")
 ```
 
@@ -127,34 +128,40 @@ bwu::cat_neuropsych_results(data, file = "_07_memory_raw.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_t_score <- gt::md(
-  "*T* Score (Mean = 50, SD = 10)"
-)
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 pheno <- "memory"
 table_name <- "table_memory"
-grp_standard_score <- c("NAB", "CVLT-3 Brief")
-grp_t_score <- c("NAB", "Rey Complex Figure")
-grp_scaled_score <- c("CVLT-3 Brief")
+grp_memory <- list(
+  "standard_score" = c("NAB", "CVLT-3 Brief"),
+  "scaled_score" = c("CVLT-3 Brief"),
+  "t_score" = c("NAB", "Rey Complex Figure")
+)
+vertical_padding <- 0.18
+multiline <- TRUE
 
-memory <- bwu::tbl_gt(data,
+# source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.25,
-  grp_standard_score = grp_standard_score,
-  grp_t_score = grp_t_score,
-  grp_scaled_score = grp_scaled_score,
-  multiline = TRUE
+  vertical_padding = vertical_padding,
+  fn_standard_score = fn_standard_score,
+  fn_scaled_score = fn_scaled_score,
+  fn_t_score = fn_t_score,
+  grp_standard_score = grp_memory[["standard_score"]],
+  grp_scaled_score = grp_memory[["scaled_score"]],
+  grp_t_score = grp_memory[["t_score"]],
+  multiline = multiline
 )
 ```
 
 ```{r}
 #| label: fig-memory
 #| eval: true
-#| fig-asp: 1.0
+#| fig-asp: 0.95
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
 
 exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
@@ -170,13 +177,13 @@ data <- memory
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
-return_plot <- TRUE
-filename <- "svg"
+return_plot <- FALSE
+filename <- "fig_memory.svg"
 
 # Make dotplot
-bwu::make_dotplot_typ(
+# source(here::here("R", "dotplot.R"))
+bwu::dotplot(
   data = data,
-  pheno = pheno,
   x = x,
   y = y,
   colors = colors,
@@ -188,30 +195,28 @@ bwu::make_dotplot_typ(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Fira Sans", size: 0.80em)
   set text(..font)
-  grid(
-    columns: (50%, 50%),
-    gutter: 8pt,
-  figure([#image(file_qtbl)],
-    caption: [#title],
-    caption-pos: top,
-    kind: "qtbl",
-    supplement: [*Table*],
-    ),
-  figure([#image(file_fig)],
-    caption: [
-      Learning and memory refer to the rate and ease with which new information
-      (e.g., facts, stories, lists, faces, names) can be encoded, stored, and
-      later recalled from long-term memory.
-      ],
-      kind: "image",
-      supplement: [*Fig.*],
-      placement: bottom,
-      gap: 0.5em,
-      ),
-  )
-}
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: [#title],
+          caption-pos: top,
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: [
+            Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory.
+            ],
+          placement: bottom,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
 ```
 
 ```{=typst}

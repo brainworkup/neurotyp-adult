@@ -30,7 +30,6 @@ data <- bwu::read_data(pheno = "academics")
 #| label: filter-academics
 
 domains <- c("Academic Skills")
-
 scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
@@ -99,14 +98,12 @@ scales <- c(
   "Written Expression",
   "Written Language Composite"
 )
-
 data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-academics
 #| cache: true
-
 bwu::cat_neuropsych_results(data, file = "_03_academics_raw.qmd")
 ```
 
@@ -114,14 +111,11 @@ bwu::cat_neuropsych_results(data, file = "_03_academics_raw.qmd")
 #| label: qtbl-academics
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
-
 source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
 table_name <- "table_academics"
 pheno <- "academics"
-
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt_typ(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
 
@@ -145,7 +139,7 @@ bwu::make_dotplot_typ(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
+  let font = (font: "Fira Sans", size: 0.80em)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -167,7 +161,7 @@ figure(
   supplement: [
     *Figure*
     ],
-  gap: 1em,
+  gap: 0.5em,
   [
     #image(file_fig)
     ],

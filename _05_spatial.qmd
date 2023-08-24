@@ -23,6 +23,8 @@ params:
 
 ```{r}
 #| label: data-spatial
+library(bwu)
+# Read data and filter
 pheno <- "spatial"
 data <- bwu::read_data(pheno = pheno)
 domains <- "Visual Perception/Construction"
@@ -69,7 +71,6 @@ data <-
 #| cache: true
 
 # Concatenate text from neuro*.csv files per scale and domain
-# Glue results together and insert into text
 bwu::cat_neuropsych_results(data, file = "_05_spatial_raw.qmd")
 ```
 
@@ -80,27 +81,34 @@ bwu::cat_neuropsych_results(data, file = "_05_spatial_raw.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_t_score <- gt::md(
-  "*T* Score (Mean = 50, SD = 10)"
-)
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+
+grp_spatial <- list(
+  "scaled_score" = c("WAIS-IV"),
+  "standard_score" = c("NAB"),
+  "t_score" = c("NAB", "Rey Complex Figure")
+)
 
 pheno <- "spatial"
 table_name <- "table_spatial"
-grp_standard_score <- c("NAB")
-grp_t_score <- c("NAB", "Rey Complex Figure")
-grp_scaled_score <- c("WAIS-IV")
+vertical_padding <- 0.18
+multiline <- TRUE
 
-spatial <- bwu::tbl_gt(data,
+# source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.25,
-  grp_standard_score = grp_standard_score,
-  grp_t_score = grp_t_score,
-  grp_scaled_score = grp_scaled_score,
-  multiline = TRUE
+  vertical_padding = vertical_padding,
+  fn_scaled_score = fn_scaled_score,
+  fn_standard_score = fn_standard_score,
+  fn_t_score = fn_t_score,
+  grp_scaled_score = grp_spatial[["scaled_score"]],
+  grp_standard_score = grp_spatial[["standard_score"]],
+  grp_t_score = grp_spatial[["t_score"]],
+  multiline = multiline
 )
 ```
 
@@ -111,19 +119,17 @@ spatial <- bwu::tbl_gt(data,
 
 # Arguments
 pheno <- "spatial"
-# spatial <- dplyr::filter(data, !is.na(percentile) & subdomain != "Spatial")
 spatial <- dplyr::filter(data, !is.na(percentile), subdomain != "Spatial")
 data <- spatial
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
 return_plot <- TRUE
-filename <- "svg"
+filename <- "fig_spatial.svg"
 
 # Make dotplot
-bwu::make_dotplot_typ(
+bwu::dotplot(
   data = data,
-  pheno = pheno,
   x = x,
   y = y,
   colors = colors,
@@ -134,7 +140,7 @@ bwu::make_dotplot_typ(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Fira Sans", size: 0.80em)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -156,11 +162,11 @@ figure(
   supplement: [
     *Figure*
     ],
-  gap: 1em,
+  gap: 0.5em,
   [
     #image(file_fig)
     ],
-  ),
+),
 )
 }
 ```

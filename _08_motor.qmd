@@ -27,9 +27,6 @@ data <- bwu::read_data(pheno = "motor")
 
 ```{r}
 #| label: filter-motor
-
-domains <- c("Motor")
-
 scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
@@ -60,14 +57,15 @@ scales <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-
+domains <- c(
+  "Motor"
+)
 data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-motor
 #| cache: true
-
 bwu::cat_neuropsych_results(data, file = "_08_motor_raw.qmd")
 ```
 
@@ -75,13 +73,12 @@ bwu::cat_neuropsych_results(data, file = "_08_motor_raw.qmd")
 #| label: qtbl-motor
 #| dev: tikz
 #| fig-process: pdf2png
-
 options(tikzDefaultEngine = "xetex")
 source_note <- gt::md("*Note:* T-scores (Mean = 50, SD = 10), Scaled scores (Mean =
 10, SD = 3).")
 table_name <- "table_motor"
 pheno <- "motor"
-bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = table_name)
+bwu::make_tbl_gt_typ(data, pheno = pheno, source_note = source_note, table_name = table_name)
 ```
 
 
@@ -99,59 +96,23 @@ bwu::make_tbl_gt(data, pheno = pheno, source_note = source_note, table_name = ta
 
 ```{r}
 #| label: fig-motor
+#| out-width: 70%
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
-
+#| fig-subcap: "Sensorimotor Subdomain Plots"
+roma <- c(
+  "#7E1700", "#893107", "#934610", "#9C5717", "#A5681F", "#AD7A27",
+  "#B58B31", "#BF9F40", "#C7B354", "#CFC970", "#D2DA90", "#CDE5AC",
+  "#C0E9C2", "#ACE7D0", "#93DFD5", "#77D1D7", "#5DC0D2", "#47AECD",
+  "#389CC6", "#2F8CBF", "#277AB8", "#2169B0", "#1C58A9", "#1345A0",
+  "#023198"
+)
 pheno <- "motor"
-motor <- dplyr::filter(data, !is.na(percentile))
-
+data_dotplot <- dplyr::filter(data, !is.na(percentile))
 bwu::make_dotplot_typ(
-  data = motor,
+  data = data_dotplot,
   pheno = pheno,
-  x = motor$z_mean_narrow,
-  y = motor$narrow,
+  x = data_dotplot$z_mean_narrow,
+  y = data_dotplot$narrow,
   colors = roma
-)
-```
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Inria Serif", size: 9pt)
-  set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: [
-    #title
-  ],
-  caption-pos: top,
-  kind: "qtbl",
-  supplement: [*Table*],
-),
-figure(
-  placement: bottom,
-  caption: [
-    Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing.
-  ],
-  kind: "image",
-  supplement: [
-    *Figure*
-    ],
-  gap: 1em,
-  [
-   #image(file_fig)
-   ],
-),
-)
-}
-```
-
-```{=typst}
-#let file_qtbl = "table_motor.png"
-#let file_fig = "_08_motor_files/figure-typst/fig-motor-1.svg"
-#domain(
-  title: "Motor Test Scores",
-  file_qtbl,
-  file_fig
 )
 ```

@@ -23,6 +23,8 @@ params:
 
 ```{r}
 #| label: data-verbal
+library(bwu)
+# read and filter data
 pheno <- "verbal"
 data <- bwu::read_data(pheno = pheno)
 domains <- c("Verbal/Language")
@@ -62,7 +64,6 @@ scales <- c(
   "Oromotor Sequences",
   "Phonological Awareness",
   "Picture Naming",
-  "Picture Naming",
   "Preliteracy Rating Scale",
   "Reading Comprehension",
   "Recalling Sentences",
@@ -83,11 +84,7 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
-data <-
-  bwu::filter_data(data,
-    domain = domains,
-    scale = scales
-  )
+data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -95,7 +92,6 @@ data <-
 #| cache: true
 
 # Concatenate text from neuro*.csv files per scale and domain
-# Glue results together and insert into text
 bwu::cat_neuropsych_results(data, file = "_04_verbal_raw.qmd")
 ```
 
@@ -106,52 +102,58 @@ bwu::cat_neuropsych_results(data, file = "_04_verbal_raw.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_t_score <- gt::md(
-  "*T* Score (Mean = 50, SD = 10)"
-)
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_z_score <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
 pheno <- "verbal"
 table_name <- "table_verbal"
-
-pheno <- "verbal"
-table_name <- "table_verbal"
-grp_standard_score <- c("NAB")
-grp_t_score <- c("NAB", "NIH EXAMINER", "Trail Making Test")
+# grp_verbal <- list(
+#   "scaled_score" = c("WAIS-IV"),
+#   "standard_score" = c("NAB"),
+#   "t_score" = c("NAB", "NIH EXAMINER")
+# )
 grp_scaled_score <- c("WAIS-IV")
+grp_standard_score <- c("NAB")
+grp_t_score <- c("NAB", "NIH EXAMINER")
+vertical_padding <- 0.18
+multiline <- TRUE
 
-verbal <- bwu::tbl_gt(data,
+# source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = 0.25,
+  vertical_padding = vertical_padding,
+  fn_scaled_score = fn_scaled_score,
+  fn_standard_score = fn_standard_score,
+  fn_t_score = fn_t_score,
+  grp_scaled_score = grp_scaled_score,
   grp_standard_score = grp_standard_score,
   grp_t_score = grp_t_score,
-  grp_scaled_score = grp_scaled_score,
-  multiline = TRUE
+  multiline = multiline
 )
 ```
 
 ```{r}
 #| label: fig-verbal
 #| eval: true
+#| fig-asp: 0.70
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
 # Arguments
 pheno <- "verbal"
-verbal <- dplyr::filter(data, !is.na(percentile), subdomain != "Language")
+verbal <- dplyr::filter(data, subdomain != "Language")
 data <- verbal
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
 return_plot <- TRUE
-filename <- "svg"
+filename <- "fig_verbal.svg"
 
 # Make dotplot
-bwu::make_dotplot_typ(
+bwu::dotplot(
   data = data,
-  pheno = pheno,
   x = x,
   y = y,
   colors = colors,
@@ -162,35 +164,28 @@ bwu::make_dotplot_typ(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Fira Sans", size: 0.80em)
   set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: [
-    #title
-  ],
-  caption-pos: top,
-  kind: "qtbl",
-  supplement: [*Table*],
-),
-figure(
-  placement: bottom,
-  caption: [
-    Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words.
-  ],
-  kind: "image",
-  supplement: [
-    *Figure*
-    ],
-  gap: 1em,
-  [
-    #image(file_fig)
-    ],
-  ),
-)
-}
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: [#title],
+          caption-pos: top,
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: [
+            Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words.
+            ],
+          placement: bottom,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
 ```
 
 ```{=typst}
