@@ -1,34 +1,10 @@
----
-title-meta: academics
-execute:
-  warning: false
-  echo: false
-  message: false
-format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-  html: 
-    toc: true
-params:
-  pheno: academics
----
-
-<!-- ## Academic Skills -->
+## Academic Skills
 
 {{< include _03_academics_text.qmd >}}
 
 ```{r}
 #| label: data-academics
-
 data <- bwu::read_data(pheno = "academics")
-```
-
-```{r}
-#| label: filter-academics
-
 domains <- c("Academic Skills")
 scales <- c(
   "Academic Fluency Composite",
@@ -112,28 +88,57 @@ bwu::cat_neuropsych_results(data, file = "_03_academics_raw.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
-source_note <- "*Note:* Index scores have a mean of 100 and a standard deviation of 15."
-table_name <- "table_academics"
+
+# footnotes
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+
 pheno <- "academics"
-bwu::make_tbl_gt_typ(data, pheno = pheno, source_note = source_note, table_name = table_name)
+table_name <- "table_academics"
+grp_academics <- list(
+  "standard_score" = c("KTEA-3", "WIAT-4", "WRAT-5")
+)
+vertical_padding <- 0.18
+multiline <- TRUE
+
+# source(here::here("R", "tbl_gt.R"))
+bwu::tbl_gt(data,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = vertical_padding,
+  fn_standard_score = fn_standard_score,
+  grp_academics = grp_academics[["standard_score"]],
+  multiline = multiline
+)
 ```
 
 
 ```{r}
 #| label: fig-academics
-#| out-width: 70%
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
-#| column: page
 
-pheno <- "academics"
-academics <- dplyr::filter(data, !is.na(percentile))
+# Arguments
+# pheno <- "academics"
+# academics <-
+#   dplyr::filter(
+#     data,
+#     scale %in% c(
+#       "Word Reading", "Reading Comprehension", "Math Calculation" # etc
+#     )
+# data <- academics
+x <- data$z_mean_subdomain
+y <- data$subdomain
+colors <- NULL
+return_plot <- FALSE
+filename <- "fig_academics.svg"
 
-bwu::make_dotplot_typ(
-  data = academics,
-  pheno = pheno,
-  x = academics$z_mean_subdomain,
-  y = academics$subdomain,
-  colors = roma
+# Make dotplot
+bwu::dotplot(
+  data = data,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
 )
 ```
 
@@ -141,41 +146,35 @@ bwu::make_dotplot_typ(
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Fira Sans", size:  9pt)
   set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: [
-    #title
-  ],
-  caption-pos: top,
-  kind: "qtbl",
-  supplement: [*Table*],
-),
-figure(
-  placement: bottom,
-  caption: [
-    _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
-  ],
-  kind: "image",
-  supplement: [
-    *Fig.*
-    ],
-  gap: 0.5em,
-  [
-    #image(file_fig)
-    ],
-),
-)
-}
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: [#title],
+          caption-pos: top,
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: [
+            _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
+            ],
+          placement: bottom,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+          ),
+      )
+  }
 ```
 
 ```{=typst}
+#let title = "Academic Achievement"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "_03_academics_files/figure-typst/fig-academics-1.svg"
 #domain(
-  title: "Academic Achievement Test Scores",
+  title: [#title Test Scores],
   file_qtbl,
-  file_fig
+  file_fig,
   )
 ```

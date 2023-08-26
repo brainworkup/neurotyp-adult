@@ -56,13 +56,11 @@ source("_common.R")
 ```{r}
 #| label: setup
 #| include: false
+# Load packages
 xfun::pkg_load2(
   c("fs", "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "pdftools", "png", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
-```
-
-```{r}
-#| label: knitr-options
+# Knitr options
 knitr::opts_knit$set(width = 50)
 options(digits = 1, warnPartialMatchArgs = FALSE)
 options(knitr.kable.NA = "--")
@@ -72,10 +70,7 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
-```
-
-```{r}
-#| label: env
+# Environment variables
 Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
 patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```
@@ -83,8 +78,8 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```{r}
 #| label: data-load
 #| include: false
-neuropsychological_data <- bwu::load_data(here::here(patient, "data"))
-bwu::load_data(here::here(patient, "data"))
+neuropsychological_data <- bwu::load_data(here::here(patient))
+bwu::load_data(here::here(patient))
 ```
 
 ```{=typst}
@@ -111,23 +106,6 @@ bwu::load_data(here::here(patient, "data"))
 {{< include _01_behav_obs.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS
-
-```{r show-csv-files}
-csv_path <- "csv"
-tibble::tibble(
-  files = list.files(pq_path, recursive = TRUE),
-  size_MB = file.size(file.path(pq_path, files)) / 1024^2
-)
-```
-
-```{r}
-#| label: load
-#| include: false
-
-# load data
-neuropsychological_data <- bwu::load_data(patient = "Alexandra")
-bwu::load_data(patient = "Alexandra")
-```
 
 <!---
  ## General Cognitive Ability 
@@ -195,17 +173,23 @@ bwu::load_data(patient = "Alexandra")
 
 {{< include _11_emotion.qmd >}}
 
-{{< pagebreak >}}
+<!---
+ {{< pagebreak >}} 
+--->
 
-# SUMMARY/IMPRESSION
+<!---
+ # SUMMARY/IMPRESSION 
+--->
 
 {{< include _13_sirf.qmd >}}
 
-# RECOMMENDATIONS
+<!---
+ # RECOMMENDATIONS 
+--->
 
 {{< include _14_recs.qmd >}}
 
-It was a pleasure to work with Biggie. Please contact me with any questions or concerns regarding this patient.
+It was a pleasure to work with `r patient`. Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,
 
