@@ -1,8 +1,4 @@
----
-title-meta: behavioral-observations
----
-
-<!-- ## Behavioral Observations -->
+## Behavioral Observations
 
 - *Appearance:* Appropriate grooming and dress for context.
 - *Behavior/attitude:* Cooperative, engaged.

@@ -3,13 +3,9 @@ editor:
   markdown:
     wrap: sentence
     canonical: true
-params:
-  pheno: "iq"
-  return_plot: true
-  eval_fig_iq: true
 ---
 
-# General Cognitive Ability
+# General Cognitive Ability {#sec-iq}
 
 {{< include _02_iq_text.qmd >}}
 

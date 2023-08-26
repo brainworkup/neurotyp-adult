@@ -1,8 +1,11 @@
 ---
-title-meta: iq-text
 execute:
   cache: true
 ---
+
+<!---
+ # General Cognitive Ability 
+--->
 
 Biggie showed particularly strong performance on tests measuring working
 memory capacity and higher cognitive reasoning, both of which ranked in the

@@ -48,10 +48,16 @@ editor:
 ---
 
 ```{r}
+#| echo: false
+
+source("_common.R")
+```
+
+```{r}
 #| label: setup
 #| include: false
 xfun::pkg_load2(
-  c("bookdown", "crosstalk", "fs", "ggtext", "gdtools", "ggthemes", "glue", "gptstudio", "gpttools", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "kableExtra", "knitr", "magick", "magrittr", "manipulateWidget", "pak", "patchwork", "pdftools", "png", "psycheval", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytable", "tidytext", "tidyverse", "tinytex", "vroom", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
+  c("fs", "ggtext", "gdtools", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "pdftools", "png", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
 ```
 
@@ -77,243 +83,91 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 ```{r}
 #| label: data-load
 #| include: false
-library(tidyverse)
-library(bwu)
-
 neuropsychological_data <- bwu::load_data(here::here(patient, "data"))
 bwu::load_data(here::here(patient, "data"))
 ```
 
 ```{=typst}
 #let name = [Biggie Smalls]
-#let doe = [2023-04-13]
+#let doe = [2023-01-01]
 #let patient = [Biggie]
 #v(2pt, weak: true)
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
 
-# TESTS ADMINISTERED
-
-```{=typst}
-- Comprehensive Neuropsychiatric Symptom and History Interview
-- Conners' Adult ADHD Diagnostic Interview for DSM-IV (CAADID), Part I: History
-- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
-- Conners' Adult ADHD Rating Scales--Observer Report: Long Version (CAARS--O:L)
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Self-Report Form
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Observer Form
-- Advanced Clinical Solutions (ACS):
-  - Word Choice, Test of Premorbid Functioning (TOPF)
-- Dot Counting Test
-- Wechsler Adult Intelligence Scale, 4th ed (WAIS-IV)
-- Wide Range Achievement Test, 5th ed (WRAT-5): 
-  - Word Reading
-- Neuropsychological Assessment Battery, Screener (NAB):
-  - Attention, Language, Memory, Spatial, and Executive Functions Modules
-- NIH Executive Abilities: Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
-  - Unstructured Task, Verbal Fluency, and Behavioral Rating Scale
-- California Verbal Learning Test, 3rd ed (CVLT-3), Brief Form
-- Rey-Osterrieth Complex Figure Test (ROCFT)
-- Trail Making Test
-- Personality Assessment Inventory (PAI)
-```
+{{< include _00_tests_admin.qmd >}}
 
 {{< include _00_nse.qmd >}}
-
-## Behavioral Observations
 
 {{< include _01_behav_obs.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS
 
-```{r}
-#| eval: false
-dir.create("data", showWarnings = FALSE)
-
-csv_path <- "data/csv"
-
-tibble(
-  files = list.files(csv_path, recursive = TRUE),
-  size_MB = file.size(file.path(csv_path, files)) / 1024^2
-)
-```
-
 ```{r show-csv-files}
 csv_path <- "csv"
-tibble(
+tibble::tibble(
   files = list.files(pq_path, recursive = TRUE),
   size_MB = file.size(file.path(pq_path, files)) / 1024^2
 )
 ```
 
 ```{r}
-#| label: tidy-data
+#| label: load
 #| include: false
 
-library(tidyverse)
-
-patient <- "Biggie"
-
-data_path <- here::here(patient, "csv")
-files <- dir(data_path, pattern = "*.csv")
-neuropsych <-
-  files |>
-  purrr::set_names() |>
-  purrr::map_df(
-    ~ readr::read_csv(file.path(data_path, .), show_col_types = FALSE),
-    na = c("", "NA", "--", "-"),
-    .id = "filename"
-  ) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::distinct() |>
-  dplyr::mutate(z = qnorm(percentile / 100)) |>
-  dplyr::mutate(domain = forcats::as_factor(domain)) |>
-  dplyr::mutate(subdomain = forcats::as_factor(subdomain)) |>
-  dplyr::mutate(narrow = forcats::as_factor(narrow)) |>
-  dplyr::mutate(pass = forcats::as_factor(pass)) |>
-  dplyr::mutate(verbal = forcats::as_factor(verbal)) |>
-  dplyr::mutate(timed = forcats::as_factor(timed))
-
-# Subset neurocognitive data
-neurocog <-
-  neuropsych |>
-  dplyr::filter(test_type == "npsych_test")
-# domain
-neurocog <-
-  neurocog |>
-  dplyr::group_by(domain, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
-  dplyr::ungroup()
-# subdomain
-neurocog <-
-  neurocog |>
-  dplyr::group_by(subdomain, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
-  dplyr::ungroup()
-# narrow
-neurocog <-
-  neurocog |>
-  dplyr::group_by(narrow, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
-  dplyr::ungroup()
-# pass
-neurocog <-
-  neurocog |>
-  dplyr::group_by(pass, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_pass = mean(z), z_sd_pass = sd(z)) |>
-  dplyr::ungroup()
-# verbal
-neurocog <-
-  neurocog |>
-  dplyr::group_by(verbal, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_verbal = mean(z), z_sd_verbal = sd(z)) |>
-  dplyr::ungroup()
-# timed
-neurocog <-
-  neurocog |>
-  dplyr::group_by(timed, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_timed = mean(z), z_sd_timed = sd(z)) |>
-  dplyr::ungroup()
-
-# Subset neurobehavioral data
-neurobehav <-
-  neuropsych |>
-  dplyr::filter(test_type == "rating_scale")
-# domain
-neurobehav <-
-  neurobehav |>
-  dplyr::group_by(domain, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
-  dplyr::ungroup()
-# subdomain
-neurobehav <-
-  neurobehav |>
-  dplyr::group_by(subdomain, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
-  dplyr::ungroup()
-# narrow
-neurobehav <-
-  neurobehav |>
-  dplyr::group_by(narrow, .add = TRUE) |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
-  dplyr::ungroup()
-
-# Subset validity data
-validity <-
-  neuropsych |>
-  dplyr::filter(test_type %in% c("performance_validity", "symptom_validity"))
-# domain
-validity <-
-  validity |>
-  dplyr::group_by(domain, .add = TRUE) |>
-  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
-  dplyr::ungroup()
-# subdomain
-validity <-
-  validity |>
-  dplyr::group_by(subdomain, .add = TRUE) |>
-  dplyr::mutate(z_mean_subdomain = mean(z), z_sd_subdomain = sd(z)) |>
-  dplyr::ungroup()
-# narrow
-validity <-
-  validity |>
-  dplyr::group_by(narrow, .add = TRUE) |>
-  dplyr::mutate(z_mean_narrow = mean(z), z_sd_narrow = sd(z)) |>
-  dplyr::ungroup()
-
-# Write neuro data
-readr::write_csv(neuropsych, here::here(patient, "neuropsych.csv"))
-readr::write_csv(neurocog, here::here(patient, "neurocog.csv"))
-readr::write_csv(neurobehav, here::here(patient, "neurobehav.csv"))
-readr::write_csv(validity, here::here(patient, "validity.csv"))
+# load data
+neuropsychological_data <- bwu::load_data(patient = "Alexandra")
+bwu::load_data(patient = "Alexandra")
 ```
 
-## General Cognitive Ability
+<!---
+ ## General Cognitive Ability 
+--->
 
 {{< include _02_iq.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## Academic Skills
+<!---
+ ## Academic Skills 
+--->
 
 {{< include _03_academics.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## Verbal/Language
+<!---
+ ## Verbal/Language 
+--->
 
 {{< include _04_verbal.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-## Visual Perception/Construction
+<!---
+ ## Visual Perception/Construction 
+--->
 
 {{< include _05_spatial.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-## Attention/Executive
+<!---
+ ## Attention/Executive 
+--->
 
 {{< include _06_executive.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-## Memory
+<!---
+ ## Memory 
+--->
 
 {{< include _07_memory.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-## Motor
+<!---
+ ## Motor 
+--->
 
 {{< include _08_motor.qmd >}}
 
@@ -321,11 +175,15 @@ readr::write_csv(validity, here::here(patient, "validity.csv"))
 
 {{< include _09_social.qmd >}} -->
 
-## ADHD/Executive Functioning
+<!---
+ ## ADHD/Executive Functioning 
+--->
 
 {{< include _10_adhd.qmd >}}
 
-## Emotional/Behavioral/Personality
+<!---
+ ## Emotional/Behavioral/Personality 
+--->
 
 {{< include _11_emotion.qmd >}}
 
@@ -362,28 +220,4 @@ CA License PSY29212
 
 # APPENDIX
 
-## Test Selection Procedures
-
-Neuropsychological tests are intrinsically performance-based, and cognitive performance assessed during this neuropsychological evaluation is summarized above.
-Where appropriate, qualitative observations are included.
-Cultural considerations were made when selecting measures, interpreting results, and making diagnostic impressions and recommendations.
-Results from formal tests are reported in comparison to other individuals the same age, sex, and educational level as range of functioning (e.g., below average, average, above average).
-Test score labels are intended solely to be descriptive, identifying positions of scores relative to a normal curve distribution, and should be interpreted within the context of the patient's individual presentation and history.
-Although standardized scores provide the clinician with an important and necessary understanding of the patient's test performance compared with a normative group, they do not on their own lead to accurate diagnosis or treatment recommendations.
-
-## Conversion of Test Scores
-
-```{r}
-#| label: ranges
-#| eval: true
-#| cache: true
-#| double-escape: true
-#| escape: false
-range <- readr::read_csv("test_score_ranges.csv")
-tbl_range <- gt::gt(range) |>
-  gt::tab_header(title = "Test Score Labels/Ranges") |>
-  gt::cols_align(align = "center") |>
-  gtExtras::gt_theme_538()
-gt::gtsave(tbl_range, glue("tbl_range", ".png"))
-knitr::include_graphics("tbl_range.png")
-```
+{{< include _15_appendix.qmd >}}

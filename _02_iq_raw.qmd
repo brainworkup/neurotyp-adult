@@ -1,8 +1,11 @@
 ---
-title-meta: iq-raw
 execute:
   cache: true
 ---
+
+<!---
+ # General Cognitive Ability 
+--->
 
 <<PROMPT>>
 
@@ -14,4 +17,3 @@ are above average to below average to delineate relative strengths and
 weaknesses, respectively.
 
 <<START>>
-

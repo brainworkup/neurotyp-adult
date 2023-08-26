@@ -1,12 +1,6 @@
 # NEUROBEHAVIORAL STATUS EXAM {#sec-nse}
 
 ```{r}
-#| echo: false
-
-source("_common.R")
-```
-
-```{r}
 #| label: import-nse-txt
 #| eval: false
 #| include: false
