@@ -1,21 +1,4 @@
----
-title-meta: adhd
-execute:
-  warning: false
-  echo: false
-  message: false
-format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-params:
-  pheno: "adhd"
-  return_plot: TRUE
----
-
-<!-- ## ADHD/Executive Functioning -->
+## ADHD/Executive Functioning
 
 {{< include _10_adhd_text.qmd >}}
 
@@ -73,10 +56,33 @@ bwu::cat_neuropsych_results(data = data_or, file = "_10_adhd_raw.qmd")
 ```
 
 ```{r}
-#| label: qtbl-adhd
+#| label: qtbl-adhd-sr
 #| dev: tikz
 #| fig-process: pdf2png
 options(tikzDefaultEngine = "xetex")
+
+grp_adhd <- list(
+  "standard_score" = c(
+    "CEFI Self-Report",
+    "CEFI Observer-Report"
+  ),
+  "t_score" = c(
+    "CAARS Self-Report",
+    "CAARS Observer-Report"
+  )
+)
+grp_caars <- list(
+  "t_score" = c(
+    "CAARS Self-Report",
+    "CAARS Observer-Report"
+  )
+)
+grp_cefi <- list(
+  "standard_score" = c(
+    "CEFI Self-Report",
+    "CEFI Observer-Report"
+  )
+)
 
 # footnotes
 fn_standard_score <- gt::md("CEFI: Standard Score: Mean = 100 [50th‰], SD ± 15
@@ -87,37 +93,21 @@ fn_t_score <- gt::md("CAARS: *T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 
 # grp_t_score <- c("CAARS Self-Report")
 data <- data_sr
 pheno <- "self_report"
-table_name <- "table_self_report"
+table_name <- "table_sr"
 fn_standard_score <- fn_standard_score
 fn_t_score <- fn_t_score
 
-grp_adhd <- list(
-  "standard_score" = c(
-    "CEFI Self-Report",
-    "CEFI Observer-Report"
-    ),
-  "t_score" = c(
-    "CAARS Self-Report",
-    "CAARS Observer-Report")
-)
-grp_self_report <- list(
+
+
+grp_sr <- list(
   "standard_score" = c(
     "CEFI Self-Report"
-    ),
+  ),
   "t_score" = c(
-    "CAARS Self-Report")
+    "CAARS Self-Report"
+  )
 )
-grp_caars <- list(
-  "t_score" = c(
-    "CAARS Self-Report",
-    "CAARS Observer-Report")
-)
-grp_cefi <- list(
-  "standard_score" = c(
-    "CEFI Self-Report",
-    "CEFI Observer-Report"
-    )
-)
+
 vertical_padding <- 0.18
 multiline <- TRUE
 
@@ -129,25 +119,42 @@ bwu::tbl_gt(
   table_name = table_name,
   fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
-  grp_standard_score = grp_self_report[["standard_score"]],
-  grp_t_score = grp_self_report[["t_score"]],
+  grp_standard_score = grp_sr[["standard_score"]],
+  grp_t_score = grp_sr[["t_score"]],
   vertical_padding = vertical_padding,
   multiline = multiline
 )
+```
+
+```{r}
+#| label: qtbl-adhd-or
+#| dev: tikz
+#| fig-process: pdf2png
+options(tikzDefaultEngine = "xetex")
+
+# footnotes
+fn_standard_score <- gt::md("CEFI: Standard Score: Mean = 100 [50th‰], SD ± 15
+[16th‰, 84th‰], lower scores reflect reduced functioning.")
+fn_t_score <- gt::md("CAARS: *T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]; higher scores reflect reduced functioning.")
 
 # Observer-Report
 data <- data_or
 pheno <- "observer_report"
-table_name <- "table_observer_report"
+table_name <- "table_or"
 fn_standard_score <- fn_standard_score
 fn_t_score <- fn_t_score
-grp_observer_report <- list(
+
+grp_or <- list(
   "standard_score" = c(
     "CEFI Observer-Report"
-    ),
+  ),
   "t_score" = c(
-    "CAARS Observer-Report")
+    "CAARS Observer-Report"
+  )
 )
+
+vertical_padding <- 0.18
+multiline <- TRUE
 
 # Observer-Report
 bwu::tbl_gt(
@@ -156,12 +163,13 @@ bwu::tbl_gt(
   table_name = table_name,
   fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
-  grp_standard_score = grp_observer_report[["standard_score"]],
-  grp_t_score = grp_observer_report[["t_score"]],
+  grp_standard_score = grp_or[["standard_score"]],
+  grp_t_score = grp_or[["t_score"]],
   vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
+
 
 ```{r}
 #| label: fig-caars

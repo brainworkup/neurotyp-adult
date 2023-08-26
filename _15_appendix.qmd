@@ -20,6 +20,6 @@ tbl_range <- gt::gt(range) |>
   gt::tab_header(title = "Test Score Labels/Ranges") |>
   gt::cols_align(align = "center") |>
   gtExtras::gt_theme_538()
-gt::gtsave(tbl_range, glue("tbl_range", ".png"))
+gt::gtsave(tbl_range, glue::glue("tbl_range", ".png"))
 knitr::include_graphics("tbl_range.png")
 ```
