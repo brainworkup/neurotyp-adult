@@ -57,7 +57,7 @@ source("_common.R")
 #| label: setup
 #| include: false
 xfun::pkg_load2(
-  c("fs", "ggtext", "gdtools", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "pdftools", "png", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
+  c("fs", "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "pdftools", "png", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
 ```
 
@@ -96,7 +96,15 @@ bwu::load_data(here::here(patient, "data"))
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
 
+<!---
+ # TESTS ADMINISTERED {#sec-tests} 
+--->
+
 {{< include _00_tests_admin.qmd >}}
+
+<!---
+ # NEUROBEHAVIORAL STATUS EXAM {#sec-nse} 
+--->
 
 {{< include _00_nse.qmd >}}
 
