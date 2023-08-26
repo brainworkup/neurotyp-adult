@@ -109,14 +109,11 @@ fn_z_score <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
 pheno <- "verbal"
 table_name <- "table_verbal"
-# grp_verbal <- list(
-#   "scaled_score" = c("WAIS-IV"),
-#   "standard_score" = c("NAB"),
-#   "t_score" = c("NAB", "NIH EXAMINER")
-# )
-grp_scaled_score <- c("WAIS-IV")
-grp_standard_score <- c("NAB")
-grp_t_score <- c("NAB", "NIH EXAMINER")
+grp_verbal <- list(
+  "scaled_score" = c("WAIS-IV"),
+  "standard_score" = c("NAB"),
+  "t_score" = c("NAB", "NIH EXAMINER")
+)
 vertical_padding <- 0.18
 multiline <- TRUE
 
@@ -124,13 +121,13 @@ multiline <- TRUE
 bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = vertical_padding,
   fn_scaled_score = fn_scaled_score,
   fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
-  grp_scaled_score = grp_scaled_score,
-  grp_standard_score = grp_standard_score,
-  grp_t_score = grp_t_score,
+  grp_scaled_score = grp_verbal[["scaled_score"]],
+  grp_standard_score = grp_verbal[["standard_score"]],
+  grp_t_score = grp_verbal[["t_score"]],
+  vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
@@ -148,7 +145,7 @@ data <- verbal
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- TRUE
+return_plot <- FALSE
 filename <- "fig_verbal.svg"
 
 # Make dotplot
@@ -164,7 +161,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 0.80em)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
       columns: (50%, 50%),

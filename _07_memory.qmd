@@ -195,7 +195,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 0.80em)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
       columns: (50%, 50%),

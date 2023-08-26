@@ -101,13 +101,13 @@ multiline <- TRUE
 bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = vertical_padding,
   fn_scaled_score = fn_scaled_score,
   fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
   grp_scaled_score = grp_spatial[["scaled_score"]],
   grp_standard_score = grp_spatial[["standard_score"]],
   grp_t_score = grp_spatial[["t_score"]],
+  vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
@@ -124,7 +124,7 @@ data <- spatial
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- TRUE
+return_plot <- FALSE
 filename <- "fig_spatial.svg"
 
 # Make dotplot
@@ -140,7 +140,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 0.80em)
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
   grid(
   columns: (50%, 50%),
@@ -159,14 +159,10 @@ figure(
     Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper.
   ],
   kind: "image",
-  supplement: [
-    *Figure*
-    ],
+  supplement: [*Fig.*],
   gap: 0.5em,
-  [
-    #image(file_fig)
-    ],
-),
+  [#image(file_fig)],
+  ),
 )
 }
 ```

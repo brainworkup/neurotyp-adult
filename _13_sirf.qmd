@@ -29,7 +29,7 @@ scales <- c(
   # "Crystallized Knowledge",
   "Delayed Recall",
   # "Executive Functions",
-  "Fluency",
+  "Verbal Fluency",
   # "Fluid Reasoning",
   # "General Ability",
   "Learning Efficiency",
@@ -56,7 +56,7 @@ write.csv(g, paste("g_v2.csv"), row.names = FALSE)
 ```{r}
 #| label: fig-domain-plot
 #| column: page
-#| fig-height: 4.5
+#| out-width: 70%
 #| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
 
 pheno <- "g"
@@ -64,7 +64,7 @@ data <- g
 x <- g$z
 y <- g$composite_name
 colors <- NULL
-return_plot <- TRUE
+return_plot <- FALSE
 filename <- "fig_g.svg"
 
 bwu::dotplot(
@@ -78,29 +78,32 @@ bwu::dotplot(
 ```
 
 
-## Summary and Formulation
+```{=typst}
+#let domain(title: none, file_fig) = {
+  let font = (font: "Fira Sans", size:  9pt)
+  set text(..font)
+figure([#image(file_fig, width: 80%)],
+  placement: bottom,
+  caption: [Overall neurocognitive function subdomain plots of Biggie's
+strengths and weaknesses. _Note:_ *z* Scores have a mean of 0 and a standard
+deviation of 1.],
+  kind: "image",
+  supplement: [*Fig.*],
+  gap: 1em,
+  )
+}
+```
 
-- Biggie's difficulties in areas like attention could make tasks like reading a book, watching a movie, or following a conversation quite challenging.
-- Her challenges with planning might mean she struggles with activities that require forethought, such as organizing a trip or managing a project.
-- A below average organization skill could manifest in a disorganized living space, missed appointments, or difficulty managing work or school assignments.
-- With her working memory being below average, Biggie might forget instructions soon after they're given or struggle to follow multi-step processes.
-- Her struggle with initiation can be a major hurdle in daily life – she might find it hard to start tasks, whether it's a simple chore or a significant project.
-- Emotion regulation issues can lead to disproportionate reactions to minor issues, which might strain personal or professional relationships.
+```{=typst}
+#let title = "Summary"
+#let file_fig = "_13_sirf_files/figure-typst/fig-domain-plot-1.svg"
+#domain(
+  title: [#title],
+  file_fig
+)
+```
 
-Conclusion:
-While Biggie exhibits strengths in some areas, she faces significant challenges in key domains of executive functioning. It would be beneficial for her to seek interventions or coping strategies to manage these challenges, especially given their potential impact on her daily life and well-being.
-
-In daily life, Biggie's strengths in word fluency and reasoning will assist
-in organizing information and problem-solving. However, she may struggle when
-required to rapidly generate words or in noisy environments.
-
-## AT/EF
-
-Overall, Biggie demonstrates strengths, notably in working memory, strategic
-planning, and problem-solving. While her performance across several domains is average, she shows a
-slight lag in psychomotor speed, which could influence certain daily tasks
-requiring rapid coordination, such as quickly jotting down notes, typing, or
-performing fast repetitive actions. 
+## Overall Evaluation Interpretation
 
 Biggie is a 28-year-old left-handed female with a history of medically refractory epilepsy who was referred for neuropsychological testing as part of a comprehensive presurgical work-up. General cognitive ability is well within normal limits, and there is no evidence of decline from premorbid estimates. No deficits were detected in the domains of attention, processing speed, motor functioning, or visuospatial skills. Although many aspects of executive functioning, language functioning, and memory were within normal limits, she demonstrated mildly inefficient problem solving and hypothesis testing, weaknesses in word retrieval, and inefficiency in new learning of verbal information. There is no evidence of a mood disorder at this time.
 
@@ -109,6 +112,10 @@ Although Biggie lives alone, she has arranged to have her mother stay with her f
 
 ### Diagnostic Impression
 
+- 314.00 (F90.0) Attention-Deficit/Hyperactivity Disorder (ADHD), Predominantly
+  Inattentive Presentation
+
 - 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
   Presentation
+
 - [DSM-5/ICD-10 Codes](03.01_dsm5_icd10_dx.md)

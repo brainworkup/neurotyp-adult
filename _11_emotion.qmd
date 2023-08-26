@@ -194,7 +194,7 @@ table_social <- bwu::tbl_gt(
 ```{r}
 #| label: fig-emotion
 #| eval: true
-#| fig-asp: 1.0
+#| out-width: 50%
 #| fig-cap: "Mood/Self-Report"
 
 # Arguments
@@ -207,7 +207,7 @@ data <- emotion
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- TRUE
+return_plot <- FALSE
 filename <- "fig_emotion.svg"
 
 # Make dotplot
@@ -221,40 +221,25 @@ bwu::dotplot(
 )
 ```
 
-<!-- ```{=typst}
-#| eval: false
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 0.80em)
+```{=typst}
+#let domain(title: none, file_fig) = {
+  let font = (font: "Fira Sans", size:  9pt)
   set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: [#title],
-  caption-pos: top,
-  kind: "qtbl",
-  supplement: [*Table*],
-),
-figure([#image(file_fig)],
+figure([#image(file_fig, width: 80%)],
   placement: bottom,
-  caption: [
-    Mood/Self-Report ... Subdomain Plots
-  ],
+  caption: [Mood/Self-Report],
   kind: "image",
   supplement: [*Fig.*],
   gap: 1em,
-  ),
   )
 }
-``` -->
+```
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Emotional/Behavioral/Personality"
-#let file_qtbl = "table_emotion.png"
 #let file_fig = "_11_emotion_files/figure-typst/fig-emotion-1.svg"
 #domain(
   title: [#title],
-  file_qtbl,
   file_fig
 )
-``` -->
+```

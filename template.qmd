@@ -7,11 +7,13 @@ last: Smalls
 format:
   neurotyp-typst:
     keep-typ: true
-    fontsize: 12pt
+    fontsize: 11pt
+    papersize: "us-letter"
 params:
   patient: Biggie
   first_name: Biggie
   last_name: Smalls
+  mrn: 123456789
   dob: 1991-01-01
   doe1: 2023-01-01
   doe2: 2023-01-01
@@ -37,95 +39,60 @@ execute:
   warning: false
   echo: false
   message: false
-knitr:
-  opts_chunk: 
-    R.options:
-      knitr.graphics.auto_pdf: true
+editor:
+  markdown:
+    wrap: sentence
+    canonical: true
+    references: 
+      location: block
 ---
 
 ```{r}
 #| label: setup
 #| include: false
-
 xfun::pkg_load2(
-  c(
-    "arrow",
-    "bookdown",
-    "crosstalk",
-    "data.table",
-    "dplyr",
-    "forcats",
-    "fs",
-    "gdtools",
-    "ggthemes",
-    "glue",
-    "gptstudio",
-    "gpttools",
-    "grid",
-    "gt",
-    "gtExtras",
-    "hablar",
-    "here",
-    "highcharter",
-    "htmlwidgets",
-    "janitor",
-    "kableExtra",
-    "knitr",
-    "magick",
-    "magrittr",
-    "manipulateWidget",
-    "pak",
-    "patchwork",
-    "pdftables",
-    "pdftools",
-    "png",
-    "psycheval",
-    "qpdf",
-    "quarto",
-    "readxl",
-    "rJava",
-    "rlist",
-    "rmarkdown",
-    "scales",
-    "shiny",
-    "snakecase",
-    "stats",
-    "stringr",
-    "svglite",
-    "tabulizer",
-    "tabulizerjars",
-    "tidyr",
-    "tidyselect",
-    "tidytable",
-    "tidytext",
-    "tidyverse",
-    "tinytex",
-    "vroom",
-    "webshot2",
-    "widgetframe",
-    "xfun",
-    "yaml",
-    "bwu"
-  )
+  c("bookdown", "crosstalk", "fs", "ggtext", "gdtools", "ggthemes", "glue", "gptstudio", "gpttools", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "kableExtra", "knitr", "magick", "magrittr", "manipulateWidget", "pak", "patchwork", "pdftools", "png", "psycheval", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytable", "tidytext", "tidyverse", "tinytex", "vroom", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
 ```
 
 ```{r}
-#| eval: false
-# Setting the environment variable
+#| label: knitr-options
+knitr::opts_knit$set(width = 50)
+options(digits = 1, warnPartialMatchArgs = FALSE)
+options(knitr.kable.NA = "--")
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+knitr::knit_hooks$set(optipng = knitr::hook_optipng)
+# Fix subfigs for rmarkdown -> latex
+if (identical(knitr:::pandoc_to(), "latex")) {
+  knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
+}
+```
+
+```{r}
+#| label: env
 Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
-# Getting the value of the environment variable
 patient <- Sys.getenv("PATIENT_FIRST_NAME")
+```
+
+```{r}
+#| label: data-load
+#| include: false
+library(tidyverse)
+library(bwu)
+
+neuropsychological_data <- bwu::load_data(here::here(patient, "data"))
+bwu::load_data(here::here(patient, "data"))
 ```
 
 ```{=typst}
 #let name = [Biggie Smalls]
-#let doe = [2023-01-01]
+#let doe = [2023-04-13]
 #let patient = [Biggie]
 #v(2pt, weak: true)
-*PATIENT NAME:* #name \  
-*DATES OF EXAM:* #doe \  
+*PATIENT NAME:* #name \ 
+*DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
+
 # TESTS ADMINISTERED
 
 ```{=typst}
@@ -139,7 +106,8 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
   - Word Choice, Test of Premorbid Functioning (TOPF)
 - Dot Counting Test
 - Wechsler Adult Intelligence Scale, 4th ed (WAIS-IV)
-- Wide Range Achievement Test, 5th ed (WRAT-5): Word Reading
+- Wide Range Achievement Test, 5th ed (WRAT-5): 
+  - Word Reading
 - Neuropsychological Assessment Battery, Screener (NAB):
   - Attention, Language, Memory, Spatial, and Executive Functions Modules
 - NIH Executive Abilities: Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
@@ -150,8 +118,6 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 - Personality Assessment Inventory (PAI)
 ```
 
-# NEUROBEHAVIORAL STATUS EXAM
-
 {{< include _00_nse.qmd >}}
 
 ## Behavioral Observations
@@ -159,6 +125,26 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 {{< include _01_behav_obs.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS
+
+```{r}
+#| eval: false
+dir.create("data", showWarnings = FALSE)
+
+csv_path <- "data/csv"
+
+tibble(
+  files = list.files(csv_path, recursive = TRUE),
+  size_MB = file.size(file.path(csv_path, files)) / 1024^2
+)
+```
+
+```{r show-csv-files}
+csv_path <- "csv"
+tibble(
+  files = list.files(pq_path, recursive = TRUE),
+  size_MB = file.size(file.path(pq_path, files)) / 1024^2
+)
+```
 
 ```{r}
 #| label: tidy-data
@@ -363,7 +349,7 @@ Sincerely,
 #| fig-align: left
 #| cache: true
 #| eval: false
-knitr::include_graphics("jwt_sig.png")
+knitr::include_graphics("jwt_sig.png", dpi = 127)
 ```
 
 **Joey W. Trampush, Ph.D.**\
