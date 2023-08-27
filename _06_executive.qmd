@@ -1,28 +1,18 @@
 ---
-title-meta: executive
-execute:
-  warning: false
-  echo: false
-  message: false
 format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-  html: 
-    toc: true
-params:
-  pheno: "executive"
-  return_plot: TRUE
+  neurotyp-typst: default
 ---
 
-<!-- ## Attention/Executive -->
+## Attention/Executive {#sec-executive}
 
 {{< include _06_executive_text.qmd >}}
 
 ```{r}
 #| label: data-executive
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(glue)
 library(bwu)
 # read and filter data
 pheno <- "executive"
@@ -167,14 +157,13 @@ z_score_label <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 pheno <- "executive"
 table_name <- "table_executive"
 grp_executive <- list(
-  "scaled_score" = c("WAIS-IV"),
-  "standard_score" = c("NAB"),
-  "t_score" = c("NAB", "NIH EXAMINER", "Trail Making Test")
+  scaled_score = c("WAIS-IV"),
+  standard_score = c("NAB"),
+  t_score = c("NAB", "NIH EXAMINER", "Trail Making Test")
 )
-vertical_padding <- 0.18
+vertical_padding <- 0.10
 multiline <- TRUE
 
-# source(here::here("R", "tbl_gt.R"))
 bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
@@ -185,14 +174,13 @@ bwu::tbl_gt(data,
   grp_scaled_score = grp_executive[["scaled_score"]],
   grp_standard_score = grp_executive[["standard_score"]],
   grp_t_score = grp_executive[["t_score"]],
+  dynamic_grp = grp_executive,
   multiline = multiline
 )
 ```
 
 ```{r}
 #| label: fig-executive
-#| eval: true
-#| fig-asp: 1.0
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
 # Arguments
@@ -201,10 +189,9 @@ data <- executive
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- FALSE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_executive.svg"
-
-# source(here::here("R", "dotplot.R"))
+# return_plot <- TRUE
 bwu::dotplot(
   data = data,
   x = x,
@@ -217,7 +204,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 0.80em)
+  let font = (font: "Fira Sans", size:  9pt)
   set text(..font)
     grid(
       columns: (50%, 50%),
@@ -228,14 +215,15 @@ bwu::dotplot(
           kind: "qtbl",
           supplement: [*Table*],
           ),
-        figure([#image(file_fig)],
+        figure([#image(file_fig, width: auto)],
           caption: [
             Attention and executive functions are essential for successful
             cognitive functioning, enabling us to perform everyday tasks, handle
             academic challenges, solve problems, manage our emotions, and
             interact effectively with others and our environment.
             ],
-          placement: bottom,
+          caption-pos: bottom,
+          placement: none,
           kind: "image",
           supplement: [*Fig.*],
           gap: 0.5em,

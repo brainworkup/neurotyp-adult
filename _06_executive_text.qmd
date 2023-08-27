@@ -1,10 +1,7 @@
 ---
-title-meta: attention-executive-text
 execute:
   cache: true
 ---
-
-<!-- ## Attention/Executive -->
 
 Orientation to person, place, time, and situation was intact. No gross
 behavioral apathy or disinhibition observed. Auditory attentional capacity was

@@ -1,5 +1,4 @@
 ---
-title-meta: executive-raw
 execute:
   cache: true
 ---
@@ -50,3 +49,110 @@ future events and needs.
 to plan ahead, inhibit impulses, and move with purpose and speed is typical.
 
 <<START>>
+
+An overall screening measure of the examinee's attentional functioning was Average.
+Planning and foresight, inhibition, and psychomotor speed examined through a series of maze-tracing tasks fell in the Average range.
+Orientation to person, place, time, and situation was intact.
+Self-monitoring and perseverative tendencies was Average.
+Scanning, visuomotor tracking, divided attention, and cognitive flexibility was Average.
+NA
+NA
+NA
+NA
+A marker of reduced focus, or selective attention, distractibility, or reduced concentration, and diminished sustained attention was Average.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Average range.
+NA
+Judgment and decisional capacity about issues and situations likely to be encountered in daily life fell within the Average range.
+Retrieval fluency, ideational fluency, and generativity was Average.
+NA
+(ref:first-name)'s performance on a complex measure of divided attention, information processing speed, and inhibition was Average.
+An overall measure of efficiency in performing a selective attention letter cancellation task was Average.
+Psychomotor speed was Low Average.
+NA
+Auditory attentional capacity was High Average (9 digits forward).
+Working memory for orally presented information was High Average (7 digits backward).
+Strategic planning and organization aptitude to formulate an action in advance of performance or intended performance fell within the High Average range.
+Auditory attentional capacity, or how much information can be processed at once was High Average.
+Total number of repetitive response errors was High Average.
+A measure of both attentional capacity and working memory was High Average.
+Basic psychomotor processing speed was High Average.
+Total number of intrusive response errors was High Average.
+NA
+NA
+An overall screening measure of the examinee's attentional functioning was Average.
+Planning and foresight, inhibition, and psychomotor speed examined through a series of maze-tracing tasks fell in the Average range.
+Orientation to person, place, time, and situation was intact.
+Self-monitoring and perseverative tendencies was Average.
+Scanning, visuomotor tracking, divided attention, and cognitive flexibility was Average.
+NA
+NA
+NA
+NA
+A marker of reduced focus, or selective attention, distractibility, or reduced concentration, and diminished sustained attention was Average.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Average range.
+NA
+Judgment and decisional capacity about issues and situations likely to be encountered in daily life fell within the Average range.
+Retrieval fluency, ideational fluency, and generativity was Average.
+NA
+(ref:first-name)'s performance on a complex measure of divided attention, information processing speed, and inhibition was Average.
+An overall measure of efficiency in performing a selective attention letter cancellation task was Average.
+Psychomotor speed was Low Average.
+NA
+Auditory attentional capacity was High Average (9 digits forward).
+Working memory for orally presented information was High Average (7 digits backward).
+Strategic planning and organization aptitude to formulate an action in advance of performance or intended performance fell within the High Average range.
+Auditory attentional capacity, or how much information can be processed at once was High Average.
+Total number of repetitive response errors was High Average.
+A measure of both attentional capacity and working memory was High Average.
+Basic psychomotor processing speed was High Average.
+Total number of intrusive response errors was High Average.
+NA
+NA
+An overall screening measure of the examinee's attentional functioning was Average.
+Planning and foresight, inhibition, and psychomotor speed examined through a series of maze-tracing tasks fell in the Average range.
+Orientation to person, place, time, and situation was intact.
+Self-monitoring and perseverative tendencies was Average.
+Scanning, visuomotor tracking, divided attention, and cognitive flexibility was Average.
+NA
+NA
+NA
+NA
+A marker of reduced focus, or selective attention, distractibility, or reduced concentration, and diminished sustained attention was Average.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Average range.
+NA
+Judgment and decisional capacity about issues and situations likely to be encountered in daily life fell within the Average range.
+Retrieval fluency, ideational fluency, and generativity was Average.
+NA
+(ref:first-name)'s performance on a complex measure of divided attention, information processing speed, and inhibition was Average.
+An overall measure of efficiency in performing a selective attention letter cancellation task was Average.
+Psychomotor speed was Low Average.
+NA
+Auditory attentional capacity was High Average (9 digits forward).
+Working memory for orally presented information was High Average (7 digits backward).
+Strategic planning and organization aptitude to formulate an action in advance of performance or intended performance fell within the High Average range.
+Auditory attentional capacity, or how much information can be processed at once was High Average.
+Total number of repetitive response errors was High Average.
+A measure of both attentional capacity and working memory was High Average.
+Basic psychomotor processing speed was High Average.
+Total number of intrusive response errors was High Average.
+NA
+NA
+An overall screening measure of the examinee's attentional functioning was Average.
+Planning and foresight, inhibition, and psychomotor speed examined through a series of maze-tracing tasks fell in the Average range.
+Orientation to person, place, time, and situation was intact.
+Self-monitoring and perseverative tendencies was Average.
+Scanning, visuomotor tracking, divided attention, and cognitive flexibility was Average.
+NA
+NA
+NA
+NA
+A marker of reduced focus, or selective attention, distractibility, or reduced concentration, and diminished sustained attention was Average.
+A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity fell in the Average range.
+NA
+Judgment and decisional capacity about issues and situations likely to be encountered in daily life fell within the Average range.
+Retrieval fluency, ideational fluency, and generativity was Average.
+NA
+(ref:first-name)'s performance on a complex measure of divided attention, information processing speed, and inhibition was Average.
+An overall measure of efficiency in performing a selective attention letter cancellation task was Average.
+Psychomotor speed was Low Average.
+NA

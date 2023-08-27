@@ -1,23 +1,21 @@
 ---
-title-meta: sirf
-execute:
-  warning: false
-  echo: false
-  message: false
 format:
-  typst:
+  neurotyp-typst:
     keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
 params:
-  pheno: "g"
-  return_plot: TRUE
+  pheno: "sirf"
+execute: 
+  echo: false
+  warning: false
+  message: false
 ---
+
+# SUMMARY/IMPRESSION {#sec-sirf}
 
 ```{r}
 #| label: make-g
-#| include: false
+library(tidyverse)
+library(bwu)
 
 scales <- c(
   "Academic Skills",
@@ -25,17 +23,18 @@ scales <- c(
   "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
-  # "Cognitive Proficiency",
-  # "Crystallized Knowledge",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge",
   "Delayed Recall",
-  # "Executive Functions",
+  "Executive Functions",
+  "Global Neurocognitive Index (G)",
   "Verbal Fluency",
-  # "Fluid Reasoning",
-  # "General Ability",
+  "Fluid Reasoning",
+  "General Ability",
   "Learning Efficiency",
-  # "Memory",
+  "Memory",
   "Planning",
-  # "Processing Speed",
+  "Processing Speed",
   "Psychomotor Speed",
   "Verbal/Language",
   "Visual Perception/Construction",
@@ -47,24 +46,51 @@ g <-
   janitor::clean_names() |>
   dplyr::mutate(z = (index - 100) / 15) |>
   dplyr::filter(composite_name %in% scales) |>
-  dplyr::filter(!is.na(z))
+  dplyr::rename(scale = composite_name, score = index, ci_95 = x95_percent_ci) |> 
+  bwu::gpluck_make_score_ranges(range = "", test_type = "npsych_test") |> 
+  dplyr::select(scale, score, ci_95, percentile, range, reliability, z, composition) 
 
 # extra for now
-write.csv(g, paste("g_v2.csv"), row.names = FALSE)
+readr::write_csv(g, "csv/g.csv")
 ```
 
 ```{r}
 #| label: fig-domain-plot
-#| column: page
-#| out-width: 70%
-#| fig-cap: "Overall neurocognitive function subdomain plots of #patient's strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
+#| fig-cap: "Overall neurocognitive function subdomain plots of `r params$first_name` strengths and weaknesses. *Note:* *z*-scores have a mean of 0 and a standard deviation of 1."
+
+keep <- c(
+  # "Academic Skills",
+  "Attention",
+  "Attention/Executive",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  # "Cognitive Proficiency",
+  # "Crystallized Knowledge",
+  "Delayed Recall",
+  "Executive Functions",
+  # "Global Neurocognitive Index (G)",
+  "Verbal Fluency",
+  # "Fluid Reasoning",
+  # "General Ability",
+  "Learning Efficiency",
+  # "Memory",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory"
+)
+
+g <- dplyr::filter(g, scale %in% keep)
 
 pheno <- "g"
 data <- g
 x <- g$z
-y <- g$composite_name
+y <- g$scale
 colors <- NULL
-return_plot <- FALSE
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_g.svg"
 
 bwu::dotplot(
@@ -77,45 +103,27 @@ bwu::dotplot(
 )
 ```
 
-
 ```{=typst}
-#let domain(title: none, file_fig) = {
-  let font = (font: "Fira Sans", size:  9pt)
+#let domain_sirf(file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-figure([#image(file_fig, width: 80%)],
-  placement: bottom,
-  caption: [Overall neurocognitive function subdomain plots of Biggie's
-strengths and weaknesses. _Note:_ *z* Scores have a mean of 0 and a standard
-deviation of 1.],
+figure([#image(file_fig, width: auto)],
+  placement: none,
+  caption: [
+    Overall neurocognitive function subdomain plots of Biggie's strengths and weaknesses. _Note:_ *z* Scores have a mean of 0 and a standard deviation of 1.
+    ],
   kind: "image",
   supplement: [*Fig.*],
-  gap: 1em,
+  gap: 0.5em,
   )
 }
 ```
 
 ```{=typst}
-#let title = "Summary"
 #let file_fig = "_13_sirf_files/figure-typst/fig-domain-plot-1.svg"
-#domain(
-  title: [#title],
+#domain_sirf(
   file_fig
 )
 ```
 
-## Overall Evaluation Interpretation
-
-Biggie is a 28-year-old left-handed female with a history of medically refractory epilepsy who was referred for neuropsychological testing as part of a comprehensive presurgical work-up. General cognitive ability is well within normal limits, and there is no evidence of decline from premorbid estimates. No deficits were detected in the domains of attention, processing speed, motor functioning, or visuospatial skills. Although many aspects of executive functioning, language functioning, and memory were within normal limits, she demonstrated mildly inefficient problem solving and hypothesis testing, weaknesses in word retrieval, and inefficiency in new learning of verbal information. There is no evidence of a mood disorder at this time.
-
-In conclusion, the cognitive profile is mildly localizing and lateralizing as there are elements that suggest relative left temporal involvement. That said, there were features seen during testing that suggested mild frontal systems disruption as well.
-Although Biggie lives alone, she has arranged to have her mother stay with her for a week or two after surgery to help her and provide support in the immediate postacute period. She seems to have a good understanding of and appropriate expectations for the surgery. Taken together with her current asymptomatic mood profile, there are no obvious psychological risk factors for a poor outcome or need for presurgical mental health intervention.
-
-### Diagnostic Impression
-
-- 314.00 (F90.0) Attention-Deficit/Hyperactivity Disorder (ADHD), Predominantly
-  Inattentive Presentation
-
-- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
-  Presentation
-
-- [DSM-5/ICD-10 Codes](03.01_dsm5_icd10_dx.md)
+{{< include _13_sirf_text.qmd >}}

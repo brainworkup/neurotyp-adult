@@ -1,9 +1,9 @@
 ---
 title: "NEUROCOGNITIVE EXAMINATION"
-name: Biggie Smalls
+patient: Biggie Smalls
 doe: 2023-01-01
-first: Biggie
-last: Smalls
+firstname: Biggie
+lastname: Smalls
 format:
   neurotyp-typst:
     keep-typ: true

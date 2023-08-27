@@ -1,11 +1,9 @@
 #let report(
   title: none,
   author: "Joey Trampush, PhD",
-  patient: [],
-  name: none,
-  firstname: none,
-  lastname: none,
+  name: [],
   doe: [],
+  patient: [],
   date: none,
   cols: 1,
   paper: "a4",

@@ -1,27 +1,32 @@
 ---
 title: "NEUROCOGNITIVE EXAMINATION"
-patient: Biggie Smalls
-doe: 2023-04-06
-firstname: Biggie
-lastname: Smalls
+name: Biggie Smalls
+doe: 2023-01-01
+patient: Biggie
 format:
   neurotyp-typst:
     keep-typ: true
     fontsize: 11pt
+    papersize: "us-letter"
+  html:
+    embed-resources: true
+    toc: true
 params:
   patient: Biggie
   first_name: Biggie
   last_name: Smalls
-  dob: 1985-01-01
+  mrn: 123456789
+  dob: 1991-01-01
   doe1: 2023-01-01
   doe2: 2023-01-01
   doe3: 2023-01-01
   sex: female
   sex_cap: Female
-  age: 22
-  educyrs: 13
-  referral: self-referred
-  observer: Mrs. Smalls
+  age: 20
+  education: 15
+  handedness: right
+  referral: Dr. Dre
+  observer: Mrs. Wallace
   observer_relation: mother
   he_she: she
   he_she_cap: She
@@ -32,83 +37,37 @@ params:
   dx1: attention-deficit/hyperactivity disorder (ADHD)
   dx2: anxiety
   dx3: depression
+  start: !expr lubridate::ymd("2023-01-01")
+  snapshot: !expr lubridate::ymd_hms("2023-01-01 12:30:00")
 execute:
   warning: false
   echo: false
   message: false
-knitr:
-  opts_chunk: 
-    R.options:
-      knitr.graphics.auto_pdf: true
+  freeze: auto
+  cache: true
 editor:
   markdown:
-    wrap: 80
-    references: 
-      location: block
+    wrap: sentence
     canonical: true
+fig-width: 6
+fig-asp: 0.618
+out-width: "70%"
+fig-align: center
+fig-format: "svg"
+fig-dpi: 270
+df-print: kable
+reference-location: document
+bibliography: refs.bib
 ---
 
 ```{r}
 #| label: setup
 #| include: false
-
-# load packages
 xfun::pkg_load2(
-  c(
-    "bookdown",
-    "crosstalk",
-    "data.table",
-    "fs",
-    "ggplot2",
-    "ggtext",
-    "gdtools",
-    "ggthemes",
-    "glue",
-    "gptstudio",
-    "gpttools",
-    "gt",
-    "gtExtras",
-    "hablar",
-    "here",
-    "highcharter",
-    "htmlwidgets",
-    "janitor",
-    "kableExtra",
-    "knitr",
-    "magick",
-    "magrittr",
-    "manipulateWidget",
-    "pak",
-    "patchwork",
-    "pdftools",
-    "png",
-    "psycheval",
-    "quarto",
-    "readxl",
-    "rmarkdown",
-    "scales",
-    "shiny",
-    "snakecase",
-    "stats",
-    "svglite",
-    "tabulizer",
-    "tidyselect",
-    "tidytable",
-    "tidytext",
-    "tidyverse",
-    "tinytex",
-    "vroom",
-    "webshot2",
-    "widgetframe",
-    "xfun",
-    "yaml",
-    "bwu"
-  )
+  c("ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "png", "quarto", "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite", "tidyselect", "tidytext", "tidyverse", "tibble", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
-
-# R options
-knitr::opts_knit$set(width = 50)
-options(digits = 1, warnPartialMatchArgs = FALSE)
+knitr::opts_knit$set(width = 80)
+options(digits = 2, warnPartialMatchArgs = FALSE)
 options(knitr.kable.NA = "--")
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 knitr::knit_hooks$set(optipng = knitr::hook_optipng)
@@ -116,15 +75,16 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
+Sys.setenv(PATIENT_FIRST_NAME = "Biggie", RETURN_PLOT = TRUE)
+patient <- Sys.getenv("PATIENT_FIRST_NAME")
+return_plot <- Sys.getenv("RETURN_PLOT")
 ```
 
 ```{r}
-#| eval: false
-
-# Setting the environment variable
-Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
-# Getting the value of the environment variable
-patient <- Sys.getenv("PATIENT_FIRST_NAME")
+#| label: data-load
+#| include: false
+neuropsychological_data <- bwu::load_data(here::here(patient))
+bwu::load_data(here::here(patient))
 ```
 
 ```{=typst}
@@ -135,98 +95,39 @@ patient <- Sys.getenv("PATIENT_FIRST_NAME")
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
-# TESTS ADMINISTERED
 
-```{=typst}
-- Conners' Adult ADHD Diagnostic Interview for DSM-IV (CAADID), Part I: History
-- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
-- Conners' Adult ADHD Rating Scales--Observer Report: Long Version (CAARS--O:L)
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Self-Report Form
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Observer Form
-- Advanced Clinical Solutions (ACS):
-  - Test of Premorbid Functioning (TOPF)
-- Dot Counting Test
-- Wechsler Adult Intelligence Scale, 4th ed (WAIS-IV)
-- Neuropsychological Assessment Battery, Screener (NAB):
-  - Attention, Language, Memory, Spatial, and Executive Functions Modules
-- NIH Executive Abilities: Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
-  - Unstructured Task, Verbal Fluency, and Behavioral Rating Scale
-- California Verbal Learning Test, 3rd ed (CVLT-3), Brief Form
-- Rey-Osterrieth Complex Figure Test (ROCFT)
-- Trail Making Test
-- Personality Assessment Inventory (PAI)
-```
-# NEUROBEHAVIORAL STATUS EXAM
+{{< include _00_tests_admin.qmd >}}
 
 {{< include _00_nse.qmd >}}
 
-### Behavioral Observations
-
 {{< include _01_behav_obs.qmd >}}
 
-# NEUROCOGNITIVE FINDINGS
-
-```{r}
-#| label: load
-#| include: false
-
-# load data
-neuropsychological_data <- bwu::load_data(patient = "Biggie")
-bwu::load_data(patient = "Biggie")
-```
-
-## General Cognitive Ability
+# NEUROCOGNITIVE FINDINGS {#sec-test-results}
 
 {{< include _02_iq.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## Verbal/Language
+{{< include _03_academics.qmd >}}
 
 {{< include _04_verbal.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## Visual Perception/Construction
-
 {{< include _05_spatial.qmd >}}
-
-{{< pagebreak >}}
-
-## Attention/Executive
 
 {{< include _06_executive.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## Memory
-
 {{< include _07_memory.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-## ADHD/Executive Functioning
+{{< include _08_motor.qmd >}}
 
 {{< include _10_adhd.qmd >}}
 
-## Emotional/Behavioral/Personality
-
 {{< include _11_emotion.qmd >}}
-
-<!-- {{< pagebreak >}} -->
-
-# SUMMARY/IMPRESSION
 
 {{< include _13_sirf.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-# RECOMMENDATIONS
-
 {{< include _14_recs.qmd >}}
 
-It was a pleasure to work with Biggie. Please contact me with any questions
-or concerns regarding this patient.
+It was a pleasure to work with Biggie.
+Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,
 
@@ -236,50 +137,15 @@ Sincerely,
 #| fig-align: left
 #| cache: true
 #| eval: true
-knitr::include_graphics("jwt_sig.png")
+knitr::include_graphics("jwt_sig.png", dpi = 127)
 ```
 
 **Joey W. Trampush, Ph.D.**\
 Assistant Professor of Psychiatry\
 Department of Psychiatry and the Behavioral Sciences\
 University of Southern California Keck School of Medicine\
-CA License PSY29212
+CA License PSY29212 
 
-{{< pagebreak >}}
+# APPENDIX {#sec-appendix}
 
-# APPENDIX
-
-## Test Selection Procedures
-
-Neuropsychological tests are intrinsically performance-based, and cognitive
-performance assessed during this neuropsychological evaluation is summarized
-above. Where appropriate, qualitative observations are included. Cultural
-considerations were made when selecting measures, interpreting results, and
-making diagnostic impressions and recommendations. Results from formal tests are
-reported in comparison to other individuals the same age, sex, and educational
-level as range of functioning (e.g., below average, average, above average).
-Test score labels are intended solely to be descriptive, identifying positions
-of scores relative to a normal curve distribution, and should be interpreted
-within the context of the patient's individual presentation and history.
-Although standardized scores provide the clinician with an important and
-necessary understanding of the patient's test performance compared with a
-normative group, they do not on their own lead to accurate diagnosis or
-treatment recommendations.
-
-## Conversion of Test Scores
-
-```{r}
-#| label: ranges
-#| eval: true
-#| cache: true
-#| double-escape: true
-#| escape: false
-
-range <- readr::read_csv("test_score_ranges.csv")
-tbl_range <- gt::gt(range) |>
-  gt::tab_header(title = "Test Score Labels/Ranges") |>
-  gt::cols_align(align = "center") |>
-  gtExtras::gt_theme_538()
-gt::gtsave(tbl_range, glue::glue("tbl_range", ".png"))
-knitr::include_graphics("tbl_range.png")
-```
+{{< include _15_appendix.qmd >}}

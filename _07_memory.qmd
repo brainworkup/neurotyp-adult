@@ -1,28 +1,20 @@
 ---
-title-meta: memory
-execute:
-  warning: false
-  echo: false
-  message: false
 format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-  html: 
-    toc: true
+  neurotyp-typst: default
 params:
   pheno: "memory"
-  return_plot: TRUE
 ---
 
-<!-- ## Memory -->
+## Memory {#sec-memory}
 
 {{< include _07_memory_text.qmd >}}
 
 ```{r}
 #| label: data-memory
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(glue)
 library(bwu)
 # read and filter data
 pheno <- "memory"
@@ -112,12 +104,9 @@ data <-
   )
 ```
 
-
 ```{r}
 #| label: text-memory
 #| cache: true
-
-# Concatenate text for neuropsych results and insert into Quarto/Markdown files
 bwu::cat_neuropsych_results(data, file = "_07_memory_raw.qmd")
 ```
 
@@ -136,11 +125,11 @@ fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 pheno <- "memory"
 table_name <- "table_memory"
 grp_memory <- list(
-  "standard_score" = c("NAB", "CVLT-3 Brief"),
-  "scaled_score" = c("CVLT-3 Brief"),
-  "t_score" = c("NAB", "Rey Complex Figure")
+  standard_score = c("NAB", "CVLT-3 Brief"),
+  scaled_score = c("CVLT-3 Brief", "NEPSY-2", "CVLT Child", "CVLT-3"),
+  t_score = c("NAB", "Rey Complex Figure")
 )
-vertical_padding <- 0.18
+vertical_padding <- 0.10
 multiline <- TRUE
 
 # source(here::here("R", "tbl_gt.R"))
@@ -154,14 +143,13 @@ bwu::tbl_gt(data,
   grp_standard_score = grp_memory[["standard_score"]],
   grp_scaled_score = grp_memory[["scaled_score"]],
   grp_t_score = grp_memory[["t_score"]],
+  dynamic_grp = grp_memory,
   multiline = multiline
 )
 ```
 
 ```{r}
 #| label: fig-memory
-#| eval: true
-#| fig-asp: 0.95
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
 
 exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
@@ -177,11 +165,10 @@ data <- memory
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
-return_plot <- FALSE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_memory.svg"
 
 # Make dotplot
-# source(here::here("R", "dotplot.R"))
 bwu::dotplot(
   data = data,
   x = x,
@@ -206,11 +193,12 @@ bwu::dotplot(
           kind: "qtbl",
           supplement: [*Table*],
           ),
-        figure([#image(file_fig)],
+        figure([#image(file_fig, width: auto)],
           caption: [
             Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory.
             ],
-          placement: bottom,
+          caption-pos: bottom,
+          placement: none,
           kind: "image",
           supplement: [*Fig.*],
           gap: 0.5em,

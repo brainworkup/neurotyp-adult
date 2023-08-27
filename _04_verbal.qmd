@@ -1,28 +1,20 @@
 ---
-title-meta: verbal
-execute:
-  warning: false
-  echo: false
-  message: false
 format:
-  typst:
-    keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
-  html: 
-    toc: true
+  neurotyp-typst: default
 params:
   pheno: "verbal"
-  return_plot: TRUE
 ---
 
-<!-- ## Verbal/Language -->
+## Verbal/Language {#sec-verbal}
 
 {{< include _04_verbal_text.qmd >}}
 
 ```{r}
 #| label: data-verbal
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(glue)
 library(bwu)
 # read and filter data
 pheno <- "verbal"
@@ -84,14 +76,13 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
-data <- bwu::filter_data(data, domain = domains, scale = scales)
+data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-verbal
 #| cache: true
-
-# Concatenate text from neuro*.csv files per scale and domain
+data <- data_verbal
 bwu::cat_neuropsych_results(data, file = "_04_verbal_raw.qmd")
 ```
 
@@ -107,18 +98,19 @@ fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th�
 fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- "*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
+data <- data_verbal
 pheno <- "verbal"
 table_name <- "table_verbal"
 grp_verbal <- list(
-  "scaled_score" = c("WAIS-IV"),
-  "standard_score" = c("NAB"),
-  "t_score" = c("NAB", "NIH EXAMINER")
+  scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2"),
+  standard_score = c("NAB"),
+  t_score = c("NAB", "NIH EXAMINER")
 )
-vertical_padding <- 0.18
+vertical_padding <- 0.10
 multiline <- TRUE
 
-# source(here::here("R", "tbl_gt.R"))
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data,
   pheno = pheno,
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
@@ -127,6 +119,7 @@ bwu::tbl_gt(data,
   grp_scaled_score = grp_verbal[["scaled_score"]],
   grp_standard_score = grp_verbal[["standard_score"]],
   grp_t_score = grp_verbal[["t_score"]],
+  dynamic_grp = grp_verbal,
   vertical_padding = vertical_padding,
   multiline = multiline
 )
@@ -134,7 +127,6 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-verbal
-#| eval: true
 #| fig-asp: 0.70
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
@@ -145,7 +137,7 @@ data <- verbal
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- FALSE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_verbal.svg"
 
 # Make dotplot
@@ -172,11 +164,12 @@ bwu::dotplot(
           kind: "qtbl",
           supplement: [*Table*],
           ),
-        figure([#image(file_fig)],
+        figure([#image(file_fig, width: auto)],
           caption: [
             Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words.
             ],
-          placement: bottom,
+          caption-pos: bottom,  
+          placement: none,
           kind: "image",
           supplement: [*Fig.*],
           gap: 0.5em,

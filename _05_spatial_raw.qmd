@@ -1,5 +1,4 @@
 ---
-title-meta: spatial-raw
 execute:
   cache: true
 ---
@@ -9,3 +8,42 @@ execute:
 Summarize and interpret these neuropsychological test scores related to visuospatial skills, visual perception, visuomotor integration, and construction. For scores that are below average or worse, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are above average to below average to delineate relative strengths and weaknesses, respectively.
 
 <<START>>
+
+Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail was High Average.
+Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was High Average.
+NA
+NA
+NA
+NA
+A composite screening measure of (ref:first-name)'s visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Average classification range.
+Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus fell in the Average range.
+NA
+NA
+Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail was High Average.
+Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was High Average.
+NA
+NA
+NA
+NA
+A composite screening measure of (ref:first-name)'s visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Average classification range.
+Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus fell in the Average range.
+NA
+NA
+Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail was High Average.
+Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was High Average.
+NA
+NA
+NA
+NA
+A composite screening measure of (ref:first-name)'s visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Average classification range.
+Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus fell in the Average range.
+NA
+NA
+Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail was High Average.
+Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was High Average.
+NA
+NA
+NA
+NA
+A composite screening measure of (ref:first-name)'s visuoperceptual skills, attention to detail, and visuoconstructional skills fell in the Average classification range.
+Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus fell in the Average range.

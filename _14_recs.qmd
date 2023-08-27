@@ -1,6 +1,4 @@
----
-title-meta: Recommendations
----
+# RECOMMENDATIONS {#sec-recs}
 
 ## Recommendations for Medical/Healthcare
 

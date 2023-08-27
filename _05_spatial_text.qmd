@@ -1,5 +1,4 @@
 ---
-title-meta: spatial-text
 execute:
   cache: true
 ---

@@ -1,21 +1,18 @@
 ---
-title-meta: emotion
-execute:
-  warning: false
-  echo: false
-  message: false
 format:
-  typst:
+  neurotyp-typst:
     keep-typ: true
-  pdf:
-    keep-md: true
-    keep-tex: true
 params:
-  pheno: "emotion"
-  return_plot: TRUE
+  first_name: ""
+  his_her: ""
+  he_she: ""
+  he_she_cap: ""
+  his_her_cap: ""
+  him_her: ""
+  him_her_cap: ""
 ---
 
-<!-- ## Emotional/Behavioral/Personality -->
+# Emotional/Behavioral/Personality {#sec-emotion}
 
 {{< include _11_emotion_text.qmd >}}
 
@@ -95,8 +92,6 @@ data <-
 ```{r}
 #| label: text-emotion
 #| cache: true
-
-# Concatenate text from neuro*.csv files per scale and domain
 bwu::cat_neuropsych_results(data = data, file = "_11_emotion_raw.qmd")
 ```
 
@@ -107,16 +102,18 @@ bwu::cat_neuropsych_results(data = data, file = "_11_emotion_raw.qmd")
 #| eval: true
 options(tikzDefaultEngine = "xetex")
 
-# # footnotes
+# footnotes
 # fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-# fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_t_score <- gt::md("*T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 # fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 # fn_z_score <- gt::md("*z* Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 pheno <- "emotion"
 table_name <- "table_emotion"
-# grp_t_score <- c("PAI")
-vertical_padding <- 0.18
+grp_emotion <- list(
+  t_score = c("PAI", "BASC-3 PRS", "BASC-3 SRP", "BASC-3 TRS")
+)
+vertical_padding <- 0.05
 
 data2 <-
   dplyr::filter(data, domain %in% c(
@@ -134,6 +131,7 @@ bwu::tbl_gt(
   data = data3,
   pheno = pheno,
   table_name = table_name,
+  dynamic_grp = grp_emotion,
   vertical_padding = vertical_padding,
   multiline = FALSE
 )
@@ -193,8 +191,6 @@ table_social <- bwu::tbl_gt(
 
 ```{r}
 #| label: fig-emotion
-#| eval: true
-#| out-width: 50%
 #| fig-cap: "Mood/Self-Report"
 
 # Arguments
@@ -207,7 +203,8 @@ data <- emotion
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- FALSE
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_emotion.svg"
 
 # Make dotplot
@@ -222,24 +219,23 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let domain(title: none, file_fig) = {
-  let font = (font: "Fira Sans", size:  9pt)
+#let domain_emotion(file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-figure([#image(file_fig, width: 80%)],
-  placement: bottom,
-  caption: [Mood/Self-Report],
+figure([#image(file_fig, width: auto)],
+  placement: none,
+  caption: [Emotional/Behavioral/Personality],
+  caption-pos: bottom,
   kind: "image",
   supplement: [*Fig.*],
-  gap: 1em,
+  gap: 0.5em,
   )
 }
 ```
 
 ```{=typst}
-#let title = "Emotional/Behavioral/Personality"
 #let file_fig = "_11_emotion_files/figure-typst/fig-emotion-1.svg"
-#domain(
-  title: [#title],
+#domain_emotion(
   file_fig
 )
 ```

@@ -1,17 +1,19 @@
 ---
-editor:
-  markdown:
-    wrap: sentence
-    canonical: true
+format:
+  neurotyp-typst: default
 ---
 
-# General Cognitive Ability {#sec-iq}
+## General Cognitive Ability {#sec-iq}
 
 {{< include _02_iq_text.qmd >}}
 
 ```{r}
 #| label: data-iq
-
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(glue)
+library(bwu)
 # phenotype
 pheno <- "iq"
 # data
@@ -57,15 +59,13 @@ scales <- c(
   "Working Memory"
 )
 # Filter data
-data <- bwu::filter_data(data, domain = domains, scale = scales)
+data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-iq
 #| cache: true
-
-# Concatenate text from neuro*.csv files per scale and domain
-bwu::cat_neuropsych_results(data, file = "_02_iq_raw.qmd")
+bwu::cat_neuropsych_results(data_iq, file = "_02_iq_raw.qmd")
 ```
 
 ```{r}
@@ -76,23 +76,22 @@ options(tikzDefaltEngine = "xetex")
 
 # footnotes
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-
 pheno <- "iq"
 table_name <- "table_iq"
+source_note <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 grp_iq <- list(
-  "standard_score" = c("Composite Scores", "NAB", "Test of Premorbid
-  Functioning", "WRAT-5", "WAIS-IV")
-)
-vertical_padding <- 0.18
+  standard_score = c("Composite Scores", "NAB", "Test of Premorbid Functioning", "WRAT-5", "WAIS-IV", "WISC-5"))
+vertical_padding <- 0.10
 multiline <- TRUE
+data <- data_iq
 
-# source(here::here("R", "tbl_gt.R"))
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data,
   pheno = pheno,
   table_name = table_name,
+  dynamic_grp = grp_iq,
   vertical_padding = vertical_padding,
-  fn_standard_score = fn_standard_score,
-  grp_iq = grp_iq[["standard_score"]],
+  source_note = source_note,
   multiline = multiline
 )
 ```
@@ -108,14 +107,14 @@ iq <-
     data,
     scale %in% c(
       "General Ability", "Crystallized Knowledge", "Fluid Reasoning",
-      "Premorbid Ability", "TOPF Standard Score", "Word Reading"
-    )
+      "Premorbid Ability", "TOPF Standard Score"
+      )
   )
 data <- iq
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
-return_plot <- FALSE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_iq.svg"
 
 # Make dotplot
@@ -142,17 +141,12 @@ bwu::dotplot(
           kind: "qtbl",
           supplement: [*Table*],
           ),
-        figure([#image(file_fig)],
+        figure([#image(file_fig, width: auto)],
           caption: [
-            _Premorbid Ability_ is an estimate of intellectual
-            functioning prior to known or suspected onset of brain disease or
-            dysfunction. _General Ability_ is the overall skill to reason, solve
-            problems, and gain useful knowledge. _Crystallized Knowledge_
-            involves understanding the world through language and reasoning.
-            _Fluid Reasoning_ is the logical analysis and solution of new
-            problems, identifying underlying patterns, and applying logic.
+            _Premorbid Ability_ is an estimate of intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
             ],
-          placement: bottom,
+          caption-pos: bottom,  
+          placement: none,
           kind: "image",
           supplement: [*Fig.*],
           gap: 0.5em,

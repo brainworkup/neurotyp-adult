@@ -1,5 +1,4 @@
 ---
-title-meta: adhd-raw
 execute:
   cache: true
 ---
@@ -9,3 +8,111 @@ execute:
 Summarize and interpret these rating scales related to attention-deficit/hyperactivity disorder (ADHD) and executive functioning, for both the self-report measures and the Observer-Report measures. For scores that are below average or worse on the CEFI, give a brief example of how this could impact the patient's daily functioning. For scores that are above average or higher on the CAARS, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation from scores that are above average to below average to delineate relative strengths and weaknesses, respectively.
 
 <<START>>
+- CAARS-SR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was Exceptionally High
+- CAARS-SR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was Exceptionally High
+- CAARS-SR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Exceptionally High
+- CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was Exceptionally High
+#NAME?
+- Alexandra's composite indicator for identifying individuals 'at-risk' for ADHD was Above Average
+#NAME?
+- CAARS-SR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Average
+- Alexandra's self-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's self-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Low Average.
+- Alexandra's self-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Below Average.
+- Alexandra's self-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's self-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Below Average.
+- Alexandra's self-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Below Average.
+- Alexandra's self-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Below Average.
+- Alexandra's self-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Below Average.
+- Alexandra's self-reported overall level of executive functioning was Below Average.
+- Alexandra's self-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Exceptionally Low.
+- CAARS-OR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Above Average
+- CAARS-OR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Above Average
+#NAME?
+- CAARS-OR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was High Average
+- CAARS-OR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was High Average
+- Alexandra's observer-rated composite indicator for identifying individuals 'at-risk' for ADHD was High Average
+- CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was High Average
+#NAME?
+- Alexandra's observer-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Average.
+- Alexandra's observer-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Average.
+- Alexandra's observer-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Low Average.
+- Alexandra's observer-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Low Average.
+- Alexandra's observer-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Low Average.
+- Alexandra's observer-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's observer-reported overall level of executive functioning was Low Average.
+- Alexandra's observer-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Low Average.
+- Alexandra's observer-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's observer-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Exceptionally Low.
+- CAARS-SR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was Exceptionally High
+- CAARS-SR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was Exceptionally High
+- CAARS-SR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Exceptionally High
+- CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was Exceptionally High
+#NAME?
+- Alexandra's composite indicator for identifying individuals 'at-risk' for ADHD was Above Average
+#NAME?
+- CAARS-SR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Average
+- Alexandra's self-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's self-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Low Average.
+- Alexandra's self-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Below Average.
+- Alexandra's self-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's self-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Below Average.
+- Alexandra's self-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Below Average.
+- Alexandra's self-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Below Average.
+- Alexandra's self-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Below Average.
+- Alexandra's self-reported overall level of executive functioning was Below Average.
+- Alexandra's self-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Exceptionally Low.
+- CAARS-OR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Above Average
+- CAARS-OR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Above Average
+#NAME?
+- CAARS-OR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was High Average
+- CAARS-OR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was High Average
+- Alexandra's observer-rated composite indicator for identifying individuals 'at-risk' for ADHD was High Average
+- CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was High Average
+#NAME?
+- Alexandra's observer-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Average.
+- Alexandra's observer-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Average.
+- Alexandra's observer-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Low Average.
+- Alexandra's observer-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Low Average.
+- Alexandra's observer-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Low Average.
+- Alexandra's observer-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's observer-reported overall level of executive functioning was Low Average.
+- Alexandra's observer-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Low Average.
+- Alexandra's observer-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's observer-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Exceptionally Low.
+- CAARS-SR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was Exceptionally High
+- CAARS-SR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was Exceptionally High
+- CAARS-SR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Exceptionally High
+- CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was Exceptionally High
+#NAME?
+- Alexandra's composite indicator for identifying individuals 'at-risk' for ADHD was Above Average
+#NAME?
+- CAARS-SR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Average
+- Alexandra's self-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's self-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Low Average.
+- Alexandra's self-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Below Average.
+- Alexandra's self-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's self-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Below Average.
+- Alexandra's self-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Below Average.
+- Alexandra's self-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Below Average.
+- Alexandra's self-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Below Average.
+- Alexandra's self-reported overall level of executive functioning was Below Average.
+- Alexandra's self-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Exceptionally Low.
+- CAARS-OR Problems with Self-Concept (i.e., poor social relationships, low self-esteem and self confidence) was Above Average
+- CAARS-OR Inattention/Memory Problems (i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized) was Above Average
+#NAME?
+- CAARS-OR DSM-5 Inattentive Symptoms (i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD) was High Average
+- CAARS-OR DSM-5 ADHD Symptoms Total (i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD) was High Average
+- Alexandra's observer-rated composite indicator for identifying individuals 'at-risk' for ADHD was High Average
+- CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms (i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD) was High Average
+#NAME?
+- Alexandra's observer-reported Inhibitory Control (i.e., control behavior or impulses, including thinking about consequences before acting, maintaining self-control, and thinking before speaking) was Average.
+- Alexandra's observer-reported Self-Monitoring (i.e., evaluate own behavior in order to determine when a different approach is necessary, including noticing and fixing mistakes, knowing when help is required, and understanding when a task is completed) was Average.
+- Alexandra's observer-reported Attention (i.e., avoid distractions, concentrate on tasks, and sustain attention) was Low Average.
+- Alexandra's observer-reported Planning (i.e., develop and implement strategies to accomplish tasks, including planning ahead and making good decisions) was Low Average.
+- Alexandra's observer-reported Working Memory (i.e., keep information in mind that is important for knowing what to do and how to do it, including remembering important things, instructions, and steps) was Low Average.
+- Alexandra's observer-reported Flexibility (i.e., adjust behavior to meet circumstances, including coming up with different ways to solve problems, changing behavior when needed, and being able to come up with new ways to reach a goal) was Low Average.
+- Alexandra's observer-reported overall level of executive functioning was Low Average.
+- Alexandra's observer-reported Initiation (i.e., begin tasks or projects on own, including starting tasks easily, being motivated, and taking the initiative when needed) was Low Average.
+- Alexandra's observer-reported Organization (i.e., manage personal effects, work, or multiple tasks, including organizing tasks and thoughts well, managing time effectively, and working neatly) was Below Average.
+- Alexandra's observer-reported Emotion Regulation (i.e., control and manage emotions, including staying calm when handling small problems and reacting with the right level of emotion) was Exceptionally Low.
