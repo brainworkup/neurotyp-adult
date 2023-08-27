@@ -26,11 +26,13 @@ _freeze/
 bk/
 blackbox.config.json
 cache/
-data/
 local_data
 neuropsych_report_cache/
 notes.sh
 # params.yml
 secure_data
 Biggie.qmd
-Biggie.qmd
+Biggie/
+file_names.sh
+_03-05_feedback.knit.md
+_03-05_feedback.html
