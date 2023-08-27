@@ -8,9 +8,6 @@ format:
     keep-typ: true
     fontsize: 11pt
     papersize: "us-letter"
-  html:
-    embed-resources: true
-    toc: true
 params:
   patient: Biggie
   first_name: Biggie
@@ -37,8 +34,6 @@ params:
   dx1: attention-deficit/hyperactivity disorder (ADHD)
   dx2: anxiety
   dx3: depression
-  start: !expr lubridate::ymd("2023-01-01")
-  snapshot: !expr lubridate::ymd_hms("2023-01-01 12:30:00")
 execute:
   warning: false
   echo: false
@@ -48,12 +43,14 @@ execute:
 editor:
   markdown:
     wrap: sentence
+    references: 
+      prefix: "ref-"
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: "70%"
+out-width: 70%
 fig-align: center
-fig-format: "svg"
+fig-format: svg
 fig-dpi: 270
 df-print: kable
 reference-location: document
