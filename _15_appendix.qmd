@@ -40,7 +40,7 @@ knitr::include_graphics("plot_narrow.png")
 ```
 
 ```{r}
-#| label: gauss-plot-broad
+#| label: fig-gauss-plot-broad
 #| eval: false
 #| fig.cap: "Classification of neuropsychological test scores that are positively skewed in the general population [@schoenbergReportingStandardsNeuropsychological2017]."
 #| fig.width: 6.0

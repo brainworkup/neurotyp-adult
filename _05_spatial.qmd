@@ -59,8 +59,6 @@ data <-
 ```{r}
 #| label: text-spatial
 #| cache: true
-
-# Concatenate text from neuro*.csv files per scale and domain
 bwu::cat_neuropsych_results(data, file = "_05_spatial_raw.qmd")
 ```
 

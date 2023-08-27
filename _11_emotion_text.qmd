@@ -1,14 +1,6 @@
 ---
 execute:
   cache: true
-params:
-  first_name: Biggie
-  his_her: NULL
-  he_she: NULL
-  he_she_cap: NULL
-  his_her_cap: NULL
-  him_her: NULL
-  him_her_cap: NULL 
 ---
 
 `r params$first_name` completed an objective, self-report inventory of

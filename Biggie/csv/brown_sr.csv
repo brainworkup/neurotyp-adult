@@ -1,0 +1,8 @@
+scale,raw_score,score,percentile,range,ci_95,test,test_name,domain,subdomain,narrow,pass,verbal,timed,test_type,score_type,absort,description
+Activation,4,44,33,WNL,37-51,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Arousal/Activation,,,,rating_scale,t_score,brown_sr_activation_1,"organizing, prioritizing, and activating to work"
+Focus,9,50,59,WNL,44-56,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Focused Attention,,,,rating_scale,t_score,brown_sr_focus_2,"focusing, sustaining, and shifting attention to tasks"
+Effort,2,40,15,WNL,33-47,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Effort/Motivation,,,,rating_scale,t_score,brown_sr_effort_3,"regulating alertness, sustaining effort, and adjusting processing speed"
+Emotion,12,57,77,WNL,49-65,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Emotion Regulation,,,,rating_scale,t_score,brown_sr_emotion_4,managing frustration and modulating emotions
+Memory,4,42,26,WNL,36-48,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Working Memory/Recall,,,,rating_scale,t_score,brown_sr_memory_5,utilizing working memory and accessing recall
+Action,10,52,64,WNL,46-58,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),Self-Regulation,,,,rating_scale,t_score,brown_sr_action_6,monitoring and self-regulating action
+Total Composite,41,47,49,WNL,44-50,brown_sr,Brown EF/A Self-Report,Behavioral/Emotional/Social,ADHD/Executive Function (S),General Executive Dysfunction,,,,rating_scale,t_score,brown_sr_total composite_7,general executive functioning in daily life

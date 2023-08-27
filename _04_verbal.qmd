@@ -127,7 +127,6 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-verbal
-#| fig-asp: 0.70
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
 # Arguments

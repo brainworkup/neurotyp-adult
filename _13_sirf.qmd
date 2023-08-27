@@ -4,10 +4,6 @@ format:
     keep-typ: true
 params:
   pheno: "sirf"
-execute: 
-  echo: false
-  warning: false
-  message: false
 ---
 
 # SUMMARY/IMPRESSION {#sec-sirf}
@@ -107,7 +103,7 @@ bwu::dotplot(
 #let domain_sirf(file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-figure([#image(file_fig, width: auto)],
+figure([#image(file_fig, width: 70%)],
   placement: none,
   caption: [
     Overall neurocognitive function subdomain plots of Biggie's strengths and weaknesses. _Note:_ *z* Scores have a mean of 0 and a standard deviation of 1.

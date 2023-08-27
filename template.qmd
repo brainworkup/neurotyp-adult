@@ -1,14 +1,16 @@
 ---
 title: "NEUROCOGNITIVE EXAMINATION"
-patient: Biggie Smalls
+name: Biggie Smalls
 doe: 2023-01-01
-firstname: Biggie
-lastname: Smalls
+patient: Biggie
 format:
   neurotyp-typst:
     keep-typ: true
     fontsize: 11pt
     papersize: "us-letter"
+  html:
+    embed-resources: true
+    toc: true
 params:
   patient: Biggie
   first_name: Biggie
@@ -26,43 +28,46 @@ params:
   referral: Dr. Dre
   observer: Mrs. Wallace
   observer_relation: mother
-  he_she: they
-  he_she_cap: They
-  his_her: their
-  his_her_cap: Their
-  him_her: them
-  him_her_cap: Them
+  he_she: she
+  he_she_cap: She
+  his_her: her
+  his_her_cap: Her
+  him_her: her
+  him_her_cap: Her
   dx1: attention-deficit/hyperactivity disorder (ADHD)
   dx2: anxiety
   dx3: depression
+  start: !expr lubridate::ymd("2023-01-01")
+  snapshot: !expr lubridate::ymd_hms("2023-01-01 12:30:00")
 execute:
   warning: false
   echo: false
   message: false
+  freeze: auto
+  cache: true
 editor:
   markdown:
     wrap: sentence
     canonical: true
-    references: 
-      location: block
+fig-width: 6
+fig-asp: 0.618
+out-width: "70%"
+fig-align: center
+fig-format: "svg"
+fig-dpi: 270
+df-print: kable
+reference-location: document
+bibliography: refs.bib
 ---
-
-```{r}
-#| echo: false
-
-source("_common.R")
-```
 
 ```{r}
 #| label: setup
 #| include: false
-# Load packages
 xfun::pkg_load2(
-  c("fs", "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "highcharter", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "pdftools", "png", "quarto", "readxl", "rmarkdown", "scales", "shiny", "snakecase", "stats", "svglite", "tabulizer", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
+  c("ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "png", "quarto", "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite", "tidyselect", "tidytext", "tidyverse", "tibble", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
 )
-# Knitr options
-knitr::opts_knit$set(width = 50)
-options(digits = 1, warnPartialMatchArgs = FALSE)
+knitr::opts_knit$set(width = 80)
+options(digits = 2, warnPartialMatchArgs = FALSE)
 options(knitr.kable.NA = "--")
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 knitr::knit_hooks$set(optipng = knitr::hook_optipng)
@@ -70,9 +75,9 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
-# Environment variables
-Sys.setenv(PATIENT_FIRST_NAME = "Biggie")
+Sys.setenv(PATIENT_FIRST_NAME = "Biggie", RETURN_PLOT = FALSE)
 patient <- Sys.getenv("PATIENT_FIRST_NAME")
+return_plot <- Sys.getenv("RETURN_PLOT")
 ```
 
 ```{r}
@@ -91,105 +96,38 @@ bwu::load_data(here::here(patient))
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
 
-<!---
- # TESTS ADMINISTERED {#sec-tests} 
---->
-
 {{< include _00_tests_admin.qmd >}}
-
-<!---
- # NEUROBEHAVIORAL STATUS EXAM {#sec-nse} 
---->
 
 {{< include _00_nse.qmd >}}
 
 {{< include _01_behav_obs.qmd >}}
 
-# NEUROCOGNITIVE FINDINGS
-
-<!---
- ## General Cognitive Ability 
---->
+# NEUROCOGNITIVE FINDINGS {#sec-test-results}
 
 {{< include _02_iq.qmd >}}
 
-<!---
- ## Academic Skills 
---->
-
 {{< include _03_academics.qmd >}}
-
-<!---
- ## Verbal/Language 
---->
 
 {{< include _04_verbal.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-<!---
- ## Visual Perception/Construction 
---->
-
 {{< include _05_spatial.qmd >}}
-
-<!-- {{< pagebreak >}} -->
-
-<!---
- ## Attention/Executive 
---->
 
 {{< include _06_executive.qmd >}}
 
-<!-- {{< pagebreak >}} -->
-
-<!---
- ## Memory 
---->
-
 {{< include _07_memory.qmd >}}
-
-<!-- {{< pagebreak >}} -->
-
-<!---
- ## Motor 
---->
 
 {{< include _08_motor.qmd >}}
 
-<!-- ## Social Cognition
-
-{{< include _09_social.qmd >}} -->
-
-<!---
- ## ADHD/Executive Functioning 
---->
-
 {{< include _10_adhd.qmd >}}
-
-<!---
- ## Emotional/Behavioral/Personality 
---->
 
 {{< include _11_emotion.qmd >}}
 
-<!---
- {{< pagebreak >}} 
---->
-
-<!---
- # SUMMARY/IMPRESSION 
---->
-
 {{< include _13_sirf.qmd >}}
-
-<!---
- # RECOMMENDATIONS 
---->
 
 {{< include _14_recs.qmd >}}
 
-It was a pleasure to work with `r patient`. Please contact me with any questions or concerns regarding this patient.
+It was a pleasure to work with Biggie.
+Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,
 
@@ -198,18 +136,16 @@ Sincerely,
 #| out-width: 20%
 #| fig-align: left
 #| cache: true
-#| eval: false
-knitr::include_graphics("jwt_sig.png", dpi = 127)
+#| eval: true
+knitr::include_graphics("../neuropsychology/jwt_sig.png", dpi = 127)
 ```
 
 **Joey W. Trampush, Ph.D.**\
 Assistant Professor of Psychiatry\
 Department of Psychiatry and the Behavioral Sciences\
 University of Southern California Keck School of Medicine\
-CA License PSY29212
+CA License PSY29212 
 
-{{< pagebreak >}}
-
-# APPENDIX
+# APPENDIX {#sec-appendix}
 
 {{< include _15_appendix.qmd >}}

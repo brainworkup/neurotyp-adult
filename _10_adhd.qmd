@@ -145,7 +145,6 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-caars
-#| fig-height: 4
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
 # data for caars dotplot
