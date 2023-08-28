@@ -19,5 +19,15 @@
   "files.exclude": {
     ".history": true,
     ".vscode": true
-  }
+  },
+  "deno.enable": true,
+  "deno.inlayHints.parameterTypes.enabled": true,
+  "deno.inlayHints.variableTypes.enabled": true,
+  "deno.suggest.completeFunctionCalls": true,
+  "deno.unstable": true,
+  "projectManager.groupList": true,
+  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+  "projectManager.supportSymlinksOnBaseFolders": true,
+  "projectManager.git.maxDepthRecursion": 0,
+  "projectManager.hg.maxDepthRecursion": 0
 }

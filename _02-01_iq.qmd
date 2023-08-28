@@ -154,7 +154,6 @@ bwu::dotplot(
       )
   }
 ```
-
 ```{=typst}
 #let title = "General Cognitive Ability"
 #let file_qtbl = "table_iq.png"
