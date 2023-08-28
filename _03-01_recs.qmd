@@ -1,4 +1,6 @@
-# RECOMMENDATIONS {#sec-recs}
+<!---
+ # RECOMMENDATIONS {#sec-recs} 
+--->
 
 ## Recommendations for Medical/Healthcare
 
@@ -21,7 +23,6 @@
     The app has a simple, distraction free interface and a Focus Mode that reduces the temptation to continuously re-read and tweak your text.
 
     -   [An ADHD-friendly Writing App]
-
     -   [After all, everyone is distracted once in a while]
 
 -   Set reminders.
@@ -42,11 +43,8 @@
 -   *Books and online recommendations*
 
     -   [Taking Charge of Adult ADHD, Second Edition: Proven Strategies to Succeed at Work, at Home, and in Relationships]
-
     -   [ADHD 2.0]
-
     -   [PsychCentral for Adult ADHD]
-
     -   [Launching in Young Adulthood with ADHD... Ready or Not!]
 
 ## Recommendations for Follow-Up Evaluation
@@ -54,11 +52,3 @@
 -   Follow-up assessment is not recommended at this time unless further concerns arise that need to be addressed.
 
 -   Follow-up assessment in 12-18 months is recommended to gauge `r params$first_name`'s progress and to assess the impact of the above interventions, unless further concerns arise that need to be addressed sooner.
-
-  [*iA Writer*]: https://ia.net/
-  [An ADHD-friendly Writing App]: https://ia.net/topics/an-adhd-friendly-writing-app
-  [After all, everyone is distracted once in a while]: https://ia.net/topics/after-all-everyone-is-distracted-once-in-a-while
-  [Taking Charge of Adult ADHD, Second Edition: Proven Strategies to Succeed at Work, at Home, and in Relationships]: https://www.guilford.com/books/Taking-Charge-of-Adult-ADHD/Russell-Barkley/9781462546855
-  [ADHD 2.0]: https://drhallowell.com/read/books-by-ned/
-  [PsychCentral for Adult ADHD]: https://psychcentral.com/adhd/adhd-resources#for-adults-with-adhd
-  [Launching in Young Adulthood with ADHD... Ready or Not!]: https://www.chrisdendy.com/product-page/launching-in-young-adulthood-with-adhd-ready-or-not

@@ -1,20 +1,19 @@
-# NEUROBEHAVIORAL STATUS EXAM {#sec-nse}
+<!---
+ # NEUROBEHAVIORAL STATUS EXAM {#sec-nse} 
+--->
 
 ```{r}
 #| label: import-nse-txt
 #| eval: false
 #| include: false
-
 patient <- "Biggie"
 scale <- "NeuropsychEval-NSE-"
 ext <- ".txt"
-
 file_path <- function(patient, scale, ext){
   result <- ""
   file <- file.path(paste0(scale, patient, ext))
   return(file)
 }
-
 ```
 
 ## Referral
