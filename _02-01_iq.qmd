@@ -16,8 +16,6 @@ library(glue)
 library(bwu)
 # phenotype
 pheno <- "iq"
-# data
-data <- bwu::read_data(pheno = pheno)
 # Filter by domain
 domains <- c("General Cognitive Ability")
 # Filter by scale
@@ -58,6 +56,9 @@ scales <- c(
   "Working Memory Index",
   "Working Memory"
 )
+# data
+data <- bwu::read_data(pheno = pheno)
+
 # Filter data
 data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 ```

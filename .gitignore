@@ -39,3 +39,8 @@ _03-05_feedback.html
 .vscode/settings.json
 output/
 _quarto.yml
+index_scores.xlsx
+neurobehav.csv
+neurocog.csv
+validity.csv
+neuropsych.csv

@@ -48,7 +48,7 @@ editor:
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: 70%
+out-width: "70%"
 fig-align: center
 fig-format: svg
 fig-dpi: 270
@@ -84,7 +84,6 @@ neuropsychological_data <- bwu::load_data(here::here(patient))
 bwu::load_data(here::here(patient))
 ```
 
-
 ```{=typst}
 #let name = [Biggie Smalls]
 #let doe = [2023-01-01]
@@ -93,10 +92,9 @@ bwu::load_data(here::here(patient))
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
-
 # TESTS ADMINISTERED {#sec-tests}
 
-{{< include _00_tests_admin.qmd >}}
+{{< include _00-00_tests.qmd >}}
 
 # NEUROBEHAVIORAL STATUS EXAM {#sec-nse}
 
@@ -120,14 +118,20 @@ bwu::load_data(here::here(patient))
 
 {{< include _02-07_motor.qmd >}}
 
-{{< include _02-08_social.qmd >}}
-
+```{=html}
+<!---
+ {{< include _02-08_social.qmd >}} 
+--->
+```
 {{< include _02-09_adhd.qmd >}}
 
 {{< include _02-10_emotion.qmd >}}
 
-{{< include _02-11_adaptive.qmd >}}
-
+```{=html}
+<!---
+ {{< include _02-11_adaptive.qmd >}} 
+--->
+```
 # SUMMARY/IMPRESSION {#sec-sirf}
 
 {{< include _03-00_sirf.qmd >}}
