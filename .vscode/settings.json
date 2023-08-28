@@ -29,5 +29,9 @@
   "projectManager.openInNewWindowWhenClickingInStatusBar": true,
   "projectManager.supportSymlinksOnBaseFolders": true,
   "projectManager.git.maxDepthRecursion": 0,
-  "projectManager.hg.maxDepthRecursion": 0
+  "projectManager.hg.maxDepthRecursion": 0,
+  "[markdown]": {
+    "editor.tabSize": 2,
+    "editor.wrappingIndent": "same"
+  }
 }
