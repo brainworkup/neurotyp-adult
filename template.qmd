@@ -106,7 +106,7 @@ bwu::load_data(here::here(patient))
 
 {{< include _02-01_iq.qmd >}}
 
-{{< include _02-02_academics.qmd >}}
+<!-- {{< include _02-02_academics.qmd >}} -->
 
 {{< include _02-03_verbal.qmd >}}
 
@@ -116,22 +116,16 @@ bwu::load_data(here::here(patient))
 
 {{< include _02-06_memory.qmd >}}
 
-{{< include _02-07_motor.qmd >}}
+<!-- {{< include _02-07_motor.qmd >}} -->
 
-```{=html}
-<!---
- {{< include _02-08_social.qmd >}} 
---->
-```
+<!-- {{< include _02-08_social.qmd >}} -->
+
 {{< include _02-09_adhd.qmd >}}
 
 {{< include _02-10_emotion.qmd >}}
 
-```{=html}
-<!---
- {{< include _02-11_adaptive.qmd >}} 
---->
-```
+<!-- {{< include _02-11_adaptive.qmd >}}  -->
+
 # SUMMARY/IMPRESSION {#sec-sirf}
 
 {{< include _03-00_sirf.qmd >}}
