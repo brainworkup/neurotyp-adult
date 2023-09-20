@@ -48,7 +48,7 @@ future events and needs.
 - _Planning, Foresight, Inhibition, and Psychomotor Speed:_ Average; Biggie's ability
 to plan ahead, inhibit impulses, and move with purpose and speed is typical.
 
-<<START>>
+<<EXAMPLE>>
 
 Orientation to person, place, time, and situation was intact. No gross
 behavioral apathy or disinhibition observed. Auditory attentional capacity was
@@ -58,4 +58,4 @@ executive functions revealed heterogeneous skills. A composite index of both
 basic and complex verbal and nonverbal attentional capacity/functioning was
 Average. A composite index of higher executive skills was Average.
 
-<!-- Glue -->
+<<START>>
