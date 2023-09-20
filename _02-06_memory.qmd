@@ -165,8 +165,8 @@ data <- memory
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
-return_plot <- FALSE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_memory.svg"
 
 # Make dotplot
