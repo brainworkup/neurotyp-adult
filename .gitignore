@@ -46,3 +46,4 @@ validity.csv
 neuropsych.csv
 run_scrape_pdf_nse.R
 _environment.local
+prerender.R
