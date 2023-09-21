@@ -43,15 +43,8 @@ $if(abstract)$
   abstract: [$abstract$],
 $endif$
 
-// $if(margin)$
-//   margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
-// $endif$
-
 $if(margin)$
-  margin: ($for(margin/pairs)$
-    $margin.key$: $margin.value$
-    $if(!loop.last)$,$endif$
-  $endfor$),
+  margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
 $endif$
 
 $if(papersize)$

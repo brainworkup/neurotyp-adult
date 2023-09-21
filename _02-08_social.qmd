@@ -1,12 +1,6 @@
----
-format:
-  neurotyp-typst:
-    keep-typ: true
----
-
 ## Social Cognition {#sec-social}
 
-{{< include _02_08_social_text.qmd >}}
+{{< include _02-08_social_text.qmd >}}
 
 ```{r}
 #| label: data-social
