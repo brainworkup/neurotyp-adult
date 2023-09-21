@@ -1,0 +1,26 @@
+params:
+  patient: Biggie
+  first_name: Biggie
+  last_name: Ho
+  mrn: 002449433
+  dob: 2000-07-21
+  doe1: 2023-04-27
+  doe2: 2023-05-04
+  doe3: 2023-01-01
+  sex: male
+  sex_cap: Male
+  age: 22
+  education: 15
+  handedness: right
+  referral: Dr. Dre
+  observer: Mrs. Wallace
+  observer_relation: mother
+  he_she: he
+  he_she_cap: He
+  his_her: his
+  his_her_cap: His
+  him_her: him
+  him_her_cap: Him
+  dx1: attention-deficit/hyperactivity disorder (ADHD)
+  dx2: anxiety
+  dx3: depression

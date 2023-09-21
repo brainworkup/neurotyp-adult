@@ -129,8 +129,8 @@ data <- verbal
 x <- data$z_mean_subdomain
 y <- data$subdomain
 colors <- NULL
-return_plot <- FALSE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- FALSE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_verbal.svg"
 
 # Make dotplot

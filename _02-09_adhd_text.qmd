@@ -1,4 +1,3 @@
-
 <<PROMPT>>
 
 Summarize and interpret these rating scales related to

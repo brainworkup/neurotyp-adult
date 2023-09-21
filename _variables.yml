@@ -1,0 +1,9 @@
+version: 0.0.1
+
+email:
+  info: info@brainworkup.org
+  support: support@example.com
+
+engine:
+  jupyter: "[Jupyter](https://jupyter.org)"
+  knitr: "[Knitr](<https://yihui.name/knitr>)"

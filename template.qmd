@@ -72,8 +72,10 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
-Sys.setenv(PATIENT_FIRST_NAME = "Biggie", RETURN_PLOT = FALSE)
-patient <- Sys.getenv("PATIENT_FIRST_NAME")
+
+Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = TRUE)
+
+patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 ```
 

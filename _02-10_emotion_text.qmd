@@ -1,9 +1,8 @@
-
 <<PROMPT>>
 
 Summarize and interpret this personality assessment using the PAI (Personality Assessment Inventory) as part of a comprehensive neuropsychological evaluation. For scores that are above average or higher, give a brief example of how this could impact the patient's daily functioning, cognitive functioning, social functioning, and emotional functioning. 
 
-Summarize and interpret this personality assessment using the BASC-3 Self-Report of Personality SRP) for children and adolescents as part of a comprehensive neuropsychological evaluation. For scores that are above average or higher, give a brief example of how this could impact the patient's daily functioning.
+Summarize and interpret this personality assessment using the BASC-3 Self-Report of Personality (SRP) for children and adolescents as part of a comprehensive neuropsychological evaluation. For scores that are above average or higher, give a brief example of how this could impact the patient's daily functioning.
 
 <<EXAMPLE>>
 

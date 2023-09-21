@@ -100,7 +100,6 @@ colors <- NULL
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
 
-# source(here::here("R", "dotplot.R"))
 bwu::dotplot(
   data = data,
   x = x,
