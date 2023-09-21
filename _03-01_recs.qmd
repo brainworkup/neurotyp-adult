@@ -1,6 +1,4 @@
-<!---
- # RECOMMENDATIONS {#sec-recs} 
---->
+# RECOMMENDATIONS {#sec-recs} 
 
 ## Recommendations for Medical/Healthcare
 

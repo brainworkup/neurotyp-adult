@@ -1,4 +1,3 @@
-
 ## Overall Evaluation Interpretation
 
 `r params$first_name` is a `r params$age`-year-old `r params$handedness`-handed `r params$sex` with a history of `r params$dx1`, `r params$dx2`, and `r params$dx3` who was referred for neuropsychological testing as part of a comprehensive work-up for attention-deficit/hyperactivity disorder. General cognitive ability is well within normal limits, and there is no evidence of decline from premorbid estimates. No deficits were detected in the domains of attention, processing speed, motor functioning, or visuospatial skills. Although many aspects of executive functioning, language functioning, and memory were within normal limits, she demonstrated mildly inefficient problem solving and hypothesis testing, weaknesses in word retrieval, and inefficiency in new learning of verbal information. There is no evidence of a mood disorder at this time.

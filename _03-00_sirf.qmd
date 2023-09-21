@@ -1,14 +1,4 @@
----
-format:
-  neurotyp-typst:
-    keep-typ: true
-params:
-  pheno: "sirf"
----
-
-<!---
- # SUMMARY/IMPRESSION {#sec-sirf} 
---->
+# SUMMARY/IMPRESSION {#sec-sirf} 
 
 ```{r}
 #| label: make-g
