@@ -1,12 +1,12 @@
 params:
   patient: Biggie
   first_name: Biggie
-  last_name: Ho
-  mrn: 002449433
-  dob: 2000-07-21
-  doe1: 2023-04-27
-  doe2: 2023-05-04
-  doe3: 2023-01-01
+  last_name: Smalls
+  mrn: NULL
+  dob: ''
+  doe1: ''
+  doe2: ''
+  doe3: ''
   sex: male
   sex_cap: Male
   age: 22

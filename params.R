@@ -3,7 +3,7 @@ quarto::quarto_render(
   execute_params = list(
     patient = "Biggie",
     first_name = "Biggie",
-    last_name = "Ho",
+    last_name = "Smalls",
     mrn = 000000000,
     dob = "1999-01-01",
     doe1 = "2023-01-01",
@@ -27,5 +27,5 @@ quarto::quarto_render(
     dx2 = "anxiety",
     dx3 = "depression"
   ),
-  output_file = "BiggieTypst.pdf"
+  output_file = "Biggie.pdf"
 )
