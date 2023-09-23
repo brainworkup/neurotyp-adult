@@ -22,7 +22,11 @@ bwu::save_as_markdown(text = txt, output_path)
 
 ## Referral
 
-`r params$first_name` was referred for neuropsychological testing as part of a comprehensive work-up for attention-deficit/hyperactivity disorder (ADHD). The results and recommendations were discussed with `r params$first_name` during the feedback visit on the final day of the evaluation and will be used in academic and treatment planning.
+`r params$first_name` was referred for neuropsychological testing as part of a
+comprehensive work-up for attention-deficit/hyperactivity disorder (ADHD).
+Findings from the evaluation will be used in formulating an effective academic
+and treatment strategy. Results and recommendations were discussed with `r
+params$first_name` during the feedback visit on the final day of the evaluation.
 
 ## Background
 
