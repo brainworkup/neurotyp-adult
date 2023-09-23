@@ -70,7 +70,7 @@ Family history of dysgraphia and ADHD.
 
 ### Cultural/Social Background
 
-Mr./Ms. `r params$last_name` is a Caucasian `r params$sex` who was born and raised in Brooklyn, NY with `r params$his_her` biological parents.
+`r params$first_name` is a Caucasian `r params$sex` who was born and raised in Brooklyn, NY with `r params$his_her` biological parents.
 `r params$he_she_cap` is single, never married, and has no children.
 
 ### Educational History
