@@ -91,7 +91,7 @@
   // Title row.
   align(center)[
     #block(text(font: sans-font, weight: 600, 1.75em, title))
-    #v(2.2em, weak: true)
+    #v(0em, weak: true)
   ]
 
   if date != none {

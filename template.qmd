@@ -44,7 +44,6 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
-Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = FALSE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 ```
@@ -54,19 +53,16 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 #| include: false
 neuropsychological_data <- bwu::load_data(here::here(patient))
 bwu::load_data(here::here(patient))
-# neuropsychological_data <- bwu::load_data(patient = ".")
-# bwu::load_data(patient = ".")
 ```
 
 ```{=typst}
 #let name = [Biggie Smalls]
 #let doe = [2023-01-01]
 #let patient = [Biggie]
-#v(2pt, weak: true)
+#v(0em, weak: true)
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
-
 {{< include _00-00_tests.qmd >}}
 
 {{< include _01-00_nse.qmd >}}
@@ -96,6 +92,8 @@ bwu::load_data(here::here(patient))
 {{< include _02-11_adaptive.qmd >}} 
 
 {{< include _03-00_sirf.qmd >}}
+
+{{< include _03-00_sirf_text.qmd >}}
 
 {{< include _03-01_recs.qmd >}}
 
