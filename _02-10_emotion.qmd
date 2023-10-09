@@ -112,7 +112,7 @@ data <-
 bwu::cat_neuropsych_results(
   data = data,
   file = "_02-10_emotion_text.qmd"
-  )
+)
 ```
 
 ```{r}
@@ -251,7 +251,7 @@ emotion <-
   dplyr::filter(data) |>
   dplyr::filter(domain %in% c(
     "Psychiatric Disorders", "Personality Disorders",
-    "Substance Use", "Behavioral/Emotional/Social"
+    "Substance Use", "Behavioral/Emotional/Socialx``"
   ))
 
 data <- emotion

@@ -32,6 +32,7 @@
   "projectManager.hg.maxDepthRecursion": 0,
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.wrappingIndent": "same"
+    "editor.wrappingIndent": "same",
+    "editor.cursorSurroundingLines": 0
   }
 }
