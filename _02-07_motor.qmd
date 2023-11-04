@@ -4,11 +4,14 @@
 
 ```{r}
 #| label: data-motor
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
 library(glue)
 library(bwu)
+
 data <- bwu::read_data(pheno = "motor")
 domains <- c("Motor")
 scales <- c(
@@ -47,6 +50,8 @@ data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-motor
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data, file = "_02-07_motor_text.qmd")
 ```
 
@@ -54,6 +59,7 @@ bwu::cat_neuropsych_results(data, file = "_02-07_motor_text.qmd")
 #| label: qtbl-motor
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -73,7 +79,6 @@ grp_motor <- list(
 vertical_padding <- 0
 multiline <- TRUE
 
-# source(here::here("R", "tbl_gt.R"))
 bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
@@ -89,6 +94,7 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-motor
+#| include: false
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
 # Arguments
@@ -140,7 +146,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Motor"
 #let file_qtbl = "table_motor.png"
-#let file_fig = "_02-07_motor_files/figure-typst/fig-motor-1.svg"
+#let file_fig = "fig_motor.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,

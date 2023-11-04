@@ -4,6 +4,8 @@
 
 ```{r}
 #| label: data-verbal
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -75,6 +77,8 @@ data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-verbal
 #| cache: true
+#| include: false
+
 data <- data_verbal
 bwu::cat_neuropsych_results(data, file = "_02-03_verbal_text.qmd")
 ```
@@ -83,6 +87,7 @@ bwu::cat_neuropsych_results(data, file = "_02-03_verbal_text.qmd")
 #| label: qtbl-verbal
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes

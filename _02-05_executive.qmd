@@ -4,6 +4,8 @@
 
 ```{r}
 #| label: data-executive
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -90,6 +92,8 @@ data <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-executive
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data, file = "_02-05_executive_text.qmd")
 ```
 
@@ -97,6 +101,7 @@ bwu::cat_neuropsych_results(data, file = "_02-05_executive_text.qmd")
 #| label: qtbl-executive
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # more filtering for exe tables
@@ -178,6 +183,7 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-executive
+#| include: false
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
 # Arguments

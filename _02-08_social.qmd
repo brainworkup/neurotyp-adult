@@ -4,6 +4,8 @@
 
 ```{r}
 #| label: data-social
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -31,7 +33,14 @@ scales <- c(
   "Faces II",
   "Names I",
   "Names II",
-  "CARS-2 HF Total Score"
+  "CARS-2 Total Score",
+  "Restricted/Repetitive Behaviors",
+  "Social Interaction",
+  "Social Communication",
+  "Emotional Responses",
+  "Cognitive Style",
+  "Maladaptive Speech",
+  "Autism Index"
 )
 data <-
   bwu::filter_data(
@@ -44,6 +53,8 @@ data <-
 ```{r}
 #| label: text-social
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data, file = "_02-08_social_text.qmd")
 ```
 
@@ -51,6 +62,7 @@ bwu::cat_neuropsych_results(data, file = "_02-08_social_text.qmd")
 #| label: qtbl-social
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -61,7 +73,7 @@ fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
 grp_social <- list(
   scaled_score = c("NEPSY-2", "ACS Social Cognition"),
-  t_score = c("CARS-2")
+  t_score = c("CARS-2", "GARS-3")
 )
 pheno <- "social"
 table_name <- "table_social"
@@ -83,12 +95,13 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-social
+#| include: false
 #| fig-cap: "Social cognition measures are used to gauge aspects of social-emotional processing and social aptitude (sometimes referred to as emotional intelligence), which are important facets of how individuals process social information about other children, adults, groups, and social contexts."
 
 # Arguments
 pheno <- "social"
-social <- dplyr::filter(data, scale != "CARS-2 HF Total Score") # this might not be necessary
-data <- social
+# social <- dplyr::filter(data, scale != "CARS-2 Total Score") # this might not be necessary
+# data <- social
 x <- data$z_mean_narrow
 y <- data$narrow
 colors <- NULL
@@ -137,7 +150,7 @@ figure([#image(file_fig, width: auto)],
 ```{=typst}
 #let title = "Social Cognition"
 #let file_qtbl = "table_social.png"
-#let file_fig = "_02-08_social_files/figure-typst/fig-social-1.svg"
+#let file_fig = "fig_social.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,

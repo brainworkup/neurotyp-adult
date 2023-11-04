@@ -4,11 +4,14 @@
 
 ```{r}
 #| label: data-spatial
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
 library(glue)
 library(bwu)
+
 # Read data and filter
 pheno <- "spatial"
 data <- bwu::read_data(pheno = pheno)
@@ -54,6 +57,8 @@ data <-
 ```{r}
 #| label: text-spatial
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data, file = "_02-04_spatial_text.qmd")
 ```
 
@@ -61,6 +66,7 @@ bwu::cat_neuropsych_results(data, file = "_02-04_spatial_text.qmd")
 #| label: qtbl-spatial
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -96,6 +102,7 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-spatial
+#| include: false
 #| fig-cap: "Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
 # Arguments

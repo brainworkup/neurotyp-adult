@@ -4,6 +4,8 @@
 
 ```{r}
 #| label: data-memory
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -100,6 +102,8 @@ data <-
 ```{r}
 #| label: text-memory
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data, file = "_02-06_memory_text.qmd")
 ```
 
@@ -107,6 +111,7 @@ bwu::cat_neuropsych_results(data, file = "_02-06_memory_text.qmd")
 #| label: qtbl-memory
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -125,7 +130,6 @@ grp_memory <- list(
 vertical_padding <- 0
 multiline <- TRUE
 
-# source(here::here("R", "tbl_gt.R"))
 bwu::tbl_gt(data,
   pheno = pheno,
   table_name = table_name,
@@ -143,6 +147,7 @@ bwu::tbl_gt(data,
 
 ```{r}
 #| label: fig-memory
+#| include: false
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
 
 exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
@@ -202,7 +207,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Learning and Memory"
 #let file_qtbl = "table_memory.png"
-#let file_fig = "_02-06_memory_files/figure-typst/fig-memory-1.svg"
+#let file_fig = "fig_memory.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,

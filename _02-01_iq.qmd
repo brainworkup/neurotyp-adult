@@ -4,6 +4,7 @@
 
 ```{r}
 #| label: data-iq
+#| include: false
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -60,6 +61,7 @@ data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-iq
 #| cache: true
+#| include: false
 
 # data <- data_iq
 bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
@@ -69,12 +71,13 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 #| label: qtbl-iq
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaltEngine = "xetex")
 
 # footnotes
 fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 
-data <- data_iq
+# data <- data_iq
 pheno <- "iq"
 table_name <- "table_iq"
 grp_iq <- list(
@@ -100,6 +103,7 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-iq
+#| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
 # Arguments

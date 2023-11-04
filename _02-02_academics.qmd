@@ -4,6 +4,8 @@
 
 ```{r}
 #| label: data-academics
+#| include: false
+
 library(bwu)
 library(tidyverse)
 library(gt)
@@ -84,6 +86,8 @@ data_academics <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-academics
 #| cache: true
+#| include: false
+
 bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text.qmd")
 ```
 
@@ -91,6 +95,7 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 #| label: qtbl-academics
 #| dev: tikz
 #| fig-process: pdf2png
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -120,6 +125,7 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-academics
+#| include: false
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
 # Arguments
@@ -156,7 +162,9 @@ bwu::dotplot(
           supplement: [*Table*],
           ),
         figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.]),
+          caption: figure.caption(position: bottom, [
+            _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
+            ]),
           placement: none,
           kind: "image",
           supplement: [*Fig.*],
