@@ -151,7 +151,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Visual Perception/Construction"
 #let file_qtbl = "table_spatial.png"
-#let file_fig = "_02-04_spatial_files/figure-typst/fig-spatial-1.svg"
+#let file_fig = "fig_spatial.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,

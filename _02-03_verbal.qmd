@@ -171,7 +171,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
-#let file_fig = "_02-03_verbal_files/figure-typst/fig-verbal-1.svg"
+#let file_fig = "fig_verbal.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,

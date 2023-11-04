@@ -60,8 +60,9 @@ data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-iq
 #| cache: true
-data <- data_iq
-bwu::cat_neuropsych_results(data, file = "_02-01_iq_text.qmd")
+
+# data <- data_iq
+bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 ```
 
 ```{r}
@@ -86,7 +87,7 @@ vertical_padding <- 0
 multiline <- TRUE
 
 bwu::tbl_gt(
-  data = data,
+  data = data_iq,
   pheno = pheno,
   table_name = table_name,
   fn_standard_score = fn_standard_score,
@@ -108,7 +109,8 @@ iq <-
     data,
     scale %in% c(
       "General Ability", "Crystallized Knowledge", "Fluid Reasoning",
-      "Premorbid Ability", "TOPF Standard Score", "Word Reading", "NAB Executive Functions Index"
+      "Premorbid Ability", "TOPF Standard Score", "Word Reading", "NAB Executive
+      Functions Index", "Verbal Comprehension (VCI)", "Perceptual Reasoning (PRI)"
     )
   )
 data <- iq
@@ -159,7 +161,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "General Cognitive Ability"
 #let file_qtbl = "table_iq.png"
-#let file_fig = "_02-01_iq_files/figure-typst/fig-iq-1.svg"
+#let file_fig = "fig_iq.svg"
 #domain(
   title: [#title Index Scores],
   file_qtbl,

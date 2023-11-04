@@ -9,7 +9,7 @@ pheno <- "emotion"
 data <- bwu::read_data(pheno = pheno)
 domains <- c(
   "Psychiatric Disorders", "Personality Disorders", "Substance Use",
-  "Psychosocial Problems", "Behavioral/Emotional/Social"
+  "Psychosocial Problems", "Behavioral/Emotional/Social", "Emotional/Behavioral/Personality"
 )
 scales <- c(
   "Activity Level",
@@ -137,7 +137,8 @@ data2 <-
     "Psychiatric Disorders",
     "Personality Disorders",
     "Substance Use",
-    "Behavioral/Emotional/Social"
+    "Behavioral/Emotional/Social",
+    "Emotional/Behavioral/Personality"
   )) |>
   dplyr::arrange(test_name) |>
   dplyr::arrange(subdomain) |>
@@ -251,7 +252,7 @@ emotion <-
   dplyr::filter(data) |>
   dplyr::filter(domain %in% c(
     "Psychiatric Disorders", "Personality Disorders",
-    "Substance Use", "Behavioral/Emotional/Socialx``"
+    "Substance Use", "Behavioral/Emotional/Social", "Emotional/Behavioral/Personality"
   ))
 
 data <- emotion
