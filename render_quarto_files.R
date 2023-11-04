@@ -1,7 +1,7 @@
 # Load the necessary library
 library(purrr)
 
-Sys.setenv(PATIENT = "Ashish", RETURN_PLOT = TRUE)
+Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = TRUE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 
