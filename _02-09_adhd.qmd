@@ -31,6 +31,28 @@ data <-
 ```
 
 ```{r}
+#| label: data-adhd-brown
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(glue)
+library(bwu)
+data <- bwu::read_data(pheno = "adhd")
+domains <- c("ADHD")
+scales <- c(
+  "Activation",
+  "Focus",
+  "Effort",
+  "Emotion",
+  "Memory",
+  "Action",
+  "Total Composite"
+)
+data <- bwu::filter_data(data, domain = domains, scale = scales)
+```
+
+
+```{r}
 #| label: text-adhd-sr
 #| cache: true
 
@@ -51,7 +73,7 @@ bwu::cat_neuropsych_results(data = data_sr, file = "_02-09_adhd_text.qmd")
 # Observer reports
 data_or <-
   data |>
-  dplyr::filter(test == "cefi_or" | test == "caars_or") |>
+  dplyr::filter(test == "cefi_or" | test == "caars_or" | test == "brown_efa_parent") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 
@@ -145,6 +167,40 @@ bwu::tbl_gt(
 ```
 
 ```{r}
+#| label: qtbl-adhd-or-brown
+#| dev: tikz
+#| fig-process: pdf2png
+#| eval: true
+options(tikzDefaultEngine = "xetex")
+
+# footnotes
+fn_t_score <- gt::md("Brown EF/A: *T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]; higher scores reflect reduced functioning.")
+
+# Observer-Report
+data <- dplyr::arrange(data_or, absort)
+pheno <- "observer_report"
+table_name <- "table_or"
+fn_t_score <- fn_t_score
+grp_or <- list(t_score = c("Brown EF/A Parent Ratings"))
+vertical_padding <- 0
+multiline <- TRUE
+
+# Observer-Report
+bwu::tbl_gt(
+  data = data,
+  pheno = pheno,
+  table_name = table_name,
+  fn_t_score = fn_t_score,
+  grp_t_score = grp_or[["t_score"]],
+  dynamic_grp = grp_or,
+  vertical_padding = vertical_padding,
+  multiline = multiline
+)
+```
+
+
+
+```{r}
 #| label: fig-caars
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
@@ -193,6 +249,31 @@ bwu::dotplot(
   filename = filename
 )
 ```
+
+```{r}
+#| label: fig-brown
+#| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
+
+# data for brown efa dotplot
+pheno <- "brown"
+data_brown <- dplyr::filter(data, filename %in% c("brown_efa_parent.csv", "brown_efa_self.csv"))
+colors <- NULL
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "brown_efa.svg"
+x <- data_brown$z_mean_narrow
+y <- data_brown$narrow
+
+# Make dotplot
+bwu::dotplot(
+  data = data_brown,
+  x = x,
+  y = y,
+  colors = NULL,
+  return_plot = return_plot
+)
+```
+
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
