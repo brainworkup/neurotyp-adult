@@ -46,7 +46,7 @@ scales <- c(
   "Visual Puzzles",
   "Visuospatial/Constructional Index"
 )
-data <-
+data_spatial <-
   bwu::filter_data(
     data,
     domain = domains,
@@ -59,7 +59,7 @@ data <-
 #| cache: true
 #| include: false
 
-bwu::cat_neuropsych_results(data, file = "_02-04_spatial_text.qmd")
+bwu::cat_neuropsych_results(data = data_spatial, file = "_02-04_spatial_text.qmd")
 ```
 
 ```{r}
@@ -78,21 +78,22 @@ fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 grp_spatial <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2"),
   standard_score = c("NAB"),
-  t_score = c("NAB", "Rey Complex Figure")
+  t_score = c("NAB", "Rey Complex Figure", "WASI-2")
 )
 pheno <- "spatial"
 table_name <- "table_spatial"
 vertical_padding <- 0
 multiline <- TRUE
 
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data_spatial,
   pheno = pheno,
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
-  # fn_standard_score = fn_standard_score,
+  fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
   grp_scaled_score = grp_spatial[["scaled_score"]],
-  # grp_standard_score = grp_spatial[["standard_score"]],
+  grp_standard_score = grp_spatial[["standard_score"]],
   grp_t_score = grp_spatial[["t_score"]],
   dynamic_grp = grp_spatial,
   vertical_padding = vertical_padding,
@@ -106,18 +107,16 @@ bwu::tbl_gt(data,
 #| fig-cap: "Perception, construction, and visuospatial processing refer to abilities such as mentally visualizing how objects should look from different angles, visualizing how to put objects together so that they fit correctly, and being able to accurately and efficiently copy and/or reproduce visual-spatial information onto paper."
 
 # Arguments
-pheno <- "spatial"
-spatial <- dplyr::filter(data, !is.na(percentile), subdomain != "Spatial")
-data <- spatial
-x <- data$z_mean_subdomain
-y <- data$subdomain
+x <- data_spatial$z_mean_subdomain
+y <- data_spatial$subdomain
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
+# return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_spatial.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data,
+  data = data_spatial,
   x = x,
   y = y,
   colors = colors,
@@ -140,12 +139,13 @@ bwu::dotplot(
           supplement: [*Table*],
           ),
         figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [Perception, construction,
-          and visuospatial processing refer to abilities such as mentally
-          visualizing how objects should look from different angles, visualizing
-          how to put objects together so that they fit correctly, and being able
-          to accurately and efficiently copy and/or reproduce visual-spatial
-          information onto paper.]),
+          caption: figure.caption(position: bottom, [
+            Perception, construction, and visuospatial processing refer to
+            abilities such as mentally visualizing how objects should look from
+            different angles, visualizing how to put objects together so that
+            they fit correctly, and being able to accurately and efficiently
+            copy and/or reproduce visual-spatial information onto paper.
+            ]),
           placement: none,
           kind: "image",
           supplement: [*Fig.*],

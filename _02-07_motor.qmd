@@ -37,6 +37,7 @@ scales <- c(
   "Left-Hand Time",
   "Non-Dominant Hand Time",
   "Nondominant Hand",
+  "Nondominant Hand Time",
   "Repetitions vs. Sequences",
   "Right-Hand Time",
   "Visuomotor Precision Errors",
@@ -44,7 +45,7 @@ scales <- c(
   "Visuomotor Precision Time",
   "Visuomotor Precision"
 )
-data <- bwu::filter_data(data, domain = domains, scale = scales)
+data_motor <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -52,7 +53,7 @@ data <- bwu::filter_data(data, domain = domains, scale = scales)
 #| cache: true
 #| include: false
 
-bwu::cat_neuropsych_results(data, file = "_02-07_motor_text.qmd")
+bwu::cat_neuropsych_results(data = data_motor, file = "_02-07_motor_text.qmd")
 ```
 
 ```{r}
@@ -67,7 +68,6 @@ fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
-z_score_label <- "_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
 pheno <- "motor"
 table_name <- "table_motor"
@@ -79,7 +79,8 @@ grp_motor <- list(
 vertical_padding <- 0
 multiline <- TRUE
 
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data_motor,
   pheno = pheno,
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
@@ -97,17 +98,16 @@ bwu::tbl_gt(data,
 #| include: false
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
-# Arguments
-motor <- dplyr::filter(data, !is.na(percentile))
-data <- motor
-x <- data$z_mean_narrow
-y <- data$narrow
+# args
+x <- data_motor$z_mean_narrow
+y <- data_motor$narrow
 colors <- NULL
+# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
 
 bwu::dotplot(
-  data = data,
+  data = data_motor,
   x = x,
   y = y,
   colors = colors,

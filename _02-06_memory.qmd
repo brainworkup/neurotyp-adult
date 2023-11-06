@@ -11,6 +11,7 @@ library(gt)
 library(gtExtras)
 library(glue)
 library(bwu)
+
 # read and filter data
 pheno <- "memory"
 data <- bwu::read_data(pheno = pheno)
@@ -76,22 +77,30 @@ scales <- c(
   # "Total Hits",
   "Total Intrusions",
   "Total Repetitions",
-  # "Trial 1 Correct",
-  # "Trial 1 Free Recall Correct",
+  "Trial 1 Correct",
+  "Trial 1 Free Recall Correct",
   # "Trial 2 Correct",
   # "Trial 3 Correct",
-  # "Trial 4 Correct",
-  # "Trial 5 Correct",
-  # "Trial 5 Free Recall Correct",
+  "Trial 4 Correct",
+  "Trial 5 Correct",
+  "Trial 5 Free Recall Correct",
   "Trials 1-4 Correct",
   "Trials 1-5 Correct",
   "Trials 1-5 Free Recall Correct",
   "Visual Reproduction I",
   "Visual Reproduction II",
   "Word List Interference-Recall",
-  "Word List Interference-Repetition"
+  "Word List Interference-Repetition",
+  "List Memory Total Trials 1-5",
+  "List Memory Total and Delayed Recall",
+  "List Memory Repetitions",
+  "List Memory Intrusions",
+  "List Memory Learning Effect",
+  "List Memory Interference Effect",
+  "List Memory Delay Effect"
 )
-data <-
+
+data_memory <-
   bwu::filter_data(
     data,
     domain = domains,
@@ -104,7 +113,7 @@ data <-
 #| cache: true
 #| include: false
 
-bwu::cat_neuropsych_results(data, file = "_02-06_memory_text.qmd")
+bwu::cat_neuropsych_results(data = data_memory, file = "_02-06_memory_text.qmd")
 ```
 
 ```{r}
@@ -130,7 +139,8 @@ grp_memory <- list(
 vertical_padding <- 0
 multiline <- TRUE
 
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data_memory,
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
@@ -150,18 +160,16 @@ bwu::tbl_gt(data,
 #| include: false
 #| fig-cap: "Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory."
 
+# args
 exclude <- c("CVLT-3 Total Intrusions", "CVLT-3 Total Repetitions", "CVLT-3 Forced-Choice Recognition Hits")
 
-# Arguments
-pheno <- "memory"
-memory <- data |>
-  dplyr::filter(!is.na(percentile)) |>
-  dplyr::filter(scale != "NAB Memory Index") |>
-  dplyr::filter(!scale %in% exclude)
+# memory <- data |>
+#   dplyr::filter(!is.na(percentile)) |>
+#   dplyr::filter(scale != "NAB Memory Index") |>
+#   dplyr::filter(!scale %in% exclude)
 
-data <- memory
-x <- data$z_mean_narrow
-y <- data$narrow
+x <- data_memory$z_mean_narrow
+y <- data_memory$narrow
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
@@ -169,7 +177,7 @@ filename <- "fig_memory.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data,
+  data = data_memory,
   x = x,
   y = y,
   colors = colors,

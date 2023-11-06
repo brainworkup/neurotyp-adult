@@ -51,8 +51,7 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 ```{r}
 #| label: data-load
 #| include: false
-neuropsychological_data <- bwu::load_data(here::here(patient))
-bwu::load_data(here::here(patient))
+bwu::load_data(here::here("."))
 ```
 
 ```{=typst}
@@ -63,6 +62,7 @@ bwu::load_data(here::here(patient))
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
+
 {{< include _00-00_tests.qmd >}}
 
 {{< include _01-00_nse.qmd >}}
@@ -87,7 +87,7 @@ bwu::load_data(here::here(patient))
 
 {{< include _02-09_adhd.qmd >}}
 
-{{< include _02-10_emotion.qmd >}}
+{{< include _02-10_emotion_adult.qmd >}}
 
 {{< include _02-11_adaptive.qmd >}} 
 

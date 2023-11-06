@@ -65,8 +65,9 @@ scales <- c(
   "Speeded Naming",
   "Vocabulary",
   "Word Classes",
-  "Word Generation-Initial Letter",
-  "Word Generation-Semantic",
+  "Word Generation Initial Letter",
+  "Word Generation Semantic",
+  "Semantic vs. Initial Letter",
   "Word Generation",
   "Word Structure",
   "Writing"
@@ -79,8 +80,7 @@ data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 #| cache: true
 #| include: false
 
-data <- data_verbal
-bwu::cat_neuropsych_results(data, file = "_02-03_verbal_text.qmd")
+bwu::cat_neuropsych_results(data = data_verbal, file = "_02-03_verbal_text.qmd")
 ```
 
 ```{r}
@@ -96,27 +96,26 @@ fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th�
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- "_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
-data <- data_verbal
 pheno <- "verbal"
 table_name <- "table_verbal"
 grp_verbal <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS"),
   standard_score = c("NAB"),
-  t_score = c("NAB", "NIH EXAMINER")
+  t_score = c("NAB", "NIH EXAMINER", "WASI-2")
 )
 vertical_padding <- 0
 multiline <- TRUE
 
 bwu::tbl_gt(
-  data = data,
+  data = data_verbal,
   pheno = pheno,
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
-  # fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
+  fn_standard_score = fn_standard_score,
   grp_scaled_score = grp_verbal[["scaled_score"]],
-  # grp_standard_score = grp_verbal[["standard_score"]],
   grp_t_score = grp_verbal[["t_score"]],
+  grp_standard_score = grp_verbal[["standard_score"]],
   dynamic_grp = grp_verbal,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -125,21 +124,21 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-verbal
+#| include: false
 #| fig-cap: "Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words."
 
-# Arguments
-pheno <- "verbal"
-verbal <- dplyr::filter(data, subdomain != "Language")
-data <- verbal
-x <- data$z_mean_subdomain
-y <- data$subdomain
+# args
+data_verbal <- dplyr::filter(data_verbal, subdomain != "Language")
+x <- data_verbal$z_mean_subdomain
+y <- data_verbal$subdomain
 colors <- NULL
+# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_verbal.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data,
+  data = data_verbal,
   x = x,
   y = y,
   colors = colors,

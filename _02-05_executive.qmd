@@ -11,6 +11,7 @@ library(gt)
 library(gtExtras)
 library(glue)
 library(bwu)
+
 # read and filter data
 pheno <- "executive"
 data <- bwu::read_data(pheno = pheno)
@@ -84,9 +85,11 @@ scales <- c(
   "Word Generation",
   "Word Generation Perseverations",
   "Working Memory (WMI)",
-  "Zoo Locations"
+  "Zoo Locations",
+  "List Memory Repetitions",
+  "List Memory Intrusions"
 )
-data <- bwu::filter_data(data, domain = domains, scale = scales)
+data_executive <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -94,7 +97,7 @@ data <- bwu::filter_data(data, domain = domains, scale = scales)
 #| cache: true
 #| include: false
 
-bwu::cat_neuropsych_results(data, file = "_02-05_executive_text.qmd")
+bwu::cat_neuropsych_results(data = data_executive, file = "_02-05_executive_text.qmd")
 ```
 
 ```{r}
@@ -105,76 +108,76 @@ bwu::cat_neuropsych_results(data, file = "_02-05_executive_text.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # more filtering for exe tables
-data <- dplyr::filter(data, test_name != "CVLT-3 Brief") |>
-  dplyr::filter(scale != "Orientation") |>
-  dplyr::filter(scale %in% c(
-    # "D-KEFS Inhibition Total Errors",
-    "D-KEFS Inhibition",
-    # "D-KEFS Switching Total Errors",
-    "D-KEFS Switching",
-    "NAB Attention Index",
-    "Digits Forward",
-    # "Digits Forward Longest Span",
-    "Digits Backward",
-    # "Digits Backward Longest Span",
-    "Dots",
-    "Numbers & Letters Part A Efficiency",
-    "Numbers & Letters Part B Efficiency",
-    "Numbers & Letters Part C Efficiency",
-    "Numbers & Letters Part D Efficiency",
-    "Driving Scenes",
-    "NAB Executive Functions Index",
-    "Mazes",
-    "Categories",
-    "Word Generation",
-    # "Word Generation Perseverations",
-    "Judgment",
-    "Working Memory (WMI)",
-    "Arithmetic",
-    "Digit Span",
-    "Longest Digit Span Forward",
-    "Longest Digit Span Backward",
-    "Longest Digit Span Sequence",
-    "Letter-Number Sequencing",
-    "Symbol Span",
-    "Spatial Span",
-    "Picture Span",
-    "Processing Speed (PSI)",
-    "Coding",
-    "Cancellation",
-    "Symbol Search",
-    "TMT, Part A",
-    "TMT, Part B",
-    "Unstructured Task",
-    "Attention Index"
-  ))
+# data_executive <- dplyr::filter(data = data_executive, test_name != "CVLT-3 Brief") |>
+#   dplyr::filter(scale != "Orientation") |>
+#   dplyr::filter(scale %in% c(
+#     # "D-KEFS Inhibition Total Errors",
+#     "D-KEFS Inhibition",
+#     # "D-KEFS Switching Total Errors",
+#     "D-KEFS Switching",
+#     "NAB Attention Index",
+#     "Digits Forward",
+#     # "Digits Forward Longest Span",
+#     "Digits Backward",
+#     # "Digits Backward Longest Span",
+#     "Dots",
+#     "Numbers & Letters Part A Efficiency",
+#     "Numbers & Letters Part B Efficiency",
+#     "Numbers & Letters Part C Efficiency",
+#     "Numbers & Letters Part D Efficiency",
+#     "Driving Scenes",
+#     "NAB Executive Functions Index",
+#     "Mazes",
+#     "Categories",
+#     "Word Generation",
+#     # "Word Generation Perseverations",
+#     "Judgment",
+#     "Working Memory (WMI)",
+#     "Arithmetic",
+#     "Digit Span",
+#     "Longest Digit Span Forward",
+#     "Longest Digit Span Backward",
+#     "Longest Digit Span Sequence",
+#     "Letter-Number Sequencing",
+#     "Symbol Span",
+#     "Spatial Span",
+#     "Picture Span",
+#     "Processing Speed (PSI)",
+#     "Coding",
+#     "Cancellation",
+#     "Symbol Search",
+#     "TMT, Part A",
+#     "TMT, Part B",
+#     "Unstructured Task",
+#     "Attention Index"
+#   ))
 
 # footnotes
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
-z_score_label <- "_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
 
 pheno <- "executive"
 table_name <- "table_executive"
 grp_executive <- list(
-  scaled_score = c("WAIS-IV", "D-KEFS"),
-  standard_score = c("NAB"),
+  scaled_score = c("WAIS-IV", "D-KEFS", "NEPSY-2", "WISC-5"),
+  standard_score = c("NAB", "WISC-5", "WAIS-IV"),
   t_score = c("NAB", "NIH EXAMINER", "Trail Making Test")
 )
 vertical_padding <- 0
 multiline <- TRUE
 
-bwu::tbl_gt(data,
+bwu::tbl_gt(
+  data = data_executive,
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
   fn_scaled_score = fn_scaled_score,
-  # fn_standard_score = fn_standard_score,
+  fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
   grp_scaled_score = grp_executive[["scaled_score"]],
-  # grp_standard_score = grp_executive[["standard_score"]],
+  grp_standard_score = grp_executive[["standard_score"]],
   grp_t_score = grp_executive[["t_score"]],
   dynamic_grp = grp_executive,
   multiline = multiline
@@ -186,17 +189,16 @@ bwu::tbl_gt(data,
 #| include: false
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
-# Arguments
-executive <- dplyr::filter(data, !is.na(percentile))
-data <- executive
-x <- data$z_mean_subdomain
-y <- data$subdomain
+# args
+x <- data_executive$z_mean_subdomain
+y <- data_executive$subdomain
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
+# return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_executive.svg"
 
 bwu::dotplot(
-  data = data,
+  data = data_executive,
   x = x,
   y = y,
   colors = colors,
