@@ -1,6 +1,6 @@
 #let report(
   title: none,
-  author: "Joey Trampush, PhD",
+  author: "Joey W. Trampush, Ph.D.",
   name: [],
   doe: [],
   patient: [],

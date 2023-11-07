@@ -1,39 +1,5 @@
 # RECOMMENDATIONS {#sec-recs} 
 
-## Treatment Implications
-
-Given Biggie's age and status as a college student, immediate therapeutic intervention is necessary. Multimodal treatment combining pharmacotherapy (e.g., SSRIs for depression and anxiety) and psychotherapy (e.g., DBT or CBT focused on emotional regulation and cognitive restructuring) should be considered. Due to the severity of symptoms, continuous risk assessment for self-harm or suicidal tendencies should be integrated into his treatment plan.
-
-Given Biggie's complex clinical profile with exceptionally high scores on various scales related to anxiety, depression, thought disorders, and borderline features, a multimodal treatment approach is warranted. Here are some targeted treatment considerations:
-
-### Pharmacotherapy
-1. **Antidepressants (SSRIs, SNRIs)**: Given the exceptionally high scores in depression and anxiety, these medications could help regulate Biggie's mood and anxiety levels, thus improving his daily emotional and cognitive functioning.
-  
-2. **Antipsychotics**: If the elevated thought disorder and schizophrenia-related scores are of immediate concern, low-dose antipsychotic medication may be considered for short-term stabilization.
-
-3. **Mood Stabilizers**: Given the high score on affective instability and borderline features, mood stabilizers such as lithium or antiepileptics might help regulate Biggie's emotional responses.
-
-### Psychotherapy
-1. **Cognitive Behavioral Therapy (CBT)**: This could help Biggie deal with anxiety, depression, and phobias by targeting maladaptive thought patterns and behaviors.
-
-2. **Dialectical Behavior Therapy (DBT)**: Given the high scores related to borderline features and affective instability, DBT can be highly effective in teaching emotional regulation and interpersonal effectiveness.
-
-3. **Trauma-Informed Therapy**: The high-average score on traumatic stress suggests that trauma-specific interventions might be necessary.
-
-4. **Family Therapy**: Given the complexities of Biggie's profile, family involvement could provide additional support and could be particularly helpful given the score on negative relationships.
-
-### Academic Accommodations
-Biggie may benefit from academic accommodations such as extended time for tests and a quieter testing environment, considering his high levels of anxiety and thought disorder symptoms affecting his cognitive functioning.
-
-### Continuous Monitoring
-1. **Suicidal Ideation**: Due to the above-average score on suicidal ideation, Biggie should be closely monitored for risk of self-harm or suicidal tendencies. Emergency contacts and safety plans should be established.
-
-2. **Medication Compliance and Side-effects**: Regular follow-ups are essential to monitor the effectiveness of pharmacotherapy and any potential side effects.
-
-3. **Efficacy of Therapy**: Regular assessments should be conducted to evaluate the efficacy of therapeutic interventions.
-
-Given Biggie's age and educational setting, it's crucial that he has immediate access to a coordinated care team, ideally within a college mental health service setting if available, to monitor his progress and adjust treatment plans accordingly.
-
 ## Recommendations for Medical/Healthcare
 
 - Treatment options for ADHD include a combination of behavioral techniques, consideration of stimulant medication, environmental organization, and the maintenance of a long-term perspective of ADHD as a chronic condition. `r params$first_name` may wish to discuss whether medical treatment of `r params$his_her` symptoms is indicated with one of our psychiatrists.
@@ -63,7 +29,7 @@ Given Biggie's age and educational setting, it's crucial that he has immediate a
 
 - High quality sleep, balanced nutrition, and frequent, vigorous exercise are critical to maximizing attention and focus.
 
-### Books and online recommendations
+### Books and Online Materials
 
 - [Taking Charge of Adult ADHD, Second Edition: Proven Strategies to Succeed at Work, at Home, and in Relationships](https://www.guilford.com/books/Taking-Charge-of-Adult-ADHD/Russell-Barkley/9781462546855)
 

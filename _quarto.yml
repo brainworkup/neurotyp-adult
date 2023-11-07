@@ -1,6 +1,5 @@
 project:
   title: 'NEUROCOGNITIVE EXAMINATION'
-  # output-dir: neuro_report
   # pre-render: prerender.R
   render:
     - _02-01_iq.qmd
