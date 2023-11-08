@@ -1,5 +1,5 @@
 #let report(
-  title: none,
+  title: "NEUROCOGNITIVE EXAMINATION",
   author: "Joey W. Trampush, Ph.D.",
   name: [],
   doe: [],

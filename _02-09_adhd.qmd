@@ -4,6 +4,9 @@
 
 ```{r}
 #| label: data-adhd
+#| eval: false
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -23,7 +26,7 @@ scales <- eval(parse(text = paste("c(", inner_string, ")", sep = "")))
 
 data <- bwu::read_data(pheno = pheno)
 
-data <-
+data_adhd <-
   bwu::filter_data(data,
     domain = domains,
     scale = scales
@@ -31,7 +34,9 @@ data <-
 ```
 
 ```{r}
-#| label: data-adhd-brown
+#| label: data-adhd2
+#| include: false
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -46,19 +51,38 @@ scales <- c(
   "Emotion",
   "Memory",
   "Action",
-  "Total Composite"
+  "Total Composite",
+  "CAARS-SR Inattention/Memory Problems", "CAARS-SR Hyperactivity/Restlessness",
+  "CAARS-SR Impulsivity/Emotional Lability", "CAARS-SR Problems with
+  Self-Concept", "CAARS-SR DSM-5 Inattentive Symptoms", "CAARS-SR DSM-5
+  Hyperactive-Impulsive Symptoms", "CAARS-SR DSM-5 ADHD Symptoms Total",
+  "CAARS-SR ADHD Index", "CEFI-SR Full Scale", "CEFI-SR Attention", "CEFI-SR
+  Emotion Regulation", "CEFI-SR Flexibility", "CEFI-SR Inhibitory Control",
+  "CEFI-SR Initiation", "CEFI-SR Organization", "CEFI-SR Planning", "CEFI-SR
+  Self-Monitoring", "CEFI-SR Working Memory", "CAARS-OR Inattention/Memory
+  Problems", "CAARS-OR Hyperactivity/Restlessness", "CAARS-OR
+  Impulsivity/Emotional Lability", "CAARS-OR Problems with Self-Concept",
+  "CAARS-OR DSM-5 Inattentive Symptoms", "CAARS-OR DSM-5 Hyperactive-Impulsive
+  Symptoms", "CAARS-OR DSM-5 ADHD Symptoms Total", "CAARS-OR ADHD Index",
+  "CEFI-OR Full Scale", "CEFI-OR Attention", "CEFI-OR Emotion Regulation",
+  "CEFI-OR Flexibility", "CEFI-OR Inhibitory Control", "CEFI-OR Initiation",
+  "CEFI-OR Organization", "CEFI-OR Planning", "CEFI-OR Self-Monitoring",
+  "CEFI-OR Working Memory"
 )
-data <- bwu::filter_data(data, domain = domains, scale = scales)
+
+data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 
 ```{r}
-#| label: text-adhd-sr
+#| label: text-adhd-self
 #| cache: true
+#| eval: false
+#| include: false
 
 # Self-report
 data_sr <-
-  data |>
+  data_adhd |>
   dplyr::filter(test == "cefi_sr" | test == "caars_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
@@ -67,9 +91,43 @@ bwu::cat_neuropsych_results(data = data_sr, file = "_02-09_adhd_text.qmd")
 ```
 
 ```{r}
-#| label: text-adhd-or
+#| label: text-adhd-observer
 #| cache: true
+#| eval: false
+#| include: false
 
+# Observer reports
+data_or <-
+  data |>
+  dplyr::filter(test == "cefi_or" | test == "caars_or") |>
+  dplyr::arrange(dplyr::desc(percentile)) |>
+  dplyr::distinct(.keep_all = FALSE)
+
+# Flatten the text
+bwu::cat_neuropsych_results(data = data_or, file = "_02-09_adhd_text.qmd")
+```
+
+```{r}
+#| label: text-adhd-parent
+#| cache: true
+#| eval: true
+#| include: false
+
+# parent reports
+data_adhd_parent <-
+  data_adhd |>
+  dplyr::filter(test == "cefi_or" | test == "caars_or" | test == "brown_efa_parent")
+
+# Flatten the text
+bwu::cat_neuropsych_results(data = data_adhd_parent, file = "_02-09_adhd_text.qmd")
+```
+
+```{r}
+#| label: text-adhd-teacher
+#| cache: true
+#| eval: false
+#| include: false
+TODO:
 # Observer reports
 data_or <-
   data |>
@@ -85,6 +143,8 @@ bwu::cat_neuropsych_results(data = data_or, file = "_02-09_adhd_text.qmd")
 #| label: qtbl-adhd-sr
 #| dev: tikz
 #| fig-process: pdf2png
+#| eval: false
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 grp_adhd <- list(
@@ -132,6 +192,8 @@ bwu::tbl_gt(
 #| label: qtbl-adhd-or
 #| dev: tikz
 #| fig-process: pdf2png
+#| eval: false
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
@@ -167,41 +229,48 @@ bwu::tbl_gt(
 ```
 
 ```{r}
-#| label: qtbl-adhd-or-brown
+#| label: qtbl-adhd-parent
 #| dev: tikz
 #| fig-process: pdf2png
 #| eval: true
+#| include: false
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_t_score <- gt::md("Brown EF/A: *T* Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]; higher scores reflect reduced functioning.")
+source_note <- gt::md("Brown EF/A Scale *T* Scores: Mean = 50 [50th‰], SD ± 10
+[16th‰, 84th‰].
 
-# Observer-Report
-data <- dplyr::arrange(data_or, absort)
-pheno <- "observer_report"
-table_name <- "table_or"
-fn_t_score <- fn_t_score
-grp_or <- list(t_score = c("Brown EF/A Parent Ratings"))
+High scores reflect difficulties in executive functioning.")
+
+# fn_t_score <- gt::md("Brown EF/A Scales: *T* Score: Mean = 50 [50th‰], SD ± 10
+# [16th‰, 84th‰]; higher scores reflect difficulties in executive functioning.")
+
+# parent report
+# data <- dplyr::arrange(data_or, absort)
+pheno <- "adhd_parent"
+table_name <- "table_adhd_parent"
+grp_adhd_parent <- list(t_score = c("Brown EF/A Parent Ratings"))
 vertical_padding <- 0
 multiline <- TRUE
 
-# Observer-Report
 bwu::tbl_gt(
-  data = data,
+  data = data_adhd_parent,
   pheno = pheno,
   table_name = table_name,
-  fn_t_score = fn_t_score,
-  grp_t_score = grp_or[["t_score"]],
-  dynamic_grp = grp_or,
+  source_note = source_note,
+  # fn_t_score = fn_t_score,
+  grp_t_score = grp_adhd_parent[["t_score"]],
+  dynamic_grp = grp_adhd_parent,
   vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
 
 
-
 ```{r}
 #| label: fig-caars
+#| eval: false
+#| include: false
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
 # data for caars dotplot
@@ -227,13 +296,15 @@ bwu::dotplot(
 
 ```{r}
 #| label: fig-cefi
+#| eval: false
+#| include: false
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
 # data for cefi dotplot
 pheno <- "cefi"
 data_cefi <- dplyr::filter(data, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
 colors <- NULL
-# return_plot <- FALSE
+# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_cefi.svg"
 x <- data_cefi$z_mean_narrow
@@ -251,29 +322,29 @@ bwu::dotplot(
 ```
 
 ```{r}
-#| label: fig-brown
+#| label: fig-adhd-parent
+#| eval: true
+#| include: false
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
-# data for brown efa dotplot
-pheno <- "brown"
-data_brown <- dplyr::filter(data, filename %in% c("brown_efa_parent.csv", "brown_efa_self.csv"))
+# args
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
-filename <- "brown_efa.svg"
-x <- data_brown$z_mean_narrow
-y <- data_brown$narrow
+filename <- "fig_adhd_parent.svg"
+x <- data_adhd_parent$z_mean_narrow
+y <- data_adhd_parent$narrow
 
 # Make dotplot
 bwu::dotplot(
-  data = data_brown,
+  data = data_adhd_parent,
   x = x,
   y = y,
   colors = NULL,
-  return_plot = return_plot
+  return_plot = return_plot,
+  filename = filename
 )
 ```
-
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -281,7 +352,6 @@ bwu::dotplot(
   set text(..font)
     grid(
       columns: (50%, 50%),
-      rows: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
@@ -320,7 +390,6 @@ bwu::dotplot(
   set text(..font)
     grid(
       columns: (50%, 50%),
-      rows: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
@@ -344,6 +413,44 @@ bwu::dotplot(
 #let title = "Observer Ratings of ADHD and Executive Function"
 #let file_qtbl = "table_observer_report.png"
 #let file_fig = "_02-09_adhd_files/figure-typst/fig-cefi-1.svg"
+#domain(
+  title: [#title],
+  file_qtbl,
+  file_fig
+)
+```
+
+
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
+  set text(..font)
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: figure.caption(position: top, [#title]),
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig)],
+          caption: figure.caption(position: bottom, [
+            Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other.
+            ]),
+          placement: none,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
+```
+
+```{=typst}
+#let title = "Parent Ratings of ADHD-Related Executive Function"
+#let file_qtbl = "table_adhd_parent.png"
+#let file_fig = "fig_adhd_parent.svg"
 #domain(
   title: [#title],
   file_qtbl,
