@@ -75,6 +75,8 @@ fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th�
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+
 grp_spatial <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2"),
   standard_score = c("NAB"),
@@ -91,7 +93,8 @@ bwu::tbl_gt(
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
   fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
+  source_note = source_note,
+  # fn_t_score = fn_t_score,
   grp_scaled_score = grp_spatial[["scaled_score"]],
   grp_standard_score = grp_spatial[["standard_score"]],
   grp_t_score = grp_spatial[["t_score"]],
@@ -110,8 +113,8 @@ bwu::tbl_gt(
 x <- data_spatial$z_mean_subdomain
 y <- data_spatial$subdomain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_spatial.svg"
 
 # Make dotplot
@@ -131,12 +134,11 @@ bwu::dotplot(
   set text(..font)
     grid(
       columns: (50%, 50%),
-      rows: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig)],
           caption: figure.caption(position: bottom, [
@@ -148,7 +150,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
           ),
         )

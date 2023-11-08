@@ -146,23 +146,21 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
-            _Premorbid Ability_ is an estimate of intellectual functioning prior
-            to known or suspected onset of brain disease or dysfunction.
-            _Neuropsychological Functioning_ is the overall skill to reason,
-            solve problems, and gain useful knowledge.
+            _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Fig.],
           gap: 0.5em,
           ),
       )
   }
 ```
+
 ```{=typst}
 #let title = "General Cognitive Ability"
 #let file_qtbl = "table_iq.png"

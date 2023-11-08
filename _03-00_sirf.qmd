@@ -2,9 +2,11 @@
 
 ```{r}
 #| label: make-g
+#| include: false
+
 scales <- c(
   "Academic Skills",
-  "Attention",
+  "Attention Span",
   "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
@@ -23,7 +25,11 @@ scales <- c(
   "Psychomotor Speed",
   "Verbal/Language",
   "Visual Perception/Construction",
-  "Working Memory"
+  "Working Memory",
+  "Reading",
+  "Math",
+  "Writing",
+  "Academic Fluency"
 )
 
 # make g
@@ -32,9 +38,9 @@ g <-
   janitor::clean_names() |>
   dplyr::mutate(z = (index - 100) / 15) |>
   dplyr::filter(composite_name %in% scales) |>
-  dplyr::rename(scale = composite_name, score = index, ci_95 = x95_percent_ci) |> 
-  bwu::gpluck_make_score_ranges(range = "", test_type = "npsych_test") |> 
-  dplyr::select(scale, score, ci_95, percentile, range, reliability, z, composition) 
+  dplyr::rename(scale = composite_name, score = index, ci_95 = x95_percent_ci) |>
+  bwu::gpluck_make_score_ranges(range = "", test_type = "npsych_test") |>
+  dplyr::select(scale, score, ci_95, percentile, range, reliability, z, composition)
 
 # save g.csv
 readr::write_csv(g, "csv/g.csv")
@@ -42,23 +48,26 @@ readr::write_csv(g, "csv/g.csv")
 
 ```{r}
 #| label: fig-sirf
+#| include: false
 #| fig-cap: "Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1."
+
+g <- readr::read_csv("csv/g.csv")
 
 # scales
 keep <- c(
   "Academic Skills",
-  "Attention",
+  "Attention Span",
   "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
   # "Cognitive Proficiency",
-  # "Crystallized Knowledge",
+  "Crystallized Knowledge",
   "Delayed Recall",
   "Executive Functions",
   # "Global Neurocognitive Index (G)",
   "Verbal Fluency",
-  # "Fluid Reasoning",
-  # "General Ability",
+  "Fluid Reasoning",
+  "General Ability",
   "Learning Efficiency",
   # "Memory",
   "Planning",
@@ -66,10 +75,15 @@ keep <- c(
   "Psychomotor Speed",
   "Verbal/Language",
   "Visual Perception/Construction",
-  "Working Memory"
+  "Working Memory",
+  "Reading",
+  "Math",
+  "Writing",
+  "Academic Fluency"
 )
 
 g <- dplyr::filter(g, scale %in% keep)
+g <- g[complete.cases(g$z), ]
 
 pheno <- "g"
 data <- g
@@ -90,6 +104,32 @@ bwu::dotplot(
 )
 ```
 
+```{r}
+#| label: fig-domains
+#| include: false
+#| fig-cap: "Broad cognitive domains"
+
+# args
+data <- bwu::read_data(pheno = "g")
+x <- data$z_mean_domain
+y <- data$domain
+colors <- NULL
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_domains.svg"
+
+# Make dotplot
+bwu::dotplot(
+  data = data,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
+```
+
+
 ```{=typst}
 #let domain(file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
@@ -98,14 +138,21 @@ figure([#image(file_fig, width: 70%)],
   placement: none,
   caption: figure.caption(position: bottom, [Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1.]),
   kind: "image",
-  supplement: [*Fig.*],
+  supplement: [Figure],
   gap: 0.5em,
   )
 }
 ```
 
+<!-- ```{=typst}
+#let file_fig = "fig_g.svg"
+#domain(
+  file_fig
+)
+``` -->
+
 ```{=typst}
-#let file_fig = "_03-00_sirf_files/figure-typst/fig-sirf-1.svg"
+#let file_fig = "fig_domains.svg"
 #domain(
   file_fig
 )

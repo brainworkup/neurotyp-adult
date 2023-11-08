@@ -99,6 +99,7 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
+# fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 pheno <- "academics"
 table_name <- "table_academics"
@@ -113,6 +114,7 @@ bwu::tbl_gt(
   pheno = pheno,
   table_name = table_name,
   source_note = source_note,
+  # fn_standard_score = fn_standard_score,
   grp_standard_score = grp_academics[["standard_score"]],
   dynamic_grp = grp_academics,
   vertical_padding = vertical_padding,
@@ -167,7 +169,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
@@ -175,7 +177,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
           ),
       )
@@ -192,6 +194,7 @@ bwu::dotplot(
   file_fig,
   )
 ```
+
 
 <!-- ```{=typst}
 #let title = "Academic Achievement"

@@ -119,7 +119,7 @@ bwu::dotplot(
 )
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
@@ -131,7 +131,7 @@ figure([#image(file_qtbl)],
     #title
   ]),
   kind: "qtbl",
-  supplement: [*Table*],
+  supplement: [Table],
 ),
 figure([#image(file_fig, width: auto)],
   caption: figure.caption(position: bottom, [
@@ -139,14 +139,14 @@ figure([#image(file_fig, width: auto)],
     ]),
   placement: none,
   kind: "image",
-  supplement: [*Fig.*],
+  supplement: [Figure],
   gap: 0.5em,  
   ),
 )
 }
-```
+``` -->
 
-```{=typst}
+<!-- ```{=typst}
 #let title = "Social Cognition"
 #let file_qtbl = "table_social.png"
 #let file_fig = "fig_social.svg"
@@ -155,4 +155,4 @@ figure([#image(file_fig, width: auto)],
   file_qtbl,
   file_fig
 )
-```
+``` -->

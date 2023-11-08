@@ -1,4 +1,5 @@
 ---
+title: "NEUROCOGNITIVE EXAMINATION"
 name: Biggie Smalls
 doe: 2023-01-01
 patient: Biggie
@@ -6,7 +7,6 @@ params:
   patient: Biggie
   first_name: Biggie
   last_name: Smalls
-  mrn: 123456789
   dob: 1991-01-01
   doe1: 2023-01-01
   doe2: 2023-01-01

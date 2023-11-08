@@ -1,6 +1,6 @@
 ## Emotional/Behavioral/Personality {#sec-emotion}
 
-{{< include _02-10_emotion_text.qmd >}}
+<!-- {{< include _02-10_emotion_text.qmd >}} -->
 
 ```{r}
 #| label: data-emotion
@@ -279,8 +279,9 @@ bwu::dotplot(
 )
 ```
 
+### Self-Report
 
-## Self-Report
+{{< include _02-10_emotion_text_self.qmd >}}
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -292,7 +293,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
@@ -300,7 +301,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
         ),
       )
@@ -318,7 +319,9 @@ bwu::dotplot(
   )
 ```
 
-## Parent Report
+### Parent Report
+
+{{< include _02-10_emotion_text_parent.qmd >}}
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -330,7 +333,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
@@ -338,7 +341,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
         ),
       )

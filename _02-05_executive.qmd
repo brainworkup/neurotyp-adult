@@ -85,9 +85,9 @@ scales <- c(
   "Word Generation",
   "Word Generation Perseverations",
   "Working Memory (WMI)",
-  "Zoo Locations",
-  "List Memory Repetitions",
-  "List Memory Intrusions"
+  "Zoo Locations"
+  # "List Memory Repetitions",
+  # "List Memory Intrusions"
 )
 data_executive <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
@@ -193,8 +193,8 @@ bwu::tbl_gt(
 x <- data_executive$z_mean_subdomain
 y <- data_executive$subdomain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_executive.svg"
 
 bwu::dotplot(
@@ -218,7 +218,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
@@ -229,7 +229,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
         ),
       )

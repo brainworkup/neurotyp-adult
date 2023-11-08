@@ -356,45 +356,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [*Table*],
-          ),
-        figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [Adult ADHD symptom reports
-          collapsed/averaged together across raters and subdomains of ADHD. The
-          above figures were generated based on the Conners’ Adult ADHD Rating Scales, Long
-          Version (CAARS–S:L), an instrument that is helpful when considering a
-          diagnosis of ADHD or related problems.]),
-          placement: none,
-          kind: "image",
-          supplement: [*Fig.*],
-          gap: 0.5em,
-        ),
-      )
-  }
-```
-
-```{=typst}
-#let title = "Self-Report Rating of ADHD and Executive Function"
-#let file_qtbl = "table_self_report.png"
-#let file_fig = "_02-09_adhd_files/figure-typst/fig-caars-1.svg"
-#domain(
-  title: [#title],
-  file_qtbl,
-  file_fig
-)
-```
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
-  set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [*Table*],
+          supplement: [Table],
           ),
         figure([#image(file_fig)],
           caption: figure.caption(position: bottom, [
@@ -402,7 +364,7 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [Figure],
           gap: 0.5em,
         ),
       )
@@ -410,45 +372,7 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let title = "Observer Ratings of ADHD and Executive Function"
-#let file_qtbl = "table_observer_report.png"
-#let file_fig = "_02-09_adhd_files/figure-typst/fig-cefi-1.svg"
-#domain(
-  title: [#title],
-  file_qtbl,
-  file_fig
-)
-```
-
-
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
-  set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [*Table*],
-          ),
-        figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [
-            Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other.
-            ]),
-          placement: none,
-          kind: "image",
-          supplement: [*Fig.*],
-          gap: 0.5em,
-        ),
-      )
-  }
-```
-
-```{=typst}
-#let title = "Parent Ratings of ADHD-Related Executive Function"
+#let title = "Parent Ratings of Executive Function"
 #let file_qtbl = "table_adhd_parent.png"
 #let file_fig = "fig_adhd_parent.svg"
 #domain(

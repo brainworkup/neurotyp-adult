@@ -15,7 +15,7 @@ file_path <- function(patient, scale, ext) {
 file_path <- here::here(patient, "NeuropsychEval_NSE_Biggie.txt")
 start_pattern <- "Biggie"
 end_pattern <- "Joey"
-output_path <- "~/neuropsychological.reports/Biggie/nse_text.md"
+output_path <- "~/neuropsychology/Biggie/nse_extracted_text.md"
 txt <- bwu::extract_text(patient, file_path, start_pattern, end_pattern)
 bwu::save_as_markdown(text = txt, output_path)
 ```

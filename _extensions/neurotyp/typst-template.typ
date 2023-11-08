@@ -51,8 +51,8 @@
 )
   // Save heading and body font families in variables.
   let body-font = "Linux Libertine"
-  // let sans-font = "IBM Plex Sans"
   let sans-font = "Linux Libertine"
+  // let sans-font = "IBM Plex Sans"
 
   // Set text and body font family.
   set text(font: body-font, lang: lang, region: region, size: fontsize)
