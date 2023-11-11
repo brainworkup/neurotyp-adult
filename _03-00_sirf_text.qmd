@@ -10,3 +10,9 @@ expectations for the surgery. Taken together with her current asymptomatic mood
 profile, there are no obvious psychological risk factors for a poor outcome or
 need for presurgical mental health intervention.
 
+### Diagnostic Impression
+
+- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
+  Presentation
+
+- [DSM-5/ICD-10 Codes](_03-05_dsm5_icd10_dx.qmd)

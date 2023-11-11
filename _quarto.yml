@@ -1,5 +1,5 @@
 project:
-  title: "NEUROCOGNITIVE EXAMINATION"
+  title: NEUROCOGNITIVE EXAMINATION
   # output-dir: neuro_report
   # pre-render: prerender.R
   render:
@@ -21,7 +21,7 @@ format:
   neurotyp-typst:
     keep-typ: true
     fontsize: 11pt
-    papersize: "us-letter"
+    papersize: us-letter
 
 execute:
   warning: false

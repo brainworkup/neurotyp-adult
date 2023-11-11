@@ -1,12 +1,12 @@
 <<PROMPT>>
 
-Summarize and interpret these neuropsychological test scores related to learning
-and memory. For scores that are Below Average, give a brief example of how this
-could impact the patient's daily functioning. Organize your summary and
-interpretation in order from scores that are Exceptionally High/Above Average to
-Exceptionally Low/Below Average to delineate relative strengths and weaknesses,
-respectively. Finally, recommended additional support that the patient should
-receive in areas in which scores fall below average to exceptionally low.
+## Area: Learning and Memory
+
+Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+
+Prefix the output/results as follows: Headers (e.g., Relative Strengths,
+Relative Weaknesses) should be padded with ###, and output that contains lists should be
+unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
@@ -21,15 +21,5 @@ non-target distractors after a delay period was Average, suggesting stable
 memory consolidation over time. Finally, spontaneous, long-term delayed recall
 (20-25 min) recall and reproduction of a complex abstract figure fell within the
 Average range.
-
-Given Biggie's below average and exceptionally low scores in some areas, it is
-recommended that they receive additional support in these areas. For example,
-they may benefit from working with a speech-language pathologist to improve
-their memory skills. They may also benefit from using mnemonic devices and
-organizational strategies, such as taking notes, making lists, and using visual
-aids. Additionally, it is important to provide Biggie with clear and concise
-instructions, and to break down complex tasks into smaller steps. It is also
-important to be patient with Biggie and to provide them with plenty of
-opportunities to practice and learn new information.
 
 <<START>>
