@@ -3,18 +3,36 @@
 {{< include _02-03_verbal_text.qmd >}}
 
 ```{r}
+#| label: setup-verbal
+#| include: false
+# domain
+domains <- c("Verbal/Language")
+# phenotype
+pheno <- "verbal"
+```
+
+```{r}
+#| label: export-verbal
+#| include: false
+verbal <- readr::read_csv("neurocog.csv") |>
+  dplyr::filter(domain == domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, pass, verbal, timed, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
+    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+  )
+readr::write_csv(verbal, paste0(pheno, ".csv"))
+```
+
+```{r}
 #| label: data-verbal
 #| include: false
 
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(glue)
-library(bwu)
 # read and filter data
-pheno <- "verbal"
 data <- bwu::read_data(pheno = pheno)
-domains <- c("Verbal/Language")
 scales <- c(
   "Academic Language Readiness Index",
   "Auditory Comprehension Colors",

@@ -40,6 +40,8 @@ However, issues have begun to arise that `r params$he_she` has been unable to av
 
 Cognitive complaints: sustained attention, working memory, and organization.
 
+{{< pagebreak >}}
+
 ## History
 
 ### Past Neuropsychological Test Results
@@ -48,12 +50,12 @@ Patient denied having prior testing.
 
 ### Developmental History
 
--   No birth complications.
--   Developmental milestones: Normal.
+- No birth complications.
+- Developmental milestones: Normal.
 
 ### Medical History
 
--   Denied major current medical concerns.
+- Denied major current medical concerns.
 
 ### Psychiatric History
 
@@ -64,9 +66,9 @@ Additionally, `r params$first_name` held herself and others to high expectations
 
 ### Family History
 
-Older sister currently in medical school and a younger brother who is struggling with his academic career.
-Parents are married and successful in their careers.
-Family history of dysgraphia and ADHD.
+- Older sister currently in medical school and a younger brother who is struggling with his academic career.
+- Parents are married and successful in their careers.
+- Family history of dysgraphia and ADHD.
 
 ### Cultural/Social Background
 
@@ -79,3 +81,5 @@ Attended a PS 198 school with an emphasis in social-emotional development and ha
 However, if `r params$first_name` found a task uninteresting or disliked it, `r params$he_she` would simply not complete it.
 This led `r params$his_her` teachers to believe `r params$he_she` was incapable of the task when in reality, `r params$his_her` lack of motivation stemmed from a lack of interest.
 It was always difficult for `r params$his_her` to take notes and still is; a traditional classroom setting would have further exacerbated `r params$his_her` difficulties in note-taking.
+
+{{< pagebreak >}}

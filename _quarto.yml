@@ -22,6 +22,7 @@ format:
     keep-typ: true
     fontsize: 11pt
     papersize: us-letter
+    number-sections: false
 
 execute:
   warning: false

@@ -12,7 +12,6 @@ need for presurgical mental health intervention.
 
 ### Diagnostic Impression
 
-- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
-  Presentation
+- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined Presentation
 
-- [DSM-5/ICD-10 Codes](_03-05_dsm5_icd10_dx.qmd)
+- [DSM-5/ICD-10 Codes](_03-00_dsm5_icd10_dx.qmd)

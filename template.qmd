@@ -34,7 +34,13 @@ params:
 #| label: setup
 #| include: false
 xfun::pkg_load2(
-  c("ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here", "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "quarto", "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite", "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun", "yaml", "bwu")
+  c(
+    "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here",
+    "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "png",
+    "quarto", "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite",
+    "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun",
+    "yaml", "bwu"
+  )
 )
 knitr::opts_knit$set(width = 80)
 options(digits = 2, warnPartialMatchArgs = FALSE)
@@ -44,8 +50,12 @@ knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
+Sys.setenv(PATIENT = "Biggie")
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
+if (is.null(return_plot)) return_plot <- FALSE
+if (return_plot == "true") return_plot <- TRUE
+if (is.null(patient)) patient <- "Biggie"
 ```
 
 ```{r}
@@ -85,11 +95,13 @@ bwu::load_data(here::here("."))
 
 {{< include _02-08_social.qmd >}}
 
-{{< include _02-09_adhd.qmd >}}
+{{< include _02-09_adhd_adult.qmd >}}
 
 {{< include _02-10_emotion_adult.qmd >}}
 
-{{< include _02-11_adaptive.qmd >}} 
+{{< include _02-11_adaptive.qmd >}}
+
+{{< pagebreak >}}
 
 {{< include _03-00_sirf.qmd >}}
 
@@ -99,4 +111,4 @@ bwu::load_data(here::here("."))
 
 {{< include _03-02_signature.qmd >}}
 
-{{< include _03-04_appendix.qmd >}}
+{{< include _03-03_appendix.qmd >}}

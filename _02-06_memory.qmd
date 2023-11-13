@@ -25,7 +25,6 @@ memory <- readr::read_csv("neurocog.csv") |>
 readr::write_csv(memory, paste0(pheno, ".csv"))
 ```
 
-
 ```{r}
 #| label: data-memory
 #| include: false

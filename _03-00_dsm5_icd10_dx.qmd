@@ -23,10 +23,8 @@
 
 ---
 
-- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined
-  Presentation
-- 314.00 (F90.0) Attention-Deficit/Hyperactivity Disorder (ADHD), Predominantly
-  Inattentive Presentation
+- 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined Presentation
+- 314.00 (F90.0) Attention-Deficit/Hyperactivity Disorder (ADHD), Predominantly Inattentive Presentation
 - 314.01 (F90.1) Attention-Deficit/Hyperactivity Disorder, Predominantly
   Hyperactive/Impulsive Presentation
 - 314.01 (F90.8) Other Specified Attention-Deficit/Hyperactivity Disorder (ADHD)
@@ -41,9 +39,7 @@
 - 315.2 (F81.81) Specific Learning Disorder, With Impairment in Written
   Expression (spelling accuracy, grammar and punctuation accuracy, clarity or
   organization of written expression)
-- 315.1 (F81.2) Specific Learning Disorder, With Impairment in Mathematics
-  (number sense, memorization of arithmetic facts, accurate or fluent
-  calculation, accurate math reasoning)
+- 315.1 (F81.2) Specific Learning Disorder, With Impairment in Mathematics (number sense, memorization of arithmetic facts, accurate or fluent calculation, accurate math reasoning)
 
 ## Motor Disorders
 

@@ -3,19 +3,36 @@
 {{< include _02-04_spatial_text.qmd >}}
 
 ```{r}
+#| label: setup-spatial
+#| include: false
+# domain
+domains <- c("Visual Perception/Construction")
+# phenotype
+pheno <- "spatial"
+```
+
+```{r}
+#| label: export-spatial
+#| include: false
+spatial <- readr::read_csv("neurocog.csv") |>
+  dplyr::filter(domain == domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, pass, verbal, timed, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
+    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+  )
+readr::write_csv(spatial, paste0(pheno, ".csv"))
+```
+
+```{r}
 #| label: data-spatial
 #| include: false
 
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(glue)
-library(bwu)
-
 # Read data and filter
-pheno <- "spatial"
 data <- bwu::read_data(pheno = pheno)
-domains <- "Visual Perception/Construction"
 scales <- c(
   "Arrows",
   "Bicycle Drawing",

@@ -3,16 +3,38 @@
 <!-- {{< include _02-10_emotion_text.qmd >}} -->
 
 ```{r}
-#| label: data-emotion
+#| label: setup-emotion
 #| include: false
-
-library(bwu)
-pheno <- "emotion"
-data <- bwu::read_data(pheno = pheno)
+# domain
 domains <- c(
   "Psychiatric Disorders", "Personality Disorders", "Substance Use",
   "Psychosocial Problems", "Behavioral/Emotional/Social", "Emotional/Behavioral/Personality"
 )
+# phenotype
+pheno <- "emotion"
+```
+
+```{r}
+#| label: export-emotion
+#| include: false
+#| eval: false
+emotion <- readr::read_csv("neurobehav.csv") |>
+  dplyr::filter(domain %in% domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow
+  )
+readr::write_csv(emotion, paste0(pheno, ".csv"))
+```
+
+```{r}
+#| label: data-emotion
+#| include: false
+
+data <- bwu::read_data(pheno = pheno)
 scales <- c(
   "Activity Level",
   "Affective (A)",
@@ -136,12 +158,14 @@ options(tikzDefaultEngine = "xetex")
 
 # vars
 pheno <- "emotion_self"
-source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+Personal Adjustment scores are reversed.")
 # fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 table_name <- "table_emotion_self"
 vertical_padding <- 0
 grp_emotion <- list(
-  t_score = c("PAI", "BASC-3 PRS", "BASC-3 SRP", "BASC-3 TRS")
+  t_score = c("PAI", "BASC-3 SRP")
 )
 multiline <- FALSE
 
@@ -160,13 +184,23 @@ data_emotion_self <-
   dplyr::arrange(absort) |>
   dplyr::arrange(subdomain)
 
+library(gt)
+library(dplyr)
+library(glue)
+
+# # Define broad domain categories
+# broad_domains <- c("School Problems", "Internalizing Problems", "Inattention/Hyperactivity", "Emotional Symptoms Index", "Personal Adjustment")
+
+# # Create a new column to identify broad domains and subscales
+# data_emotion_self <- data_emotion_self |>
+#   dplyr::mutate(is_broad_domain = scale %in% broad_domains)
+
 bwu::tbl_gt(
   data = data_emotion_self,
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
   source_note = source_note,
-  # fn_t_score = fn_t_score,
   grp_t_score = grp_emotion[["t_score"]],
   dynamic_grp = grp_emotion,
   multiline = multiline
@@ -183,12 +217,13 @@ options(tikzDefaultEngine = "xetex")
 
 # vars
 pheno <- "emotion_parent"
-source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-# fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+Adaptive Skills scores are reversed.")
 table_name <- "table_emotion_parent"
 vertical_padding <- 0
 grp_emotion <- list(
-  t_score = c("PAI", "BASC-3 PRS", "BASC-3 SRP", "BASC-3 TRS")
+  t_score = c("BASC-3 PRS", "BASC-3 TRS")
 )
 multiline <- FALSE
 
@@ -213,13 +248,11 @@ bwu::tbl_gt(
   table_name = table_name,
   vertical_padding = vertical_padding,
   source_note = source_note,
-  # fn_t_score = fn_t_score,
   grp_t_score = grp_emotion[["t_score"]],
   dynamic_grp = grp_emotion,
   multiline = multiline
 )
 ```
-
 
 ```{r}
 #| label: fig-emotion-self
@@ -235,8 +268,8 @@ df_self <-
 x <- df_self$z_mean_subdomain
 y <- df_self$subdomain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_emotion_self.svg"
 
 # Make dotplot
@@ -244,6 +277,22 @@ bwu::dotplot(
   data = df_self,
   x = x,
   y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
+
+
+x2 <- df_self$z
+y2 <- df_self$scale
+colors <- NULL
+filename <- "fig_emotion_self2.svg"
+
+# Make dotplot
+bwu::dotplot(
+  data = df_self,
+  x = x2,
+  y = y2,
   colors = colors,
   return_plot = return_plot,
   filename = filename
@@ -264,8 +313,8 @@ df_parent <-
 x <- df_parent$z_mean_subdomain
 y <- df_parent$subdomain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_emotion_parent.svg"
 
 # Make dotplot
@@ -277,49 +326,26 @@ bwu::dotplot(
   return_plot = return_plot,
   filename = filename
 )
+
+x2 <- df_parent$z
+y2 <- df_parent$scale
+colors <- NULL
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_emotion_parent2.svg"
+
+# Make dotplot
+bwu::dotplot(
+  data = df_parent,
+  x = x2,
+  y = y2,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
 ```
 
-### Self-Report
-
-{{< include _02-10_emotion_text_self.qmd >}}
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
-  set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [Table],
-          ),
-        figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [
-            Emotional/Behavioral/Personality/Social
-            ]),
-          placement: none,
-          kind: "image",
-          supplement: [Figure],
-          gap: 0.5em,
-        ),
-      )
-  }
-```
-
-```{=typst}
-#let title = "Mood/Self-Report"
-#let file_qtbl = "table_emotion_self.png"
-#let file_fig = "fig_emotion_self.svg"
-#domain(
-  title: [#title Test Scores],
-  file_qtbl,
-  file_fig
-  )
-```
-
-### Parent Report
+### PARENT RATINGS
 
 {{< include _02-10_emotion_text_parent.qmd >}}
 
@@ -337,7 +363,7 @@ bwu::dotplot(
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
-            Emotional/Behavioral/Personality/Social
+            The data presented here is based on Michelle Elliott's rating of Biggie's behavior using the BASC-3 Parent Rating Scales form. Scale scores in the Clinically Significant range suggest a high level of impairment. Scores in the At-Risk range may identify a significant problem that may not be severe enough to require formal treatment or may identify the potential of developing a problem that needs careful monitoring.
             ]),
           placement: none,
           kind: "image",
@@ -349,11 +375,51 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let title = "Mood/Parent-Report"
+#let title = "BASC-3 Parent Rating Scales"
 #let file_qtbl = "table_emotion_parent.png"
 #let file_fig = "fig_emotion_parent.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title],
+  file_qtbl,
+  file_fig
+  )
+```
+
+### SELF-REPORT
+
+{{< include _02-10_emotion_text_self.qmd >}}
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
+  set text(..font)
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: figure.caption(position: top, [#title]),
+          kind: "qtbl",
+          supplement: [Table],
+          ),
+        figure([#image(file_fig, width: auto)],
+          caption: figure.caption(position: bottom, [
+            The data presented here is based on Biggie's ratings of herself using the BASC-3 Self-Report of Personality form. Scale scores in the Clinically Significant range suggest a high level of impairment. Scores in the At-Risk range may identify a significant problem that may not be severe enough to require formal treatment or may identify the potential of developing a problem that needs careful monitoring.
+            ]),
+          placement: none,
+          kind: "image",
+          supplement: [Figure],
+          gap: 0.5em,
+        ),
+      )
+  }
+```
+
+```{=typst}
+#let title = "BASC-3 Self-Report of Personality"
+#let file_qtbl = "table_emotion_self.png"
+#let file_fig = "fig_emotion_self.svg"
+#domain(
+  title: [#title],
   file_qtbl,
   file_fig
   )

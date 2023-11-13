@@ -14,6 +14,7 @@ pheno <- "iq"
 ```{r}
 #| label: export-iq
 #| include: false
+#| eval: false
 iq <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
@@ -29,6 +30,7 @@ readr::write_csv(iq, paste0(pheno, ".csv"))
 ```{r}
 #| label: data-iq
 #| include: false
+#| eval: false
 
 # data
 data <- bwu::read_data(pheno = pheno)
@@ -115,36 +117,35 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 #| include: false
+#| eval: true
 options(tikzDefaltEngine = "xetex")
 
 include <- c(
   "Cognitive Proficiency",
   # "Crystallized Knowledge",
   # "Fluid Reasoning",
-  # "General Ability (GAI)",
+  "General Ability (GAI)",
   "General Ability",
   "Perceptual Reasoning (PRI)",
   "Perceptual Reasoning",
-  "Processing Speed (PSI)",
-  "Processing Speed",
+  # "Processing Speed (PSI)",
+  # "Processing Speed",
   "Verbal Comprehension (VCI)",
-  "Verbal Comprehension",
-  "Working Memory (WMI)",
-  "Working Memory",
-  "Processing Speed",
-  "Working Memory"
+  "Verbal Comprehension"
+  # "Working Memory (WMI)",
+  # "Working Memory",
+  # "Processing Speed",
+  # "Working Memory"
 )
-data_iq <- dplyr::filter(data_iq, scale %in% include)
-
+# data_iq <- dplyr::filter(data_iq, scale %in% include)
+data_iq <- readr::read_csv("iq.csv")
 # footnotes
-# fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 pheno <- "iq"
 table_name <- "table_iq"
 grp_iq <- list(
   standard_score = c(
-    "Composite Scores", "NAB", "Test of Premorbid Functioning", "WRAT-5",
-    "WAIS-IV", "WAIS-4", "WISC-5", "WASI-2", "RBANS", "KTEA-3"
+    "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4", "WASI-2", "WISC-5", "WRAT-5", "KTEA-3", "NAB", "RBANS"
   )
 )
 vertical_padding <- 0
@@ -155,7 +156,6 @@ bwu::tbl_gt(
   pheno = pheno,
   table_name = table_name,
   source_note = source_note,
-  # fn_standard_score = fn_standard_score,
   grp_standard_score = grp_iq[["standard_score"]],
   dynamic_grp = grp_iq,
   vertical_padding = vertical_padding,
@@ -199,9 +199,8 @@ bwu::dotplot(
           supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [_General Ability_ refers
-          to an overall capacity to reason, to solve problems, and to learn
-          useful information. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
+          caption: figure.caption(position: bottom, [
+            _General Ability_ refers to an overall capacity to reason, to solve problems, and to learn useful information. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
           ]),
           placement: none,
           kind: "image",

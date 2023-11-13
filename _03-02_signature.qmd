@@ -4,8 +4,10 @@ Please contact me with any questions or concerns regarding this patient.
 Sincerely,
 
 ```{r}
+#| label: signature
 #| fig-align: left
-#| out-width: 20%
+#| out-width: 60%
+#| echo: false
 knitr::include_graphics("jwt_sig.png")
 ```
 

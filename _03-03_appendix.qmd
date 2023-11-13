@@ -21,22 +21,25 @@ Although standardized scores provide the clinician with an important and necessa
 #| fig-asp: 0.67
 #| fig-show: hold
 #| out-width: 95%
-library(png)
+#| eval: false
 
 range <- readr::read_csv("test_score_ranges.csv")
 tbl_range <- gt::gt(range) |>
   gt::tab_header(title = "Test Score Labels/Ranges") |>
   gt::cols_align(align = "center") |>
+  gt::tab_style(
+    style = cell_text(size = "small"),
+    locations = cells_source_notes()
+  ) |>
   gtExtras::gt_theme_538()
 gt::gtsave(tbl_range, glue::glue("tbl_range", ".png"))
-# knitr::include_graphics("tbl_range.png", dpi = 270)
 
-knitr::include_graphics("tbl_range.png")
+knitr::include_graphics("tbl_range.png", dpi = 270)
 ```
 
-## Test Score Distributions
+{{< pagebreak >}}
 
-[@fig-gauss-plot-narrow] can be used as a guide to help interpret individual test scores in terms of the degree of distance a score fell in relation to normative expectations and the magnitude of clinical severity. Test scores are easiest to interpret as percentiles[^1] and as *z*-Scores (M = 0, SD = 1)[^2], which are used to plot the various test and domain scores below.
+## Test Score Distributions
 
 ```{r}
 #| label: fig-gauss-plot-narrow
@@ -44,25 +47,13 @@ knitr::include_graphics("tbl_range.png")
 #| fig-retina: 2
 #| fig-width: 6
 #| fig-asp: 0.67
-#| fig-show: hold
 #| out-height: 50%
 
 knitr::include_graphics("plot_narrow.png")
-
-# knitr::include_graphics("plot_broad.png")
 ```
 
-```{r}
-#| label: fig-gauss-plot-broad
-#| eval: false
-#| fig-cap: "Classification of neuropsychological test scores that are positively skewed in the general population [@schoenbergReportingStandardsNeuropsychological2017]."
-#| fig-width: 6.0
-#| fig-height: 5.0
-#| fig-pos: '!ht'
-#| cache: true
-knitr::include_graphics("plot_broad.png")
-```
+[@fig-gauss-plot-narrow] can be used as a guide to help interpret individual test scores in terms of the degree of distance a score fell in relation to normative expectations and the magnitude of clinical severity. Test scores are easiest to interpret as percentiles[^1] and as *z*-Scores (M = 0, SD = 1)[^2], which are used to plot the various test and domain scores below.
 
 [^1]: A *percentile* shows `r params$first_name`'s standing relative to peers. For example, a percentile rank of 70 means `r params$first_name` performed as well as or better than 70% of individuals the same age.
 
-[^2]: *z* = -1 (16th percentile), *z* = 0 (50th percentile), and *z* = 1 (84th percentile)
+[^2]: *z-Score* = -1 (16th percentile), *z-Score* = 0 (50th percentile), and *z-Score* = +1 (84th percentile)

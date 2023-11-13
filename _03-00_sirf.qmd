@@ -3,23 +3,25 @@
 ```{r}
 #| label: make-g
 #| include: false
+#| eval: false
 
 scales <- c(
   "Academic Skills",
+  "Attention",
   "Attention Span",
   "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
-  "Cognitive Proficiency",
+  # "Cognitive Proficiency",
   "Crystallized Knowledge",
   "Delayed Recall",
   "Executive Functions",
-  "Global Neurocognitive Index (G)",
+  # "Global Neurocognitive Index (G)",
   "Verbal Fluency",
   "Fluid Reasoning",
   "General Ability",
   "Learning Efficiency",
-  "Memory",
+  # "Memory",
   "Planning",
   "Processing Speed",
   "Psychomotor Speed",
@@ -56,6 +58,7 @@ g <- readr::read_csv("csv/g.csv")
 # scales
 keep <- c(
   "Academic Skills",
+  "Attention",
   "Attention Span",
   "Attention/Executive",
   "Attentional Fluency",
@@ -71,7 +74,7 @@ keep <- c(
   "Learning Efficiency",
   # "Memory",
   "Planning",
-  "Processing Speed",
+  # "Processing Speed",
   "Psychomotor Speed",
   "Verbal/Language",
   "Visual Perception/Construction",
@@ -110,17 +113,26 @@ bwu::dotplot(
 #| fig-cap: "Broad cognitive domains"
 
 # args
-data <- bwu::read_data(pheno = "g")
-x <- data$z_mean_domain
-y <- data$domain
+# data <- bwu::read_data(pheno = "g")
+data <- readr::read_csv("neurocog.csv")
+data2 <- dplyr::filter(data, scale != "Cognitive Proficiency")
+
+data2 <-
+    data2 |>
+    group_by(domain, .add = TRUE) |>
+    dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+    dplyr::ungroup()
+
+x <- data2$z_mean_domain
+y <- data2$domain
 colors <- NULL
-# return_plot <- TRUE
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
+# return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_domains.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data,
+  data = data2,
   x = x,
   y = y,
   colors = colors,
@@ -144,12 +156,12 @@ figure([#image(file_fig, width: 70%)],
 }
 ```
 
-<!-- ```{=typst}
+```{=typst}
 #let file_fig = "fig_g.svg"
 #domain(
   file_fig
 )
-``` -->
+```
 
 ```{=typst}
 #let file_fig = "fig_domains.svg"

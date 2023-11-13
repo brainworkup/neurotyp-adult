@@ -1,116 +1,67 @@
 # RECOMMENDATIONS {#sec-recs}
 
-**Recommendations for Additional Support:**
-- **Cognitive Behavioral Therapy (CBT):** This can help Biggie develop strategies to improve executive functions, like planning, inhibition, and flexibility.
-- **Occupational Therapy:** To support the development of visuomotor coordination and processing speed, occupational therapy may be beneficial.
-- **Memory Training:** Exercises and techniques to enhance working memory could help with the manipulation and retention of information.
-- **Academic Accommodations:** Extended time on tests, reduced copying from the board, or the use of a note-taker could compensate for slower psychomotor speed and attentional challenges.
-- **Task Breakdown:** Simplifying tasks and providing step-by-step instructions can help manage deficits in working memory and planning.
-- **Behavioral Interventions:** These may assist in improving divided attention and shifting between tasks, such as using a visual schedule or structured transitions.
-- **Psychoeducation:** Educating Biggie on her profile of strengths and weaknesses may empower her to develop self-awareness and advocate for her needs in various settings.
-
-By addressing these areas with targeted support, the goal is to enhance
-Biggie’s daily functioning and academic performance in spite of the identified
-challenges.
-
-Given these findings, interventions for Biggie should include support for enhancing concentration and coping with distractibility, strategies for managing anxiety and worry, and bolstering her emotional understanding and regulation. Social skills training may also be beneficial, along with psychoeducational interventions to improve her self-image and self-efficacy. Finally, monitoring for signs of increasing internalization or externalization of problems would be prudent to ensure that additional supports are provided as needed to promote her overall well-being and adjustment.
-
-
-**Recommendations:**
-
-For areas falling within the at-risk or clinically significant ranges, a multi-faceted intervention approach would be beneficial, potentially including:
-- Cognitive-behavioral therapy (CBT) to address anxiety and self-esteem issues.
-- Attention and executive function interventions, such as cognitive training exercises or strategies to improve focus.
-- Psychoeducation to help Biggie understand and manage her emotions and thoughts more effectively.
-- Social skills training and opportunities for positive peer interaction to enhance her interpersonal relationships.
-- Support within the educational setting, such as an individualized education plan (IEP) or accommodations, to address attentional challenges.
-
-Ongoing monitoring and reassessment will be crucial to determine the effectiveness of interventions and to adjust support as Biggie develops and her needs change.
-
-### Recommendations for Additional Support
-
-- **Occupational Therapy:** This can help improve graphomotor skills, focusing on both speed and accuracy to enhance performance in academic tasks and daily activities.
-- **Adaptive Writing Tools:** Using ergonomic pens or pencil grips can assist in improving control and reducing errors.
-- **Graphomotor Exercises:** Practicing specific drawing or tracing exercises can improve fine motor coordination and control.
-- **Extra Time for Written Tasks:** In academic settings, allowing additional time for tasks requiring writing can compensate for her slower graphomotor speed when accuracy is required.
-- **Technology Use:** Incorporating the use of a keyboard or voice-to-text software might reduce the impact of graphomotor weaknesses on academic performance.
-
-By focusing on these recommendations, the goal is to assist Biggie in developing her sensorimotor functions, particularly in fine motor domains where she is experiencing some difficulty.
-
-In terms of support, Biggie would benefit from a structured and consistent routine with clear and concise instructions. She may require assistance in breaking down tasks into manageable steps and using visual schedules or planners to enhance organization skills. Techniques to improve focus, such as minimizing distractions and incorporating frequent breaks during tasks, could also be helpful. Training in metacognitive strategies to strengthen her working memory and executive control should be considered. Additionally, interventions to support emotional regulation, such as cognitive-behavioral therapy or stress management techniques, may also be advantageous. Given the substantial impact of these executive functioning challenges on daily life, comprehensive support from a multidisciplinary team including a neuropsychologist, an occupational therapist, and possibly a behavior therapist could be instrumental in helping Biggie navigate her daily tasks more effectively.
-
-
 ## Recommendations for Medical/Healthcare
 
-- Given Biggie's average attentional function and overall performance across measures of processing speed and cognitive efficiency, it is recommended that she receive additional support in these areas. For example, she may benefit from working with an occupational therapist or psychologist to improve her attention and processing speed skills. She may also benefit from using organizational tools and strategies, such as breaking down tasks into smaller steps and setting deadlines. Additionally, it is important to provide Biggie with clear and concise instructions, and to create a distraction-free environment when she is working or studying.
+- Biggie should receive interventions to enhance concentration, manage anxiety, and improve emotional understanding. This includes social skills training, psychoeducational interventions for self-image improvement, and monitoring for signs of internalization or externalization of problems.
 
--   Given Biggie's low average ability to follow auditory instructions of increasing complexity, it is recommended that she receive additional support in this area.
-    For example, she may benefit from working with a speech-language pathologist to improve her auditory comprehension skills.
-    She may also benefit from using visual aids, such as pictures or diagrams, to help her understand instructions.
-    Additionally, it is important to give Biggie clear and concise instructions, and to break down complex instructions into smaller steps.
+- **Cognitive Behavioral Therapy (CBT):** To develop strategies for improving executive functions and addressing self-esteem issues.
 
-- Treatment options for ADHD include a combination of behavioral techniques, consideration of stimulant medication, environmental organization, and the maintenance of a long-term perspective of ADHD as a chronic condition. `r params$first_name` may wish to discuss whether medical treatment of `r params$his_her` symptoms is indicated with one of our psychiatrists.
+- **Occupational Therapy:** To enhance graphomotor skills for academic tasks and daily activities.
 
--   *Psychotherapy* Individual therapy to address features of anxiety, heightened stress, ward off any emerging depression, and to instill adaptive coping skills.
-    Mindfulness, distress tolerance skills, and cognitive-behavioral techniques should be woven into the therapeutic process.
+- **Cognitive Training:** Techniques to boost working memory and attention, along with strategies to improve focus.
 
--   Given Biggie's low average ability to copy a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material, it is recommended that she receive additional support in this area.
-    For example, she may benefit from working with an occupational therapist to improve her visuospatial skills.
-    She may also benefit from using visual aids, such as pictures or diagrams, to help her understand and follow instructions.
-    Additionally, it is important to provide Biggie with clear and concise instructions, and to break down complex tasks into smaller steps.
+- **Speech-Language Therapy:** Working with a speech-language pathologist can help improve memory skills, particularly for verbal material.
+
+- **Psychoeducation:** To empower Biggie with self-awareness and enable her to advocate for her needs in various settings.
+
+- Additional support is recommended in areas like attentional function, processing speed, and cognitive efficiency. This can be achieved through occupational therapy, the use of organizational tools, and creating a distraction-free environment.
+
+- Treatment options for ADHD should include behavioral techniques, stimulant medication consideration, environmental organization, and long-term perspective maintenance. Medical treatment discussion with a child and adolescent psychiatrist could be beneficial.
+
+- Additional support is suggested in areas like auditory comprehension and complex figure copying. This can be accomplished through speech-language pathology and occupational therapy respectively. Use of visual aids and breaking down complex tasks into smaller steps can also be helpful.
 
 ## Recommendations for School
 
-- Given Biggie's low average and below average scores in some areas, it is recommended that she receive additional support in these areas. For example, she may benefit from working with a tutor or teacher to improve her sentence level writing fluency and overall academic fluency in reading, math, and writing. She may also benefit from working with a math tutor to improve her math comprehension and problem solving skills, math computation skills, and math speed and fluency.
+- **Accommodated Testing:** Extended time accommodations are recommended due to relative weakness in processing speed and academic fluency.
 
-- It is also important to create a supportive and accommodating environment for Biggie at home and in school. This may involve providing her with extra time to complete tasks, giving her clear and concise instructions, and breaking down complex tasks into smaller steps. Additionally, it is important to praise Biggie for her efforts and accomplishments, even if she makes mistakes.
+- **Calculator Use:** Please consider allowing Biggie to utilize a calculator for class assignments and examinations as she progresses in the mathematics curriculum.
 
--   *Accommodated testing* Given her weakness in processing speed, extended time accommodations for high-stakes exams (e.g., BAR EXAM) in particular are apt to more readily enable `r params$first_name` to demonstrate `r params$his_her` competencies in a more effective and consistent manner, given `r params$his_her` weakness in processing speed.
-    Further, additional test taking time will enable `r params$first_name` to identify and utilize organizational strategies and allay feelings of anxiety that accompany time-intensive tasks to channel `r params$his_her` skills in the most effective manner.
+- Biggie should receive additional support in mathematics through:
+  - Individual or small group tutoring.
+  - Visual aids and hands-on activities.
+  - Technology-based learning tools.
+  - Real-life math scenarios practice.
+  - Extra time for math-related tasks.
 
--   *Classroom recordings* `r params$first_name` should be provided with lecture notes/slides prior to class for advanced preparation and review and be allowed to audio or video record the lecture for later review.
+- Support within the educational setting, such as an individualized education plan (IEP) or 504 Plan, to address attentional/executive challenges. Academic accommodations should include extended time on tests, reduced copying from the board, or a note-taker to offset slower psychomotor speed and attentional challenges.
 
-Recommendations for Additional Support:
+- **Adaptive Writing Tools:** Use of ergonomic pens or pencil grips for better control and fewer errors.
 
-- Speech-Language Therapy: Working with a speech-language pathologist can help improve memory skills, particularly for verbal material.
-- Mnemonic Devices: Using mnemonic strategies can aid in the encoding and retrieval of information. For example, creating acronyms or visual images could help with memory retention.
-- Organizational Strategies: Techniques such as note-taking, list-making, and using visual schedules or aids can provide external memory support.
-- Task Simplification: Breaking down complex information into smaller, manageable parts can help the child to process and remember information more effectively.
-- Repeated Exposure and Practice: Given the below-average learning efficiency, the child may benefit from repeated exposure to material and additional practice beyond what is typical in a classroom setting.
+- **Graphomotor Exercises:** Drawing or tracing exercises for improved fine motor coordination.
 
+- **Extra Time for Written Tasks:** Additional time for tasks requiring writing to compensate for slower graphomotor speed.
+
+- **Technology Use:** Keyboard or voice-to-text software use to mitigate graphomotor weaknesses' effect on academic performance.
+
+- Tutoring or teaching assistance is recommended for improving her sentence level writing fluency and overall academic fluency in reading, math, and writing. 
+
+- A supportive environment at home and school involving clear instructions, task breakdown into smaller steps, and praise for efforts and achievements.
 
 ## Recommendations for Home
 
-* _[iA Writer](https://ia.net/) writing app for writing assignments_ iA Writer
-   is a plain text markdown based writing tool used by many professional
-   journalists. The app has a simple, distraction free interface and a Focus
-   Mode that reduces the temptation to continuously re-read and tweak your text.
+- **Mnemonic Devices:** Use of mnemonic strategies like acronyms or visual images for memory retention.
 
-  + [An ADHD-friendly Writing App](https://ia.net/topics/an-adhd-friendly-writing-app)
+- **Organizational Strategies:** Note-taking, list-making, and visual schedules can provide external memory support.
 
-  + [After all, everyone is distracted once in a while](https://ia.net/topics/after-all-everyone-is-distracted-once-in-a-while)
+- **Task Simplification:** Break down complex information into smaller, manageable parts for effective processing and remembering.
 
--   Set reminders.
-    Calendars, alarms, written notes, and lists can provide additional assistance in remembering tasks.
+- **Repeated Exposure and Practice:** Repeated exposure to material and additional practice are beneficial due to below-average learning efficiency.
 
--   *Mindfulness* is a technique in which `r params$first_name` can learn to ignore distracting thoughts and concentrate on the task at hand.
-    People of all ages can benefit from mindfulness training, which can help them to develop cognitive control.
+- **Set Reminders:** Use calendars, alarms, written notes, and lists for task reminders.
 
--   High quality sleep, balanced nutrition, and frequent, vigorous exercise are critical to maximizing attention and focus.
-
-### Books and Online Materials
-
-- [Taking Charge of Adult ADHD, Second Edition: Proven Strategies to Succeed at Work, at Home, and in Relationships](https://www.guilford.com/books/Taking-Charge-of-Adult-ADHD/Russell-Barkley/9781462546855)
-
-- [ADHD 2.0](https://drhallowell.com/read/books-by-ned/)
-
-- (https://g.co/kgs/EKmwBy)[Messages: The Communication Skills Book]
-
-- (https://psychcentral.com/adhd/adhd-resources#for-adults-with-adhd)[PsychCentral for Adult ADHD]
-
-- [Launching in Young Adulthood with ADHD… Ready or
-Not!](https://www.chrisdendy.com/product-page/launching-in-young-adulthood-with-adhd-ready-or-not)
+- **Mindfulness Training:** Technique to ignore distracting thoughts and concentrate on the task at hand, aiding in cognitive control.
 
 ## Recommendations for Follow-Up Evaluation
 
--   Follow-up assessment in 12-18 months is recommended to gauge `r params$first_name`'s progress and to assess the impact of the above interventions, unless further concerns arise that need to be addressed sooner.
+- A follow-up assessment in 12-18 months is suggested to measure progress and assess the interventions' impact, unless urgent concerns arise. Continuous monitoring and reassessment are vital to adjust support as `r params$first_name` develops and her needs change.
+
