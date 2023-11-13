@@ -3,59 +3,100 @@
 {{< include _02-01_iq_text.qmd >}}
 
 ```{r}
+#| label: setup-iq
+#| include: false
+# domain
+domains <- c("General Cognitive Ability")
+# phenotype
+pheno <- "iq"
+```
+
+```{r}
+#| label: export-iq
+#| include: false
+iq <- readr::read_csv("neurocog.csv") |>
+  dplyr::filter(domain == domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
+    pass, verbal, timed, result, z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
+    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+  )
+readr::write_csv(iq, paste0(pheno, ".csv"))
+```
+
+```{r}
 #| label: data-iq
 #| include: false
 
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(glue)
-library(bwu)
-
-# phenotype
-pheno <- "iq"
 # data
 data <- bwu::read_data(pheno = pheno)
-# Filter by domain
-domains <- c("General Cognitive Ability")
-# Filter by scale
+# filter by scale
 scales <- c(
-  "Cognitive Efficiency",
-  "Cognitive Proficiency (CPI)",
-  "Cognitive Proficiency Index",
-  "Cognitive Proficiency",
-  "Crystallized Knowledge Index",
-  "Crystallized Knowledge",
-  "Fluid Reasoning (FRI)",
-  "Fluid Reasoning Index",
-  "Fluid Reasoning",
   "Full Scale (FSIQ)",
   "General Ability (GAI)",
   "General Ability Index",
   "General Ability",
   "General Intelligence",
-  "NAB Attention Index",
-  "NAB Executive Functions Index",
-  "NAB Language Index",
-  "NAB Memory Index",
-  "NAB Spatial Index",
   "NAB Total Index",
-  "Nonverbal (NVI)",
-  "Perceptual Reasoning (PRI)",
-  "Processing Speed (PSI)",
-  "Processing Speed Index",
-  "Processing Speed",
-  "RBANS Total Index",
   "Test of Premorbid Functioning",
   "TOPF Standard Score",
-  "Verbal Comprehension (VCI)",
-  "Visual Spatial (VSI)",
-  "Vocabulary Acquisition (VAI)",
   "Word Reading",
+  "Crystallized Knowledge Index",
+  "Crystallized Knowledge",
+  "Verbal Comprehension (VCI)",
+  "Verbal Comprehension",
+  "Vocabulary Acquisition (VAI)",
+  "Fluid Reasoning (FRI)",
+  "Fluid Reasoning Index",
+  "Fluid Reasoning",
+  "Perceptual Reasoning",
+  "Perceptual Reasoning (PRI)",
+  "Nonverbal (NVI)",
+  "Visual Spatial (VSI)",
   "Working Memory (WMI)",
   "Working Memory Index",
   "Working Memory",
-  "Auditory Working Memory (AWMI)"
+  "Auditory Working Memory (AWMI)",
+  "Processing Speed (PSI)",
+  "Processing Speed Index",
+  "Processing Speed",
+  "Cognitive Proficiency (CPI)",
+  "Cognitive Proficiency Index",
+  "Cognitive Proficiency",
+  "NAB Attention Index",
+  "NAB Language Index",
+  "NAB Memory Index",
+  "NAB Spatial Index",
+  "NAB Executive Functions Index",
+  "RBANS Total Index",
+  # from g
+  "Global Neurocognitive Index (G)",
+  "General Ability",
+  "Crystallized Knowledge",
+  "Fluid Reasoning",
+  "Verbal/Language",
+  "Verbal Fluency",
+  "Visual Perception/Construction",
+  "Attention/Executive",
+  "Attention",
+  "Attention Span",
+  "Attentional Fluency",
+  "Executive Function",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Cognitive Efficiency",
+  "Working Memory",
+  "Memory",
+  "Learning Efficiency",
+  "Delayed Recall",
+  "Academic Skills",
+  "Reading",
+  "Writing",
+  "Math",
+  "Academic Fluency"
 )
 # Filter data
 data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
@@ -76,6 +117,25 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 #| include: false
 options(tikzDefaltEngine = "xetex")
 
+include <- c(
+  "Cognitive Proficiency",
+  # "Crystallized Knowledge",
+  # "Fluid Reasoning",
+  # "General Ability (GAI)",
+  "General Ability",
+  "Perceptual Reasoning (PRI)",
+  "Perceptual Reasoning",
+  "Processing Speed (PSI)",
+  "Processing Speed",
+  "Verbal Comprehension (VCI)",
+  "Verbal Comprehension",
+  "Working Memory (WMI)",
+  "Working Memory",
+  "Processing Speed",
+  "Working Memory"
+)
+data_iq <- dplyr::filter(data_iq, scale %in% include)
+
 # footnotes
 # fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
@@ -84,7 +144,7 @@ table_name <- "table_iq"
 grp_iq <- list(
   standard_score = c(
     "Composite Scores", "NAB", "Test of Premorbid Functioning", "WRAT-5",
-    "WAIS-IV", "WAIS-4", "WISC-5", "WASI-2", "RBANS"
+    "WAIS-IV", "WAIS-4", "WISC-5", "WASI-2", "RBANS", "KTEA-3"
   )
 )
 vertical_padding <- 0
@@ -108,16 +168,6 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-# args
-iq <-
-  dplyr::filter(
-    data,
-    scale %in% c(
-      "General Ability", "Crystallized Knowledge", "Fluid Reasoning",
-      "Premorbid Ability", "TOPF Standard Score", "Word Reading", "NAB Executive
-      Functions Index", "Verbal Comprehension (VCI)", "Perceptual Reasoning (PRI)"
-    )
-  )
 x <- data_iq$z_mean_subdomain
 y <- data_iq$subdomain
 colors <- NULL
@@ -149,9 +199,10 @@ bwu::dotplot(
           supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [
-            _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
-            ]),
+          caption: figure.caption(position: bottom, [_General Ability_ refers
+          to an overall capacity to reason, to solve problems, and to learn
+          useful information. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
+          ]),
           placement: none,
           kind: "image",
           supplement: [Fig.],

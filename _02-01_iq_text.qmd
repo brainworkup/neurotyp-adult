@@ -9,7 +9,9 @@ functioning. Organize your summary and interpretation in order from scores that
 are Exceptionally High/Above Average to Exceptionally Low/Below Average to
 delineate relative strengths and weaknesses, respectively. Finally, recommended
 additional support that the patient should receive in areas in which scores fall
-Below Average to Exceptionally Low.
+Below Average to Exceptionally Low, or scores that are signficantly discrepant
+and lower than expected relative to other scores (e.g., verbal reasoning versus
+nonverbal reasoning).
 
 Prefix the output/results as follows: Headers (e.g., Relative Strengths,
 Relative Weaknesses) should be padded with ###, and output that contains lists should be

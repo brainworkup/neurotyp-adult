@@ -10,16 +10,18 @@ unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
-Learning and recall of rote verbal information (word list) was Average overall.
-Recall of the list after a short delay was Average. Recall of the list after a
-long delay was Average, as he was able to recall nearly all the material he had
-learned. Memory recall of more complex verbal information (short story) was
-Average for immediate free recall. Delayed recall of the story details was
-preserved|diminished over time. Learning and recognition of visual material
-(abstract shapes) was Average. Recognition of the target visual material among
-non-target distractors after a delay period was Average, suggesting stable
-memory consolidation over time. Finally, spontaneous, long-term delayed recall
-(20-25 min) recall and reproduction of a complex abstract figure fell within the
-Average range.
+- **Overall Learning and Memory Performance**: Biggie generally shows
+below-average performance across different memory tasks, likely to be secondary
+to attentional variability, with specific
+areas of difficulty.
+
+- **Learning Efficiency vs. Delayed Recall**:
+  - Biggie has more pronounced difficulties with learning efficiency, especially in contextual or story memory tasks.
+  - Delayed recall abilities vary, with notable weaknesses in story memory but relatively better performance in visual memory tasks.
+
+- **Types of Memory**:
+  - **Rote Memory (List Learning)**: Below-average abilities in both learning and recalling lists of information.
+  - **Contextual Memory (Story/Narrative Memory)**: Significant difficulties are evident in both learning and recalling stories or narratives, marking this as a critical area of weakness.
+  - **Visual Memory (Figure Recall)**: The patient shows relatively better capabilities in recalling visual information after a delay, suggesting this as an area of relative strength compared to other memory types.
 
 <<START>>
