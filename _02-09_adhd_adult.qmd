@@ -1,6 +1,6 @@
 ## ADHD/Executive Function {#sec-adhd}
 
-{{< include _02-09_adhd_text.qmd >}}
+{{< include _02-09_adhd_text_adult.qmd >}}
 
 ```{r}
 #| label: setup-adhd
@@ -14,7 +14,7 @@ pheno <- "adhd"
 ```{r}
 #| label: export-adhd
 #| include: false
-#| eval: false
+#| eval: true
 adhd <- readr::read_csv("neurobehav.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
@@ -41,7 +41,7 @@ data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-adhd-self
 #| cache: true
-#| eval: false
+#| eval: true
 #| include: false
 
 # Self-report
@@ -51,13 +51,13 @@ data_adhd_self <-
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_text.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_text_adult.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-observer
 #| cache: true
-#| eval: false
+#| eval: true
 #| include: false
 
 # Observer reports
@@ -67,14 +67,14 @@ data_adhd_observer <-
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_text.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_text_adult.qmd")
 ```
 
 ```{r}
 #| label: qtbl-adhd-self
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: false
+#| eval: true
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -129,7 +129,7 @@ bwu::tbl_gt(
 #| label: qtbl-adhd-observer
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: false
+#| eval: true
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -215,7 +215,7 @@ y <- data_adhd_cefi$narrow
 
 # Make dotplot
 bwu::dotplot(
-  data = data_cefi,
+  data = data_adhd_cefi,
   x = x,
   y = y,
   colors = colors,
@@ -255,7 +255,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Self-Report of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_self.png"
-#let file_fig = "fig_adhd_self.svg"
+#let file_fig = "fig_adhd_caars.svg"
 #domain(
   title: [#title],
   file_qtbl,
@@ -291,7 +291,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Observer Ratings of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_observer.png"
-#let file_fig = "fig_adhd_observer.svg"
+#let file_fig = "fig_adhd_cefi.svg"
 #domain(
   title: [#title],
   file_qtbl,

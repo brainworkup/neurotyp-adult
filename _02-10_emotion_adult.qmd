@@ -137,7 +137,7 @@ data_emotion <-
 
 bwu::cat_neuropsych_results(
   data = data_emotion,
-  file = "_02-10_emotion_text.qmd"
+  file = "_02-10_emotion_text_adult.qmd"
 )
 ```
 
@@ -250,8 +250,8 @@ colnames(df4)[1] <- "test_name"
 x <- data_emotion$z_mean_subdomain
 y <- data_emotion$subdomain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_emotion.svg"
 
 # Make dotplot
@@ -290,8 +290,8 @@ bwu::dotplot(
 
 ```{=typst}
 #let title = "Personality Assessment Inventory (PAI)"
-#let file_qtbl = "table_mood_self.png"
-#let file_fig = "fig_emotion_self.svg"
+#let file_qtbl = "table_emotion.png"
+#let file_fig = "fig_emotion.svg"
 #domain(
   title: [#title],
   file_qtbl,

@@ -26,11 +26,10 @@ iq <- readr::read_csv("neurocog.csv") |>
   )
 readr::write_csv(iq, paste0(pheno, ".csv"))
 ```
-
 ```{r}
 #| label: data-iq
 #| include: false
-#| eval: false
+#| eval: true
 
 # data
 data <- bwu::read_data(pheno = pheno)

@@ -1,7 +1,7 @@
 ---
 title: "Neuropsychological Evaluation Results"
-patient: Biggie
-date: 2023-01-01
+patient: Bridget
+date: 2023-11-08
 author: "Joey Trampush, PhD"
 institute: "Department of Psychiatry and the Behavioral Sciences"
 output:
@@ -29,6 +29,7 @@ output:
 
 ```{r patient, include=FALSE}
 patient <- rmarkdown::metadata$patient
+patient <- "Bridget"
 ```
 
 ```{r setup, include=FALSE}
@@ -75,16 +76,16 @@ knitr::opts_chunk$set(
 
 ```{r, read-data}
 neuropsych <-
-  vroom::vroom(here::here(patient, "neuropsych.csv"), show_col_types = FALSE)
+  readr::read_csv(here::here(patient, "neuropsych.csv"), show_col_types = TRUE)
 neurocog <-
-  vroom::vroom(here::here(patient, "neurocog.csv"), show_col_types = FALSE) |>
+  readr::read_csv(here::here(patient, "neurocog.csv"), show_col_types = TRUE) |>
   dplyr::filter(scale != "Orientation") |>
   dplyr::filter(narrow != "Response Monitoring") |>
   dplyr::filter(narrow != "Recognition Memory")
 neurobehav <-
-  vroom::vroom(here::here(patient, "neurobehav.csv"), show_col_types = FALSE)
+  readr::read_csv(here::here(patient, "neurobehav.csv"), show_col_types = TRUE)
 validity <-
-  vroom::vroom(here::here(patient, "validity.csv"), show_col_types = FALSE)
+  readr::read_csv(here::here(patient, "validity.csv"), show_col_types = TRUE)
 ```
 
 name: title
@@ -109,9 +110,7 @@ background-size: contain
 
 ### Distribution of Scores: _Population-level Interpretation_
 
-
-```{r, gauss-plot1, fig.cap = 'Performance classification of neuropsychological
-test scores in the general population.', fig.retina = 3, fig.asp = 0.5, out.width = '50%'}
+```{r, gauss-plot1, fig.cap = 'Performance classification of neuropsychological test scores in the general population.', fig.retina = 3, fig.asp = 0.5, out.width = '50%'}
 knitr::include_graphics("plot_narrow.png", auto_pdf = TRUE)
 ```
 
@@ -144,11 +143,11 @@ theme_merge <-
 
 ```{r drilldown-plot1, fig.cap = "Drilldown from broad to narrow neurocognitive domains.", fig.width = 12, fig.height = 8, fig.retina = 3, out.width = '100%'}
 
-data <- readr::read_csv("neurocog.csv")
+data <- neurocog
 neuro_domain <- "Neuropsychological Test Scores"
 theme <- theme_merge
 plot1 <- 
-  drilldown(
+  bwu::drilldown(
     data = data,
     patient = patient,
     neuro_domain = neuro_domain,
@@ -174,11 +173,11 @@ background-color: var(--usc-black)
 
 ```{r drilldown-plot2, fig.cap = 'Drilldown from broad to narrow behavioral domains.', fig.width = 12, fig.height = 8, fig.retina = 3, out.width = '100%'}
 
-data <- readr::read_csv("neurobehav.csv")
+data <- neurobehav
 neuro_domain <- "Behavioral Rating Scales"
 theme <- theme_merge
 plot2 <- 
-  drilldown(
+  bwu::drilldown(
     data = data,
     patient = patient,
     neuro_domain = neuro_domain,
@@ -204,11 +203,11 @@ background-color: var(--usc-black)
 
 ```{r drilldown-plot3, fig.cap = 'Drilldown from broad to narrow validity domains.', fig.width = 12, fig.height = 8, fig.retina = 3, out.width = '100%'}
 
-data <- readr::read_csv("validity.csv")
+data <- validity
 neuro_domain <- "Effort/Validity Test Scores"
 theme <- theme_merge
 plot3 <- 
-  drilldown(
+  bwu::drilldown(
     data = data,
     patient = patient,
     neuro_domain = neuro_domain,
