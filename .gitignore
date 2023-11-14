@@ -69,3 +69,4 @@ package/dist/**
 .trunk/configs/.markdownlint.yaml
 .trunk/configs/.yamllint.yaml
 .vscode/settings.json
+jwt_sig.png
