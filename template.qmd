@@ -33,13 +33,37 @@ params:
 ```{r}
 #| label: setup
 #| include: false
+#| cache: false
 xfun::pkg_load2(
   c(
-    "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here",
-    "htmlwidgets", "janitor", "knitr", "magick", "manipulateWidget", "png",
-    "quarto", "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite",
-    "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun",
-    "yaml", "bwu"
+    "ggtext",
+    "ggthemes",
+    "glue",
+    "gt",
+    "gtExtras",
+    "hablar",
+    "here",
+    "htmlwidgets",
+    "janitor",
+    "knitr",
+    "magick",
+    "manipulateWidget",
+    "png",
+    "quarto",
+    "readxl",
+    "rmarkdown",
+    "scales",
+    "snakecase",
+    "stats",
+    "svglite",
+    "tidyselect",
+    "tidytext",
+    "tidyverse",
+    "webshot2",
+    "widgetframe",
+    "xfun",
+    "yaml",
+    "bwu"
   )
 )
 knitr::opts_knit$set(width = 80)
@@ -72,7 +96,6 @@ bwu::load_data(here::here("."))
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
-
 {{< include _00-00_tests.qmd >}}
 
 {{< include _01-00_nse.qmd >}}

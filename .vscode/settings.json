@@ -17,8 +17,8 @@
   },
   "peacock.color": "#8887e1",
   "files.exclude": {
-    ".history": true,
-    ".vscode": true
+    ".vscode": true,
+    ".trunk": true
   },
   "deno.enable": true,
   "deno.inlayHints.parameterTypes.enabled": true,

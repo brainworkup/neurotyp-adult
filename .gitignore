@@ -68,3 +68,4 @@ package/dist/**
 .trunk/trunk.yaml
 .trunk/configs/.markdownlint.yaml
 .trunk/configs/.yamllint.yaml
+.vscode/settings.json
