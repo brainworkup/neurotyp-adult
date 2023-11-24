@@ -5,6 +5,7 @@
 ```{r}
 #| label: setup-executive
 #| include: false
+
 # domain
 domains <- c("Attention/Executive")
 # phenotype
@@ -18,7 +19,9 @@ executive <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name, domain, subdomain, narrow, pass, verbal, timed, result, z_mean_domain, z_sd_domain, z_mean_subdomain,
+    scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, pass, verbal, timed, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
     z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
@@ -123,49 +126,51 @@ bwu::cat_neuropsych_results(data = data_executive, file = "_02-05_executive_text
 options(tikzDefaultEngine = "xetex")
 
 # more filtering for exe tables
-# data_executive <- dplyr::filter(data = data_executive, test_name != "CVLT-3 Brief") |>
-#   dplyr::filter(scale != "Orientation") |>
-#   dplyr::filter(scale %in% c(
-#     # "D-KEFS Inhibition Total Errors",
-#     "D-KEFS Inhibition",
-#     # "D-KEFS Switching Total Errors",
-#     "D-KEFS Switching",
-#     "NAB Attention Index",
-#     "Digits Forward",
-#     # "Digits Forward Longest Span",
-#     "Digits Backward",
-#     # "Digits Backward Longest Span",
-#     "Dots",
-#     "Numbers & Letters Part A Efficiency",
-#     "Numbers & Letters Part B Efficiency",
-#     "Numbers & Letters Part C Efficiency",
-#     "Numbers & Letters Part D Efficiency",
-#     "Driving Scenes",
-#     "NAB Executive Functions Index",
-#     "Mazes",
-#     "Categories",
-#     "Word Generation",
-#     # "Word Generation Perseverations",
-#     "Judgment",
-#     "Working Memory (WMI)",
-#     "Arithmetic",
-#     "Digit Span",
-#     "Longest Digit Span Forward",
-#     "Longest Digit Span Backward",
-#     "Longest Digit Span Sequence",
-#     "Letter-Number Sequencing",
-#     "Symbol Span",
-#     "Spatial Span",
-#     "Picture Span",
-#     "Processing Speed (PSI)",
-#     "Coding",
-#     "Cancellation",
-#     "Symbol Search",
-#     "TMT, Part A",
-#     "TMT, Part B",
-#     "Unstructured Task",
-#     "Attention Index"
-#   ))
+data_executive <-
+  data_executive |>
+  dplyr::filter(test_name != "CVLT-3 Brief") |>
+  dplyr::filter(scale != "Orientation") |>
+  dplyr::filter(scale %in% c(
+    # "D-KEFS Inhibition Total Errors",
+    "D-KEFS Inhibition",
+    # "D-KEFS Switching Total Errors",
+    "D-KEFS Switching",
+    "NAB Attention Index",
+    "Digits Forward",
+    # "Digits Forward Longest Span",
+    "Digits Backward",
+    # "Digits Backward Longest Span",
+    "Dots",
+    "Numbers & Letters Part A Efficiency",
+    "Numbers & Letters Part B Efficiency",
+    "Numbers & Letters Part C Efficiency",
+    "Numbers & Letters Part D Efficiency",
+    "Driving Scenes",
+    "NAB Executive Functions Index",
+    "Mazes",
+    "Categories",
+    "Word Generation",
+    # "Word Generation Perseverations",
+    "Judgment",
+    "Working Memory (WMI)",
+    "Arithmetic",
+    "Digit Span",
+    "Longest Digit Span Forward",
+    "Longest Digit Span Backward",
+    "Longest Digit Span Sequence",
+    "Letter-Number Sequencing",
+    "Symbol Span",
+    "Spatial Span",
+    "Picture Span",
+    "Processing Speed (PSI)",
+    "Coding",
+    "Cancellation",
+    "Symbol Search",
+    "TMT, Part A",
+    "TMT, Part B",
+    "Unstructured Task",
+    "Attention Index"
+  ))
 
 # footnotes
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
@@ -192,7 +197,7 @@ bwu::tbl_gt(
   fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
   grp_scaled_score = grp_executive[["scaled_score"]],
-  grp_standard_score = grp_executive[["standard_score"]],
+  # grp_standard_score = grp_executive[["standard_score"]],
   grp_t_score = grp_executive[["t_score"]],
   dynamic_grp = grp_executive,
   multiline = multiline
@@ -220,8 +225,32 @@ bwu::dotplot(
   return_plot = return_plot,
   filename = filename
 )
+
 ```
 
+
+```{r}
+#| label: fig-executive2
+#| include: false
+#| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
+
+# args2
+x2 <- data_executive$z_mean_narrow
+y2 <- data_executive$narrow
+colors <- NULL
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_executive2.svg"
+
+bwu::dotplot(
+  data = data_executive,
+  x = x2,
+  y = y2,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
+```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -250,6 +279,7 @@ bwu::dotplot(
       )
   }
 ```
+
 ```{=typst}
 #let title = "Attention/Executive"
 #let file_qtbl = "table_executive.png"
@@ -260,3 +290,42 @@ bwu::dotplot(
   file_fig
   )
 ```
+
+<!-- ```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Fira Sans", size: 9pt)
+  set text(..font)
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: figure.caption(position: top, [#title]),
+          kind: "qtbl",
+          supplement: [Table],
+          ),
+        figure([#image(file_fig, width: auto)],
+          caption: figure.caption(position: bottom, [
+            Attention and executive functions are essential for successful
+            cognitive functioning, enabling us to perform everyday tasks, handle
+            academic challenges, solve problems, manage our emotions, and
+            interact effectively with others and our environment.
+            ]),
+          placement: none,
+          kind: "image",
+          supplement: [Figure],
+          gap: 0.5em,
+        ),
+      )
+  }
+``` -->
+
+<!-- ```{=typst}
+#let title = "Attention/Executive"
+#let file_qtbl = "table_executive.png"
+#let file_fig = "fig_executive2.svg"
+#domain(
+  title: [#title Test Scores],
+  file_qtbl,
+  file_fig
+  )
+``` -->

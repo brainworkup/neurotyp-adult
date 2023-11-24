@@ -133,7 +133,7 @@ bwu::tbl_gt(
   fn_standard_score = fn_standard_score,
   grp_scaled_score = grp_verbal[["scaled_score"]],
   grp_t_score = grp_verbal[["t_score"]],
-  grp_standard_score = grp_verbal[["standard_score"]],
+  # grp_standard_score = grp_verbal[["standard_score"]],
   dynamic_grp = grp_verbal,
   vertical_padding = vertical_padding,
   multiline = multiline

@@ -61,9 +61,9 @@ scales <- c(
   "Memory Domain",
   "Memory for Designs Content",
   "Memory for Designs Delayed Content",
-  "Memory for Designs Delayed memory",
+  "Memory for Designs Delayed Spatial",
   "Memory for Designs Delayed",
-  "Memory for Designs memory",
+  "Memory for Designs Spatial",
   "Memory for Designs",
   "Memory for Faces Delayed",
   "Memory for Faces",
@@ -92,13 +92,13 @@ scales <- c(
   # "Total Hits",
   "Total Intrusions",
   "Total Repetitions",
-  "Trial 1 Correct",
-  "Trial 1 Free Recall Correct",
+  # "Trial 1 Correct",
+  # "Trial 1 Free Recall Correct",
   # "Trial 2 Correct",
   # "Trial 3 Correct",
-  "Trial 4 Correct",
-  "Trial 5 Correct",
-  "Trial 5 Free Recall Correct",
+  # "Trial 4 Correct",
+  # "Trial 5 Correct",
+  # "Trial 5 Free Recall Correct",
   "Trials 1-4 Correct",
   "Trials 1-5 Correct",
   "Trials 1-5 Free Recall Correct",
@@ -139,16 +139,16 @@ bwu::cat_neuropsych_results(data = data_memory, file = "_02-06_memory_text.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 pheno <- "memory"
 table_name <- "table_memory"
 grp_memory <- list(
-  standard_score = c("NAB", "CVLT-3 Brief"),
   scaled_score = c("CVLT-3 Brief", "NEPSY-2", "CVLT Child", "CVLT-3"),
+  standard_score = c("CVLT-3", "CVLT-3 Brief"), # Also NAB if decide to keep here
   t_score = c("NAB", "Rey Complex Figure")
 )
 vertical_padding <- 0
@@ -159,11 +159,11 @@ bwu::tbl_gt(
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
-  fn_standard_score = fn_standard_score,
   fn_scaled_score = fn_scaled_score,
+  fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
-  grp_standard_score = grp_memory[["standard_score"]],
   grp_scaled_score = grp_memory[["scaled_score"]],
+  grp_standard_score = grp_memory[["standard_score"]],
   grp_t_score = grp_memory[["t_score"]],
   dynamic_grp = grp_memory,
   multiline = multiline

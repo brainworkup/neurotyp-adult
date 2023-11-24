@@ -1,4 +1,4 @@
-# Emotional/Behavioral/Personality {#sec-emotion}
+## Emotional/Behavioral/Personality {#sec-emotion}
 
 {{< include _02-10_emotion_text_adult.qmd >}}
 
