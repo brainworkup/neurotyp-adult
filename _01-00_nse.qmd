@@ -22,11 +22,9 @@ bwu::save_as_markdown(text = txt, output_path)
 
 ## Referral
 
-`r params$first_name` was referred for neuropsychological testing as part of a
-comprehensive work-up for attention-deficit/hyperactivity disorder (ADHD).
-Findings from the evaluation will be used in formulating an effective academic
-and treatment strategy. Results and recommendations were discussed with `r
-params$first_name` during the feedback visit on the final day of the evaluation.
+Biggie Smalls is a 24-year-old right-handed research assistant with 16 years of education, including a B.A. in Psychology from the University of Brooklyn. Ms. Smalls was referred in order to determine the nature and extent of neurocognitive sequelae emerging from a history of attention-deficit/hyperactivity disorder (ADHD), obsessive-compulsive disorder (OCD), and post-traumatic stress disorder (PTSD).
+
+The purpose of the current evaluation is to provide documentation of current impairment, so that Ms. Smalls may receive accommodations on the Medical College Admissions Test (MCAT). She has been studying and taking MCAT prep classes, but has not been completing practice tests in the allotted time. It is Ms. Smalls's goal to attend medical school and then embark on a career in psychiatry. This report is based on a review of available medical records and information gathered across multiple days of evaluation. Treatment planning and plans for test accommodations were discussed with Ms. Smalls during the feedback visit on the final day of the examination.
 
 ## Background
 

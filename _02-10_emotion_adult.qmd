@@ -1,6 +1,6 @@
 ## Emotional/Behavioral/Personality {#sec-emotion}
 
-{{< include _02-10_emotion_text_adult.qmd >}}
+{{< include _02-10_emotion_adult_text.qmd >}}
 
 ```{r}
 #| label: setup-emotion

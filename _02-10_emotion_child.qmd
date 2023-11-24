@@ -1,6 +1,6 @@
 ## Emotional/Behavioral/Personality {#sec-emotion}
 
-<!-- {{< include _02-10_emotion_text.qmd >}} -->
+<!-- {{< include _02-10_emotion_child_text.qmd >}} -->
 
 ```{r}
 #| label: setup-emotion
@@ -347,7 +347,7 @@ bwu::dotplot(
 
 ### PARENT RATINGS
 
-{{< include _02-10_emotion_text_parent.qmd >}}
+{{< include _02-10_emotion_parent_text.qmd >}}
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -387,7 +387,7 @@ bwu::dotplot(
 
 ### SELF-REPORT
 
-{{< include _02-10_emotion_text_self.qmd >}}
+{{< include _02-10_emotion_child_text.qmd >}}
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {

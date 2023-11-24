@@ -1,6 +1,6 @@
 ## ADHD/Executive Function {#sec-adhd}
 
-{{< include _02-09_adhd_adult_text.qmd >}}
+{{< include _02-09_adhd_text_adult.qmd >}}
 
 ```{r}
 #| label: setup-adhd
@@ -236,6 +236,8 @@ bwu::tbl_gt(
 #| label: fig-adhd-self
 #| eval: true
 #| include: false
+#| fig-height: 6
+#| out-height: 100%
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
 # data for self-report dotplot
@@ -263,6 +265,8 @@ bwu::dotplot(
 #| label: fig-adhd-observer
 #| eval: true
 #| include: false
+#| fig-height: 6
+#| out-height: 100%
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
 # data for adhd observer dotplot
@@ -291,7 +295,7 @@ bwu::dotplot(
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
-      columns: (50%, 50%),
+      columns: (45%, 55%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
@@ -326,7 +330,7 @@ bwu::dotplot(
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
-      columns: (50%, 50%),
+      columns: (45%, 55%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
