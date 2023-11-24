@@ -1,6 +1,6 @@
 ## ADHD/Executive Function {#sec-adhd}
 
-{{< include _02-09_adhd_text_adult.qmd >}}
+{{< include _02-09_adhd_adult_text.qmd >}}
 
 ```{r}
 #| label: setup-adhd
@@ -40,6 +40,14 @@ scales <- c(
   "Memory",
   "Action",
   "Total Composite",
+  "Inattention/Memory Problems",
+  "Hyperactivity/Restlessness",
+  "Impulsivity/Emotional Lability",
+  "Problems with Self-Concept",
+  "DSM-5 Inattentive Symptoms",
+  "DSM-5 Hyperactive-Impulsive Symptoms",
+  "DSM-5 ADHD Symptoms Total",
+  "ADHD Index",
   "CAARS-SR Inattention/Memory Problems",
   "CAARS-SR Hyperactivity/Restlessness",
   "CAARS-SR Impulsivity/Emotional Lability",
@@ -48,6 +56,16 @@ scales <- c(
   "CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms",
   "CAARS-SR DSM-5 ADHD Symptoms Total",
   "CAARS-SR ADHD Index",
+  "Full Scale",
+  "Attention",
+  "Emotion Regulation",
+  "Flexibility",
+  "Inhibitory Control",
+  "Initiation",
+  "Organization",
+  "Planning",
+  "Self-Monitoring",
+  "Working Memory",
   "CEFI-SR Full Scale",
   "CEFI-SR Attention",
   "CEFI-SR Emotion Regulation",
@@ -135,6 +153,7 @@ fn_standard_score <- gt::md("CEFI Standard Score: Mean = 100 [50th‰], SD ± 15
 [16th‰, 84th‰].
 
 Lower scores reflect reduced functioning.")
+
 fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 Higher scores reflect reduced functioning.")
@@ -180,6 +199,7 @@ fn_standard_score <- gt::md("CEFI Standard Score: Mean = 100 [50th‰], SD ± 15
 [16th‰, 84th‰].
 
 Lower scores reflect reduced functioning.")
+
 fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 Higher scores reflect reduced functioning.")
@@ -213,24 +233,24 @@ bwu::tbl_gt(
 ```
 
 ```{r}
-#| label: fig-caars
+#| label: fig-adhd-self
 #| eval: true
 #| include: false
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
-# data for caars dotplot
-pheno <- "adhd_caars"
-data_adhd_caars <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "caars_or.csv"))
+# data for self-report dotplot
+pheno <- "adhd_self"
+data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
-filename <- "fig_adhd_caars.svg"
-x <- data_adhd_caars$z_mean_subdomain
-y <- data_adhd_caars$subdomain
+filename <- "fig_adhd_self.svg"
+x <- data_adhd_self$z
+y <- data_adhd_self$scale
 
 # Make dotplot
 bwu::dotplot(
-  data = data_adhd_caars,
+  data = data_adhd_self,
   x = x,
   y = y,
   colors = colors,
@@ -240,24 +260,24 @@ bwu::dotplot(
 ```
 
 ```{r}
-#| label: fig-cefi
+#| label: fig-adhd-observer
 #| eval: true
 #| include: false
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
-# data for cefi dotplot
-pheno <- "adhd_cefi"
-data_adhd_cefi <- dplyr::filter(data_adhd, filename %in% c("cefi_sr.csv", "cefi_or.csv"))
+# data for adhd observer dotplot
+pheno <- "adhd_observer"
+data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
-filename <- "fig_adhd_cefi.svg"
-x <- data_adhd_cefi$z_mean_narrow
-y <- data_adhd_cefi$narrow
+filename <- "fig_adhd_observer.svg"
+x <- data_adhd_observer$z
+y <- data_adhd_observer$scale
 
 # Make dotplot
 bwu::dotplot(
-  data = data_adhd_cefi,
+  data = data_adhd_observer,
   x = x,
   y = y,
   colors = colors,
@@ -272,7 +292,6 @@ bwu::dotplot(
   set text(..font)
     grid(
       columns: (50%, 50%),
-      rows: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
@@ -280,11 +299,8 @@ bwu::dotplot(
           supplement: [*Table*],
           ),
         figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [Adult ADHD symptom reports
-          collapsed and averaged together across raters and across subdomains of ADHD. The
-          above figures were generated based on the Conners’ Adult ADHD Rating
-          Scales (CAARS), an instrument that is helpful when considering a
-          diagnosis of ADHD or related problems.]),
+          caption: figure.caption(position: bottom, [Adult ADHD symptoms and
+          executive functioning self-reported by the patient.]),
           placement: none,
           kind: "image",
           supplement: [*Fig.*],
@@ -297,7 +313,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Self-Report of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_self.png"
-#let file_fig = "fig_adhd_caars.svg"
+#let file_fig = "fig_adhd_self.svg"
 #domain(
   title: [#title],
   file_qtbl,
@@ -333,7 +349,7 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Observer Ratings of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_observer.png"
-#let file_fig = "fig_adhd_cefi.svg"
+#let file_fig = "fig_adhd_observer.svg"
 #domain(
   title: [#title],
   file_qtbl,

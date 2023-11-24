@@ -1,11 +1,11 @@
 ## ADHD/Executive Function {#sec-adhd}
-
-{{< include _02-09_adhd_text.qmd >}}
+TODO:
+{{< include _02-09_adhd_child_text.qmd >}}
 
 ```{r}
 #| label: setup-adhd
 #| include: false
-TODO:
+
 # domain
 domains <- c("ADHD")
 # phenotype
