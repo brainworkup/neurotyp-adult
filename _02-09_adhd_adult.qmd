@@ -1,6 +1,6 @@
 ## ADHD/Executive Function {#sec-adhd}
 
-{{< include _02-09_adhd_text_adult.qmd >}}
+{{< include _02-09_adhd_adult_text.qmd >}}
 
 ```{r}
 #| label: setup-adhd
@@ -295,7 +295,7 @@ bwu::dotplot(
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
-      columns: (45%, 55%),
+      columns: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
@@ -330,7 +330,7 @@ bwu::dotplot(
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
     grid(
-      columns: (45%, 55%),
+      columns: (50%, 50%),
       gutter: 8pt,
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),

@@ -1,4 +1,4 @@
-It was a pleasure to work with Biggie.
+It was a pleasure to work with `r params$first_name`.
 Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,
@@ -6,13 +6,14 @@ Sincerely,
 ```{r}
 #| label: signature
 #| fig-align: left
-#| out-width: 60%
+#| out-width: 50%
 #| echo: false
 knitr::include_graphics("jwt_sig.png")
 ```
 
 **Joey W. Trampush, Ph.D.**\
-Assistant Professor of Psychiatry\
+Clinical Neuropsychologist\
+Della Martin Assistant Professor of Psychiatry\
 Department of Psychiatry and the Behavioral Sciences\
 University of Southern California Keck School of Medicine\
 CA License PSY29212  

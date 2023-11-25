@@ -26,6 +26,7 @@ iq <- readr::read_csv("neurocog.csv") |>
   )
 readr::write_csv(iq, paste0(pheno, ".csv"))
 ```
+
 ```{r}
 #| label: data-iq
 #| include: false
@@ -121,20 +122,19 @@ options(tikzDefaltEngine = "xetex")
 
 include <- c(
   "Cognitive Proficiency",
-  # "Crystallized Knowledge",
-  # "Fluid Reasoning",
+  "Crystallized Knowledge",
+  "Fluid Reasoning",
   "General Ability (GAI)",
   "General Ability",
   "Perceptual Reasoning (PRI)",
   "Perceptual Reasoning",
-  # "Processing Speed (PSI)",
-  # "Processing Speed",
+  "Processing Speed (PSI)",
+  "Processing Speed",
   "Verbal Comprehension (VCI)",
-  "Verbal Comprehension"
-  # "Working Memory (WMI)",
-  # "Working Memory",
-  # "Processing Speed",
-  # "Working Memory"
+  "Verbal Comprehension",
+  "Working Memory (WMI)",
+  "Working Memory",
+  "NAB Total Index"
 )
 # data_iq <- dplyr::filter(data_iq, scale %in% include)
 data_iq <- readr::read_csv("iq.csv")
@@ -166,6 +166,10 @@ bwu::tbl_gt(
 #| label: fig-iq
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
+
+remove <- c("Neuropsychological Function", "Working Memory", "Processing Speed")
+
+data_iq <- dplyr::filter(data_iq, !subdomain %in% remove)
 
 x <- data_iq$z_mean_subdomain
 y <- data_iq$subdomain

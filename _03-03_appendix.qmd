@@ -12,25 +12,25 @@ Although standardized scores provide the clinician with an important and necessa
 ## Conversion of Test Scores
 
 ```{r}
-#| label: fig-test-score-ranges
-#| cache: true
+#| label: tbl-test-score-ranges
 #| double-escape: true
 #| escape: false
 #| fig-retina: 2
 #| fig-width: 6
 #| fig-asp: 0.67
-#| fig-show: hold
-#| out-width: 95%
-#| eval: false
+#| fig-align: center
+#| out-width: 70%
+#| eval: true
+#| tbl-cap-location: bottom
 
 range <- readr::read_csv("test_score_ranges.csv")
 tbl_range <- gt::gt(range) |>
   gt::tab_header(title = "Test Score Labels/Ranges") |>
   gt::cols_align(align = "center") |>
-  gt::tab_style(
-    style = cell_text(size = "small"),
-    locations = cells_source_notes()
-  ) |>
+  # gt::tab_style(
+  #   locations = cells_source_notes(),
+  #   style = cell_text(size = "small")
+  # ) |>
   gtExtras::gt_theme_538()
 gt::gtsave(tbl_range, glue::glue("tbl_range", ".png"))
 
