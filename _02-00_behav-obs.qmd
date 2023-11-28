@@ -7,4 +7,5 @@
 - *Mood/affect:* Neutral, range was full and appropriate.
 - *Sensory/motor:* Performance was not limited by any obvious sensory or motor difficulties.
 - *Cognitive process:* Coherent and goal directed.
-- *Motivation/effort:* Normal; Word Choice = 50/50, RDS = 12, CVLT-3 Forced-Choice Recognition = 9/9.
+- *Motivation/effort:* Normal; Word Choice = 50/50, RDS = 12, CVLT-3
+Forced-Choice Recognition = 9/9.

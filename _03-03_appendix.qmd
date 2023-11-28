@@ -2,12 +2,35 @@
 
 ## Test Selection Procedures
 
-Neuropsychological tests are intrinsically performance-based, and cognitive performance assessed during this neuropsychological evaluation is summarized above.
+Neuropsychological tests are intrinsically performance-based, and cognitive
+performance assessed during this examination is summarized above.
 Where appropriate, qualitative observations are included.
 Cultural considerations were made when selecting measures, interpreting results, and making diagnostic impressions and recommendations.
-Results from formal tests are reported in comparison to other individuals the same age, sex, and educational level as range of functioning (e.g., below average, average, above average).
+Results from formal tests are reported in comparison to other individuals the
+same age and sex/gender as range of functioning (e.g., below
+average, average, above average).
 Test score labels are intended solely to be descriptive, identifying positions of scores relative to a normal curve distribution, and should be interpreted within the context of the patient's individual presentation and history.
-Although standardized scores provide the clinician with an important and necessary understanding of the patient's test performance compared with a normative group, they do not on their own lead to accurate diagnosis or treatment recommendations.
+Although standardized scores provide the clinician with an important and
+necessary understanding of the patient's test performance compared with a
+normative group, they do not on their own lead to accurate diagnosis or
+treatment recommendations.
+
+**[@fig-gauss-plot-narrow]** can be used as a guide to help interpret individual test scores in terms of the degree of distance a score fell in relation to normative expectations and the magnitude of clinical severity. Test scores are easiest to interpret as percentiles[^1] and as *z*-Scores (M = 0, SD = 1)[^2], which are used to plot the various test and domain scores below.
+
+{{< pagebreak >}}
+
+## Test Score Distributions
+
+```{r}
+#| label: fig-gauss-plot-narrow
+#| fig-cap: "Classification of neuropsychological test scores that are normally distributed in the general population [@guilmetteAmericanAcademyClinical2020]."
+#| fig-retina: 2
+#| fig-width: 6
+#| fig-asp: 0.67
+#| out-height: 50%
+
+knitr::include_graphics("plot_narrow.png")
+```
 
 ## Conversion of Test Scores
 
@@ -37,23 +60,8 @@ gt::gtsave(tbl_range, glue::glue("tbl_range", ".png"))
 knitr::include_graphics("tbl_range.png", dpi = 270)
 ```
 
-{{< pagebreak >}}
-
-## Test Score Distributions
-
-```{r}
-#| label: fig-gauss-plot-narrow
-#| fig-cap: "Classification of neuropsychological test scores that are normally distributed in the general population [@guilmetteAmericanAcademyClinical2020]."
-#| fig-retina: 2
-#| fig-width: 6
-#| fig-asp: 0.67
-#| out-height: 50%
-
-knitr::include_graphics("plot_narrow.png")
-```
-
-[@fig-gauss-plot-narrow] can be used as a guide to help interpret individual test scores in terms of the degree of distance a score fell in relation to normative expectations and the magnitude of clinical severity. Test scores are easiest to interpret as percentiles[^1] and as *z*-Scores (M = 0, SD = 1)[^2], which are used to plot the various test and domain scores below.
 
 [^1]: A *percentile* shows `r params$first_name`'s standing relative to peers. For example, a percentile rank of 70 means `r params$first_name` performed as well as or better than 70% of individuals the same age.
 
-[^2]: *z-Score* = -1 (16th percentile), *z-Score* = 0 (50th percentile), and *z-Score* = +1 (84th percentile)
+[^2]: *z-Score* = -1 (16th percentile), *z-Score* = 0 (50th percentile), and
+*z-Score* = +1 (84th percentile)

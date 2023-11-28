@@ -26,66 +26,52 @@ params:
   him_her: her
   him_her_cap: Her
   dx1: attention-deficit/hyperactivity disorder (ADHD)
-  dx2: anxiety
-  dx3: depression
+  dx2: obsessive-compulsive disorder (OCD)
+  dx3: anxiety/depression
 ---
 
 ```{r}
 #| label: setup
 #| include: false
 #| cache: false
-xfun::pkg_load2(
-  c(
-    "ggtext",
-    "ggthemes",
-    "glue",
-    "gt",
-    "gtExtras",
-    "hablar",
-    "here",
-    "htmlwidgets",
-    "janitor",
-    "knitr",
-    "magick",
-    "manipulateWidget",
-    "png",
-    "quarto",
-    "readxl",
-    "rmarkdown",
-    "scales",
-    "snakecase",
-    "stats",
-    "svglite",
-    "tidyselect",
-    "tidytext",
-    "tidyverse",
-    "webshot2",
-    "widgetframe",
-    "xfun",
-    "yaml",
-    "bwu"
-  )
+
+# Load necessary packages
+packages <- c(
+  "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here",
+  "htmlwidgets", "janitor", "knitr", "magick", "png", "manipulateWidget", "quarto",
+  "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite",
+  "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun",
+  "yaml", "bwu"
 )
+xfun::pkg_load2(packages)
+
+# Set knitr options
 knitr::opts_knit$set(width = 80)
 options(digits = 2, warnPartialMatchArgs = FALSE)
 options(knitr.kable.NA = "--")
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 knitr::knit_hooks$set(optipng = knitr::hook_optipng)
+
+# Set plot hook for LaTeX output
 if (identical(knitr:::pandoc_to(), "latex")) {
   knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
 }
-Sys.setenv(PATIENT = "Biggie")
+
+# Set environment variables with default values
+Sys.setenv(PATIENT = "Bridget", RETURN_PLOT = TRUE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
-if (is.null(return_plot)) return_plot <- FALSE
-if (return_plot == "true") return_plot <- TRUE
-if (is.null(patient)) patient <- "Biggie"
 ```
 
 ```{r}
 #| label: data-load
 #| include: false
-bwu::load_data(here::here("."))
+file_path <- here::here(patient)
+bwu::load_data(here::here(file_path))
+neurocog <- read.csv("neurocog.csv")
+neurobehav <- read.csv("neurobehav.csv")
+neuropsych <- read.csv("neuropsych.csv")
+validity <- read.csv("validity.csv")
 ```
 
 ```{=typst}
@@ -96,11 +82,16 @@ bwu::load_data(here::here("."))
 *PATIENT NAME:* #name \ 
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
 ```
+
 {{< include _00-00_tests.qmd >}}
 
 {{< include _01-00_nse.qmd >}}
 
 {{< include _02-00_behav-obs.qmd >}}
+
+<!-- {{< pagebreak >}} -->
+
+# NEUROCOGNITIVE FINDINGS {#sec-nt}
 
 {{< include _02-01_iq.qmd >}}
 
@@ -114,17 +105,13 @@ bwu::load_data(here::here("."))
 
 {{< include _02-06_memory.qmd >}}
 
-{{< include _02-07_motor.qmd >}}
-
-{{< include _02-08_social.qmd >}}
+<!-- {{< include _02-07_motor.qmd >}} -->
 
 {{< include _02-09_adhd_adult.qmd >}}
 
 {{< include _02-10_emotion_adult.qmd >}}
 
-{{< include _02-11_adaptive.qmd >}}
-
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 {{< include _03-00_sirf.qmd >}}
 
@@ -133,5 +120,7 @@ bwu::load_data(here::here("."))
 {{< include _03-01_recs.qmd >}}
 
 {{< include _03-02_signature.qmd >}}
+
+<!-- {{< pagebreak >}} -->
 
 {{< include _03-03_appendix.qmd >}}
