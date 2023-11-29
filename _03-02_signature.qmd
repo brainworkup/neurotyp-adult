@@ -6,7 +6,7 @@ Sincerely,
 ```{r}
 #| label: signature
 #| fig-align: left
-#| out-width: 50%
+#| out-width: 55%
 #| echo: false
 knitr::include_graphics("jwt_sig.png")
 ```

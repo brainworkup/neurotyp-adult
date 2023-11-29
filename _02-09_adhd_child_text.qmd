@@ -16,11 +16,11 @@ unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
-Bridget completed self-report rating scales of adult ADHD symptoms and executive functioning in everyday life. Consistent and overlapping difficulties were reported in the areas of:
+Biggie completed self-report rating scales of adult ADHD symptoms and executive functioning in everyday life. Consistent and overlapping difficulties were reported in the areas of:
 
 <!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
 
-On the companion observer-reports, it was reported that Bridget evidences moderate to severe difficulties in the areas of:
+On the companion observer-reports, it was reported that Biggie evidences moderate to severe difficulties in the areas of:
 
 <!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
 
