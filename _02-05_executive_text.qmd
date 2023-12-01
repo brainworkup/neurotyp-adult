@@ -2,25 +2,29 @@
 
 ## Area: Attention and Executive Functioning
 
-Summarize and interpret these neuropsychological test scores related to the area
-denoted above. For scores that are Below
-Average, give a brief example of how this could impact the patient's daily
-functioning. Organize your summary and interpretation in order from scores that
-are Exceptionally High/Above Average to Exceptionally Low/Below Average to
-delineate relative strengths and weaknesses, respectively. Finally, recommended
-additional support that the patient should receive in areas in which scores fall
-Below Average to Exceptionally Low.
+Summarize and interpret these neuropsychological test scores related to the area denoted above.
+For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning.
+Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively.
+Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
 
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
+Prefix the output/results as follows: Headers (e.g., Relative Strengths, Relative Weaknesses) should be padded with ###, and output that contains lists should be unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
-- Biggie demonstrates an exceptionally high auditory attentional capacity, indicating a strong ability to process a large amount of information at once. Their attentional capacity and working memory are above average, allowing him to effectively retrieve, generate, and present ideas. Their auditory attentional capacity is high, particularly in maintaining sequences of orally presented information. Their psychomotor speed, visual scanning ability, and visual-motor coordination are also high, indicating a high efficiency in processing and coordinating visual information.
 
-- In terms of average scores, Biggie shows a typical level of focus, concentration, and sustained attention. Their ability to scan, track visuomotor activities, divide their attention, and exhibit cognitive flexibility are all average. They exhibits average self-monitoring and perseverative tendencies, indicating a typical level of cognitive control. Biggie's psychomotor speed and basic psychomotor processing speed are both average, suggesting they perform tasks at a normal speed.
+-   Biggie demonstrates an exceptionally high auditory attentional capacity, indicating a strong ability to process a large amount of information at once.
+    Their attentional capacity and working memory are above average, allowing him to effectively retrieve, generate, and present ideas.
+    Their auditory attentional capacity is high, particularly in maintaining sequences of orally presented information.
+    Their psychomotor speed, visual scanning ability, and visual-motor coordination are also high, indicating a high efficiency in processing and coordinating visual information.
 
-- Biggie's performance falls into the low average range when it comes to planning and foresight, inhibition, and psychomotor speed examined through maze-tracing tasks. This could potentially impact their ability to plan and execute complex tasks in daily life. Their performance on a complex measure of divided attention, information processing speed, and inhibition is also low average, which may affect Their ability to quickly process information and control impulses. Biggie's inhibition/cognitive control and set-shifting/cognitive flexibility are also low average, which could affect their ability to switch between tasks or control their behavior in daily life.
+-   In terms of average scores, Biggie shows a typical level of focus, concentration, and sustained attention.
+    Their ability to scan, track visuomotor activities, divide their attention, and exhibit cognitive flexibility are all average.
+    They exhibits average self-monitoring and perseverative tendencies, indicating a typical level of cognitive control.
+    Biggie's psychomotor speed and basic psychomotor processing speed are both average, suggesting they perform tasks at a normal speed.
+
+-   Biggie's performance falls into the low average range when it comes to planning and foresight, inhibition, and psychomotor speed examined through maze-tracing tasks.
+    This could potentially impact their ability to plan and execute complex tasks in daily life.
+    Their performance on a complex measure of divided attention, information processing speed, and inhibition is also low average, which may affect Their ability to quickly process information and control impulses.
+    Biggie's inhibition/cognitive control and set-shifting/cognitive flexibility are also low average, which could affect their ability to switch between tasks or control their behavior in daily life.
 
 <<START>>

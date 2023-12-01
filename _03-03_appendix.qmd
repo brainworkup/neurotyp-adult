@@ -48,7 +48,7 @@ knitr::include_graphics("plot_narrow.png")
 
 range <- readr::read_csv("test_score_ranges.csv")
 tbl_range <- gt::gt(range) |>
-  gt::tab_header(title = "Test Score Labels/Ranges") |>
+    gt::tab_header(title = "Test Score Labels/Ranges") |>
   gt::cols_align(align = "center") |>
   # gt::tab_style(
   #   locations = cells_source_notes(),
