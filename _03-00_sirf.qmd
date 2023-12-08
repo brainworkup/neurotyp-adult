@@ -3,7 +3,7 @@
 ```{r}
 #| label: make-g
 #| include: false
-#| eval: false
+#| eval: true
 
 scales <- c(
   "Academic Skills",
@@ -118,23 +118,23 @@ data <- readr::read_csv("neurocog.csv")
 data2 <- dplyr::filter(data, scale != "Cognitive Proficiency")
 
 data2 <-
-    data2 |>
-    group_by(domain, .add = TRUE) |>
-    dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
-    dplyr::ungroup()
+  data2 |>
+  group_by(domain, .add = TRUE) |>
+  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+  dplyr::ungroup()
 
-x <- data2$z_mean_domain
-y <- data2$domain
+x2 <- data2$z_mean_domain
+y2 <- data2$domain
 colors <- NULL
-return_plot <- TRUE
-# return_plot <- Sys.getenv("RETURN_PLOT")
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_domains.svg"
 
 # Make dotplot
 bwu::dotplot(
   data = data2,
-  x = x,
-  y = y,
+  x = x2,
+  y = y2,
   colors = colors,
   return_plot = return_plot,
   filename = filename

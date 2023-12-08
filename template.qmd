@@ -91,7 +91,7 @@ validity <- read.csv("validity.csv")
 
 <!-- {{< pagebreak >}} -->
 
-# NEUROCOGNITIVE FINDINGS {#sec-nt}
+# NEUROCOGNITIVE FINDINGS
 
 {{< include _02-01_iq.qmd >}}
 

@@ -14,17 +14,15 @@ pheno <- "iq"
 ```{r}
 #| label: export-iq
 #| include: false
-#| eval: false
+#| eval: true
 iq <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
     scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
-    pass, verbal, timed, result, z_mean_domain, z_sd_domain, z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+    pass, verbal, timed, result
   )
-readr::write_csv(iq, paste0(pheno, ".csv"))
+readr::write_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
@@ -137,10 +135,9 @@ include <- c(
   "NAB Total Index"
 )
 # data_iq <- dplyr::filter(data_iq, scale %in% include)
-data_iq <- readr::read_csv("iq.csv")
+# data_iq <- readr::read_csv("iq.csv")
 # footnotes
 source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-pheno <- "iq"
 table_name <- "table_iq"
 grp_iq <- list(
   standard_score = c(
@@ -167,9 +164,9 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-remove <- c("Neuropsychological Function", "Working Memory", "Processing Speed")
+# remove <- c("Neuropsychological Function", "Working Memory", "Processing Speed")
 
-data_iq <- dplyr::filter(data_iq, !subdomain %in% remove)
+# data_iq <- dplyr::filter(data_iq, !subdomain %in% remove)
 
 x <- data_iq$z_mean_subdomain
 y <- data_iq$subdomain
