@@ -1,4 +1,4 @@
-# SUMMARY/IMPRESSION {#sec-sirf} 
+# SUMMARY/IMPRESSION {#sec-sirf}
 
 ```{r}
 #| label: make-g
@@ -12,16 +12,16 @@ scales <- c(
   "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
-  # "Cognitive Proficiency",
+  "Cognitive Proficiency",
   "Crystallized Knowledge",
   "Delayed Recall",
   "Executive Functions",
-  # "Global Neurocognitive Index (G)",
+  "Global Neurocognitive Index (G)",
   "Verbal Fluency",
   "Fluid Reasoning",
   "General Ability",
   "Learning Efficiency",
-  # "Memory",
+  "Memory",
   "Planning",
   "Processing Speed",
   "Psychomotor Speed",
@@ -40,9 +40,34 @@ g <-
   janitor::clean_names() |>
   dplyr::mutate(z = (index - 100) / 15) |>
   dplyr::filter(composite_name %in% scales) |>
-  dplyr::rename(scale = composite_name, score = index, ci_95 = x95_percent_ci) |>
+  dplyr::rename(
+    scale = composite_name,
+    score = index,
+    ci_95 = x95_percent_ci
+  ) |>
+  dplyr::mutate(
+    test = "index_score",
+    test_name = "Composite Scores",
+    domain = "General Cognitive Ability",
+    subdomain = scale,
+    test_type = "npsych_test"
+  ) |>
   bwu::gpluck_make_score_ranges(range = "", test_type = "npsych_test") |>
-  dplyr::select(scale, score, ci_95, percentile, range, reliability, z, composition)
+  dplyr::select(
+    scale,
+    score,
+    ci_95,
+    z,
+    percentile,
+    range,
+    test,
+    test_name,
+    domain,
+    subdomain,
+    test_type,
+    reliability,
+    composition
+  )
 
 # save g.csv
 readr::write_csv(g, "csv/g.csv")
@@ -57,20 +82,20 @@ g <- readr::read_csv("csv/g.csv")
 
 # scales
 keep <- c(
+  "General Ability",
   "Academic Skills",
+  "Fluid Reasoning",
+  "Attention/Executive",
   "Attention",
   "Attention Span",
-  "Attention/Executive",
   "Attentional Fluency",
   "Cognitive Efficiency",
   # "Cognitive Proficiency",
   "Crystallized Knowledge",
-  "Delayed Recall",
   "Executive Functions",
   # "Global Neurocognitive Index (G)",
   "Verbal Fluency",
-  "Fluid Reasoning",
-  "General Ability",
+  "Delayed Recall",
   "Learning Efficiency",
   # "Memory",
   "Planning",
@@ -113,13 +138,12 @@ bwu::dotplot(
 #| fig-cap: "Broad cognitive domains"
 
 # args
-# data <- bwu::read_data(pheno = "g")
 data <- readr::read_csv("neurocog.csv")
 data2 <- dplyr::filter(data, scale != "Cognitive Proficiency")
 
 data2 <-
   data2 |>
-  group_by(domain, .add = TRUE) |>
+  dplyr::group_by(domain, .add = TRUE) |>
   dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
   dplyr::ungroup()
 
@@ -141,7 +165,6 @@ bwu::dotplot(
 )
 ```
 
-
 ```{=typst}
 #let domain(file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
@@ -155,14 +178,12 @@ figure([#image(file_fig, width: 70%)],
   )
 }
 ```
-
 ```{=typst}
 #let file_fig = "fig_g.svg"
 #domain(
   file_fig
 )
 ```
-
 ```{=typst}
 #let file_fig = "fig_domains.svg"
 #domain(
