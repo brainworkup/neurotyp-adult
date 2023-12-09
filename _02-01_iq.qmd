@@ -5,9 +5,11 @@
 ```{r}
 #| label: setup-iq
 #| include: false
-# domain
+
+# Filter by domain
 domains <- c("General Cognitive Ability")
-# phenotype
+
+# Target phenotype
 pheno <- "iq"
 ```
 
@@ -15,14 +17,35 @@ pheno <- "iq"
 #| label: export-iq
 #| include: false
 #| eval: true
-iq <- readr::read_csv("neurocog.csv") |>
-  dplyr::filter(domain == domains) |>
-  dplyr::filter(!is.na(z_mean_domain)) |>
-  dplyr::select(
-    scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
-    pass, verbal, timed, result
-  )
-readr::write_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
+# Load necessary libraries
+library(readr)
+library(dplyr)
+library(magrittr)
+
+# Read the CSV file into a data frame
+iq <- read_csv("neurocog.csv")
+
+# Filter the data frame to keep only rows where 'domain' equals 'domains'
+iq <- iq %>% filter(domain == domains)
+
+# Further filter the data frame to remove rows with NA in 'z_mean_domain'
+iq <- iq %>% filter(!is.na(z_mean_domain))
+
+# Select specific columns from the data frame
+iq <- iq %>% select(
+  scale, score, z, percentile, range, test_name,
+  domain, subdomain, narrow, pass, verbal, timed, result,
+  z_mean_domain, z_sd_domain, z_mean_subdomain,
+  z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
+  z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+)
+
+# Write the resulting data frame to a new CSV file
+# The file name is created by concatenating the 'pheno' variable and ".csv"
+# NA values are replaced with an empty string in the output file
+# Column names are included in the output file
+# If the file already exists, it is overwritten (not appended)
+write_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
@@ -30,83 +53,48 @@ readr::write_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = 
 #| include: false
 #| eval: true
 
-# data
+# Load the bwu library
+library(bwu)
+
+# Define the phenotype
+pheno <- "your_phenotype_here" # replace with your phenotype
+
+# Read the data using the read_data function from the bwu library
+# The phenotype is specified by the 'pheno' variable
 data <- bwu::read_data(pheno = pheno)
-# filter by scale
+
+# Define the scales of interest
 scales <- c(
-  "Full Scale (FSIQ)",
-  "General Ability (GAI)",
-  "General Ability Index",
-  "General Ability",
-  "General Intelligence",
-  "NAB Total Index",
-  "Test of Premorbid Functioning",
-  "TOPF Standard Score",
-  "Word Reading",
-  "Crystallized Knowledge Index",
-  "Crystallized Knowledge",
-  "Verbal Comprehension (VCI)",
-  "Verbal Comprehension",
-  "Vocabulary Acquisition (VAI)",
-  "Fluid Reasoning (FRI)",
-  "Fluid Reasoning Index",
-  "Fluid Reasoning",
-  "Perceptual Reasoning",
-  "Perceptual Reasoning (PRI)",
-  "Nonverbal (NVI)",
-  "Visual Spatial (VSI)",
-  "Working Memory (WMI)",
-  "Working Memory Index",
-  "Working Memory",
-  "Auditory Working Memory (AWMI)",
-  "Processing Speed (PSI)",
-  "Processing Speed Index",
-  "Processing Speed",
-  "Cognitive Proficiency (CPI)",
-  "Cognitive Proficiency Index",
-  "Cognitive Proficiency",
-  "NAB Attention Index",
-  "NAB Language Index",
-  "NAB Memory Index",
-  "NAB Spatial Index",
-  "NAB Executive Functions Index",
-  "RBANS Total Index",
-  # from g
-  "Global Neurocognitive Index (G)",
-  "General Ability",
-  "Crystallized Knowledge",
-  "Fluid Reasoning",
-  "Verbal/Language",
-  "Verbal Fluency",
-  "Visual Perception/Construction",
-  "Attention/Executive",
-  "Attention",
-  "Attention Span",
-  "Attentional Fluency",
-  "Executive Function",
-  "Planning",
-  "Processing Speed",
-  "Psychomotor Speed",
-  "Cognitive Efficiency",
-  "Working Memory",
-  "Memory",
-  "Learning Efficiency",
-  "Delayed Recall",
-  "Academic Skills",
-  "Reading",
-  "Writing",
-  "Math",
-  "Academic Fluency"
+  "Full Scale (FSIQ)", "General Ability (GAI)", "General Ability",
+  "General Intelligence", "Test of Premorbid Functioning", "TOPF Standard Score",
+  "Word Reading", "Crystallized Knowledge", "Verbal Comprehension (VCI)",
+  "Verbal Comprehension", "Vocabulary Acquisition (VAI)", "Verbal/Language",
+  "Verbal Fluency", "Fluid Reasoning (FRI)", "Fluid Reasoning",
+  "Perceptual Reasoning", "Perceptual Reasoning (PRI)", "Nonverbal (NVI)",
+  "Visual Spatial (VSI)", "Visual Perception/Construction", "Memory",
+  "Learning Efficiency", "Delayed Recall", "Cognitive Proficiency (CPI)",
+  "Cognitive Proficiency", "Working Memory", "Working Memory (WMI)",
+  "Auditory Working Memory (AWMI)", "Processing Speed", "Processing Speed (PSI)",
+  "Psychomotor Speed", "Cognitive Efficiency", "Attention/Executive",
+  "Attention", "Attention Span", "Attentional Fluency", "Executive Function",
+  "Planning", "Judgment", "Academic Skills", "Academic Fluency", "Reading",
+  "Writing", "Math", "NAB Total Index", "NAB Attention Index",
+  "NAB Language Index", "NAB Memory Index", "NAB Spatial Index",
+  "NAB Executive Functions Index", "RBANS Total Index",
+  "Global Neurocognitive Index (G)"
 )
-# Filter data
+
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
 data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
+
 
 ```{r}
 #| label: text-iq
 #| cache: true
 #| include: false
-
 bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 ```
 
@@ -116,21 +104,18 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 #| fig-process: pdf2png
 #| include: false
 #| eval: true
+
+# Set the default engine for tikz to "xetex"
 options(tikzDefaltEngine = "xetex")
 
+# Define the scales to include
 include <- c(
-  "Cognitive Proficiency",
+  "General Ability",
+  "General Ability (GAI)",
   "Crystallized Knowledge",
   "Fluid Reasoning",
-  "General Ability (GAI)",
-  "General Ability",
-  "Perceptual Reasoning (PRI)",
-  "Perceptual Reasoning",
-  "Processing Speed (PSI)",
+  "Cognitive Proficiency",
   "Processing Speed",
-  # "Verbal Comprehension (VCI)",
-  "Verbal Comprehension",
-  "Working Memory (WMI)",
   "Working Memory",
   "NAB Total Index",
   "NAB Attention Index",
@@ -139,19 +124,39 @@ include <- c(
   "NAB Spatial Index",
   "NAB Executive Functions Index"
 )
+
+# Filter the data to include only the specified scales
 data_iq <- dplyr::filter(data_iq, scale %in% include)
-# data_iq <- readr::read_csv("iq.csv")
-# footnotes
-source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-table_name <- "table_iq"
-grp_iq <- list(
-  standard_score = c(
-    "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4", "WASI-2", "WISC-5", "WRAT-5", "KTEA-3", "NAB", "RBANS"
-  )
+
+# Define the variables to include in the output
+variables <- c(
+  "test", "test_name", "scale", "score", "z", "percentile", "range", "ci_95", "domain",
+  "subdomain", "narrow", "test_type", "result"
 )
+
+# Select the specified variables from the data
+iq <- data_iq |> dplyr::select(all_of(variables))
+
+# Write the data to an Excel CSV file
+readr::write_excel_csv(iq, "iq.csv", na = "", col_names = TRUE, append = FALSE)
+
+# Define the table name, vertical padding, and multiline setting
+table_name <- "table_iq"
 vertical_padding <- 0
 multiline <- TRUE
 
+# Define the source note
+source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+
+# Define the groups for the table
+grp_iq <- list(
+  standard_score = c(
+    "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4",
+    "WASI-2", "WISC-5", "WRAT-5", "KTEA-3", "NAB", "RBANS"
+  )
+)
+
+# Create the table using the tbl_gt function from the bwu library
 bwu::tbl_gt(
   data = data_iq,
   pheno = pheno,
@@ -169,19 +174,27 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-# remove <- c("Neuropsychological Function", "Working Memory", "Processing Speed")
-# data_iq <- dplyr::filter(data_iq, !subdomain %in% remove)
+# Define the scales to keep
 keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
-data_iq <- dplyr::filter(data_iq, subdomain %in% keep)
 
-x <- data_iq$z_mean_subdomain
-y <- data_iq$subdomain
+# Filter the data to keep only the specified scales
+data_iq <- dplyr::filter(data_iq, scale %in% keep)
+
+# Define the x and y variables for the dotplot
+x <- data_iq$z
+y <- data_iq$scale
+
+# Define the colors for the dotplot (NULL means use default colors)
 colors <- NULL
-# return_plot <- TRUE
+
+# Define whether to return the plot or save it to a file
+# This is determined by the "RETURN_PLOT" environment variable
 return_plot <- Sys.getenv("RETURN_PLOT")
+
+# Define the filename for the plot
 filename <- "fig_iq.svg"
 
-# Make dotplot
+# Create the dotplot using the dotplot function from the bwu library
 bwu::dotplot(
   data = data_iq,
   x = x,
@@ -192,38 +205,53 @@ bwu::dotplot(
 )
 ```
 
+
 ```{=typst}
+// Define a function to create a domain with a title, a table, and a figure
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [Table],
-          ),
-        figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [
-            _General Ability_ refers to an overall capacity to reason, to solve problems, and to learn useful information. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.
-          ]),
-          placement: none,
-          kind: "image",
-          supplement: [Fig.],
-          gap: 0.5em,
-          ),
-      )
-  }
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          _General Ability_ refers to an overall capacity to reason, to solve problems,
+          and to learn useful information. _Crystallized Knowledge_ involves understanding
+          the world through language and reasoning. _Fluid Reasoning_ is the logical
+          analysis and solution of new problems, identifying underlying patterns, and
+          applying logic.
+        ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Fig.],
+      gap: 0.5em,
+    ),
+  )
+}
 ```
 
 ```{=typst}
+// Define the title of the domain
 #let title = "General Cognitive Ability"
+
+// Define the file name of the table
 #let file_qtbl = "table_iq.png"
+
+// Define the file name of the figure
 #let file_fig = "fig_iq.svg"
-#domain(
-  title: [#title Index Scores],
-  file_qtbl,
-  file_fig,
-  )
+
+// Call the 'domain' function with the specified title, table file name, and figure file name
+// The title is appended with ' Index Scores'
+#domain(title: [#title Index Scores], file_qtbl, file_fig)
 ```

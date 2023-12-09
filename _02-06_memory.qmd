@@ -18,7 +18,9 @@ memory <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name, domain, subdomain, narrow, pass, verbal, timed, result, z_mean_domain, z_sd_domain, z_mean_subdomain,
+    scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
+    pass, verbal, timed, description, result, z_mean_domain, z_sd_domain,
+    z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
     z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
@@ -215,9 +217,12 @@ bwu::dotplot(
           supplement: [Table],
           ),
         figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [
-            Learning and memory refer to the rate and ease with which new information (e.g., facts, stories, lists, faces, names) can be encoded, stored, and later recalled from long-term memory.
-            ]),
+          caption: figure.caption(position: bottom, 
+          
+          [Learning and memory refer to the rate and ease with which new
+          information (e.g., facts, stories, lists, faces, names) can be
+          encoded, stored, and later recalled from long-term memory.]),
+          
           placement: none,
           kind: "image",
           supplement: [Figure],

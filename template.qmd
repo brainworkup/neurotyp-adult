@@ -1,5 +1,5 @@
 ---
-title: "NEUROCOGNITIVE EXAMINATION"
+title: NEUROCOGNITIVE EXAMINATION
 name: Biggie Smalls
 doe: 2023-01-01
 patient: Biggie
@@ -46,9 +46,7 @@ packages <- c(
 xfun::pkg_load2(packages)
 
 # Set knitr options
-knitr::opts_knit$set(width = 80)
-options(digits = 2, warnPartialMatchArgs = FALSE)
-options(knitr.kable.NA = "--")
+knitr::opts_knit$set(width = 80, digits = 2, warnPartialMatchArgs = FALSE)
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 
@@ -69,6 +67,7 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 
 file_path <- here::here(".")
 bwu::load_data(here::here(file_path))
+
 neurocog <- readr::read_csv("neurocog.csv")
 neurobehav <- readr::read_csv("neurobehav.csv")
 neuropsych <- readr::read_csv("neuropsych.csv")
@@ -92,7 +91,7 @@ validity <- readr::read_csv("validity.csv")
 
 <!-- {{< pagebreak >}} -->
 
-# NEUROCOGNITIVE FINDINGS
+# NEUROCOGNITIVE FINDINGS {#sec-nt}
 
 {{< include _02-01_iq.qmd >}}
 

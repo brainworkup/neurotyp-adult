@@ -169,24 +169,27 @@ bwu::dotplot(
 #let domain(file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-figure([#image(file_fig, width: 70%)],
-  placement: none,
-  caption: figure.caption(position: bottom, [Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1.]),
-  kind: "image",
-  supplement: [Figure],
-  gap: 0.5em,
+  figure(
+    [#image(file_fig, width: 70%)],
+    placement: none,
+    caption: figure.caption(
+      position: bottom,
+      [Overall neurocognitive function subdomain plots of the patient's strengths and
+        weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1.],
+    ),
+    kind: "image",
+    supplement: [Figure],
+    gap: 0.5em,
   )
 }
 ```
+
 ```{=typst}
 #let file_fig = "fig_g.svg"
-#domain(
-  file_fig
-)
+#domain(file_fig)
 ```
+
 ```{=typst}
 #let file_fig = "fig_domains.svg"
-#domain(
-  file_fig
-)
+#domain(file_fig)
 ```
