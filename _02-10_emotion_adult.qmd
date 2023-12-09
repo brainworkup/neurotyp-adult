@@ -23,7 +23,7 @@ emotion <- readr::read_csv("neurobehav.csv") |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
     scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow, result,
+    domain, subdomain, narrow,  description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow
   )

@@ -20,7 +20,7 @@ adhd <- readr::read_csv("neurobehav.csv") |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
     scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow, result,
+    domain, subdomain, narrow, description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow
   )
@@ -111,13 +111,13 @@ data_adhd_self <-
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_text_adult.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_text.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-observer
 #| cache: true
-#| eval: true
+#| eval: false
 #| include: false
 
 # Observer reports
@@ -127,7 +127,7 @@ data_adhd_observer <-
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_text_adult.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult_text.qmd")
 ```
 
 ```{r}
@@ -190,7 +190,7 @@ bwu::tbl_gt(
 #| label: qtbl-adhd-observer
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: true
+#| eval: false
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -263,7 +263,7 @@ bwu::dotplot(
 
 ```{r}
 #| label: fig-adhd-observer
-#| eval: true
+#| eval: false
 #| include: false
 #| fig-height: 6
 #| out-height: 100%
@@ -294,69 +294,73 @@ bwu::dotplot(
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [*Table*],
-          ),
-        figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [Adult ADHD symptoms and
-          executive functioning self-reported by the patient.]),
-          placement: none,
-          kind: "image",
-          supplement: [*Fig.*],
-          gap: 0.5em,
-        ),
-      )
-  }
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [*Table*],
+    ),
+    figure(
+      [#image(file_fig)],
+      caption: figure.caption(
+        position: bottom,
+        [Adult ADHD symptoms and executive functioning self-reported by the patient.],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [*Fig.*],
+      gap: 0.5em,
+    ),
+  )
+}
 ```
 
 ```{=typst}
 #let title = "Self-Report of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_self.png"
 #let file_fig = "fig_adhd_self.svg"
-#domain(
-  title: [#title],
-  file_qtbl,
-  file_fig
-)
+#domain(title: [#title], file_qtbl, file_fig)
 ```
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Fira Sans", size: 9pt)
   set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [Table],
-          ),
-        figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [
-            Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other.
-            ]),
-          placement: none,
-          kind: "image",
-          supplement: [Figure],
-          gap: 0.5em,
-        ),
-      )
-  }
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          Attention and executive functions are multidimensional concepts that contain
+          several related processes. Both concepts require self-regulatory skills and have
+          some common subprocesses; therefore, it is common to treat them together, or
+          even to refer to both processes when talking about one or the other.
+        ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
 ```
 
 ```{=typst}
 #let title = "Observer Ratings of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_observer.png"
 #let file_fig = "fig_adhd_observer.svg"
-#domain(
-  title: [#title],
-  file_qtbl,
-  file_fig
-)
+#domain(title: [#title], file_qtbl, file_fig)
 ```

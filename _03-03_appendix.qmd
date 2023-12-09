@@ -1,5 +1,15 @@
 # APPENDIX
 
+## Examiner Qualifications
+
+I'm fortunate to have a blend of scientific and clinical experience in this field, with a solid academic foundation comprising four psychology degrees (BA, MA, MPhil, and PhD), and specialized training in clinical neuropsychology. My journey includes an APA-accredited predoctoral internship in pediatric clinical neuropsychology at Henry Ford Hospital, Detroit, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health (NIMH), NIH.
+
+Previously, I've served as the Director of the Laboratory of Cognitive Genomics, Assistant Investigator of Psychiatric Neuroscience, and Assistant Professor of Psychiatry at Zucker Hillside Hospital and Hofstra Northwell Health School of Medicine, New York. Currently, I am an Assistant Professor of Clinical Psychiatry and Behavioral Sciences at the Keck School of Medicine, University of Southern California. Earlier this year, I was honored with the Della Martin Assistant Professor of Psychiatry position at the Keck School of Medicine, an acknowledgment of my research and clinical contributions to both the university and the wider scientific community.
+
+In my clinical role, I've garnered over 20 years of experience in neurocognitive and psychodiagnostic evaluations, specializing in ADHD across all ages. I've conducted numerous neuropsychological and psychoeducational assessments, particularly in ADHD and learning disorders. As a researcher, I am actively involved and NIH-funded, having contributed to pivotal studies on cognitive aspects of neurodevelopment in ADHD. One of our notable publications, which was recognized as a "must read" by Faculty of 1000 Medicine, highlighted the link between ADHD and early subcortical dysfunction, and how symptom recovery correlates with executive control and prefrontal cortex maturation.
+
+With this background, I believe I bring a unique, objective, and evidence-based perspective to the evaluation and diagnosis of patients, considering their genetic and developmental histories.
+
 ## Test Selection Procedures
 
 Neuropsychological tests are intrinsically performance-based, and cognitive
@@ -41,13 +51,13 @@ treatment recommendations.
 #three-line-table[
 |*Range*|*Standard Score*|*T Score*|*Scaled Score*|*z-Score*|*Percentile (‰)*|
 |---|---|---|---|---|---|
-|Exceptionally High Score|130 +|70 +|16 +|2 +|98 +|
-|Above Average Score|120 – 129|63 – 69|14 – 15|1.3 – 1.9|91 – 97|
-|High Average Score|110 – 119|57 – 62|12 – 13|0.7 – 1.2|75 – 90|
-|Average Score|90 – 109|44 – 56|9 – 11|-0.7 – 0.6|25 – 74|
-|Low Average Score|80 – 89|37 – 43|7 – 8|-1.3 – -0.6|9 – 24|
-|Below Average Score|70 – 79|30 – 36|4 – 6|-2 – -1.4|2 – 8|
-|Exceptionally Low Score|< 70|< 30|< 4|< -2|< 2|
+|Exceptionally high score|130 +|70 +|16 +|2 +|98 +|
+|Above average score|120 – 129|63 – 69|14 – 15|1.3 – 1.9|91 – 97|
+|High average score|110 – 119|57 – 62|12 – 13|0.7 – 1.2|75 – 90|
+|Average score|90 – 109|44 – 56|9 – 11|-0.7 – 0.6|25 – 74|
+|Low average score|80 – 89|37 – 43|7 – 8|-1.3 – -0.6|9 – 24|
+|Below average score|70 – 79|30 – 36|4 – 6|-2 – -1.4|2 – 8|
+|Exceptionally low score|< 70|< 30|< 4|< -2|< 2|
 ]
 ```
 

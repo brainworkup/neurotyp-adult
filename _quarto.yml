@@ -1,9 +1,9 @@
 project:
-  title: NEUROCOGNITIVE EXAMINATION
-  output-dir: neuro_report
-  # pre-render: prerender.R
+  type: default
+  execute-dir: file
+  output-dir: _neuro_report
   render:
-    - Biggie.qmd
+    - Daniel.qmd
 
 format:
   neurotyp-typst:
@@ -11,6 +11,7 @@ format:
     fontsize: 11pt
     papersize: us-letter
     number-sections: false
+    # fontfamily: TeX Gyre Heros #Tex Gyre Pagella #IBM Plex Serif
 
 execute:
   warning: false

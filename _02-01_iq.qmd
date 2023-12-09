@@ -34,7 +34,7 @@ iq <- iq %>% filter(!is.na(z_mean_domain))
 # Select specific columns from the data frame
 iq <- iq %>% select(
   scale, score, z, percentile, range, test_name,
-  domain, subdomain, narrow, pass, verbal, timed, result,
+  domain, subdomain, narrow, pass, verbal, timed, description, result,
   z_mean_domain, z_sd_domain, z_mean_subdomain,
   z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
   z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
@@ -57,7 +57,7 @@ write_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 library(bwu)
 
 # Define the phenotype
-pheno <- "your_phenotype_here" # replace with your phenotype
+pheno <- "iq"
 
 # Read the data using the read_data function from the bwu library
 # The phenotype is specified by the 'pheno' variable
@@ -65,22 +65,55 @@ data <- bwu::read_data(pheno = pheno)
 
 # Define the scales of interest
 scales <- c(
-  "Full Scale (FSIQ)", "General Ability (GAI)", "General Ability",
-  "General Intelligence", "Test of Premorbid Functioning", "TOPF Standard Score",
-  "Word Reading", "Crystallized Knowledge", "Verbal Comprehension (VCI)",
-  "Verbal Comprehension", "Vocabulary Acquisition (VAI)", "Verbal/Language",
-  "Verbal Fluency", "Fluid Reasoning (FRI)", "Fluid Reasoning",
-  "Perceptual Reasoning", "Perceptual Reasoning (PRI)", "Nonverbal (NVI)",
-  "Visual Spatial (VSI)", "Visual Perception/Construction", "Memory",
-  "Learning Efficiency", "Delayed Recall", "Cognitive Proficiency (CPI)",
-  "Cognitive Proficiency", "Working Memory", "Working Memory (WMI)",
-  "Auditory Working Memory (AWMI)", "Processing Speed", "Processing Speed (PSI)",
-  "Psychomotor Speed", "Cognitive Efficiency", "Attention/Executive",
-  "Attention", "Attention Span", "Attentional Fluency", "Executive Function",
-  "Planning", "Judgment", "Academic Skills", "Academic Fluency", "Reading",
-  "Writing", "Math", "NAB Total Index", "NAB Attention Index",
-  "NAB Language Index", "NAB Memory Index", "NAB Spatial Index",
-  "NAB Executive Functions Index", "RBANS Total Index",
+  "Full Scale (FSIQ)",
+  "General Ability (GAI)",
+  "General Ability",
+  "General Intelligence",
+  "Test of Premorbid Functioning",
+  "TOPF Standard Score",
+  "Word Reading",
+  "Crystallized Knowledge",
+  "Verbal Comprehension (VCI)",
+  "Verbal Comprehension",
+  "Vocabulary Acquisition (VAI)",
+  "Verbal/Language",
+  "Verbal Fluency",
+  "Fluid Reasoning (FRI)",
+  "Fluid Reasoning",
+  "Perceptual Reasoning",
+  "Perceptual Reasoning (PRI)",
+  "Nonverbal (NVI)",
+  "Visual Spatial (VSI)",
+  "Visual Perception/Construction",
+  "Memory",
+  "Learning Efficiency",
+  "Delayed Recall",
+  "Working Memory",
+  "Working Memory (WMI)",
+  "Auditory Working Memory (AWMI)",
+  "Processing Speed",
+  "Processing Speed (PSI)",
+  "Psychomotor Speed",
+  "Cognitive Efficiency",
+  "Attention/Executive",
+  "Attention",
+  "Attention Span",
+  "Attentional Fluency",
+  "Executive Function",
+  "Planning",
+  "Judgment",
+  "Academic Skills",
+  "Academic Fluency",
+  "Reading",
+  "Writing",
+  "Math",
+  "NAB Total Index",
+  "NAB Attention Index",
+  "NAB Language Index",
+  "NAB Memory Index",
+  "NAB Spatial Index",
+  "NAB Executive Functions Index",
+  "RBANS Total Index",
   "Global Neurocognitive Index (G)"
 )
 
@@ -114,7 +147,7 @@ include <- c(
   "General Ability (GAI)",
   "Crystallized Knowledge",
   "Fluid Reasoning",
-  "Cognitive Proficiency",
+  #"Cognitive Proficiency",
   "Processing Speed",
   "Working Memory",
   "NAB Total Index",
