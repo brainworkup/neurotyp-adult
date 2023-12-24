@@ -70,3 +70,4 @@ package/dist/**
 .trunk/configs/.yamllint.yaml
 .vscode/settings.json
 jwt_sig.png
+.vscode/settings.json
