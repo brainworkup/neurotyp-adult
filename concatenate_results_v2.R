@@ -16,7 +16,7 @@ concatenate_results <- function(df) {
 }
 
 # Read the dataset
-executive <- readr::read_csv("Daniel/executive.csv")
+executive <- readr::read_csv("Biggie/executive.csv")
 
 # Sort the dataset by 'percentile' in descending order
 executive <- executive %>% arrange(desc(percentile))
@@ -28,7 +28,7 @@ executive$summary <- concatenate_results(executive)
 cat(executive$summary, sep = "\n\n")
 
 # Write the summary to a text file
-readr::write_lines(executive$summary, "Daniel/_02-05_executive_text.txt", sep = "\n\n")
+readr::write_lines(executive$summary, "Biggie/_02-05_executive_text.txt", sep = "\n\n")
 
 
 # Read the dataset

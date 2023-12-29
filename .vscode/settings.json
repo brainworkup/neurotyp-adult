@@ -10,7 +10,16 @@
     "editorInfo.foreground": "#000000ff",
     "editorWarning.foreground": "#000000ff",
     "sash.hoverBorder": "#b0b0eb",
-    "tab.activeBorder": "#b0b0eb"
+    "statusBar.background": "#8887e1",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#605ed7",
+    "statusBarItem.remoteBackground": "#8887e1",
+    "statusBarItem.remoteForeground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "titleBar.activeBackground": "#8887e1",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#8887e199",
+    "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.color": "#8887e1",
   "files.exclude": {

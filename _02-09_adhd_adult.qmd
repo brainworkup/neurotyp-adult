@@ -1,7 +1,5 @@
 ## ADHD/Executive Function {#sec-adhd}
 
-{{< include _02-09_adhd_adult_text.qmd >}}
-
 ```{r}
 #| label: setup-adhd
 #| include: false
@@ -107,27 +105,27 @@ data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
 # Self-report
 data_adhd_self <-
   data_adhd |>
-  dplyr::filter(test == "cefi_sr" | test == "caars_sr") |>
+  dplyr::filter(test == "caars_sr" | test == "cefi_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_text.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_text_self.qmd")
 ```
 
 ```{r}
 #| label: text-adhd-observer
 #| cache: true
-#| eval: false
+#| eval: true
 #| include: false
 
 # Observer reports
 data_adhd_observer <-
-  data |>
-  dplyr::filter(test == "cefi_or" | test == "caars_or") |>
+  data_adhd |>
+  dplyr::filter(test == "caars_or" | test == "cefi_or") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
-bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult_text.qmd")
+bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult_text_observer.qmd")
 ```
 
 ```{r}
@@ -159,7 +157,8 @@ fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 8
 Higher scores reflect reduced functioning.")
 
 # variables
-data <- data_adhd_self
+data_adhd_self <-
+  dplyr::mutate(data_adhd_self, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR "))
 pheno <- "adhd_self"
 table_name <- "table_adhd_self"
 vertical_padding <- 0
@@ -173,7 +172,7 @@ grp_self <- list(
 
 # Self-Report
 bwu::tbl_gt(
-  data = data,
+  data = data_adhd_self,
   pheno = pheno,
   table_name = table_name,
   fn_standard_score = fn_standard_score,
@@ -190,7 +189,7 @@ bwu::tbl_gt(
 #| label: qtbl-adhd-observer
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: false
+#| eval: true
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -205,7 +204,8 @@ fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 8
 Higher scores reflect reduced functioning.")
 
 # Observer-Report
-data <- data_adhd_observer
+data_adhd_observer <-
+  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-OR |CEFI-OR "))
 pheno <- "adhd_observer"
 table_name <- "table_adhd_observer"
 vertical_padding <- 0
@@ -219,7 +219,7 @@ grp_observer <- list(
 
 # Observer-Report
 bwu::tbl_gt(
-  data = data,
+  data = data_adhd_observer,
   pheno = pheno,
   table_name = table_name,
   fn_standard_score = fn_standard_score,
@@ -242,7 +242,7 @@ bwu::tbl_gt(
 
 # data for self-report dotplot
 pheno <- "adhd_self"
-data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
+# data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
@@ -263,7 +263,7 @@ bwu::dotplot(
 
 ```{r}
 #| label: fig-adhd-observer
-#| eval: false
+#| eval: true
 #| include: false
 #| fig-height: 6
 #| out-height: 100%
@@ -271,7 +271,7 @@ bwu::dotplot(
 
 # data for adhd observer dotplot
 pheno <- "adhd_observer"
-data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
+# data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
@@ -290,9 +290,13 @@ bwu::dotplot(
 )
 ```
 
+### Self-Report
+
+{{< include _02-09_adhd_adult_text_self.qmd >}}
+
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
   grid(
     columns: (50%, 50%),
@@ -325,9 +329,13 @@ bwu::dotplot(
 #domain(title: [#title], file_qtbl, file_fig)
 ```
 
+### Observer Ratings
+
+{{< include _02-09_adhd_adult_text_observer.qmd >}}
+
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
   grid(
     columns: (50%, 50%),

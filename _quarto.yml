@@ -3,7 +3,7 @@ project:
   execute-dir: file
   output-dir: _neuro_report
   render:
-    - Daniel.qmd
+    - Biggie.qmd
 
 format:
   neurotyp-typst:
@@ -11,7 +11,6 @@ format:
     fontsize: 11pt
     papersize: us-letter
     number-sections: false
-    # fontfamily: TeX Gyre Heros #Tex Gyre Pagella #IBM Plex Serif
 
 execute:
   warning: false
@@ -26,7 +25,7 @@ editor:
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: "70%"
+out-width: '70%'
 fig-align: center
 fig-format: svg
 fig-dpi: 270
