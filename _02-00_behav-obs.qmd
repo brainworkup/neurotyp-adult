@@ -1,10 +1,10 @@
 ## Mental Status Exam and Behavioral Observations
 
-- *Attention/orientation:* Orientation to person, place, time, and situation was intact.
-- *Appearance:* Appropriate grooming and dress for context.
-- *Behavior/attitude:* Cooperative, engaged. No gross behavioral apathy or disinhibition observed.
-- *Speech/language:* Fluent and normal in rate, volume, and prosody.
-- *Mood/affect:* Neutral, range was full and appropriate.
-- *Sensory/motor:* Performance was not limited by any obvious sensory or motor difficulties.
-- *Cognitive process:* Coherent and goal directed.
-- *Motivation/effort:* Normal; Word Choice = 50/50, RDS = 12, CVLT-3 Forced-Choice Recognition = 9/9.
+- **Attention/orientation:** Orientation to person, place, time, and situation was intact.
+- **Appearance:** Appropriate grooming and dress for context.
+- **Behavior/attitude:** Cooperative, engaged. No gross behavioral apathy or disinhibition observed.
+- **Speech/language:** Fluent and normal in rate, volume, and prosody.
+- **Mood/affect:** Neutral, range was full and appropriate.
+- **Sensory/motor:** Performance was not limited by any obvious sensory or motor difficulties.
+- **Cognitive process:** Coherent and goal directed.
+- **Motivation/effort:** Normal; Word Choice = 50/50, RDS = 12, CVLT-3 Forced-Choice Recognition = 9/9.

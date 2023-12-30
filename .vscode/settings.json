@@ -16,7 +16,9 @@
   "peacock.color": "#8887e1",
   "files.exclude": {
     ".vscode": true,
-    ".trunk": true
+    ".trunk": true,
+    ".history": true,
+    ".Rproj.user": true
   },
   "deno.enable": true,
   "deno.inlayHints.parameterTypes.enabled": true,

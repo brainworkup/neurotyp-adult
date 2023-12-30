@@ -1,15 +1,17 @@
 project:
   type: default
-  execute-dir: file
-  output-dir: _neuro_report
+  # execute-dir: file
+  # output-dir: _neuro_report
   render:
     - Biggie.qmd
 
 format:
   neurotyp-typst:
     keep-typ: true
-    fontsize: 11pt
     papersize: us-letter
+    bodyfont: 'ScholaX'
+    sansfont: 'Noto Sans'
+    fontsize: 12pt
     number-sections: false
 
 execute:

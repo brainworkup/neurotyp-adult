@@ -23,7 +23,7 @@ emotion <- readr::read_csv("neurobehav.csv") |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
     scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow,  description, result,
+    domain, subdomain, narrow, description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow
   )
@@ -134,10 +134,11 @@ data_emotion <-
 #| label: text-emotion
 #| cache: true
 #| include: false
+#| eval: false
 
 bwu::cat_neuropsych_results(
   data = data_emotion,
-  file = "_02-10_emotion_text_adult.qmd"
+  file = "_02-10_emotion_adult_text.qmd"
 )
 ```
 
@@ -265,9 +266,9 @@ bwu::dotplot(
 )
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
     grid(
       columns: (50%, 50%),
@@ -286,9 +287,9 @@ bwu::dotplot(
         ),
       )
   }
-```
+``` -->
 
-```{=typst}
+<!-- ```{=typst}
 #let title = "Personality Assessment Inventory (PAI)"
 #let file_qtbl = "table_emotion.png"
 #let file_fig = "fig_emotion.svg"
@@ -297,4 +298,4 @@ bwu::dotplot(
   file_qtbl,
   file_fig
   )
-```
+``` -->
