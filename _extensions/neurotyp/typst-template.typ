@@ -10,7 +10,7 @@
   margin: (x: 25mm, y: 30mm),
   lang: "en",
   region: "US",
-  font: ("Libertinus Serif"),
+  font: (),
   body-font: ("Libertinus Serif"),
   sans-font: ("Libertinus Sans"),
   fontsize: 11pt,
@@ -42,7 +42,7 @@
     columns: cols,
   )
   // Set paragraph justification and leading.
-  set par(justify: true, leading: 1.2em, linebreaks: "optimized")
+  set par(justify: true, leading: 1em, linebreaks: "optimized")
 
   // Save heading and body font families in variables.
   // let body-font = "ScholaX"
@@ -74,7 +74,7 @@
   // Configure lists and links.
   show enum: set block(above: 0.65em, below: 0.65em)
   set enum(indent: 0.5em, body-indent: 0.5em, tight: false)
-    // show list: set block(above: 0.65em, below: 0.65em)
+  // show list: set block(above: 0.65em, below: 0.65em)
   show list: set par(leading: 0.65em)
   set list(indent: 0.5em, body-indent: 0.5em, marker: ([•], [--]), tight: false)
   show link: set text(font: "Merriweather", color: "#42b883", weight: 500)
