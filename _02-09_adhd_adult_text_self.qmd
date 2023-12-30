@@ -1,3 +1,32 @@
+<<PROMPT>>
+
+## Area: attention-deficit/hyperactivity disorder (ADHD) and executive functioning
+
+Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+
+Prefix the output/results as follows: Headers (e.g., Relative Strengths,
+Relative Weaknesses) should be padded with ###, and output that contains lists should be
+unordered and padded with - instead of ordered.
+
+- On the CAARS scales, higher scores reflect reduced functioning, but on the CEFI scales, lower scores reflect reduced functioning.
+- 
+- For scores that are above average or higher on the CAARS, give a brief example of how this could impact the patient's daily functioning.
+- 
+- For scores that are below average or worse on the CEFI, give a brief example of how this could impact the patient's daily functioning.
+
+<<EXAMPLE>>
+
+Biggie completed self-report rating scales of adult ADHD symptoms and executive functioning in everyday life. Consistent and overlapping difficulties were reported in the areas of:
+
+<!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
+
+On the companion observer-reports, it was reported that Biggie evidences moderate to severe difficulties in the areas of:
+
+<!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
+
+<<START>>
+
+
 The patient's Full Scale executive function score is significantly below average at the 1st percentile. This indicates pervasive weaknesses across multiple cognitive and behavioral domains. Specifically, the patient's Attention scale falls at the 1st percentile, aligning with identified executive function weaknesses. Emotion Regulation abilities are low and rank at the 10th percentile. Flexibility, Organization, and Planning are particularly weak, each falling well below average at the 2nd and 1st percentiles respectively. Inhibitory Control and Initiation are also below average at the 4th and 6th percentiles, respectively. Self-Monitoring and Working Memory rank in the below-average range at the 2nd and 3rd percentiles. This profile indicates significant challenges in executive functioning, including attention, flexibility, planning, and memory.
 
 The patient's self-report from the CAARS highlight significant difficulties in areas related to ADHD. Inattention and Memory Problems, scoring at the 82nd percentile, suggest significant issues with concentration, planning, task completion, forgetfulness, and disorganization. Hyperactivity/Restlessness, at the 72nd percentile, indicates problems with maintaining focus on tasks, restlessness, and fidgeting. The Impulsivity/Emotional Lability scale, at the 74th percentile, suggests challenges with impulsive behaviors, low frustration tolerance, and mood fluctuations. Problems with Self-Concept, scoring at the 66th percentile, indicate moderately atypical issues with social relationships and self-esteem.
