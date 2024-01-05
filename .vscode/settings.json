@@ -34,5 +34,21 @@
     "editor.tabSize": 2,
     "editor.wrappingIndent": "same",
     "editor.cursorSurroundingLines": 0
+  },
+  "spellright.language": ["en"],
+  "spellright.documentTypes": [
+    "quarto",
+    "markdown",
+    "latex",
+    "plaintext",
+    "rmd"
+  ],
+  "spellright.parserByClass": {
+    "quarto": {
+      "parser": "markdown"
+    },
+    "typst": {
+      "parser": "plain"
+    }
   }
 }

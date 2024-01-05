@@ -6,7 +6,7 @@
   patient: [],
   date: none,
   cols: 1,
-  paper: "a4",
+  paper: "us-letter",
   margin: (x: 25mm, y: 30mm),
   lang: "en",
   region: "US",
@@ -77,7 +77,7 @@
   // show list: set block(above: 0.65em, below: 0.65em)
   show list: set par(leading: 0.65em)
   set list(indent: 0.5em, body-indent: 0.5em, marker: ([•], [--]), tight: false)
-  show link: set text(font: "Merriweather", color: "#42b883", weight: 500)
+  show link: set text(font: "Libertinus Sans", color: "#42b883", weight: 400)
 
   // Logo
   block(figure(image("logo.png")))
