@@ -76,6 +76,7 @@ readr::write_csv(g, "csv/g.csv")
 ```{r}
 #| label: fig-sirf
 #| include: false
+#| eval: true
 #| fig-cap: "Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1."
 
 g <- readr::read_csv("csv/g.csv")
@@ -85,7 +86,7 @@ keep <- c(
   "General Ability",
   "Academic Skills",
   "Fluid Reasoning",
-  "Attention/Executive",
+  # "Attention/Executive",
   "Attention",
   "Attention Span",
   "Attentional Fluency",
@@ -135,7 +136,7 @@ bwu::dotplot(
 ```{r}
 #| label: fig-domains
 #| include: false
-#| eval: false
+#| eval: true
 #| fig-cap: "Broad cognitive domains"
 
 # args
@@ -171,7 +172,7 @@ bwu::dotplot(
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
   figure(
-    [#image(file_fig, width: 70%)],
+    [#image(file_fig, width: 85%)],
     placement: none,
     caption: figure.caption(
       position: bottom,
@@ -190,7 +191,7 @@ bwu::dotplot(
 #domain(file_fig)
 ```
 
-<!-- ```{=typst}
+```{=typst}
 #let file_fig = "fig_domains.svg"
 #domain(file_fig)
-``` -->
+```

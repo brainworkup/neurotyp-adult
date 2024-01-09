@@ -2,28 +2,35 @@
 
 ## Examiner Qualifications
 
-I'm fortunate to have a blend of scientific and clinical experience in this field, with a solid academic foundation comprising four psychology degrees (BA, MA, MPhil, and PhD), and specialized training in clinical neuropsychology. My journey includes an APA-accredited predoctoral internship in pediatric clinical neuropsychology at Henry Ford Hospital, Detroit, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health (NIMH), NIH.
+I have both research and clinical expertise in the field of ADHD that dates back almost 20 years.
+My academic background is comprised of four psychology degrees (B.A., M.A., M.Phil., and Ph.D.).
+I completed an APA-accredited predoctoral internship in pediatric neuropsychology at Henry Ford Hospital in Detroit, Michigan, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health of the National Institutes of Health in Bethesda, Maryland.
+I am a licensed psychologist in the States of California and New York.
 
-Previously, I've served as the Director of the Laboratory of Cognitive Genomics, Assistant Investigator of Psychiatric Neuroscience, and Assistant Professor of Psychiatry at Zucker Hillside Hospital and Hofstra Northwell Health School of Medicine, New York. Currently, I am an Assistant Professor of Clinical Psychiatry and Behavioral Sciences at the Keck School of Medicine, University of Southern California. Earlier this year, I was honored with the Della Martin Assistant Professor of Psychiatry position at the Keck School of Medicine, an acknowledgment of my research and clinical contributions to both the university and the wider scientific community.
+I have served as the Director of the Laboratory of Cognitive Genomics (Zucker Hillside Hospital), Assistant Investigator of Psychiatric Neuroscience (Feinstein Institue for Medical Research), and Assistant Professor of Psychiatry (Hofstra School of Medicine) at Northwell Health in Long Island, New York.
+Currently, I am an Assistant Professor in the Department of Psychiatry and the Behavioral Sciences, Keck School of Medicine, University of Southern California.
+In 2019, I was awarded an endowed professorship from USC, the Della Martin Assistant Professor of Psychiatry, as an acknowledgment of my research and clinical contributions to both the university and the wider scientific community.
 
-In my clinical role, I've garnered over 20 years of experience in neurocognitive and psychodiagnostic evaluations, specializing in ADHD across all ages. I've conducted numerous neuropsychological and psychoeducational assessments, particularly in ADHD and learning disorders. As a researcher, I am actively involved and NIH-funded, having contributed to pivotal studies on cognitive aspects of neurodevelopment in ADHD. One of our notable publications, which was recognized as a "must read" by Faculty of 1000 Medicine, highlighted the link between ADHD and early subcortical dysfunction, and how symptom recovery correlates with executive control and prefrontal cortex maturation.
+I have published several research studies in high-impact scientific journals on
+the trajectory of symptom stability and neuropsychological functioning from
+early childhood to young adulthood in ADHD [@De2008; @Miller2006; @Trampush2009;
+@bedardPerceptualMotorInhibition2010; @HalperinTrampush2008;
+@rajendranAssociationVariationNeuropsychological2013;
+@trampushModeratorEffectsWorking2014].
+In my clinical role, I would estimate having conducted 200+ neurocognitive and
+psychodiagnostic evaluations of ADHD across all ages, genders, ethnicites, and comorbidities.
 
-With this background, I believe I bring a unique, objective, and evidence-based perspective to the evaluation and diagnosis of patients, considering their genetic and developmental histories.
+With this background, I believe I bring a unique, informed, and objective
+perspective to the evaluation and diagnosis of psychopathology, especially ADHD.
 
 ## Test Selection Procedures
 
-Neuropsychological tests are intrinsically performance-based, and cognitive
-performance assessed during this examination is summarized above.
+Neuropsychological tests are intrinsically performance-based, and cognitive performance assessed during this examination is summarized above.
 Where appropriate, qualitative observations are included.
 Cultural considerations were made when selecting measures, interpreting results, and making diagnostic impressions and recommendations.
-Results from formal tests are reported in comparison to other individuals the
-same age and sex/gender as range of functioning (e.g., below
-average, average, above average).
+Results from formal tests are reported in comparison to other individuals the same age and sex/gender as range of functioning (e.g., Below Average, average, Above Average).
 Test score labels are intended solely to be descriptive, identifying positions of scores relative to a normal curve distribution, and should be interpreted within the context of the patient's individual presentation and history.
-Although standardized scores provide the clinician with an important and
-necessary understanding of the patient's test performance compared with a
-normative group, they do not on their own lead to accurate diagnosis or
-treatment recommendations.
+Although standardized scores provide the clinician with an important and necessary understanding of the patient's test performance compared with a normative group, they do not on their own lead to accurate diagnosis or treatment recommendations.
 
 ## Conversion of Test Scores
 
@@ -31,12 +38,13 @@ treatment recommendations.
 #import "@preview/tablex:0.0.6": tablex, gridx, hlinex, vlinex, colspanx, rowspanx
 #import "@preview/tablem:0.1.0": tablem
 
+#set text(10pt)
 #let three-line-table = tablem.with(
   render: (columns: auto, ..args) => {
     tablex(
       columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr),
       auto-lines: false,
-      align: (col, row) => 
+      align: (col, row) =>
             if row == 0 { center + horizon }
             else if col == 0 { left + horizon }
             else { center + horizon },
@@ -60,26 +68,3 @@ treatment recommendations.
 |Exceptionally low score|< 70|< 30|< 4|< -2|< 2|
 ]
 ```
-
-<!-- {{< pagebreak >}} -->
-
-## Test Score Distributions
-
-**[@fig-gauss-plot-narrow]** can be used as a guide to help interpret individual test scores in terms of the degree of distance a score fell in relation to normative expectations and the magnitude of clinical severity. Test scores are easiest to interpret as percentiles[^1] and as *z*-Scores (M = 0, SD = 1)[^2], which are used to plot the various test and domain scores below.
-
-```{r}
-#| label: fig-gauss-plot-narrow
-#| fig-cap: "Classification of neuropsychological test scores that are normally distributed in the general population [@guilmetteAmericanAcademyClinical2020]."
-#| fig-retina: 2
-#| fig-width: 6
-#| fig-asp: 0.67
-#| out-height: 50%
-
-knitr::include_graphics("plot_narrow.png")
-```
-
-
-[^1]: A *percentile* shows `r params$first_name`'s standing relative to peers. For example, a percentile rank of 70 means `r params$first_name` performed as well as or better than 70% of individuals the same age.
-
-[^2]: *z-Score* = -1 (16th percentile), *z-Score* = 0 (50th percentile), and
-*z-Score* = +1 (84th percentile)

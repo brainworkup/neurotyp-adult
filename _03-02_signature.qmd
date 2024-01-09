@@ -1,4 +1,4 @@
-It was a pleasure to work with `r params$first_name`.
+It was a pleasure to work with Mr. Estey-Ang.
 Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,
@@ -6,8 +6,9 @@ Sincerely,
 ```{r}
 #| label: signature
 #| fig-align: left
-#| out-width: 9em
+#| out-width: 7em
 #| echo: false
+#| eval: true
 knitr::include_graphics("jwt_sig.png")
 ```
 
@@ -17,9 +18,10 @@ knitr::include_graphics("jwt_sig.png")
 #block[
 *Joey W. Trampush, Ph.D.* \
 Clinical Neuropsychologist \
-Della Martin Assistant Professor of Psychiatry \
+Assistant Professor of Psychiatry \
 Department of Psychiatry and the Behavioral Sciences \
 University of Southern California Keck School of Medicine \
 CA License PSY29212
 ]
 ```
+

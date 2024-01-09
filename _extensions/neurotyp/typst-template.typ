@@ -6,7 +6,7 @@
   patient: [],
   date: none,
   cols: 1,
-  paper: "us-letter",
+  paper: "a4",
   margin: (x: 25mm, y: 30mm),
   lang: "en",
   region: "US",
@@ -46,45 +46,48 @@
 
   // Save heading and body font families in variables.
   // let body-font = "ScholaX"
-  // let sans-font = "IBM Plex Sans"
 
   // Set text and body font family.
-  set text(font: body-font, lang: lang, region: region, size: fontsize)
+  set text(font: body-font, size: fontsize, lang: lang, region: region)
   show math.equation: set text(weight: 400)
 
   // Set heading numbering.
   set heading(numbering: sectionnumbering)
 
   // Set paragraph spacing.
-  show par: set block(above: 1.5em, below: 1.5em)
+  show par: set block(above: 1.75em, below: 1.75em)
 
   // Set heading font.
-  show heading: set text(font: body-font, weight: "semibold")
+  show heading: set text(font: sans-font, weight: "semibold")
 
   // Set run-in subheadings, starting at level 4.
   show heading: it => {
     if it.level > 3 {
       parbreak()
-      text(10pt, style: "italic", weight: "regular", it.body + ".")
+      text(1em, style: "italic", weight: "regular", it.body + ".")
     } else {
       it
     }
   }
 
   // Configure lists and links.
-  show enum: set block(above: 0.65em, below: 0.65em)
-  set enum(indent: 0.5em, body-indent: 0.5em, tight: false)
-  // show list: set block(above: 0.65em, below: 0.65em)
-  show list: set par(leading: 0.65em)
-  set list(indent: 0.5em, body-indent: 0.5em, marker: ([•], [--]), tight: false)
-  show link: set text(font: "Libertinus Sans", color: "#42b883", weight: 400)
+  show enum: set block(above: 1em, below: 1em)
+  show enum: set par(leading: 0.85em)
+  set enum(indent: 0.25em, body-indent: 0.25em, tight: false)
+
+  show list: set block(above: 1em, below: 1em)
+  show list: set par(leading: 0.85em)
+  set list(indent: 0em, body-indent: 0.25em, marker: ([•], [--]), tight: false)
+
+  show link: set text(font: body-font, fill: rgb(4, 1, 23), weight: 450)
+  show link: underline
 
   // Logo
   block(figure(image("logo.png")))
 
   // Title row.
   align(center)[
-    #block(text(font: body-font, weight: 600, 1.75em, title))
+    #block(text(font: sans-font, weight: 600, 1.75em, title))
     #v(0em, weak: true)
   ]
 

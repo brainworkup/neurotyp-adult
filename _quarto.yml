@@ -8,9 +8,9 @@ project:
 format:
   neurotyp-typst:
     keep-typ: true
-    papersize: a4
+    papersize: us-letter
     bodyfont: "ScholaX"
-    sansfont: "Libertinus Sans"
+    sansfont: "ScholaX"
     fontsize: 12pt
     number-sections: false
 
