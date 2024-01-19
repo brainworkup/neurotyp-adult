@@ -56,7 +56,7 @@ if (identical(knitr:::pandoc_to(), "latex")) {
 }
 
 # Set environment variables with default values
-Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = FALSE)
+Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = TRUE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 ```
@@ -65,7 +65,7 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 #| label: data-load
 #| include: false
 
-file_path <- here::here(".")
+file_path <- here::here(patient)
 bwu::load_data(here::here(file_path))
 neurocog <- readr::read_csv("neurocog.csv")
 neurobehav <- readr::read_csv("neurobehav.csv")
@@ -80,8 +80,8 @@ validity <- readr::read_csv("validity.csv")
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)
 #block[
-*PATIENT NAME:* #name \ 
-*DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \ 
+*PATIENT NAME:* #name \
+*DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \
 ]
 ```
 
