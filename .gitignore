@@ -72,3 +72,5 @@ package/dist/**
 jwt_sig.png
 .vscode/settings.json
 .vscode/settings.json
+
+/_*.local
