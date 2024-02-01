@@ -1,6 +1,6 @@
 <<PROMPT>>
 
-## Area: Academic Achievement (reading, writing, math) and academic fluency
+## Area: Academic Achievement and Academic Fluency
 
 Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
 
@@ -10,6 +10,6 @@ unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
-`r params$first_name`'s broad academic achievement and academic fluency skills fell in the Average range for `r params$his_her` age and grade-level. Math fluency, math calculation, and quantitative reasoning were Average to Exceptionally High. `r params$first_name` demonstrated Average written expression skills on measures of word spelling and expository writing, and Average writing speed/fluency. By contrast, there were statistically significant and clinically meaningful differences between `r params$first_name`'s predicted scores (based on `r params$his_her` cognitive ability) and the scores `r params$he_she` actually obtained on measures of reading achievement. While reading comprehension stood out as a strength, there were 21-25 point discrepancies between `r params$his_her` predicted and obtained scores on the Word Reading subtest and the Reading composite. These differences are significant and so large that they are not commonly found in the general population (2%-5%), indicating a notable personal weakness in reading decoding. A pattern of strengths and weakness (PSW) analysis indicated reduced working memory capacity contributes to `r params$first_name`'s low reading scores and very likely constrains learning.
+Biggie's broad academic achievement and academic fluency skills fell in the Average range for their age and grade-level. Math fluency, math calculation, and quantitative reasoning were Average to Exceptionally High. Biggie demonstrated Average written expression skills on measures of word spelling and expository writing, and Average writing speed/fluency. By contrast, there were statistically significant and clinically meaningful differences between Biggie's predicted scores (based on their cognitive ability) and the scores they actually obtained on measures of reading achievement. While reading comprehension stood out as a strength, there were 21-25 point discrepancies between their predicted and obtained scores on the Word Reading subtest and the Reading composite. These differences are significant and so large that they are not commonly found in the general population (2%-5%), indicating a notable personal weakness in reading decoding. A pattern of strengths and weakness (PSW) analysis indicated reduced working memory capacity contributes to Biggie's low reading scores and very likely constrains learning.
 
 <<START>>

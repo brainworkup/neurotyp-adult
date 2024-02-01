@@ -242,7 +242,7 @@ bwu::tbl_gt(
 
 # data for self-report dotplot
 pheno <- "adhd_self"
-# data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
+data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
@@ -271,7 +271,7 @@ bwu::dotplot(
 
 # data for adhd observer dotplot
 pheno <- "adhd_observer"
-# data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
+data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")

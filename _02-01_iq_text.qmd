@@ -1,6 +1,6 @@
 <<PROMPT>>
 
-## Area: General Cognitive Ability/General Intelligence
+## Area: General Cognitive Ability/Intelligence
 
 Summarize and interpret these neuropsychological test scores related to the area
 denoted above. For scores that are Below
