@@ -1,27 +1,28 @@
-<<PROMPT>>
+Mr. Lopez demonstrated a range of performance across different memory tasks.
 
-## Area: Learning and Memory
+## Learning vs. Recall
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+- **Learning Efficiency**: High average performance in learning and immediate recognition of visual material (abstract shapes). Low average performance in complex one-trial verbal learning (story learning).
 
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
+- **Delayed Recall**: Average performance in recalling verbal lists after a delay with cues and in recognizing visual material after a delay. Notable weaknesses in the delayed recall of complex verbal and visual material.
 
-<<EXAMPLE>>
+## Types of Memory
 
-- **Overall Learning and Memory Performance**: Biggie generally shows
-below-average performance across different memory tasks, likely to be secondary
-to attentional variability, with specific
-areas of difficulty.
+### Rote Memory (List Learning)
 
-- **Learning Efficiency vs. Delayed Recall**:
-  - Biggie has more pronounced difficulties with learning efficiency, especially in contextual or story memory tasks.
-  - Delayed recall abilities vary, with notable weaknesses in story memory but relatively better performance in visual memory tasks.
+- Average abilities in both learning and recalling lists of information after short and long delays, suggesting adequate rote memory skills.
 
-- **Types of Memory**:
-  - **Rote Memory (List Learning)**: Below-average abilities in both learning and recalling lists of information.
-  - **Contextual Memory (Story/Narrative Memory)**: Significant difficulties are evident in both learning and recalling stories or narratives, marking this as a critical area of weakness.
-  - **Visual Memory (Figure Recall)**: The patient shows relatively better capabilities in recalling visual information after a delay, suggesting this as an area of relative strength compared to other memory types.
+### Contextual Memory (Story/Narrative Memory)
 
-<<START>>
+- **Immediate Recall**: Low average abilities in learning and recalling story details immediately.
+
+- **Delayed Recall**: Continued low average abilities in recalling story details over time, indicating difficulties with contextual memory.
+
+### Visual Memory (Figure Recall)
+
+- **Immediate Recognition**: High average capabilities in learning and recognizing abstract shapes immediately.
+
+- **Delayed Recognition**: Average abilities in recognizing target visual material among distractors after a delay.
+
+- **ROCFT Delayed Recall**: Below-average performance in spontaneously recalling and reproducing a complex abstract figure after a long-term delay, suggesting difficulties with visual memory retention.
+

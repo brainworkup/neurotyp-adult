@@ -179,6 +179,7 @@ bwu::dotplot(
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
+  pad(top: 0.5em)[]
   grid(
     columns: (50%, 50%),
     gutter: 8pt,
@@ -193,11 +194,7 @@ bwu::dotplot(
       caption: figure.caption(
         position: bottom,
         [
-          _Reading ability_ consists of three interrelated abilities: decoding,
-          comprehension, and fluency. _Writing ability_ can be described in terms of
-          spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can
-          be described in terms of calculation skills, applied problem solving, and math
-          fluency.
+          Reading ability encompasses three interconnected skills: _Decoding_: The capacity to identify and pronounce isolated written words; _Comprehension_: The aptitude to understand explicit facts in the text as well as infer unstated aspects; _Fluency_: The proficiency in swiftly and fluently decoding and understanding basic written information.
         ],
       ),
       placement: none,
@@ -209,14 +206,14 @@ bwu::dotplot(
 }
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let title = "Academic Achievement"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics.svg"
 #domain(title: [#title Test Scores], file_qtbl, file_fig)
-```
+``` -->
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Academic Achievement"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics2.svg"
@@ -225,4 +222,4 @@ bwu::dotplot(
   file_qtbl,
   file_fig,
   )
-``` -->
+```

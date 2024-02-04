@@ -73,7 +73,7 @@
   // Configure lists and links.
   show enum: set block(above: 1em, below: 1em)
   show enum: set par(leading: 0.85em)
-  set enum(indent: 0.25em, body-indent: 0.25em, tight: false)
+  set enum(indent: 0em, body-indent: 0.25em, tight: false)
 
   show list: set block(above: 1em, below: 1em)
   show list: set par(leading: 0.85em)

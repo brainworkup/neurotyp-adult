@@ -7,15 +7,16 @@
     "activityBarBadge.background": "#d24d4d",
     "activityBarBadge.foreground": "#e7e7e7",
     "sash.hoverBorder": "#b0b0eb",
-    "commandCenter.border": "#15202b99",
-    "titleBar.activeBackground": "#8887e1",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#8887e199",
-    "titleBar.inactiveForeground": "#15202b99"
+    "editorError.foreground": "#000000ff",
+    "editorGroup.border": "#b0b0eb",
+    "editorInfo.foreground": "#000000ff",
+    "editorWarning.foreground": "#000000ff",
+    "panel.border": "#b0b0eb",
+    "sideBar.border": "#b0b0eb",
+    "tab.activeBorder": "#b0b0eb"
   },
   "peacock.color": "#8887e1",
   "files.exclude": {
-    ".vscode": true,
     ".trunk": true,
     ".history": true,
     ".Rproj.user": true
@@ -35,7 +36,9 @@
     "editor.wrappingIndent": "same",
     "editor.cursorSurroundingLines": 0
   },
-  "spellright.language": ["en"],
+  "spellright.language": [
+    "en"
+  ],
   "spellright.documentTypes": [
     "quarto",
     "markdown",

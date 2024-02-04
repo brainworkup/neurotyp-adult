@@ -272,6 +272,7 @@ bwu::dotplot(
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
+  pad(top: 0.5em)[]
     grid(
       columns: (50%, 50%),
       gutter: 8pt,

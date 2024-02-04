@@ -99,7 +99,7 @@ data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
 ```{r}
 #| label: text-adhd-self
 #| cache: true
-#| eval: true
+#| eval: false
 #| include: false
 
 # Self-report
@@ -132,7 +132,7 @@ bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult
 #| label: qtbl-adhd-self
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: true
+#| eval: false
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -234,7 +234,7 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-adhd-self
-#| eval: true
+#| eval: false
 #| include: false
 #| fig-height: 6
 #| out-height: 100%
@@ -242,7 +242,7 @@ bwu::tbl_gt(
 
 # data for self-report dotplot
 pheno <- "adhd_self"
-data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
+# data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
@@ -290,14 +290,15 @@ bwu::dotplot(
 )
 ```
 
-### Self-Report
+<!-- ### Self-Report -->
 
-{{< include _02-09_adhd_adult_text_self.qmd >}}
+<!-- {{< include _02-09_adhd_adult_text_self.qmd >}} -->
 
-```{=typst}
+<!-- ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
+  pad(top: 0.5em)[]
   grid(
     columns: (50%, 50%),
     gutter: 8pt,
@@ -320,14 +321,14 @@ bwu::dotplot(
     ),
   )
 }
-```
+``` -->
 
-```{=typst}
+<!-- ```{=typst}
 #let title = "Self-Report of ADHD and Executive Function"
 #let file_qtbl = "table_adhd_self.png"
 #let file_fig = "fig_adhd_self.svg"
 #domain(title: [#title], file_qtbl, file_fig)
-```
+``` -->
 
 ### Observer Ratings
 
@@ -337,6 +338,7 @@ bwu::dotplot(
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
+  pad(top: 0.5em)[]
   grid(
     columns: (50%, 50%),
     gutter: 8pt,

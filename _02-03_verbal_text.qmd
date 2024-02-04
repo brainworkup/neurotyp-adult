@@ -1,21 +1,9 @@
-<<PROMPT>>
+Mr. Lopez evidenced a range of abilities in verbal skills, with particular strengths in naming and verbal reasoning. However, there were significant challenges in auditory comprehension, letter fluency, and to a lesser extent, category fluency.
 
-## Area: Verbal Skills/Expressive-Receptive Language Processing
+- **Retrieval**: Average ability in naming, indicating he is typically able to recall and name familiar objects or concepts. This skill is important for everyday communication and interaction.
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+- **Reasoning**: Average verbal reasoning (Similarities), which indicates an adequate ability to understand and express relationships between different concepts. This skill is crucial for effective communication and understanding complex ideas.
 
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
+- **Fluency**: Low Average semantic fluency, which suggests some difficulty in generating words within a given category. This affects his ability to quickly retrieve and articulate words related to specific topics, which might be noticeable in conversational speech or specific tasks like brainstorming. His below-average score in phonemic fluency indicates difficulties in generating words that start with a specific letter. This impacts tasks requiring quick word retrieval based on phonemic cues, such as thinking of names or items in rapid succession. Such patterns are typical in individuals with dyslexia.
 
-<<EXAMPLE>>
-
-Screening of Biggie's language comprehension and expression skills was
-intact for his age, demographic background, and educational history.
-Biggie demonstrated Average phonemic (letters) word fluency and
-Average semantic (categories) word fluency. Word-finding ability and
-retrieval fluency were Average, with no notable dysfluency in informal
-conversation. Auditory comprehension and rapid reading and color naming tasks
-were also performed at an Average level.
-
-<<START>>
+- **Comprehension**: Exceptionally Low score, which signifies challenges in understanding spoken language. This impacts daily communication, understanding instructions, or following verbal directions.

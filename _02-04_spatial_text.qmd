@@ -1,21 +1,12 @@
-<<PROMPT>>
+Mr. Lopez demonstrates a mix of average abilities in visuospatial processing.
 
-## Area: Visuospatial Skills, Visual Perception, Visuomotor Integration, and Construction
+- **Perception**: Average perceptual processing, discrimination, and pattern matching requiring close attention to visual detail.
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+- **Reasoning**: Average inductive reasoning and nonverbal problem-solving.
 
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
+- **Construction**: Constructing and recreating abstract visual designs was Average.
 
-<<EXAMPLE>>
-
-Performance across measures of visual perception, construction, motor
-integration, and spatial navigation of visual/environmental information was
-Average overall. Visuoperceptual matching requiring close attention to visual
-detail was Average. Visuoconstruction assembly requiring nonverbal reasoning and
-quick processing speed was Average. Finally, visuoconstructural drawing/copying
-of a complex figure requiring visuospatial integration, planning and
-organization, and efficient encoding of nonverbal material was Average.
-
-<<START>>
+- **Organization**: Copying of a complex figure requiring visuospatial
+integration, planning and organization, and efficient encoding of visuospatial
+material was Low Average. This indicates executive function difficulties in planning and
+organizing complex visuospatial material.

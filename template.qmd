@@ -83,6 +83,7 @@ validity <- readr::read_csv("validity.csv")
 *PATIENT NAME:* #name \
 *DATES OF EXAM:* `r params$doe1`, `r params$doe2`, and `r params$doe3` \
 ]
+#show heading.where(level: 1): set align(center)
 ```
 
 {{< include _00-00_tests.qmd >}}
