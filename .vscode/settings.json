@@ -19,12 +19,13 @@
   "files.exclude": {
     ".trunk": true,
     ".history": true,
-    ".Rproj.user": true
+    ".Rproj.user": true,
+    ".vscode": true
   },
   "deno.enable": true,
-  "deno.inlayHints.parameterTypes.enabled": true,
-  "deno.inlayHints.variableTypes.enabled": true,
-  "deno.suggest.completeFunctionCalls": true,
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.suggest.completeFunctionCalls": true,
   "deno.unstable": true,
   "projectManager.groupList": true,
   "projectManager.openInNewWindowWhenClickingInStatusBar": true,
