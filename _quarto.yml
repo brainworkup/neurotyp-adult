@@ -1,7 +1,7 @@
 project:
   type: default
   execute-dir: project
-  output-dir: _neuro_report
+  # output-dir: _neuro_report
   render:
     - Biggie.qmd
 
@@ -9,8 +9,8 @@ format:
   neurotyp-typst:
     keep-typ: true
     papersize: us-letter
-    bodyfont: "ScholaX"
-    sansfont: "ScholaX"
+    bodyfont: 'ScholaX'
+    sansfont: 'ScholaX'
     fontsize: 12pt
     number-sections: false
 
@@ -27,7 +27,7 @@ editor:
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: "70%"
+out-width: '70%'
 fig-align: center
 fig-format: svg
 fig-dpi: 270
