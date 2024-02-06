@@ -15,7 +15,7 @@ nonverbal reasoning).
 
 <<EXAMPLE>>
 
-{{< var patient >}} evidenced a balanced intellectual profile with no
+{{< var params.patient >}} evidenced a balanced intellectual profile with no
 significant deviations from the norm relative to same-aged peers.
 
 - **Knowledge**: Average level of acquired knowledge and verbal skills, commensurate with his age and educational background. His understanding of facts, vocabulary, and general knowledge is typical.

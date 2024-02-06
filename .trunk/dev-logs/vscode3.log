@@ -1,4 +1,0 @@
-2023-12-05T14:38:58.609Z [[32minfo[39m] using /usr/local/bin/trunk as requested by config
-2023-12-05T14:38:58.617Z [[32minfo[39m] using /usr/local/bin/trunk as requested by config
-2023-12-05T14:39:00.167Z [[34mdebug[39m] Starting Trunk language client with run config: {"command":"/usr/local/bin/trunk","args":["lsp-proxy"],"options":{"cwd":"/Users/joey/neurotyp","detached":false,"shell":false}}
-2023-12-05T18:49:27.190Z [[31merror[39m] Channel has been closed
