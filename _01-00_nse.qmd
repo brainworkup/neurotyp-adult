@@ -20,13 +20,17 @@ txt <- bwu::extract_text(patient, file_path, start_pattern, end_pattern)
 bwu::save_as_markdown(text = txt, output_path)
 ```
 
-## Referral
+## Reason for Referral
 
-Biggie Smalls is a 24-year-old right-handed research assistant with 16 years of education, including a B.A. in Psychology from the University of Brooklyn. Ms. Smalls was referred in order to determine the nature and extent of neurocognitive sequelae emerging from a history of attention-deficit/hyperactivity disorder (ADHD), obsessive-compulsive disorder (OCD), and post-traumatic stress disorder (PTSD).
+Biggie Smalls is a YY-year-old, right-handed research assistant with 16 years of
+education, including a B.A. in Hustling from the University of Brooklyn. He was referred in order to determine the nature and extent of
+neurocognitive sequelae emerging from a history of
+attention-deficit/hyperactivity disorder (ADHD).
 
-The purpose of the current evaluation is to provide documentation of current impairment, so that Ms. Smalls may receive accommodations on the Medical College Admissions Test (MCAT). She has been studying and taking MCAT prep classes, but has not been completing practice tests in the allotted time. It is Ms. Smalls's goal to attend medical school and then embark on a career in psychiatry. This report is based on a review of available medical records and information gathered across multiple days of evaluation. Treatment planning and plans for test accommodations were discussed with Ms. Smalls during the feedback visit on the final day of the examination.
 
-## Background
+The purpose of the current evaluation is XYZ. This report is based on a review of available medical records and information gathered across multiple days of evaluation. Treatment planning and plans for test accommodations were discussed with Ms. Smalls during the feedback visit on the final day of the examination.
+
+## Background Information
 
 The following information was obtained during an interview with `r params$patient` and from review of available medical records.
 `r params$first_name` has been doing well in `r params$his_her` classes since starting law school and has never failed.
@@ -38,46 +42,50 @@ However, issues have begun to arise that `r params$he_she` has been unable to av
 
 Cognitive complaints: sustained attention, working memory, and organization.
 
-{{< pagebreak >}}
 
-## History
+## Relevant History
 
 ### Past Neuropsychological Test Results
 
 Patient denied having prior testing.
 
-### Developmental History
+## Relevant History
 
-- No birth complications.
-- Developmental milestones: Normal.
+### Birth/Early Development
+
+- Normal pregnancy, birth, and delivery.
+- Developmental milestones achieved on time.
 
 ### Medical History
 
-- Denied major current medical concerns.
+::: {.block above="1.2em"}
+- **Current**: Consequat ad est amet deserunt dolor amet cillum nisi irure sit consequat officia do..
+- **Family**: Irure anim qui deserunt eu culpa aliqua ea consequat deserunt..
+- **Medications**: None.
+- **Appetite/Weight**: Stable with no significant changes recently.
+- **Sleep**: Normal, no changes.
+- **Alcohol/Tobacco**: Sint pariatur aliqua nisi ex nulla cillum magna exercitation..
+- **Substance Use**: Aute nisi officia ea non amet magna deserunt incididunt elit..
+- **Neurological Injury**: Voluptate magna do id veniam id laborum in qui magna sint ad cillum commodo.
+- **Psychiatric**: ADHD, anxiety, and depression.
+:::
 
-### Psychiatric History
+### Behavioral/Emotional/Social
 
-`r params$first_name` shared `r params$his_her` difficulties in breaking routines as a child.
-For example, `r params$his_her` mother would withhold plans unless `r params$he_she` was certain they would not be altered.
-Additionally, `r params$first_name` held herself and others to high expectations, leading to frustration and disappointment when these expectations were not met.
-`r params$he_she_cap` suggested that `r params$his_her` struggles were likely linked to perfectionism.
-
-### Family History
-
-- Older sister currently in medical school and a younger brother who is struggling with his academic career.
-- Parents are married and successful in their careers.
-- Family history of dysgraphia and ADHD.
-
-### Cultural/Social Background
-
-`r params$first_name` is a Caucasian `r params$sex` who was born and raised in Brooklyn, NY with `r params$his_her` biological parents.
-`r params$he_she_cap` is single, never married, and has no children.
+Laborum enim culpa excepteur non dolore ut consequat officia nisi proident.
 
 ### Educational History
 
-Attended a PS 198 school with an emphasis in social-emotional development and had no significant academic difficulties in the past.
-However, if `r params$first_name` found a task uninteresting or disliked it, `r params$he_she` would simply not complete it.
-This led `r params$his_her` teachers to believe `r params$he_she` was incapable of the task when in reality, `r params$his_her` lack of motivation stemmed from a lack of interest.
-It was always difficult for `r params$his_her` to take notes and still is; a traditional classroom setting would have further exacerbated `r params$his_her` difficulties in note-taking.
+Ea eiusmod eiusmod officia. Ut adipisicing magna nostrud aute in enim laboris ipsum amet. Ex est occaecat irure. Aliqua ea excepteur non ea dolore culpa commodo irure ipsum non. Ea in nisi laboris id laborum laborum reprehenderit officia in ad Lorem aliqua consectetur anim. Ex pariatur eu quis tempor. Amet veniam deserunt laborum do laborum eu ex.
 
-{{< pagebreak >}}
+Aliqua laborum consequat occaecat officia eu quis cillum culpa. Incididunt consequat occaecat non ullamco fugiat laboris tempor nulla. Magna amet nisi laboris eiusmod nostrud ut esse non eu irure esse. Enim amet mollit et ea labore nulla anim veniam eiusmod laboris irure.
+
+Magna quis excepteur aliqua do cillum est duis incididunt pariatur voluptate voluptate ullamco do. Consequat ea sit elit deserunt mollit consectetur laborum est eiusmod. Do cupidatat ad irure officia ea in nisi irure adipisicing. Sint culpa nulla do non ullamco aliquip id occaecat anim proident. Qui laboris tempor quis ullamco esse laborum deserunt. Magna proident consequat ex reprehenderit excepteur amet et est exercitation.
+
+### Occupational History
+
+Mollit pariatur ut laborum nulla proident aute. Eu laboris tempor consectetur id qui eu. Exercitation sint cupidatat ipsum fugiat cupidatat nulla nostrud culpa elit reprehenderit sit Lorem minim officia. Ex exercitation voluptate enim pariatur voluptate magna commodo. Aute fugiat ad deserunt sunt qui ipsum. Culpa ea proident aliquip irure veniam ut. Tempor id minim commodo.
+
+### Cultural/Social Context
+
+Deserunt sint esse culpa exercitation adipisicing cupidatat cupidatat incididunt commodo magna. Minim irure non culpa dolore esse sit. Elit officia nulla consequat esse id consequat quis consequat quis voluptate veniam tempor fugiat. Ut in adipisicing nisi amet labore.

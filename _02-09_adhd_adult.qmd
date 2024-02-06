@@ -234,7 +234,7 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-adhd-self
-#| eval: false
+#| eval: true
 #| include: false
 #| fig-height: 6
 #| out-height: 100%

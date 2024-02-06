@@ -2,14 +2,29 @@
 
 ## Area: Academic Achievement and Academic Fluency
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
-
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
+Summarize and interpret these neuropsychological test scores related to the area
+denoted above. For scores that are Below Average to Exceptionally Low, give a brief example of how
+this could impact the patient's daily functioning. Finally, recommend additional support that the patient should
+receive in areas in which scores fall Below Average to Exceptionally Low.
 
 <<EXAMPLE>>
 
-Biggie's broad academic achievement and academic fluency skills fell in the Average range for their age and grade-level. Math fluency, math calculation, and quantitative reasoning were Average to Exceptionally High. Biggie demonstrated Average written expression skills on measures of word spelling and expository writing, and Average writing speed/fluency. By contrast, there were statistically significant and clinically meaningful differences between Biggie's predicted scores (based on their cognitive ability) and the scores they actually obtained on measures of reading achievement. While reading comprehension stood out as a strength, there were 21-25 point discrepancies between their predicted and obtained scores on the Word Reading subtest and the Reading composite. These differences are significant and so large that they are not commonly found in the general population (2%-5%), indicating a notable personal weakness in reading decoding. A pattern of strengths and weakness (PSW) analysis indicated reduced working memory capacity contributes to Biggie's low reading scores and very likely constrains learning.
+Biggie demonstrated Clinically Significant limitations in his reading abilities, including difficulties in basic reading skills, understanding written words, decoding unfamiliar words, and in the speed at which he reads. A clinically sensitive composite score for identifying risk for dyslexia among students was Below Average.
+
+- **Decoding**: His decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for his age group. Further, his reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from his average IQ scores.
+
+- **Comprehension**: His Low Average score suggests mild-to-moderate difficulties in various
+aspects of reading comprehension. Individuals with similar impairments find it challenging to
+read and understand text at the expected level for their age, which affects
+academic performance and daily activities that involve reading, like following
+instructions or engaging with written material.
+
+- **Fluency**: Exceptionally Low reading fluency. Slow reading speed makes it
+difficult to read both familiar and unfamiliar text quickly and accurately. This
+impacts daily functioning in activities such as reading for fun or learning new
+vocabulary.
+
+
+
 
 <<START>>
