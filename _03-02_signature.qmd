@@ -17,11 +17,12 @@ knitr::include_graphics("jwt_sig.png")
 #show block: set par(leading: 0.65em)
 #block[
 *Joey W. Trampush, Ph.D.* \
-Clinical Neuropsychologist \
+Chief Neuropsychologist \
+BrainWorkup Neuropsychology, LLC \
 Assistant Professor of Psychiatry \
 Department of Psychiatry and the Behavioral Sciences \
 University of Southern California Keck School of Medicine \
-CA License PSY29212
+CA License No. PSY29212
 ]
 ```
 

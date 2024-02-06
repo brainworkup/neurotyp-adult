@@ -2,10 +2,7 @@
 
 ## Examiner Qualifications
 
-I have both research and clinical expertise in the field of ADHD that dates back almost 20 years.
-My academic background is comprised of four psychology degrees (B.A., M.A., M.Phil., and Ph.D.).
-I completed an APA-accredited predoctoral internship in pediatric neuropsychology at Henry Ford Hospital in Detroit, Michigan, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health of the National Institutes of Health in Bethesda, Maryland.
-I am a licensed psychologist in the States of California and New York.
+I believe I bring a unique, informed, and objective perspective to the evaluation and diagnosis of psychopathology and forensic neuropsychology. I have research and clinical expertise in evaluating developmental neuropsychology and disruptive behavioral disorders dating back almost 20 years. My academic background is comprised of four psychology degrees (B.A., M.A., M.Phil., and Ph.D.). I completed an APA-accredited predoctoral internship in pediatric neuropsychology at Henry Ford Hospital in Detroit, Michigan, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health of the National Institutes of Health in Bethesda, Maryland. I am a licensed psychologist in the States of California and New York.
 
 I have served as the Director of the Laboratory of Cognitive Genomics (Zucker Hillside Hospital), Assistant Investigator of Psychiatric Neuroscience (Feinstein Institue for Medical Research), and Assistant Professor of Psychiatry (Hofstra School of Medicine) at Northwell Health in Long Island, New York.
 Currently, I am an Assistant Professor in the Department of Psychiatry and the Behavioral Sciences, Keck School of Medicine, University of Southern California.
@@ -17,18 +14,15 @@ early childhood to young adulthood in ADHD [@De2008; @Miller2006; @Trampush2009;
 @bedardPerceptualMotorInhibition2010; @HalperinTrampush2008;
 @rajendranAssociationVariationNeuropsychological2013;
 @trampushModeratorEffectsWorking2014].
-In my clinical role, I would estimate having conducted 200+ neurocognitive and
-psychodiagnostic evaluations of ADHD across all ages, genders, ethnicites, and comorbidities.
-
-With this background, I believe I bring a unique, informed, and objective
-perspective to the evaluation and diagnosis of psychopathology, especially ADHD.
+Finally, in my clinical role, I would estimate having conducted 200+ neurocognitive and
+psychodiagnostic evaluations of ADHD and related neuropsychiatric syndromes across all ages, genders, ethnicites, and comorbidities.
 
 ## Test Selection Procedures
 
 Neuropsychological tests are intrinsically performance-based, and cognitive performance assessed during this examination is summarized above.
 Where appropriate, qualitative observations are included.
 Cultural considerations were made when selecting measures, interpreting results, and making diagnostic impressions and recommendations.
-Results from formal tests are reported in comparison to other individuals the same age and sex/gender as range of functioning (e.g., Below Average, average, Above Average).
+Results from formal tests are reported in comparison to other individuals the same age and sex/gender as range of functioning (e.g., Below Average, Average, Above Average).[@guilmetteAmericanAcademyClinical2020]
 Test score labels are intended solely to be descriptive, identifying positions of scores relative to a normal curve distribution, and should be interpreted within the context of the patient's individual presentation and history.
 Although standardized scores provide the clinician with an important and necessary understanding of the patient's test performance compared with a normative group, they do not on their own lead to accurate diagnosis or treatment recommendations.
 
@@ -57,7 +51,7 @@ Although standardized scores provide the clinician with an important and necessa
 )
 
 #three-line-table[
-|*Range*|*Standard Score*|*T Score*|*Scaled Score*|*z-Score*|*Percentile (‰)*|
+|*Range*|*Standard Score*|*T-Score*|*Scaled Score*|*z-Score*|*Percentile (‰)*|
 |---|---|---|---|---|---|
 |Exceptionally high score|130 +|70 +|16 +|2 +|98 +|
 |Above average score|120 – 129|63 – 69|14 – 15|1.3 – 1.9|91 – 97|

@@ -1,30 +1,9 @@
-<<PROMPT>>
+Clinically significant limitations in reading abilities were highlighted by a below-average, clinically sensitive composite score, indicating a risk for dyslexia among students.
 
-## Area: Academic Achievement and Academic Fluency
+- **Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for his age group. Further, his reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from his average IQ scores.
 
-Summarize and interpret these neuropsychological test scores related to the area
-denoted above. For scores that are Below Average to Exceptionally Low, give a brief example of how
-this could impact the patient's daily functioning. Finally, recommend additional support that the patient should
-receive in areas in which scores fall Below Average to Exceptionally Low.
+- **Comprehension**: Low Average, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
 
-<<EXAMPLE>>
-
-Biggie demonstrated Clinically Significant limitations in his reading abilities, including difficulties in basic reading skills, understanding written words, decoding unfamiliar words, and in the speed at which he reads. A clinically sensitive composite score for identifying risk for dyslexia among students was Below Average.
-
-- **Decoding**: His decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for his age group. Further, his reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from his average IQ scores.
-
-- **Comprehension**: His Low Average score suggests mild-to-moderate difficulties in various
-aspects of reading comprehension. Individuals with similar impairments find it challenging to
-read and understand text at the expected level for their age, which affects
-academic performance and daily activities that involve reading, like following
-instructions or engaging with written material.
-
-- **Fluency**: Exceptionally Low reading fluency. Slow reading speed makes it
-difficult to read both familiar and unfamiliar text quickly and accurately. This
-impacts daily functioning in activities such as reading for fun or learning new
-vocabulary.
+- **Fluency**: Exceptionally Low. Slow reading speed makes it difficult to read both familiar and unfamiliar text quickly and accurately. This impacts daily functioning in activities such as reading for fun or learning new vocabulary.
 
 
-
-
-<<START>>

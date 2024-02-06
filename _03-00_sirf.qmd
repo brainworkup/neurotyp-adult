@@ -177,7 +177,7 @@ bwu::dotplot(
     caption: figure.caption(
       position: bottom,
       [Overall neurocognitive function subdomain plots of the patient's strengths and
-        weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1.],
+        weaknesses. _Note:_ _z_-scores have a mean of 0 and a standard deviation of 1.],
     ),
     kind: "image",
     supplement: [Figure],

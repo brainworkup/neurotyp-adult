@@ -234,7 +234,7 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-adhd-self
-#| eval: true
+#| eval: false
 #| include: false
 #| fig-height: 6
 #| out-height: 100%
@@ -290,11 +290,11 @@ bwu::dotplot(
 )
 ```
 
-<!-- ### Self-Report -->
+### SELF-REPORT
 
-<!-- {{< include _02-09_adhd_adult_text_self.qmd >}} -->
+{{< include _02-09_adhd_adult_text_self.qmd >}}
 
-<!-- ```{=typst}
+```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
@@ -321,16 +321,16 @@ bwu::dotplot(
     ),
   )
 }
-``` -->
+```
 
-<!-- ```{=typst}
-#let title = "Self-Report of ADHD and Executive Function"
+```{=typst}
+#let title = "Self-Report of ADHD/EF
 #let file_qtbl = "table_adhd_self.png"
 #let file_fig = "fig_adhd_self.svg"
 #domain(title: [#title], file_qtbl, file_fig)
-``` -->
+```
 
-### Observer Ratings
+### OBSERVER RATINGS
 
 {{< include _02-09_adhd_adult_text_observer.qmd >}}
 
@@ -369,7 +369,7 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let title = "Observer Ratings of ADHD and Executive Function"
+#let title = "Observer Ratings of ADHD/EF"
 #let file_qtbl = "table_adhd_observer.png"
 #let file_fig = "fig_adhd_observer.svg"
 #domain(title: [#title], file_qtbl, file_fig)
