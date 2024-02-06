@@ -1,28 +1,27 @@
 Mr. Lopez demonstrated a range of performance across different memory tasks.
 
-## Learning vs. Recall
+### Learning vs. Recall
 
-- **Learning Efficiency**: High average performance in learning and immediate recognition of visual material (abstract shapes). Low average performance in complex one-trial verbal learning (story learning).
+-   **Learning Efficiency**: High average performance in learning and immediate recognition of visual material (abstract shapes).
+    Low average performance in complex one-trial verbal learning (story learning).
 
-- **Delayed Recall**: Average performance in recalling verbal lists after a delay with cues and in recognizing visual material after a delay. Notable weaknesses in the delayed recall of complex verbal and visual material.
+-   **Delayed Recall**: Average performance in recalling verbal lists after a delay with cues and in recognizing visual material after a delay.
+    Notable weaknesses in the delayed recall of complex verbal and visual material.
 
-## Types of Memory
+### Types of Memory
 
-### Rote Memory (List Learning)
+-   **Rote Memory (List Learning)**: Average abilities in both learning and recalling lists of information after short and long delays, suggesting adequate rote memory skills.
 
-- Average abilities in both learning and recalling lists of information after short and long delays, suggesting adequate rote memory skills.
+-   **Contextual Memory (Story/Narrative Memory)**
 
-### Contextual Memory (Story/Narrative Memory)
+    -   **Immediate Recall**: Low average abilities in learning and recalling story details immediately.
 
-- **Immediate Recall**: Low average abilities in learning and recalling story details immediately.
+    -   **Delayed Recall**: Continued low average abilities in recalling story details over time, indicating difficulties with contextual memory.
 
-- **Delayed Recall**: Continued low average abilities in recalling story details over time, indicating difficulties with contextual memory.
+-   **Visual Memory (Figure Recall)**
 
-### Visual Memory (Figure Recall)
+    -   **Immediate Recognition**: High average capabilities in learning and recognizing abstract shapes immediately.
 
-- **Immediate Recognition**: High average capabilities in learning and recognizing abstract shapes immediately.
+    -   **Delayed Recognition**: Average abilities in recognizing target visual material among distractors after a delay.
 
-- **Delayed Recognition**: Average abilities in recognizing target visual material among distractors after a delay.
-
-- **ROCFT Delayed Recall**: Below-average performance in spontaneously recalling and reproducing a complex abstract figure after a long-term delay, suggesting difficulties with visual memory retention.
-
+    -   **Delayed Recall**: Below-average performance in spontaneously recalling and reproducing a complex abstract figure after a long-term delay, suggesting difficulties with visual memory retention.

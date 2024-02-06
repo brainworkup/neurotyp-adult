@@ -64,7 +64,7 @@
   show heading: it => {
     if it.level > 3 {
       parbreak()
-      text(1em, style: "italic", weight: "regular", it.body + ".")
+      text(1em, style: "italic", weight: "regular", it.body + ":")
     } else {
       it
     }
@@ -72,11 +72,11 @@
 
   // Configure lists and links.
   show enum: set block(above: 1em, below: 1em)
-  show enum: set par(leading: 0.85em)
+  // show enum: set par(leading: 0.85em)
   set enum(indent: 0em, body-indent: 0.25em, tight: false)
 
   show list: set block(above: 1em, below: 1em)
-  show list: set par(leading: 0.85em)
+  // show list: set par(leading: 0.85em)
   set list(indent: 0em, body-indent: 0.25em, marker: ([•], [--]), tight: false)
 
   show link: set text(font: body-font, fill: rgb(4, 1, 23), weight: 450)

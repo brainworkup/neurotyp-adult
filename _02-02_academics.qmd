@@ -143,6 +143,9 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
+# Remove rows where 'subdomain' is NA
+data_academics <- data_academics[!is.na(data_academics$subdomain), ]
+
 # args
 x <- data_academics$z_mean_subdomain
 y <- data_academics$subdomain
@@ -160,6 +163,9 @@ bwu::dotplot(
   return_plot = return_plot,
   filename = filename
 )
+
+# Remove rows where 'subdomain' is NA
+data_academics <- data_academics[!is.na(data_academics$narrow), ]
 
 x2 <- data_academics$z_mean_narrow
 y2 <- data_academics$narrow
@@ -194,7 +200,12 @@ bwu::dotplot(
       caption: figure.caption(
         position: bottom,
         [
-          Reading ability encompasses three interconnected skills: _Decoding_: The capacity to identify and pronounce isolated written words; _Comprehension_: The aptitude to understand explicit facts in the text as well as infer unstated aspects; _Fluency_: The proficiency in swiftly and fluently decoding and understanding basic written information.
+          Reading ability encompasses three interconnected skills: _Decoding_,
+          which is the capacity to identify and pronounce isolated written
+          words; _Comprehension_, the aptitude to understand explicit facts in
+          the text as well as infer unstated aspects; and _Fluency_, the
+          proficiency in swiftly and fluently decoding and understanding basic
+          written information.
         ],
       ),
       placement: none,

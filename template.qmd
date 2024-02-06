@@ -124,6 +124,6 @@ validity <- readr::read_csv("validity.csv")
 
 {{< include _03-02_signature.qmd >}}
 
-<!-- {{< pagebreak >}} -->
+{{< pagebreak >}}
 
 {{< include _03-03_appendix.qmd >}}
