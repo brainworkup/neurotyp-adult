@@ -258,11 +258,16 @@ bwu::dotplot(
       caption: figure.caption(
         position: bottom,
         [
-          _General Ability_ refers to an overall capacity to reason, to solve problems,
-          and to learn useful information. _Crystallized Knowledge_ involves understanding
-          the world through language and reasoning. _Fluid Reasoning_ is the logical
-          analysis and solution of new problems, identifying underlying patterns, and
-          applying logic.
+          _General Ability_ refers to an overall capacity to reason, to solve
+          problems, and to learn useful information. _Crystallized Knowledge_
+          involves understanding the world through language and reasoning.
+          _Fluid Reasoning_ is the logical analysis and solution of new
+          problems, identifying underlying patterns, and applying
+          logic.#footnote[In the figures presented here and below, scores have
+          been converted to _z_-scores, where an average score is 0 (zero) and the
+          standard deviation is 1.0. Any scores below the −1.0 ticks are
+          moderately concerning. Scores at or beyond the −2.0 ticks are
+          clinically signficant and a cause for greater concern.]
         ],
       ),
       placement: none,
@@ -288,3 +293,4 @@ bwu::dotplot(
 // The title is appended with ' Index Scores'
 #domain(title: [#title Index Scores], file_qtbl, file_fig)
 ```
+
