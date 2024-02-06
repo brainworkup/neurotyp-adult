@@ -26,14 +26,14 @@ bwu::save_as_markdown(text = txt, output_path)
 {{< var params.first_name >}} {{< var params.last_name >}} is a YY-year-old, right-handed research assistant with 16 years of education, including a B.A. in Hustling from the University of Brooklyn. He was referred in order to determine the nature and extent of neurocognitive sequelae emerging from a history of attention-deficit/hyperactivity disorder (ADHD).
 
 The purpose of the current evaluation is {{< var dx1 >}}, {{< var dx2 >}}, and
-{{< var dx3 >}}. This report is based on a review of available medical records
+{{< var params.dx3 >}}. This report is based on a review of available medical records
 and information gathered across multiple days of evaluation. Treatment planning
 and plans for test accommodations were discussed with Ms. {{< var params.last_name >}} during the
 feedback visit on the final day of the examination.
 
 ## Background Information
 
-The following information was obtained during an interview with {{< var patient >}} and from review of available medical records.
+The following information was obtained during an interview with {{< var params.patient >}} and from review of available medical records.
 {{< var params.first_name >}} has been doing well in {{< var his_her >}} classes since starting law school and has never failed.
 However, issues have begun to arise that {{< var he_she >}} has been unable to avoid, including being easily distracted, restlessness, constantly fidgeting, procrastination, and variable attention.
 {{< var he_she_cap >}} suspects having ADHD and has always struggled with aspects of it.

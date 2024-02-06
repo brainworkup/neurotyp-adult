@@ -15,7 +15,7 @@ format:
     fontsize: 12pt
     number-sections: false
     citeproc: false
-    csl: bib/apa
+    csl: /bib/apa
 
 execute:
   warning: false
@@ -36,4 +36,4 @@ fig-format: svg
 fig-dpi: 270
 df-print: kable
 reference-location: document
-bibliography: bib/refs.bib
+bibliography: /bib/refs.bib
