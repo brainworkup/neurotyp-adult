@@ -3,15 +3,15 @@ project:
   execute-dir: project
   # output-dir: neuro_report
   render:
-    - Nestor.qmd
+    - Biggie.qmd
 
 format:
   neurotyp-typst:
     keep-typ: true
     keep-md: true
     papersize: us-letter
-    bodyfont: "ScholaX"
-    sansfont: "ScholaX"
+    bodyfont: 'ScholaX'
+    sansfont: 'ScholaX'
     fontsize: 12pt
     number-sections: false
     citeproc: false
@@ -30,7 +30,7 @@ editor:
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: "70%"
+out-width: '70%'
 fig-align: center
 fig-format: svg
 fig-dpi: 270
