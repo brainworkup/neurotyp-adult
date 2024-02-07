@@ -15,18 +15,18 @@ nonverbal reasoning).
 
 <<EXAMPLE>>
 
-{{< var params.patient >}} evidenced a balanced intellectual profile with no
+{{< var patient >}} evidenced a balanced intellectual profile with no
 significant deviations from the norm relative to same-aged peers.
 
-- **Knowledge**: Average level of acquired knowledge and verbal skills, commensurate with his age and educational background. His understanding of facts, vocabulary, and general knowledge is typical.
+- **Knowledge**: Average level of acquired knowledge and verbal skills, commensurate with {{< var his_her >}} age and educational background. {{< var his_her_cap >}} understanding of facts, vocabulary, and general knowledge is typical.
 
 - **Reasoning**: Average fluid/nonverbal reasoning, which indicates a typical
-ability to reason, problem-solve, and adapt to new situations or tasks. He can manage new challenges and abstract reasoning tasks as
-effectively as his peers.
+ability to reason, problem-solve, and adapt to new situations or tasks. {{< var he_she_cap >}} can manage new challenges and abstract reasoning tasks as
+effectively as {{< var his_her >}} peers.
 
 - **General Intelligence**: Average overall cognitive functioning for daily
-tasks. While he may occasionally find complex or highly demanding cognitive
-tasks challenging, he generally should manage well in typical day-to-day activities.
+tasks. While {{< var he_she >}} may occasionally find complex or highly demanding cognitive
+tasks challenging, {{< var he_she >}} generally should manage well in typical day-to-day activities.
 
 <<START>>
 

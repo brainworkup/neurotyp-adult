@@ -83,7 +83,7 @@
   show link: underline
 
   // Logo
-  block(figure(image("logo.png")))
+  block(figure(image("img/logo.png")))
 
   // Title row.
   align(center)[

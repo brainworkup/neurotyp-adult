@@ -5,7 +5,7 @@ domains, which collectively indicate a substantial deviation from typical adult 
 ### ADHD Symptomatology
 
 - **Inattention/Memory:** Pronounced challenges related to concentration and task completion.
-- **Hyperactivity/Restlessness:** Marked physical restlessness, which affects his ability to maintain composure in sedentary situations.
+- **Hyperactivity/Restlessness:** Marked physical restlessness, which affects {{< var his_her >}} ability to maintain composure in sedentary situations.
 - **Impulsivity/Emotional Lability:** Tendencies toward impulsivity are evident, suggesting difficulties in emotional regulation and response inhibition.
 - **DSM-5 Alignment:** The DSM-5 subscale scores point to mild-to-moderate difficulties specifically in the realms of Inattentiveness and Hyperactive-Impulsive Symptoms. These findings correlate with established psychosocial patterns in Biggie's history.
 - **Adult ADHD Index Correlation:** Biggie's diagnostic profile exceeds the threshold typically associated with

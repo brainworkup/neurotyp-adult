@@ -12,7 +12,7 @@
 
 - **Speech-Language Therapy:** Working with a speech-language pathologist can help improve memory skills, particularly for verbal material.
 
-- **Psychoeducation:** To empower Biggie with self-awareness and enable her to advocate for her needs in various settings.
+- **Psychoeducation:** To empower Biggie with self-awareness and enable {{< var his_her >}} to advocate for {{< var his_her >}} needs in various settings.
 
 - Additional support is recommended in areas like attentional function, processing speed, and cognitive efficiency. This can be achieved through occupational therapy, the use of organizational tools, and creating a distraction-free environment.
 
@@ -24,7 +24,7 @@
 
 - **Accommodated Testing:** Extended time accommodations are recommended due to relative weakness in processing speed and academic fluency.
 
-- **Calculator Use:** Please consider allowing Biggie to utilize a calculator for class assignments and examinations as she progresses in the mathematics curriculum.
+- **Calculator Use:** Please consider allowing Biggie to utilize a calculator for class assignments and examinations as {{< var he_she >}} progresses in the mathematics curriculum.
 
 - Biggie should receive additional support in mathematics through:
   - Individual or small group tutoring.
@@ -43,7 +43,7 @@
 
 - **Technology Use:** Keyboard or voice-to-text software use to mitigate graphomotor weaknesses' effect on academic performance.
 
-- Tutoring or teaching assistance is recommended for improving her sentence level writing fluency and overall academic fluency in reading, math, and writing. 
+- Tutoring or teaching assistance is recommended for improving {{< var his_her >}} sentence level writing fluency and overall academic fluency in reading, math, and writing. 
 
 - A supportive environment at home and school involving clear instructions, task breakdown into smaller steps, and praise for efforts and achievements.
 
@@ -63,5 +63,5 @@
 
 ## Recommendations for Follow-Up Evaluation
 
-- A follow-up assessment in 12-18 months is suggested to measure progress and assess the interventions' impact, unless urgent concerns arise. Continuous monitoring and reassessment are vital to adjust support as `r params$first_name` develops and her needs change.
+- A follow-up assessment in 12-18 months is suggested to measure progress and assess the interventions' impact, unless urgent concerns arise. Continuous monitoring and reassessment are vital to adjust support as {{< var first_name >}} develops and {{< var his_her >}} needs change.
 

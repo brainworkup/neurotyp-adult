@@ -9,7 +9,7 @@ Sincerely,
 #| out-width: 7em
 #| echo: false
 #| eval: true
-knitr::include_graphics("jwt_sig.png")
+knitr::include_graphics("jwt_phd.png")
 ```
 
 ```{=typst}

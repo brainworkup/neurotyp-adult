@@ -1,6 +1,6 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
-name: Biggie Smalls
+name: Biggie Shakur
 doe: 2023-01-02
 patient: Biggie
 ---
@@ -48,15 +48,16 @@ neuropsych <- readr::read_csv("neuropsych.csv")
 validity <- readr::read_csv("validity.csv")
 ```
 
+
 ```{=typst}
-#let name = [Biggie Smalls]
+#let name = [Biggie Shakur]
 #let doe = [2023-01-02]
 #let patient = [Biggie]
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)
 #block[
 *PATIENT NAME:* #name \
-*DATES OF EXAM:* {{< var doe1 >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
+*DATES OF EXAM:* {{< var dx1 >}}, {{< var dx1 >}}, and {{< var dx1 >}} \
 ]
 #show heading.where(level: 1): set align(center)
 ```

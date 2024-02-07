@@ -2,22 +2,22 @@
 
 ## Notification/Informed Consent
 
-Biggie Smalls consented to undergo the current neuropsychological evaluation. He was informed nothing we discussed would remain confidential, and information he provided during our meetings and the test results from my evaluation of him would become a part of my report, to be used at his attorney's discretion. He was informed a copy of any report I produced would be sent to his attorney, possibly to the prosecuting attorney, and to the court. Mr. Smalls indicated having understood the purpose of the evaluation and the limitations of confidentiality of our interviews and the testing I conducted.
+Biggie Smalls consented to undergo the current neuropsychological evaluation. {{< var he_she_cap >}} was informed nothing we discussed would remain confidential, and information {{< var he_she >}} provided during our meetings and the test results from my evaluation of him would become a part of my report, to be used at {{< var his_her >}} attorney's discretion. {{< var he_she_cap >}} was informed a copy of any report I produced would be sent to {{< var his_her >}} attorney, possibly to the prosecuting attorney, and to the court. Mr. Smalls indicated having understood the purpose of the evaluation and the limitations of confidentiality of our interviews and the testing I conducted.
 
-On MM DD, YYYY, I conducted a clinical interview with Mrs. Smalls, Biggie Smalls's biological mother, via a HIPAA-compliant telehealth platform, gathering data on his developmental, medical, and psychosocial histories. The following day, I performed an in-person neuropsychological and psychodiagnostic evaluation of Mr. Smalls, which lasted approximately eight hours.
+On MM DD, YYYY, I conducted a clinical interview with Mrs. Smalls, Biggie Smalls's biological mother, via a HIPAA-compliant telehealth platform, gathering data on {{< var his_her >}} developmental, medical, and psychosocial histories. The following day, I performed an in-person neuropsychological and psychodiagnostic evaluation of Mr. Smalls, which lasted approximately eight hours.
 
 This report is based on a review of available information contained in medical
-records and criminal records, as well as interviews with Mr. Smalls, his mother
+records and criminal records, as well as interviews with Mr. Smalls, {{< var his_her >}} mother
 Mrs. Smalls, attorney XX, and information
 gathered during multiple days of evaluation. I reserve the right to change my
 opinions about the following should I be provided additional records that alter
 my understanding of the findings. Please note my current employer, Keck School
 of Medicine of USC, is neither involved nor affiliated with this case, and that
-the patient was referred to me by his attorney's office.
+the patient was referred to me by {{< var his_her >}} attorney's office.
 
 ## Reason for Referral
 
-Biggie Smalls is a XX-year-old, left-handed male with XX years of education. He
+Biggie Smalls is a XX-year-old, left-handed male with XX years of education. {{< var he_she_cap >}}
 was referred for forensic examination to elucidate the nature and extent of
 neurocognitive sequelae stemming from a history of attention-deficit/hyperactivity disorder (ADHD). The purpose of
 this evaluation was to identify or rule-out any objectively-derived

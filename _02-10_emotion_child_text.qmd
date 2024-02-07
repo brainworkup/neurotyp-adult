@@ -1,9 +1,9 @@
-Biggie's high anxiety levels could disrupt her academic, cognitive, social, and
+Biggie's high anxiety levels could disrupt {{< var his_her >}} academic, cognitive, social, and
 emotional functioning, including concentration, social interactions, and
-emotional regulation. Her attention difficulties may negatively impact her
+emotional regulation. {{< var his_her_cap >}} attention difficulties may negatively impact {{< var his_her >}}
 academic performance, cognitive abilities, social understanding, and emotional
-stability. Low self-esteem might affect her academic motivation, cognitive
-resilience, social interactions, and emotional wellbeing. Lastly, her low
+stability. Low self-esteem might affect {{< var his_her >}} academic motivation, cognitive
+resilience, social interactions, and emotional wellbeing. Lastly, {{< var his_her >}} low
 Self-Reliance score indicates a significant lack of self-sufficiency, which
 could result in academic avoidance, cognitive difficulties, and social
 dependency.

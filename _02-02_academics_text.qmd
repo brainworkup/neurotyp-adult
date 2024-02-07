@@ -1,6 +1,6 @@
 Clinically significant limitations in reading abilities were highlighted by a below-average, clinically sensitive composite score, indicating a risk for dyslexia among students.
 
-- **Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for his age group. Further, his reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from his average IQ scores.
+- **Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for {{< var his_her >}} age group. Further, {{< var his_her >}} reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from {{< var his_her >}} average IQ scores.
 
 - **Comprehension**: Low Average, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
 

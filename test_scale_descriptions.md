@@ -16,10 +16,10 @@
 
 1. **Strategic Planning and Organization:** Biggie is capable of formulating an action plan, suggesting adequate executive functioning for age-related tasks.
 2. **Auditory Attentional Capacity and Sequential Recall:** Biggie can process auditory information effectively, which is necessary for listening to and remembering instructions or oral presentations.
-3. **Response Monitoring and Working Memory for Auditory Information:** These skills are average, indicating Biggie can monitor her own responses and manipulate auditory information to a typical degree.
+3. **Response Monitoring and Working Memory for Auditory Information:** These skills are average, indicating Biggie can monitor {{< var his_her >}} own responses and manipulate auditory information to a typical degree.
 4. **Visual-Motor Processing and Perceptual Speed:** These average scores imply Biggie can perform tasks involving visual perception and motor coordination at a typical rate.
-5. **Selective Attention Task Performance:** Biggie’s ability to focus on specific stimuli while ignoring distractions is typical for her age group.
-6. **Reasoning for Problem-Solving:** Her capacity to reason and solve problems quickly is also at an expected level.
+5. **Selective Attention Task Performance:** Biggie’s ability to focus on specific stimuli while ignoring distractions is typical for {{< var his_her >}} age group.
+6. **Reasoning for Problem-Solving:** {{< var his_her_cap >}} capacity to reason and solve problems quickly is also at an expected level.
 
 **Weaknesses (Low Average to Below Average Scores):**
 

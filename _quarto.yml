@@ -1,7 +1,6 @@
 project:
   type: default
-  execute-dir: project
-  # output-dir: neuro_report
+  execute-dir: file
   render:
     - Biggie.qmd
 

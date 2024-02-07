@@ -6,12 +6,12 @@ instructions, or following verbal directions.
 
 - **Reasoning**: Average verbal reasoning (Similarities), which indicates an adequate ability to understand and express relationships between different concepts. This skill is crucial for effective communication and understanding complex ideas.
 
-- **Retrieval**: Average ability in naming, indicating he is typically able to recall and name familiar objects or concepts. This skill is important for everyday communication and interaction.
+- **Retrieval**: Average ability in naming, indicating {{< var he_she >}} is typically able to recall and name familiar objects or concepts. This skill is important for everyday communication and interaction.
 
 - **Fluency**: Low Average semantic fluency, which suggests some difficulty in
-generating words within a given category. This affects his ability to quickly
+generating words within a given category. This affects {{< var his_her >}} ability to quickly
 retrieve and articulate words related to specific topics, which might be
-noticeable in conversational speech or specific tasks like brainstorming. His
+noticeable in conversational speech or specific tasks like brainstorming. {{< var his_her_cap >}}
 Below Average score in phonemic fluency indicates difficulties in
 generating words that start with a specific letter. This impacts tasks requiring
 quick word retrieval based on phonemic cues, such as thinking of names or items
