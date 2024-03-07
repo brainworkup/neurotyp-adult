@@ -1,4 +1,4 @@
-The observer ratings provided by Marisol Lopez revealed significant elevations in
+The observer ratings provided by {{< var observer >}} revealed significant elevations in
 Biggie's ADHD symptomatology and executive functioning across several
 domains, which collectively indicate a substantial deviation from typical adult functioning.
 
