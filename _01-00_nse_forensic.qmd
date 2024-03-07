@@ -4,7 +4,12 @@
 
 Biggie Smalls consented to undergo the current neuropsychological evaluation. {{< var he_she_cap >}} was informed nothing we discussed would remain confidential, and information {{< var he_she >}} provided during our meetings and the test results from my evaluation of him would become a part of my report, to be used at {{< var his_her >}} attorney's discretion. {{< var he_she_cap >}} was informed a copy of any report I produced would be sent to {{< var his_her >}} attorney, possibly to the prosecuting attorney, and to the court. Mr. Smalls indicated having understood the purpose of the evaluation and the limitations of confidentiality of our interviews and the testing I conducted.
 
-On MM DD, YYYY, I conducted a clinical interview with Mrs. Smalls, Biggie Smalls's biological mother, via a HIPAA-compliant telehealth platform, gathering data on {{< var his_her >}} developmental, medical, and psychosocial histories. The following day, I performed an in-person neuropsychological and psychodiagnostic evaluation of Mr. Smalls, which lasted approximately eight hours.
+On {{< var doe1 >}}, I conducted a clinical interview with Mrs. Smalls, Biggie
+Smalls's biological mother, via a HIPAA-compliant telehealth platform, gathering
+data on {{< var his_her >}} developmental, medical, and psychosocial histories.
+The following day ({{< var doe1 >}}), I performed an in-person neuropsychological and
+psychodiagnostic evaluation of {{< var mr_mrs >}} {{< var last_name >}}, which lasted approximately eight
+hours.
 
 This report is based on a review of available information contained in medical
 records and criminal records, as well as interviews with Mr. Smalls, {{< var his_her >}} mother
