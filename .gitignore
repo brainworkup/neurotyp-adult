@@ -70,3 +70,9 @@ jwt_sig.png
 
 /_*.local
 notes_todo.qmd
+notes_todo.html
+fillable_pdf.R
+fillable_pdf2.R
+report.Rmd
+report-output.log
+report-output.tex
