@@ -84,6 +84,7 @@
 
   // Logo
   block(figure(image("img/logo.png")))
+  // block(figure(image("img/bwu_logo.png")))
 
   // Title row.
   align(center)[
