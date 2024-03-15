@@ -6,7 +6,7 @@ Sincerely,
 ```{r}
 #| label: signature
 #| fig-align: left
-#| out-width: 7em
+#| out-width: 10em
 #| echo: false
 #| eval: true
 knitr::include_graphics("jwt_phd.png")
@@ -19,9 +19,9 @@ knitr::include_graphics("jwt_phd.png")
 *Joey W. Trampush, Ph.D.* \
 Chief Neuropsychologist \
 BrainWorkup Neuropsychology, LLC \
-Assistant Professor of Psychiatry \
+Assistant Professor \
 Department of Psychiatry and the Behavioral Sciences \
-University of Southern California Keck School of Medicine \
+Keck School of Medicine of USC \
 CA License No. PSY29212
 ]
 ```
