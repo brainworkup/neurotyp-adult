@@ -1,3 +1,5 @@
+#import "@preview/cetz:0.2.2"
+
 #let report(
   title: "NEUROCOGNITIVE EXAMINATION",
   author: "Joey W. Trampush, Ph.D.",
@@ -41,6 +43,11 @@
     number-align: center,
     columns: cols,
   )
+
+  // align headers
+  show heading.where(level: 0): set align(center)
+  show heading.where(level: 1): set align(left)
+
   // Set paragraph justification and leading.
   set par(justify: true, leading: 1em, linebreaks: "optimized")
 
