@@ -27,6 +27,11 @@ him_her_cap:
 dx1: attention-deficit/hyperactivity disorder (ADHD)
 dx2: anxiety
 dx3: depression
+dsm5_dx1:
+dsm5_dx2:
+dsm5_dx3:
+dsm5_dx4:
+dsm5_dx5:
 
 email:
   info: joey.trampush@brainworkup.org
