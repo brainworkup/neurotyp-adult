@@ -8,21 +8,22 @@ dob: 1991-01-01
 doe1: ""
 doe2: ""
 doe3: ""
-sex: male/female
-sex_cap: Male/Female
+sex: NA
+sex_cap: NA
 age: ""
 education: ""
 handedness: ""
 referral: ""
 observer: ""
 observer_relation: ""
-mr_mrs: Mr.
-he_she: he
-he_she_cap: He
-his_her: his
-his_her_cap: His
-him_her: him
-him_her_cap: Him
+attorney: ""
+mr_mrs: ""
+he_she: NA
+he_she_cap: NA
+his_her:
+his_her_cap:
+him_her:
+him_her_cap:
 dx1: attention-deficit/hyperactivity disorder (ADHD)
 dx2: anxiety
 dx3: depression

@@ -1,0 +1,43 @@
+## Mental Status/Behavioral Observations
+
+::: {.block above="1.2em"}
+**Appearance and Behavior:**
+
+* Patient appeared disheveled.
+* Speech was rapid and somewhat disorganized ({{< var patient >}} spoke 80% of the time
+during the 2+ hour exam).
+* Maintained adequate eye contact, but breaks off intermittently.
+
+**Cognition:**
+
+* Alert and oriented to time, place, and person.
+* Memory was intact for recent and remote events.
+* Attention and concentration were moderately impaired, with frequent distractibility.
+
+**Affect and Mood:**
+
+* Patient reported feeling stressed and anxious.
+* Mood was labile, with several moments of tearfulness and irritability.
+
+**Thought Process:**
+
+* Flight of ideas present, with thoughts shifting rapidly and often unrelated.
+* Loose associations and tangential thinking noted.
+* No delusions or hallucinations reported.
+
+**Insight and Judgment:**
+
+* Patient had limited insight into their condition, believing they are "just tired."
+* Judgment is impaired, as evidenced by risky behaviors and difficulty weighing consequences.
+
+**Additional Observations:**
+
+* Patient exhibits signs of psychomotor agitation, such as fidgeting and pacing.
+* No evidence of suicidal or homicidal ideation.
+* He acknowledges need for mental health assistance.
+
+**Recommendations:**
+
+* Further psychiatric evaluation is recommended to determine an appropriate diagnosis and treatment plan.
+* Crisis intervention services may be warranted to ensure the subject's safety and well-being.
+:::

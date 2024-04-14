@@ -267,7 +267,7 @@ bwu::dotplot(
           been converted to _z_-scores, where an average score is 0 (zero) and the
           standard deviation is 1.0. Any scores below the −1.0 ticks are
           moderately concerning. Scores at or beyond the −2.0 ticks are
-          clinically signficant and a cause for greater concern.]
+          clinically significant and a cause for greater concern.]
         ],
       ),
       placement: none,

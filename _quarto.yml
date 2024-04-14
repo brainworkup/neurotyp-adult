@@ -5,16 +5,16 @@ project:
     - Biggie.qmd
 
 format:
-  neurotyp-pediatric-typst:
+  neurotyp-typst:
     keep-typ: true
     keep-md: true
-    papersize: us-letter
+    papersize: "us-letter"
     bodyfont: "ScholaX"
     sansfont: "ScholaX"
     fontsize: 12pt
     number-sections: false
     citeproc: false
-    csl: /bib/apa
+    csl: /src/bib/apa
 
 execute:
   warning: false
@@ -29,10 +29,10 @@ editor:
     canonical: true
 fig-width: 6
 fig-asp: 0.618
-out-width: "70%"
+out-width: 70%
 fig-align: center
 fig-format: svg
 fig-dpi: 270
 df-print: kable
 reference-location: document
-bibliography: /bib/refs.bib
+bibliography: /src/bib/refs.bib

@@ -58,7 +58,7 @@ validity <- readr::read_csv("validity.csv")
 *PATIENT NAME:* #name \
 *DATES OF EXAM:* {{< var doe1 >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
 ]
-#show heading.where(level: 1): set align(center)
+// #show heading.where(level: 1): set align(center)
 ```
 
 {{< include _00-00_tests.qmd >}}
@@ -89,15 +89,9 @@ validity <- readr::read_csv("validity.csv")
 
 <!-- {{< include _02-08_social.qmd >}} -->
 
-{{< include _02-09_adhd_child_text.qmd >}}
+{{< include _02-09_adhd_adult.qmd >}}
 
-{{< include _02-09_adhd_child.qmd >}}
-
-{{< include _02-10_emotion_child_text.qmd >}}
-
-{{< include _02-10_emotion_child.qmd >}}
-
-{{< include _02-10_emotion_parent_text.qmd >}}
+{{< include _02-10_emotion_adult.qmd >}}
 
 <!-- {{< include _02-11_adaptive.qmd >}} -->
 
