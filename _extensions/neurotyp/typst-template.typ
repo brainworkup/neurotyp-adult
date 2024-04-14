@@ -1,5 +1,3 @@
-#import "@preview/cetz:0.2.2"
-
 #let report(
   title: "NEUROCOGNITIVE EXAMINATION",
   author: "Joey W. Trampush, Ph.D.",
@@ -50,9 +48,6 @@
 
   // Set paragraph justification and leading.
   set par(justify: true, leading: 1em, linebreaks: "optimized")
-
-  // Save heading and body font families in variables.
-  // let body-font = "ScholaX"
 
   // Set text and body font family.
   set text(font: body-font, size: fontsize, lang: lang, region: region)
