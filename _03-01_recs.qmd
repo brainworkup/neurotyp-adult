@@ -2,7 +2,7 @@
 
 ## Recommendations for Medical/Healthcare
 
-- Biggie should receive interventions to enhance concentration, manage anxiety, and improve emotional understanding. This includes social skills training, psychoeducational interventions for self-image improvement, and monitoring for signs of internalization or externalization of problems.
+- {{< var first_name >}} should receive interventions to enhance concentration, manage anxiety, and improve emotional understanding. This includes social skills training, psychoeducational interventions for self-image improvement, and monitoring for signs of internalization or externalization of problems.
 
 - **Cognitive Behavioral Therapy (CBT):** To develop strategies for improving executive functions and addressing self-esteem issues.
 

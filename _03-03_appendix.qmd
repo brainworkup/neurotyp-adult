@@ -2,20 +2,12 @@
 
 ## Examiner Qualifications
 
-I believe I bring a unique, informed, and objective perspective to the evaluation and diagnosis of psychopathology and forensic neuropsychology. I have research and clinical expertise in evaluating developmental neuropsychology and disruptive behavioral disorders dating back almost 20 years. My academic background is comprised of four psychology degrees (B.A., M.A., M.Phil., and Ph.D.). I completed an APA-accredited predoctoral internship in pediatric neuropsychology at Henry Ford Hospital in Detroit, Michigan, and a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health of the National Institutes of Health in Bethesda, Maryland. I am a licensed psychologist in the States of California and New York.
+I possess a comprehensive and distinguished background in the field of psychopathology and forensic neuropsychology, underpinned by nearly two decades of research and clinical practice. My academic journey encompasses four psychology degrees: a B.A., M.A., M.Phil., and Ph.D., laying a solid foundation for my expertise in developmental neuropsychology and disruptive behavioral disorders. My professional training includes an APA-accredited predoctoral internship in pediatric neuropsychology at Henry Ford Hospital in Detroit, Michigan, followed by a postdoctoral fellowship in psychiatric genetics at the National Institute of Mental Health, part of the National Institutes of Health in Bethesda, Maryland. I am duly licensed as a psychologist in both California and New York.
 
-I have served as the Director of the Laboratory of Cognitive Genomics (Zucker Hillside Hospital), Assistant Investigator of Psychiatric Neuroscience (Feinstein Institue for Medical Research), and Assistant Professor of Psychiatry (Hofstra School of Medicine) at Northwell Health in Long Island, New York.
-Currently, I am an Assistant Professor in the Department of Psychiatry and the Behavioral Sciences, Keck School of Medicine, University of Southern California.
-In 2019, I was awarded an endowed professorship from USC, the Della Martin Assistant Professor of Psychiatry, as an acknowledgment of my research and clinical contributions to both the university and the wider scientific community.
+Throughout my career, I have held several prestigious positions, including Director of the Laboratory of Cognitive Genomics at Zucker Hillside Hospital, Assistant Investigator of Psychiatric Neuroscience at the Feinstein Institute for Medical Research, and Assistant Professor of Psychiatry at the Hofstra School of Medicine at Northwell Health in Long Island, New York. Presently, I serve as an Assistant Professor in the Department of Psychiatry and Behavioral Sciences at the Keck School of Medicine of the University of Southern California. My contributions to research and clinical practice were recognized in 2019 when I was honored with the Della Martin Assistant Professor of Psychiatry endowed professorship from USC, a testament to my impact on the university and the wider scientific community.
 
-I have published several research studies in high-impact scientific journals on
-the trajectory of symptom stability and neuropsychological functioning from
-early childhood to young adulthood in ADHD [@De2008; @Miller2006; @Trampush2009;
-@bedardPerceptualMotorInhibition2010; @HalperinTrampush2008;
-@rajendranAssociationVariationNeuropsychological2013;
-@trampushModeratorEffectsWorking2014].
-Finally, in my clinical role, I would estimate having conducted 200+ neurocognitive and
-psychodiagnostic evaluations of ADHD and related neuropsychiatric syndromes across all ages, genders, ethnicites, and comorbidities.
+My research endeavors have been prolific, resulting in several publications in high-impact scientific journals. These studies have focused on the trajectory of symptom stability and neuropsychological functioning from early childhood to young adulthood in individuals with ADHD, contributing valuable insights to the field [@De2008; @Miller2006; @Trampush2009; @bedardPerceptualMotorInhibition2010; @HalperinTrampush2008; @rajendranAssociationVariationNeuropsychological2013; @trampushModeratorEffectsWorking2014]. In my clinical capacity, I have conducted over 200 neurocognitive and psychodiagnostic evaluations of ADHD and related neuropsychiatric syndromes, covering a diverse range of ages, genders, ethnicities, and comorbidities. This extensive experience underscores my commitment to advancing our understanding and treatment of neuropsychological disorders.
+
 
 ## Test Selection Procedures
 
