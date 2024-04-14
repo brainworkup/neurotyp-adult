@@ -1,31 +1,5 @@
 # TESTS ADMINISTERED {#sec-tests}
 
-<!-- ## Adult -->
-
-- Comprehensive Neuropsychiatric Symptom and History Interview
-- Conners' Adult ADHD Diagnostic Interview for DSM-IV (CAADID), Part I: History
-- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
-- Conners' Adult ADHD Rating Scales--Observer Report: Long Version (CAARS--O:L)
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Self-Report Form
-- Comprehensive Executive Function Inventory Adult (CEFI Adult) Observer Form
-- Advanced Clinical Solutions (ACS): Word Choice Test, Test of Premorbid Functioning (TOPF)
-- Dot Counting Test (DCT)
-- Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): Similarities, Matrix Reasoning, Letter-Number Sequencing, Coding, Symbol Search, Digit Span, Vocabulary, Information, Comprehension, Block Design, Visual Puzzles, Figure Weights, Arithmetic, Picture Completion, Cancellation, Picture Arrangement, Object Assembly
-- WMS-IV Adult
-- Wide Range Achievement Test, 5th ed (WRAT-5): Word Reading
-- Wechsler Individual Achievement Test, 4th ed (WIAT-4): Word Reading, Reading Comprehension, Pseudoword Decoding, Orthographic Fluency, Decoding Fluency
-- Neuropsychological Assessment Battery, Screener (NAB): Attention, Language, Memory, Spatial, and Executive Functions Modules
-- NIH Executive Abilities--Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER): Unstructured Task, Verbal Fluency, Behavioral Rating Scale
-- California Verbal Learning Test, 3rd ed (CVLT-3), Brief Form
-- Rey-Osterrieth Complex Figure Test (ROCFT)
-- Trail Making Test (TMT)
-- Delis-Kaplan Executive Function System (D-KEFS): Color-Word Interference Test
-- Personality Assessment Inventory (PAI)
-- Beck Anxiety Inventory (BAI)
-- Beck Depression Inventory, 2nd ed (BDI-2)
-
-<!-- ## Child -->
-
 - Comprehensive Neurodevelopmental Symptom and History Interview
 - Behavioral Assessment System for Children, 3rd ed (BASC-3): Structured,
 Developmental History (SDH)

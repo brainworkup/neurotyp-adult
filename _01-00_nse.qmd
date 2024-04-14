@@ -62,8 +62,6 @@ Patient denied having prior testing.
 - **Medications**: None.
 - **Appetite/Weight**: Stable with no significant changes recently.
 - **Sleep**: Normal, no changes.
-- **Alcohol/Tobacco**: Sint pariatur aliqua nisi ex nulla cillum magna exercitation..
-- **Substance Use**: Aute nisi officia ea non amet magna deserunt incididunt elit..
 - **Neurological Injury**: Voluptate magna do id veniam id laborum in qui magna sint ad cillum commodo.
 - **Psychiatric**: ADHD, anxiety, and depression.
 :::
