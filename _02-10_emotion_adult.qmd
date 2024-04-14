@@ -1,0 +1,301 @@
+## Emotional/Behavioral/Personality {#sec-emotion}
+
+{{< include _02-10_emotion_adult_text.qmd >}}
+
+```{r}
+#| label: setup-emotion
+#| include: false
+# domain
+domains <- c(
+  "Psychiatric Disorders", "Personality Disorders", "Substance Use",
+  "Psychosocial Problems", "Behavioral/Emotional/Social", "Emotional/Behavioral/Personality"
+)
+# phenotype
+pheno <- "emotion"
+```
+
+```{r}
+#| label: export-emotion
+#| include: false
+#| eval: true
+emotion <- readr::read_csv("neurobehav.csv") |>
+  dplyr::filter(domain %in% domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, description, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow
+  )
+readr::write_csv(emotion, paste0(pheno, ".csv"))
+```
+
+```{r}
+#| label: data-emotion
+#| include: false
+
+data <- bwu::read_data(pheno = pheno)
+scales <- c(
+  "Activity Level",
+  "Affective (A)",
+  "Affective (D)",
+  "Affective Instability",
+  "Aggression",
+  "Aggressive Attitude",
+  "ALC Estimated Score",
+  "Alcohol Problems",
+  "Antisocial Behaviors",
+  "Antisocial Features",
+  "Anxiety-Related Disorders",
+  "Anxiety",
+  "Borderline Features",
+  "Cognitive (A)",
+  "Cognitive (D)",
+  "Conversion",
+  "Depression",
+  "Dominance",
+  "DRG Estimated Score",
+  "Drug Problems",
+  "Egocentricity",
+  "Grandiosity",
+  "Health Concerns",
+  "Hypervigilance",
+  "Identity Problems",
+  "Irritability",
+  "Mania",
+  "Negative Relationships",
+  "Nonsupport",
+  "Obsessive-Compulsive",
+  "Paranoia",
+  "Persecution",
+  "Phobias",
+  "Physical Aggression",
+  "Physiological (A)",
+  "Physiological (D)",
+  "Psychotic Experiences",
+  "Resentment",
+  "Schizophrenia",
+  "Self-Harm",
+  "Social Detachment",
+  "Somatic Complaints",
+  "Somatization",
+  "Stimulus-Seeking",
+  "Stress",
+  "Suicidal Ideation",
+  "Thought Disorder",
+  "Traumatic Stress",
+  "Treatment Rejection",
+  "Verbal Aggression",
+  "Warmth",
+  "BAI Total Score",
+  "BDI-2 Total Score",
+  "Activities of Daily Living",
+  "Adaptability",
+  "Adaptive Skills",
+  "Aggression",
+  "Anxiety",
+  "Attention Problems",
+  "Attitude to School",
+  "Attitude to Teachers",
+  "Atypicality",
+  "Behavioral Symptoms Index",
+  "Conduct Problems",
+  "Depression",
+  "Emotional Symptoms Index",
+  "Externalizing Problems",
+  "Functional Communication",
+  "Hyperactivity",
+  "Inattention/Hyperactivity",
+  "Internalizing Problems",
+  "Interpersonal Relations",
+  "Leadership",
+  "Locus of Control",
+  "Personal Adjustment",
+  "Relations with Parents",
+  "School Problems",
+  "Self-Esteem",
+  "Self-Reliance",
+  "Sensation Seeking",
+  "Sense of Inadequacy",
+  "Social Skills",
+  "Social Stress",
+  "Somatization",
+  "Withdrawal"
+)
+data_emotion <-
+  bwu::filter_data(
+    data,
+    domain = domains,
+    scale = scales
+  )
+```
+
+```{r}
+#| label: text-emotion
+#| cache: true
+#| include: false
+#| eval: false
+
+bwu::cat_neuropsych_results(
+  data = data_emotion,
+  file = "_02-10_emotion_adult_text.qmd"
+)
+```
+
+```{r}
+#| label: qtbl-emotion
+#| dev: tikz
+#| fig-process: pdf2png
+#| eval: true
+#| include: false
+options(tikzDefaultEngine = "xetex")
+
+# variablse
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].")
+table_name <- "table_emotion"
+vertical_padding <- 0
+grp_emotion <- list(
+  t_score = c("PAI", "MMPI-3")
+)
+multiline <- FALSE
+
+# # PAI
+# data_emotion <- data2[, c(10, 1, 3, 4, 5)]
+# colnames(data_emotion)[1] <- "test_name"
+# data3 <- data_emotion
+
+data_emotion <-
+  dplyr::filter(data, domain %in% c(
+    "Psychiatric Disorders",
+    "Personality Disorders",
+    "Substance Use",
+    "Behavioral/Emotional/Social",
+    "Emotional/Behavioral/Personality"
+  )) |>
+  dplyr::arrange(test_name %in% c("PAI", "MMPI-3")) |>
+  dplyr::arrange(absort) |>
+  dplyr::arrange(subdomain)
+
+bwu::tbl_gt(
+  data = data_emotion,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = vertical_padding,
+  source_note = source_note,
+  grp_t_score = grp_emotion[["t_score"]],
+  dynamic_grp = grp_emotion,
+  multiline = multiline
+)
+```
+
+```{r}
+#| label: pai-tables
+#| eval: false
+#| include: false
+
+df1 <-
+  dplyr::filter(data_emotion, domain == "Psychiatric Disorders") |>
+  dplyr::arrange(test_name) |>
+  dplyr::arrange(subdomain)
+df1 <- df1[, c(11, 2, 4, 5, 6)]
+colnames(df1)[1] <- "test_name"
+# table_psych <- bwu::tbl_gt(
+#   df1,
+#   table_name = "table_psych",
+#   source_note = source_note
+# )
+
+df2 <-
+  dplyr::filter(data_emotion, domain == "Personality Disorders") |>
+  dplyr::arrange(test_name) |>
+  dplyr::arrange(subdomain)
+df2 <- df2[, c(11, 2, 4, 5, 6)]
+colnames(df2)[1] <- "test_name"
+# table_personality <- bwu::tbl_gt(
+#   df2,
+#   table_name = "table_personality",
+#   source_note = source_note
+# )
+
+df3 <-
+  dplyr::filter(data_emotion, domain == "Substance Use") |>
+  dplyr::arrange(test_name) |>
+  dplyr::arrange(subdomain)
+df3 <- df3[, c(11, 2, 4, 5, 6)]
+colnames(df3)[1] <- "test_name"
+# table_sud <- bwu::tbl_gt(
+#   df3,
+#   table_name = "table_sud",
+#   source_note = source_note
+# )
+
+df4 <-
+  dplyr::filter(data_emotion, domain == "Psychosocial Problems") |>
+  dplyr::arrange(test_name) |>
+  dplyr::arrange(subdomain)
+df4 <- df4[, c(11, 2, 4, 5, 6)]
+colnames(df4)[1] <- "test_name"
+# table_social <- bwu::tbl_gt(
+#   df4,
+#   table_name = "table_social",
+#   source_note = source_note
+# )
+```
+
+```{r}
+#| label: fig-emotion
+#| fig-cap: "Mood/Self-Report"
+#| include: false
+
+# args
+x <- data_emotion$z_mean_subdomain
+y <- data_emotion$subdomain
+colors <- NULL
+# return_plot <- TRUE
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_emotion.svg"
+
+# Make dotplot
+bwu::dotplot(
+  data = data_emotion,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
+```
+
+<!-- ```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Merriweather", size: 0.7em)
+  set text(..font)
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: figure.caption(position: top, [#title]),
+          kind: "qtbl",
+          supplement: [*Table*],
+          ),
+        figure([#image(file_fig, width: auto)],
+          caption: figure.caption(position: bottom,[Emotional/Behavioral/Personality]),
+          placement: none,
+          kind: "image",
+          supplement: [*Fig.*],
+          gap: 0.5em,
+        ),
+      )
+  }
+``` -->
+
+<!-- ```{=typst}
+#let title = "Personality Assessment Inventory (PAI)"
+#let file_qtbl = "table_emotion.png"
+#let file_fig = "fig_emotion.svg"
+#domain(
+  title: [#title],
+  file_qtbl,
+  file_fig
+  )
+``` -->
