@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from CAARS2-2"
 params:
-  patient: Jemiel
+  patient: Biggie
   test:
     label: "CAARS 2:"
     value: [caars2_sr]
