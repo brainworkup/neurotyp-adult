@@ -3,18 +3,44 @@
 {{< include _02-08_social_text.qmd >}}
 
 ```{r}
+#| label: setup-social
+#| include: false
+# domain
+domains <- c("Social Cognition")
+# phenotype
+pheno <- "social"
+```
+
+```{r}
+#| label: export-social
+#| include: false
+social <- readr::read_csv("neurocog.csv") |>
+  dplyr::filter(domain == domains) |>
+  dplyr::filter(!is.na(z_mean_domain)) |>
+  dplyr::select(
+    test, scale, score, z, percentile, range, test_name,
+    domain, subdomain, narrow, pass, verbal, timed, description, result,
+    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
+    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+  )
+readr::write_excel_csv(social, paste0(pheno, ".csv"))
+
+
+data_social <-
+  bwu::filter_data(
+    data,
+    domain = domains,
+    scale = scales
+  )
+```
+
+```{r}
 #| label: data-social
 #| include: false
 
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(glue)
-library(bwu)
 # Read data and filter
-pheno <- "social"
 data <- bwu::read_data(pheno = pheno)
-domains <- "Social Cognition"
 scales <- c(
   "Affect Recognition",
   "Theory of Mind",
@@ -33,15 +59,34 @@ scales <- c(
   "Faces II",
   "Names I",
   "Names II",
-  "CARS-2 Total Score",
   "Restricted/Repetitive Behaviors",
   "Social Interaction",
   "Social Communication",
   "Emotional Responses",
   "Cognitive Style",
   "Maladaptive Speech",
-  "Autism Index"
+  "Autism Index",
+  # CARS-2
+  "Relating to People",
+  "Imitation",
+  "Emotional Response",
+  "Body Use",
+  "Object Use",
+  "Adaptation to Change",
+  "Visual Response",
+  "Listening Response",
+  "Taste, Smell, and Touch Response and Use",
+  "Fear or Nervousness",
+  "Verbal Communication",
+  "Nonverbal Communication",
+  "Activity Level",
+  "Level of Consistency of Intellectual Response",
+  "General Impressions",
+  "CARS-2 Total Score",
+  # CARS-2 High Functioning Version
+  "CARS-2-HF Total Score"
 )
+
 data_social <-
   bwu::filter_data(
     data,
@@ -66,15 +111,18 @@ bwu::cat_neuropsych_results(data = data_social, file = "_02-08_social_text.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_raw_score <- gt::md("Raw Score")
 
 grp_social <- list(
   scaled_score = c("NEPSY-2", "ACS Social Cognition"),
-  t_score = c("CARS-2", "GARS-3", "CARS-2 High Functioning Version")
+  t_score = c("CARS-2", "GARS-3", "CARS-2 HF", "CARS-2 High Functioning Version"),
+  raw_score = c("CARS-2", "CARS-2 HF")
 )
+
 pheno <- "social"
 table_name <- "table_social"
 vertical_padding <- 0
@@ -86,8 +134,10 @@ bwu::tbl_gt(
   table_name = table_name,
   fn_scaled_score = fn_scaled_score,
   fn_t_score = fn_t_score,
+  fn_raw_score = fn_raw_score,
   grp_scaled_score = grp_social[["scaled_score"]],
   grp_t_score = grp_social[["t_score"]],
+  grp_raw_score = grp_social[["raw_score"]],
   dynamic_grp = grp_social,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -97,7 +147,7 @@ bwu::tbl_gt(
 ```{r}
 #| label: fig-social
 #| include: false
-#| fig-cap: "Social cognition measures are used to gauge aspects of social-emotional processing and social aptitude (sometimes referred to as emotional intelligence), which are important facets of how individuals process social information about other children, adults, groups, and social contexts."
+#| fig-cap: "Social cognition measures are used to gauge aspects of social-emotional processing and social aptitude (sometimes referred to as _emotional intelligence_), which are important facets of how individuals process social information about other children, adults, groups, and social contexts."
 
 # Arguments
 # social <- dplyr::filter(data, scale != "CARS-2 Total Score") # this might not be necessary
@@ -119,23 +169,22 @@ bwu::dotplot(
 )
 ```
 
-<!-- ```{=typst}
+```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+  let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
-  grid(
-  columns: (50%, 50%),
-  gutter: 8pt,
-figure([#image(file_qtbl)],
-  caption: figure.caption(position: top, [
-    #title
-  ]),
-  kind: "qtbl",
-  supplement: [Table],
-),
-figure([#image(file_fig, width: auto)],
-  caption: figure.caption(position: bottom, [
-    Social cognition measures are used to gauge aspects of social-emotional processing and social aptitude (sometimes referred to as emotional intelligence), which are important facets of how individuals process social information about other children, adults, groups, and social contexts.
+  pad(top: 0.5em)[]
+    grid(
+      columns: (50%, 50%),
+      gutter: 8pt,
+        figure([#image(file_qtbl)],
+          caption: figure.caption(position: top, [#title]),
+          kind: "qtbl",
+          supplement: [Table],
+          ),
+        figure([#image(file_fig)],
+          caption: figure.caption(position: bottom, [
+    Social cognition measures are used to gauge aspects of social-emotional processing and social aptitude (sometimes referred to as _emotional intelligence_), which are important facets of how individuals process social information about other children, adults, groups, and social contexts.
     ]),
   placement: none,
   kind: "image",
@@ -144,9 +193,9 @@ figure([#image(file_fig, width: auto)],
   ),
 )
 }
-``` -->
+```
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Social Cognition"
 #let file_qtbl = "table_social.png"
 #let file_fig = "fig_social.svg"
@@ -155,4 +204,4 @@ figure([#image(file_fig, width: auto)],
   file_qtbl,
   file_fig
 )
-``` -->
+```

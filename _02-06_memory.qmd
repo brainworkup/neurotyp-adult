@@ -18,11 +18,7 @@ memory <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
-    pass, verbal, timed, description, result, z_mean_domain, z_sd_domain,
-    z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+    test, scale, score, z, percentile, range, test_name, domain, subdomain, narrow, pass, verbal, timed, description, result, z_mean_domain, z_sd_domain, z_mean_subdomain, z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass, z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
 readr::write_csv(memory, paste0(pheno, ".csv"))
 ```

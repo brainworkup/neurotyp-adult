@@ -18,7 +18,7 @@ spatial <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name,
+    test, scale, score, z, percentile, range, test_name,
     domain, subdomain, narrow, pass, verbal, timed, description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
@@ -92,8 +92,6 @@ fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
-
-source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 
 grp_spatial <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2"),

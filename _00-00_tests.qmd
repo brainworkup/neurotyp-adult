@@ -1,8 +1,7 @@
 # TESTS ADMINISTERED {#sec-tests}
 
 - Comprehensive Neurodevelopmental Symptom and History Interview
-- Behavioral Assessment System for Children, 3rd ed (BASC-3): Structured,
-Developmental History (SDH)
+- Behavioral Assessment System for Children, 3rd ed (BASC-3): Structured Developmental History (SDH)
 - Behavioral Assessment System for Children, 3rd ed (BASC-3): Parent Rating Scales (PRS)
 - Behavioral Assessment System for Children, 3rd ed (BASC-3): Teacher Rating Scales (TRS)
 - Behavioral Assessment System for Children, 3rd ed (BASC-3): Self-Report of Personality (SRP)
@@ -21,10 +20,8 @@ Developmental History (SDH)
 - Kaufman Test of Educational Achievement, 3rd ed (KTEA-3)
 - NEPSY-II Developmental Neuropsychological Battery
 - Repeatable Battery for the Assessment of Neuropsychological Status (RBANS)
-- NIH Executive Abilities--Measures and Instruments for Neurobehavioral
-Evaluation and Research (NIH EXAMINER): Unstructured Task, Behavioral Rating
-Scale
-- - California Verbal Learning Test, Child ed (CVLT-C)
+- NIH Executive Abilities--Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER): Unstructured Task, Behavioral Rating Scale
+- California Verbal Learning Test, Child ed (CVLT-C)
 - Rey-Osterrieth Complex Figure Test (ROCFT)
 - Trail Making Test (TMT)
 - Grooved Pegboard Test
@@ -33,8 +30,15 @@ Scale
 - CELF-5 Ages 5-8
 - CELF-5 Ages 9-21
 - Dot Counting Test (DCT)
-- WPPSI-IV Ages 2–3
-- WPPSI-IV Ages 4–7
 - Wechsler Individual Achievement Test, 4th ed (WIAT-4): Word Reading, Reading
 Comprehension, Pseudoword Decoding, Orthographic Fluency, Decoding Fluency
-- RBANS
+- Wechsler Preschool and Primary Scale of Intelligence, 4th ed (WPPSI-IV, Ages 4-7):
+- Wechsler Preschool and Primary Scale of Intelligence, 4th ed (WPPSI-IV, Ages 2-3):
+  - Receptive Vocabulary
+  - Information
+  - Picture Naming
+  - Block Design
+  - Object Assembly
+  - Picture Memory
+  - Zoo Locations
+- Bracken School Readiness Assessment, 4th ed (BSRA-4)

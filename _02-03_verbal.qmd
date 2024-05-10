@@ -18,7 +18,7 @@ verbal <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name,
+    test, scale, score, z, percentile, range, test_name,
     domain, subdomain, narrow, pass, verbal, timed, description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
@@ -97,7 +97,6 @@ data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 #| label: text-verbal
 #| cache: true
 #| include: false
-
 bwu::cat_neuropsych_results(data = data_verbal, file = "_02-03_verbal_text.qmd")
 ```
 

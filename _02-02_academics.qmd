@@ -14,17 +14,19 @@ pheno <- "academics"
 ```{r}
 #| label: export-academics
 #| include: false
+
 academics <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name,
+    test, scale, score, z, percentile, range, percent_mastery, test_name,
     domain, subdomain, narrow, pass, verbal, timed, description, result,
     z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
     z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
-readr::write_csv(academics, paste0(pheno, ".csv"))
+
+readr::write_excel_csv(academics, paste0(pheno, ".csv"))
 ```
 
 ```{r}
@@ -98,8 +100,17 @@ scales <- c(
   "Word Recognition Fluency",
   "Writing Fluency",
   "Written Expression",
-  "Written Language Composite"
+  "Written Language Composite",
+  # Bracken-4
+  "School Readiness Composite (SRC)",
+  "Colors",
+  "Letters",
+  "Numbers/Counting",
+  "Sizes/Comparisons",
+  "Shapes",
+  "Self-/Social Awareness"
 )
+
 data_academics <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
@@ -107,6 +118,8 @@ data_academics <- bwu::filter_data(data, domain = domains, scale = scales)
 #| label: text-academics
 #| cache: true
 #| include: false
+
+# export text
 bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text.qmd")
 ```
 
@@ -118,20 +131,26 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 options(tikzDefaultEngine = "xetex")
 
 # footnotes
+fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_percent_mastery <- gt::md("Percent Mastery")
+grp_academics <- list(
+  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5", "BSRA-4"),
+  percent_mastery = c("BSRA-4")
+)
+
+# arguments
 table_name <- "table_academics"
 vertical_padding <- 0
 multiline <- TRUE
-source_note <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-grp_academics <- list(
-  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5")
-)
 
 bwu::tbl_gt(
   data = data_academics,
   pheno = pheno,
   table_name = table_name,
-  source_note = source_note,
+  fn_standard_score = fn_standard_score,
+  fn_percent_mastery = fn_percent_mastery,
   grp_standard_score = grp_academics[["standard_score"]],
+  grp_percent_mastery = grp_academics[["percent_mastery"]],
   dynamic_grp = grp_academics,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -178,7 +197,6 @@ bwu::dotplot(
   return_plot = return_plot,
   filename = filename2
 )
-
 ```
 
 ```{=typst}
@@ -200,12 +218,13 @@ bwu::dotplot(
       caption: figure.caption(
         position: bottom,
         [
-          Reading ability encompasses three interconnected skills: _Decoding_,
-          which is the capacity to identify and pronounce isolated written
-          words; _Comprehension_, the aptitude to understand explicit facts in
-          the text as well as infer unstated aspects; and _Fluency_, the
-          proficiency in swiftly and fluently decoding and understanding basic
-          written information.
+          _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
+          // Reading ability encompasses three interconnected skills: _Reading Decoding_,
+          // which is the capacity to identify and pronounce isolated written
+          // words; _Reading Comprehension_, the aptitude to understand explicit facts in
+          // the text as well as infer unstated aspects; and _Reading Fluency_, the
+          // proficiency in swiftly and fluently decoding and understanding basic
+          // written information.
         ],
       ),
       placement: none,
@@ -217,12 +236,12 @@ bwu::dotplot(
 }
 ```
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Academic Achievement"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics.svg"
 #domain(title: [#title Test Scores], file_qtbl, file_fig)
-``` -->
+```
 
 ```{=typst}
 #let title = "Academic Achievement"
