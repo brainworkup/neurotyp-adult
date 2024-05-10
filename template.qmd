@@ -10,15 +10,50 @@ patient: Biggie
 #| include: false
 #| cache: false
 
-# Load necessary packages
 packages <- c(
-  "ggtext", "ggthemes", "glue", "gt", "gtExtras", "hablar", "here",
-  "htmlwidgets", "janitor", "knitr", "magick", "png", "manipulateWidget", "quarto",
-  "readxl", "rmarkdown", "scales", "snakecase", "stats", "svglite",
-  "tidyselect", "tidytext", "tidyverse", "webshot2", "widgetframe", "xfun",
-  "yaml", "bwu"
+  "ggtext",
+  "ggthemes",
+  "glue",
+  "gt",
+  "gtExtras",
+  "hablar",
+  "here",
+  "htmlwidgets",
+  "janitor",
+  "knitr",
+  "magick",
+  "png",
+  "manipulateWidget",
+  "quarto",
+  "readxl",
+  "rmarkdown",
+  "scales",
+  "snakecase",
+  "stats",
+  "svglite",
+  "tidyselect",
+  "tidytext",
+  "tidyverse",
+  "webshot2",
+  "widgetframe",
+  "xfun",
+  "yaml",
+  "bwu"
 )
-xfun::pkg_load2(packages)
+
+# Function to load packages one by one
+load_packages <- function(packages2) {
+  for (pkg in packages) {
+    if (!require(pkg, character.only = TRUE)) {
+      install.packages(pkg)
+      library(pkg, character.only = TRUE)
+    }
+    message(paste("Loaded package:", pkg))
+  }
+}
+
+# Call the function to load packages
+load_packages(packages)
 
 # Set knitr options
 knitr::opts_knit$set(width = 80, digits = 2, warnPartialMatchArgs = FALSE)
@@ -58,7 +93,6 @@ validity <- readr::read_csv("validity.csv")
 *PATIENT NAME:* #name \
 *DATES OF EXAM:* {{< var doe1 >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
 ]
-// #show heading.where(level: 1): set align(center)
 ```
 
 {{< include _00-00_tests.qmd >}}

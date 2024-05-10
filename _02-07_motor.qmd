@@ -1,4 +1,4 @@
-## Motor
+## Motor {#sec-motor}
 
 {{< include _02-07_motor_text.qmd >}}
 
@@ -18,9 +18,9 @@ motor <- readr::read_csv("neurocog.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow, pass, verbal, timed, description, result,
-    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
+    pass, verbal, timed, description, result, z_mean_domain, z_sd_domain,
+    z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
     z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
@@ -31,7 +31,7 @@ readr::write_csv(motor, paste0(pheno, ".csv"))
 #| label: data-motor
 #| include: false
 
-data <- bwu::read_data(pheno = "motor")
+data <- bwu::read_data(pheno = pheno)
 scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
@@ -39,19 +39,15 @@ scales <- c(
   "Fingertip Tapping Dominant Hand Repetitions",
   "Fingertip Tapping Dominant Hand Sequences",
   "Fingertip Tapping Dominant Hand",
-  "Fingertip Tapping Dominant Hand",
   "Fingertip Tapping Nondominant Hand Repetitions",
   "Fingertip Tapping Nondominant Hand Sequences",
   "Fingertip Tapping Nondominant Hand",
-  "Fingertip Tapping Nondominant Hand",
   "Fingertip Tapping Repetitions",
-  "Fingertip Tapping Repetitions",
-  "Fingertip Tapping Sequences",
   "Fingertip Tapping Sequences",
   "FT Dominant Hand vs. Nondominant Hand",
+  "Imitating Hand Positions",
   "Imitating Hand Positions-Dominant",
   "Imitating Hand Positions-Nondominant",
-  "Imitating Hand Positions",
   "Left-Hand Time",
   "Non-Dominant Hand Time",
   "Nondominant Hand",
@@ -60,10 +56,16 @@ scales <- c(
   "Right-Hand Time",
   "Visuomotor Precision Errors",
   "Visuomotor Precision Pencil Lifts",
-  "Visuomotor Precision Time",
+  "Visuomotor Precision Completion Time",
   "Visuomotor Precision"
 )
-data_motor <- bwu::filter_data(data, domain = domains, scale = scales)
+
+data_motor <-
+  bwu::filter_data(
+    data,
+    domain = domains,
+    scale = scales
+  )
 ```
 
 ```{r}
@@ -114,6 +116,7 @@ bwu::tbl_gt(
 ```{r}
 #| label: fig-motor
 #| include: false
+#| eval: false
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
 # args
@@ -124,20 +127,47 @@ colors <- NULL
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
 
+# Ensure no NA values are present in the plotting data
+data_motor <- data_motor |>
+  dplyr::filter(!is.na(x) & !is.na(y))
+
+
+# Ensure no NA values are present in the plotting data
+data_motor <- data_motor |>
+  dplyr::filter(!is.na(x) & !is.na(y) & !is.infinite(x) & !is.infinite(y))
+
+# Optionally, add a range filter if you know the expected range of your data
+data_motor <- data_motor |>
+  dplyr::filter(x > lower_bound & x < upper_bound) # Adjust lower_bound and upper_bound as necessary
+
+# Plotting function call
 bwu::dotplot(
   data = data_motor,
   x = x,
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
+)
+
+
+bwu::dotplot(
+  data = data_motor,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
 )
 ```
 
 ```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Fira Sans", size: 9pt)
+#let domain(title: none, file_qtbl) = {
+  let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
+  pad(top: 0.5em)[]  
     grid(
       columns: (50%, 50%),
       gutter: 8pt,
@@ -160,14 +190,13 @@ bwu::dotplot(
       )
   }
 ```
-
 ```{=typst}
 #let title = "Motor"
 #let file_qtbl = "table_motor.png"
-#let file_fig = "fig_motor.svg"
+// #let file_fig = "fig_motor.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,
-  file_fig
+  // file_fig
   )
 ```
