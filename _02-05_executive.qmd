@@ -8,7 +8,8 @@
 
 # domain
 domains <- c("Attention/Executive")
-# phenotype
+
+# Target phenotype
 pheno <- "executive"
 ```
 
@@ -16,18 +17,13 @@ pheno <- "executive"
 #| label: export-executive
 #| include: false
 
-# Load necessary libraries
-library(readr)
-library(dplyr)
-
 # Read the CSV file into a data frame
 data <- readr::read_csv("neurocog.csv")
 
 # Filter the data frame based on certain conditions
 # Keep only the rows where 'domain' equals 'domains' and 'z_mean_domain' is not NA
 filtered_data <- data |>
-  dplyr::filter(domain == domains) |>
-  dplyr::filter(!is.na(z_mean_domain))
+  dplyr::filter(domain == domains)
 
 # Select specific columns from the data frame
 executive <- filtered_data |>
@@ -192,6 +188,7 @@ data_executive <-
     "Numbers & Letters Part C Efficiency",
     "Numbers & Letters Part D Efficiency",
     "Picture Span",
+    "Picture Memory",
     "Processing Speed (PSI)",
     "Sentence Repetition",
     "Spatial Span",
@@ -207,7 +204,9 @@ data_executive <-
     "Word Generation Perseverations",
     "Word Generation",
     "Working Memory (WMI)",
-    "Working Memory"
+    "Working Memory",
+    "Zoo Locations"
+    # add RBANS
   ))
 
 # footnotes

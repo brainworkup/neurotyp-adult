@@ -5,35 +5,52 @@
 ```{r}
 #| label: setup-academics
 #| include: false
+
 # domain
 domains <- c("Academic Skills")
-# phenotype
+
+# Target phenotype
 pheno <- "academics"
 ```
 
 ```{r}
 #| label: export-academics
 #| include: false
+#| eval: true
 
-academics <- readr::read_csv("neurocog.csv") |>
-  dplyr::filter(domain == domains) |>
-  dplyr::filter(!is.na(z_mean_domain)) |>
+# Read the CSV file into a data frame
+academics <- readr::read_csv("neurocog.csv")
+
+# Filter the data frame to keep only rows where 'domain' equals 'domains'
+academics <- academics |> dplyr::filter(domain == domains)
+
+# Select specific columns from the data frame
+academics <- academics |>
   dplyr::select(
-    test, scale, score, z, percentile, range, percent_mastery, test_name,
+    test, scale, raw_score, score, ci_95, percentile, range, percent_mastery, test_name,
     domain, subdomain, narrow, pass, verbal, timed, description, result,
-    z_mean_domain, z_sd_domain, z_mean_subdomain,
+    z, z_mean_domain, z_sd_domain, z_mean_subdomain,
     z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
     z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
   )
 
-readr::write_excel_csv(academics, paste0(pheno, ".csv"))
+# Write the resulting data frame to a new CSV file
+# The file name is created by concatenating the 'pheno' variable and ".csv"
+# NA values are replaced with an empty string in the output file
+# Column names are included in the output file
+# If the file already exists, it is overwritten (not appended)
+readr::write_excel_csv(academics, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
 #| label: data-academics
 #| include: false
+#| eval: true
 
-data <- bwu::read_data(pheno = pheno)
+# Read the data using the read_data function from the bwu library
+# The phenotype is specified by the 'pheno' variable
+data <- academics
+
 scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
@@ -111,6 +128,9 @@ scales <- c(
   "Self-/Social Awareness"
 )
 
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
 data_academics <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
@@ -128,21 +148,26 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 #| dev: tikz
 #| fig-process: pdf2png
 #| include: false
-options(tikzDefaultEngine = "xetex")
 
-# footnotes
-fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_percent_mastery <- gt::md("Percent Mastery")
-grp_academics <- list(
-  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5", "BSRA-4"),
-  percent_mastery = c("BSRA-4")
-)
+# Set the default engine for tikz to "xetex"
+options(tikzDefaltEngine = "xetex")
 
 # arguments
 table_name <- "table_academics"
 vertical_padding <- 0
 multiline <- TRUE
 
+# footnotes
+fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_percent_mastery <- gt::md("Percent Mastery")
+
+# Define the groups for the table
+grp_academics <- list(
+  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5", "BSRA-4"),
+  percent_mastery = c("BSRA-4")
+)
+
+# Create the table using the tbl_gt function from the bwu library
 bwu::tbl_gt(
   data = data_academics,
   pheno = pheno,
@@ -153,8 +178,7 @@ bwu::tbl_gt(
   grp_percent_mastery = grp_academics[["percent_mastery"]],
   dynamic_grp = grp_academics,
   vertical_padding = vertical_padding,
-  multiline = multiline,
-  na.rm = TRUE
+  multiline = multiline
 )
 ```
 
@@ -163,15 +187,21 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
-# Remove rows where 'x2' or 'y2' is NA
-data_academics <- na.omit(data_academics, cols = c("z_mean_subdomain", "subdomain"))
+# data_academics <- data_academics |>
+#   dplyr::filter(
+#     scale == "School Readiness Composite (SRC)"
+#   )
 
-# args
+# Define the x and y variables for the dotplot
 x <- data_academics$z_mean_subdomain
 y <- data_academics$subdomain
+
+# plot args
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
+
+# Define the filename for the plot
 filename <- "fig_academics.svg"
 
 # Make dotplot
@@ -181,24 +211,34 @@ bwu::dotplot(
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
 
-# Remove rows where 'x2' or 'y2' is NA
-data_academics <- na.omit(data_academics, cols = c("z_mean_narrow", "narrow"))
-
+# Define the x and y variables for the dotplot
 x2 <- data_academics$z_mean_narrow
 y2 <- data_academics$narrow
+
 filename2 <- "fig_academics2.svg"
+
 bwu::dotplot(
   data = data_academics,
   x = x2,
   y = y2,
   colors = colors,
   return_plot = return_plot,
-  filename = filename2
+  filename = filename2,
+  na.rm = TRUE
 )
 ```
+
+<!-- ```{=typst} -->
+
+#let domain(title: none, file_qtbl, file_fig) = { let font = (font: "Merriweather", size: 0.7em) set text(..font) pad(top: 0.5em)\[\] grid( columns: (50%, 50%), gutter: 8pt, figure( \[#image(file_qtbl)\], caption: figure.caption(position: top, \[#title\]), kind: "qtbl", supplement: \[Table\], ), figure( \[#image(file_fig, width: auto)\], caption: figure.caption( position: bottom, \[ *Reading ability* consists of three interrelated abilities: decoding, comprehension, and fluency. *Writing ability* can be described in terms of spelling, grammar, expression of ideas, and writing fluency. *Math ability* can be described in terms of calculation skills, applied problem solving, and math fluency. \], ), placement: none, kind: "image", supplement: \[Figure\], gap: 0.5em, ), ) } <!-- ``` -->
+
+<!-- ```{=typst} -->
+
+#let title = "Academic Achievement" #let file_qtbl = "table_academics.png" #let file_fig = "fig_academics.svg" #domain(title: \[#title Test Scores\], file_qtbl, file_fig) <!-- ``` -->
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -230,17 +270,8 @@ bwu::dotplot(
   )
 }
 ```
-````{=html}
-<!-- ```{=typst}
-#let title = "Academic Achievement"
-#let file_qtbl = "table_academics.png"
-#let file_fig = "fig_academics.svg"
-#domain(title: [#title Test Scores], file_qtbl, file_fig)
-``` -->
-````
-
 ```{=typst}
-#let title = "Academic Achievement"
+#let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics2.svg"
 #domain(

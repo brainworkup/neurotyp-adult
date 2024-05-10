@@ -26,7 +26,6 @@ social <- readr::read_csv("neurocog.csv") |>
   )
 readr::write_excel_csv(social, paste0(pheno, ".csv"))
 
-
 data_social <-
   bwu::filter_data(
     data,

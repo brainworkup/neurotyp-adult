@@ -5,8 +5,10 @@
 ```{r}
 #| label: setup-verbal
 #| include: false
+
 # domain
 domains <- c("Verbal/Language")
+
 # phenotype
 pheno <- "verbal"
 ```
@@ -14,17 +16,53 @@ pheno <- "verbal"
 ```{r}
 #| label: export-verbal
 #| include: false
-verbal <- readr::read_csv("neurocog.csv") |>
-  dplyr::filter(domain == domains) |>
-  dplyr::filter(!is.na(z_mean_domain)) |>
+
+# Read the CSV file into a data frame
+verbal <- readr::read_csv("neurocog.csv")
+
+# Filter the data frame to keep only rows where 'domain' equals 'domains'
+verbal <- verbal |> dplyr::filter(domain == domains)
+
+# Select specific columns from the data frame
+verbal <- verbal |>
   dplyr::select(
-    test, scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow, pass, verbal, timed, description, result,
-    z_mean_domain, z_sd_domain, z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
+    z_mean_subdomain,
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow,
+    z_mean_pass,
+    z_sd_pass,
+    z_mean_verbal,
+    z_sd_verbal,
+    z_mean_timed,
+    z_sd_timed
   )
-readr::write_csv(verbal, paste0(pheno, ".csv"))
+
+# Write the resulting data frame to a new CSV file
+# The file name is created by concatenating the 'pheno' variable and ".csv"
+# NA values are replaced with an empty string in the output file
+# Column names are included in the output file
+# If the file already exists, it is overwritten (not appended)
+readr::write_excel_csv(verbal, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
@@ -32,7 +70,8 @@ readr::write_csv(verbal, paste0(pheno, ".csv"))
 #| include: false
 
 # read and filter data
-data <- bwu::read_data(pheno = pheno)
+data <- verbal
+
 scales <- c(
   "Academic Language Readiness Index",
   "Auditory Comprehension Colors",
@@ -90,6 +129,10 @@ scales <- c(
   "Word Structure",
   "Writing"
 )
+
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
 data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
@@ -97,6 +140,8 @@ data_verbal <- bwu::filter_data(data, domain = domains, scale = scales)
 #| label: text-verbal
 #| cache: true
 #| include: false
+
+# export text
 bwu::cat_neuropsych_results(data = data_verbal, file = "_02-03_verbal_text.qmd")
 ```
 
@@ -105,24 +150,29 @@ bwu::cat_neuropsych_results(data = data_verbal, file = "_02-03_verbal_text.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 #| include: false
+
+# Set the default engine for tikz to "xetex"
 options(tikzDefaultEngine = "xetex")
+
+# args0
+table_name <- "table_verbal"
+vertical_padding <- 0
+multiline <- TRUE
 
 # footnotes
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- "_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]"
+fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
-pheno <- "verbal"
-table_name <- "table_verbal"
+# Define the groups for the table
 grp_verbal <- list(
-  scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS"),
-  standard_score = c("NAB"),
+  scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS", "WPPSI-IV"),
+  # standard_score = c("NAB", "WPPSI-IV", "NAB-S"),
   t_score = c("NAB", "NIH EXAMINER", "WASI-2")
 )
-vertical_padding <- 0
-multiline <- TRUE
 
+Line 6unexpected end of document
 bwu::tbl_gt(
   data = data_verbal,
   pheno = pheno,
@@ -132,7 +182,7 @@ bwu::tbl_gt(
   fn_standard_score = fn_standard_score,
   grp_scaled_score = grp_verbal[["scaled_score"]],
   grp_t_score = grp_verbal[["t_score"]],
-  # grp_standard_score = grp_verbal[["standard_score"]],
+  grp_standard_score = grp_verbal[["standard_score"]],
   dynamic_grp = grp_verbal,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -160,8 +210,25 @@ bwu::dotplot(
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
+
+x <- data_verbal$z_mean_narrow
+y <- data_verbal$narrow
+filename <- "fig_verbal2.svg"
+
+# Make dotplot
+bwu::dotplot(
+  data = data_verbal,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
 ```
 
 ```{=typst}
@@ -189,7 +256,6 @@ bwu::dotplot(
       )
   }
 ```
-
 ```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
@@ -198,5 +264,45 @@ bwu::dotplot(
   title: [#title Test Scores],
   file_qtbl,
   file_fig
+  )
+```
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Merriweather", size: 0.7em)
+  set text(..font)
+  pad(top: 0.5em)[]
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words.
+        ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
+```
+```{=typst}
+#let title = "Verbal/Language"
+#let file_qtbl = "table_verbal.png"
+#let file_fig = "fig_verbal2.svg"
+#domain(
+  title: [#title Test Scores],
+  file_qtbl,
+  file_fig,
   )
 ```

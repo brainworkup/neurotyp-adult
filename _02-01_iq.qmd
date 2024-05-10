@@ -17,26 +17,20 @@ pheno <- "iq"
 #| label: export-iq
 #| include: false
 #| eval: true
-# Load necessary libraries
-library(readr)
-library(dplyr)
 
 # Read the CSV file into a data frame
-iq <- read_csv("neurocog.csv")
+iq <- readr::read_csv("neurocog.csv")
 
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
-iq <- iq |> filter(domain == domains)
-
-# Further filter the data frame to remove rows with NA in 'z_mean_domain'
-iq <- iq |> filter(!is.na(z_mean_domain))
+iq <- iq |> dplyr::filter(domain == domains)
 
 # Select specific columns from the data frame
-iq <- iq |> select(
-  test, scale, score, z, percentile, range, test_name,
+iq <- iq |> dplyr::select(
+  test, test_name, scale, raw_score, score, ci_95, percentile, range,
   domain, subdomain, narrow, pass, verbal, timed, description, result,
-  z_mean_domain, z_sd_domain, z_mean_subdomain,
+  z, z_mean_domain, z_sd_domain, z_mean_subdomain,
   z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-  z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+  z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed, description, result
 )
 
 # Write the resulting data frame to a new CSV file
@@ -52,69 +46,45 @@ readr::write_excel_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, app
 #| include: false
 #| eval: true
 
-# Load the bwu library
-library(bwu)
-
-# Define the phenotype
-pheno <- "iq"
-
 # Read the data using the read_data function from the bwu library
 # The phenotype is specified by the 'pheno' variable
-data <- bwu::read_data(pheno = pheno)
+data <- iq
 
 # Define the scales of interest
 scales <- c(
+  "Auditory Working Memory (AWMI)",
+  "Cognitive Proficiency (CPI)",
+  "Crystallized Knowledge",
+  "Fluid Reasoning (FRI)",
+  "Fluid Reasoning",
   "Full Scale (FSIQ)",
   "Full Scale IQ (FSIQ)",
   "General Ability (GAI)",
   "General Ability",
   "General Intelligence",
-  "Test of Premorbid Functioning",
-  "TOPF Standard Score",
-  "Word Reading",
-  "Crystallized Knowledge",
-  "Verbal Comprehension (VCI)",
-  "Verbal Comprehension",
-  "Vocabulary Acquisition (VAI)",
-  "Verbal/Language",
-  "Verbal Fluency",
-  "Fluid Reasoning (FRI)",
-  "Fluid Reasoning",
-  "Perceptual Reasoning",
-  "Perceptual Reasoning (PRI)",
-  "Nonverbal (NVI)",
-  "Visual Spatial (VSI)",
-  "Visual Perception/Construction",
-  "Memory",
-  "Learning Efficiency",
-  "Delayed Recall",
-  "Working Memory",
-  "Working Memory (WMI)",
-  "Auditory Working Memory (AWMI)",
-  "Processing Speed",
-  "Processing Speed (PSI)",
-  "Psychomotor Speed",
-  "Cognitive Efficiency",
-  "Attention/Executive",
-  "Attention",
-  "Attention Span",
-  "Attentional Fluency",
-  "Executive Function",
-  "Planning",
-  "Judgment",
-  "Academic Skills",
-  "Academic Fluency",
-  "Reading",
-  "Writing",
-  "Math",
-  "NAB Total Index",
+  "Global Neurocognitive Index (G)",
   "NAB Attention Index",
+  "NAB Executive Functions Index",
   "NAB Language Index",
   "NAB Memory Index",
   "NAB Spatial Index",
-  "NAB Executive Functions Index",
+  "NAB Total Index",
+  "Nonverbal (NVI)",
+  "Perceptual Reasoning (PRI)",
+  "Perceptual Reasoning",
+  "Processing Speed (PSI)",
+  "Processing Speed",
   "RBANS Total Index",
-  "Global Neurocognitive Index (G)"
+  "Test of Premorbid Functioning",
+  "TOPF Standard Score",
+  "Verbal Comprehension (VCI)",
+  "Verbal Comprehension",
+  "Visual Perception/Construction",
+  "Visual Spatial (VSI)",
+  "Vocabulary Acquisition (VAI)",
+  "Word Reading",
+  "Working Memory (WMI)",
+  "Working Memory"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -127,6 +97,8 @@ data_iq <- bwu::filter_data(data, domain = domains, scale = scales)
 #| label: text-iq
 #| cache: true
 #| include: false
+
+# export text
 bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 ```
 
@@ -164,13 +136,11 @@ include <- c(
   "Perceptual Reasoning",
   "Processing Speed (PSI)",
   "Processing Speed",
-  "Psychomotor Speed",
   "RBANS Total Index",
   "Test of Premorbid Functioning",
   "TOPF Standard Score",
   "Verbal Comprehension (VCI)",
   "Verbal Comprehension",
-  "Verbal/Language",
   "Visual Perception/Construction",
   "Visual Spatial (VSI)",
   "Vocabulary Acquisition (VAI)",
@@ -185,12 +155,12 @@ data_iq <- dplyr::filter(data_iq, scale %in% include)
 # Define the table name, vertical padding, and multiline setting
 pheno <- "iq"
 table_name <- "table_iq"
+vertical_padding <- 0
+multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 # Define the groups for the table
 grp_iq <- list(
@@ -199,8 +169,6 @@ grp_iq <- list(
     "WASI-2", "WISC-5", "WISC-V", "WRAT-5", "KTEA-3", "NAB", "NAB-S", "RBANS", "WPPSI-IV"
   )
 )
-vertical_padding <- 0
-multiline <- TRUE
 
 # Create the table using the tbl_gt function from the bwu library
 bwu::tbl_gt(
@@ -222,20 +190,22 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-# Define the scales to keep
-# keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 
 # Define the x and y variables for the dotplot
 x <- data_iq$z
 y <- data_iq$scale
 
+# plot args
 colors <- NULL
 # return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
+
 # Define the filename for the plot
 filename <- "fig_iq.svg"
 
 # Filter the data to keep only the specified scales
+# Define the scales to keep
+# keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 # data_iq <- dplyr::filter(data_iq, scale %in% keep)
 
 # Create the dotplot using the dotplot function from the bwu library
@@ -245,7 +215,8 @@ bwu::dotplot(
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
 ```
 
