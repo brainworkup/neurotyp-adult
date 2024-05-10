@@ -33,7 +33,7 @@ readr::write_excel_csv(academics, paste0(pheno, ".csv"))
 #| label: data-academics
 #| include: false
 
-data <- bwu::read_data(pheno = "academics")
+data <- bwu::read_data(pheno = pheno)
 scales <- c(
   "Academic Fluency Composite",
   "Academic Language Readiness Index",
@@ -153,7 +153,8 @@ bwu::tbl_gt(
   grp_percent_mastery = grp_academics[["percent_mastery"]],
   dynamic_grp = grp_academics,
   vertical_padding = vertical_padding,
-  multiline = multiline
+  multiline = multiline,
+  na.rm = TRUE
 )
 ```
 
@@ -162,8 +163,8 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
-# Remove rows where 'subdomain' is NA
-data_academics <- data_academics[!is.na(data_academics$subdomain), ]
+# Remove rows where 'x2' or 'y2' is NA
+data_academics <- na.omit(data_academics, cols = c("z_mean_subdomain", "subdomain"))
 
 # args
 x <- data_academics$z_mean_subdomain
@@ -183,8 +184,8 @@ bwu::dotplot(
   filename = filename
 )
 
-# Remove rows where 'subdomain' is NA
-data_academics <- data_academics[!is.na(data_academics$narrow), ]
+# Remove rows where 'x2' or 'y2' is NA
+data_academics <- na.omit(data_academics, cols = c("z_mean_narrow", "narrow"))
 
 x2 <- data_academics$z_mean_narrow
 y2 <- data_academics$narrow
@@ -219,12 +220,6 @@ bwu::dotplot(
         position: bottom,
         [
           _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
-          // Reading ability encompasses three interconnected skills: _Reading Decoding_,
-          // which is the capacity to identify and pronounce isolated written
-          // words; _Reading Comprehension_, the aptitude to understand explicit facts in
-          // the text as well as infer unstated aspects; and _Reading Fluency_, the
-          // proficiency in swiftly and fluently decoding and understanding basic
-          // written information.
         ],
       ),
       placement: none,
@@ -235,13 +230,14 @@ bwu::dotplot(
   )
 }
 ```
-
-```{=typst}
+````{=html}
+<!-- ```{=typst}
 #let title = "Academic Achievement"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics.svg"
 #domain(title: [#title Test Scores], file_qtbl, file_fig)
-```
+``` -->
+````
 
 ```{=typst}
 #let title = "Academic Achievement"
