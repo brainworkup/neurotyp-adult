@@ -5,8 +5,10 @@
 ```{r}
 #| label: setup-motor
 #| include: false
+
 # domain
 domains <- c("Motor")
+
 # phenotype
 pheno <- "motor"
 ```
@@ -14,24 +16,61 @@ pheno <- "motor"
 ```{r}
 #| label: export-motor
 #| include: false
-motor <- readr::read_csv("neurocog.csv") |>
-  dplyr::filter(domain == domains) |>
-  dplyr::filter(!is.na(z_mean_domain)) |>
+
+# Read the CSV file into a data frame
+motor <- readr::read_csv("neurocog.csv")
+
+# Filter the data frame based on certain conditions
+# Keep only the rows where 'domain' equals 'domains' and 'z_mean_domain' is not NA
+motor <- motor |>
+  dplyr::filter(domain == domains)
+
+# Select specific columns from the data frame
+motor <- motor |>
   dplyr::select(
-    test, scale, score, z, percentile, range, test_name, domain, subdomain, narrow,
-    pass, verbal, timed, description, result, z_mean_domain, z_sd_domain,
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
     z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow,
+    z_mean_pass,
+    z_sd_pass,
+    z_mean_verbal,
+    z_sd_verbal,
+    z_mean_timed,
+    z_sd_timed
   )
-readr::write_csv(motor, paste0(pheno, ".csv"))
+
+# Write the 'motor' data frame to a CSV file
+# The file name is derived from the 'pheno' variable
+readr::write_excel_csv(motor, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
 #| label: data-motor
 #| include: false
 
-data <- bwu::read_data(pheno = pheno)
+# read and filter data
+data <- motor
+
 scales <- c(
   "Dominant Hand Time",
   "Dominant Hand",
@@ -60,12 +99,10 @@ scales <- c(
   "Visuomotor Precision"
 )
 
-data_motor <-
-  bwu::filter_data(
-    data,
-    domain = domains,
-    scale = scales
-  )
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
+data_motor <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -73,7 +110,7 @@ data_motor <-
 #| cache: true
 #| include: false
 
-# export text
+# Generate the text for the motor domain
 bwu::cat_neuropsych_results(data = data_motor, file = "_02-07_motor_text.qmd")
 ```
 
@@ -82,34 +119,36 @@ bwu::cat_neuropsych_results(data = data_motor, file = "_02-07_motor_text.qmd")
 #| dev: tikz
 #| fig-process: pdf2png
 #| include: false
+
+# Set the default engine for tikz to "xetex"
 options(tikzDefaultEngine = "xetex")
+
+# table arguments
+table_name <- "table_motor"
+vertical_padding <- 0
+multiline <- TRUE
 
 # footnotes
 fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
-pheno <- "motor"
-table_name <- "table_motor"
-
+# Groupings
 grp_motor <- list(
   t_score = c("Grooved Pegboard"),
   scaled_score = c("NEPSY-2")
 )
-vertical_padding <- 0
-multiline <- TRUE
 
+# make `gt` table
 bwu::tbl_gt(
   data = data_motor,
   pheno = pheno,
   table_name = table_name,
-  fn_scaled_score = fn_scaled_score,
-  fn_t_score = fn_t_score,
-  grp_scaled_score = grp_motor[["scaled_score"]],
-  grp_t_score = grp_motor[["t_score"]],
-  dynamic_grp = grp_motor,
   vertical_padding = vertical_padding,
+  fn_t_score = fn_t_score,
+  fn_scaled_score = fn_scaled_score,
+  grp_t_score = grp_motor[["t_score"]],
+  grp_scaled_score = grp_motor[["scaled_score"]],
+  dynamic_grp = grp_motor,
   multiline = multiline
 )
 ```
@@ -117,10 +156,10 @@ bwu::tbl_gt(
 ```{r}
 #| label: fig-motor
 #| include: false
-#| eval: false
+#| eval: true
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
-# args
+# Dotplot args
 x <- data_motor$z_mean_narrow
 y <- data_motor$narrow
 colors <- NULL
@@ -128,18 +167,8 @@ colors <- NULL
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
 
-# Ensure no NA values are present in the plotting data
-data_motor <- data_motor |>
-  dplyr::filter(!is.na(x) & !is.na(y))
-
-
-# Ensure no NA values are present in the plotting data
-data_motor <- data_motor |>
-  dplyr::filter(!is.na(x) & !is.na(y) & !is.infinite(x) & !is.infinite(y))
-
-# Optionally, add a range filter if you know the expected range of your data
-data_motor <- data_motor |>
-  dplyr::filter(x > lower_bound & x < upper_bound) # Adjust lower_bound and upper_bound as necessary
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
 
 # Plotting function call
 bwu::dotplot(
@@ -152,20 +181,12 @@ bwu::dotplot(
   na.rm = TRUE
 )
 
-
-bwu::dotplot(
-  data = data_motor,
-  x = x,
-  y = y,
-  colors = colors,
-  return_plot = return_plot,
-  filename = filename,
-  na.rm = TRUE
-)
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
 ```
 
 ```{=typst}
-#let domain(title: none, file_qtbl) = {
+#let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Merriweather", size: 0.7em)
   set text(..font)
   pad(top: 0.5em)[]  
@@ -194,10 +215,10 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Motor"
 #let file_qtbl = "table_motor.png"
-// #let file_fig = "fig_motor.svg"
+#let file_fig = "fig_motor.svg"
 #domain(
   title: [#title Test Scores],
   file_qtbl,
-  // file_fig
-  )
+  file_fig
+)
 ```

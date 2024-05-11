@@ -150,7 +150,7 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 #| include: false
 
 # Set the default engine for tikz to "xetex"
-options(tikzDefaltEngine = "xetex")
+options(tikzDefaultEngine = "xetex")
 
 # arguments
 table_name <- "table_academics"

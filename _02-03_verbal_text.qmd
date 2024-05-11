@@ -1,4 +1,4 @@
-Biggie evidenced a range of abilities in verbal skills, with notable challenges in word fluency.
+Leo evidenced a range of abilities in verbal skills, with notable challenges in word fluency.
 
 - **Comprehension**: Average, which signifies no apparent difficulties in
 understanding spoken language. This impacts daily communication, understanding
@@ -8,11 +8,13 @@ instructions, or following verbal directions.
 
 - **Retrieval**: Average ability in naming, indicating {{< var he_she >}} is typically able to recall and name familiar objects or concepts. This skill is important for everyday communication and interaction.
 
-- **Fluency**: Low Average semantic fluency, which suggests some difficulty in
-generating words within a given category. This affects {{< var his_her >}} ability to quickly
-retrieve and articulate words related to specific topics, which might be
-noticeable in conversational speech or specific tasks like brainstorming. {{< var his_her_cap >}}
-Below Average score in phonemic fluency indicates difficulties in
-generating words that start with a specific letter. This impacts tasks requiring
-quick word retrieval based on phonemic cues, such as thinking of names or items
-in rapid succession. Such patterns are typical in individuals with dyslexia.
+- **Fluency**: Low Average semantic fluency, which suggests some difficulty in generating words within a given category. This affects {{< var his_her >}} ability to quickly retrieve and articulate words related to specific topics, which might be noticeable in conversational speech or specific tasks like brainstorming. {{< var his_her_cap >}} Below Average score in phonemic fluency indicates difficulties in generating words that start with a specific letter. This impacts tasks requiring quick word retrieval based on phonemic cues, such as thinking of names or items in rapid succession. Such patterns are typical in individuals with dyslexia.
+
+<<START>>
+
+Ability to name objects and actions fell within the Above Average.
+Leo's Comprehension of Instructions score of 14 () is classified as Above Average and is ranked at the 91th percentile, indicating performance as good as or better than 91% of same age peers from the general population. This estimate of Receptive language processing and the ability to follow multistep instructions is considered a relative neurocognitive strength.
+General knowledge and ability to recall and understand information fell within the High Average.
+Receptive language ability, vocabulary development, and ability to understand and use words fell within the Average.
+Leo's Body Part Naming score of  0 () is classified as Below Average and is ranked at the  4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Correctly naming body parts is considered an extreme relative neurocognitive weakness and a clinically significant concern.
+Leo's Body Part Identification score of  0 () is classified as Below Average and is ranked at the  4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Correctly identifying body parts is considered an extreme relative neurocognitive weakness and a clinically significant concern.

@@ -1,0 +1,734 @@
+## Behavioral/Emotional/Social
+
+```{r}
+#| label: setup-emotion
+#| include: false
+
+# filter by domain
+domains <- c(
+  "Psychiatric Disorders",
+  "Personality Disorders",
+  "Substance Use",
+  "Psychosocial Problems",
+  "Behavioral/Emotional/Social",
+  "Emotional/Behavioral/Personality"
+)
+
+# Target phenotype
+pheno <- "emotion"
+```
+
+```{r}
+#| label: export-emotion
+#| include: false
+
+# Read the CSV file into a data frame
+emotion <- readr::read_csv("neurobehav.csv")
+
+# Filter the data frame to keep only rows where 'domain' equals 'domains'
+emotion <- emotion |> dplyr::filter(domain == domains)
+
+# Select specific columns from the data frame
+emotion <- emotion |>
+  dplyr::select(
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
+    z_mean_subdomain,
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow
+  )
+
+# Write the resulting data frame to a new CSV file
+# The file name is created by concatenating the 'pheno' variable and ".csv"
+# NA values are replaced with an empty string in the output file
+# Column names are included in the output file
+# If the file already exists, it is overwritten (not appended)
+readr::write_excel_csv(emotion, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
+```
+
+```{r}
+#| label: data-emotion
+#| include: false
+
+# Read the data using the read_data function from the bwu library
+# The phenotype is specified by the 'pheno' variable
+data <- emotion
+
+scales <- c(
+  # PAI
+  "Activity Level",
+  "Affective (A)",
+  "Affective (D)",
+  "Affective Instability",
+  "Aggression",
+  "Aggressive Attitude",
+  "ALC Estimated Score",
+  "Alcohol Problems",
+  "Antisocial Behaviors",
+  "Antisocial Features",
+  "Anxiety-Related Disorders",
+  "Anxiety",
+  "Borderline Features",
+  "Cognitive (A)",
+  "Cognitive (D)",
+  "Conversion",
+  "Depression",
+  "Dominance",
+  "DRG Estimated Score",
+  "Drug Problems",
+  "Egocentricity",
+  "Grandiosity",
+  "Health Concerns",
+  "Hypervigilance",
+  "Identity Problems",
+  "Irritability",
+  "Mania",
+  "Negative Relationships",
+  "Nonsupport",
+  "Obsessive-Compulsive",
+  "Paranoia",
+  "Persecution",
+  "Phobias",
+  "Physical Aggression",
+  "Physiological (A)",
+  "Physiological (D)",
+  "Psychotic Experiences",
+  "Resentment",
+  "Schizophrenia",
+  "Self-Harm",
+  "Social Detachment",
+  "Somatic Complaints",
+  "Somatization",
+  "Stimulus-Seeking",
+  "Stress",
+  "Suicidal Ideation",
+  "Thought Disorder",
+  "Traumatic Stress",
+  "Treatment Rejection",
+  "Verbal Aggression",
+  "Warmth",
+  # Beck
+  "BAI Total Score",
+  "BDI-2 Total Score",
+  # BASC-3
+  "Activities of Daily Living",
+  "Adaptability",
+  "Adaptive Skills",
+  "Aggression",
+  "Anxiety",
+  "Attention Problems",
+  "Attitude to School",
+  "Attitude to Teachers",
+  "Atypicality",
+  "Behavioral Symptoms Index",
+  "Conduct Problems",
+  "Depression",
+  "Emotional Symptoms Index",
+  "Externalizing Problems",
+  "Functional Communication"
+  "Hyperactivity",
+  "Inattention/Hyperactivity",
+  "Internalizing Problems",
+  "Interpersonal Relations",
+  "Leadership",
+  "Locus of Control",
+  "Personal Adjustment",
+  "Relations with Parents",
+  "School Problems",
+  "Self-Esteem",
+  "Self-Reliance",
+  "Sensation Seeking",
+  "Sense of Inadequacy",
+  "Social Skills",
+  "Social Stress",
+  "Somatization",
+  "Withdrawal"
+)
+
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
+data_emotion <- bwu::filter_data(data, domain = domains, scale = scales)
+```
+
+```{r}
+#| label: text-emotion-parent
+#| cache: true
+#| include: false
+#| eval: true
+
+# export text
+df_parent <- dplyr::filter(data_emotion, test_name == "BASC-3 PRS")
+bwu::cat_neuropsych_results(
+  data = df_parent,
+  file = "_02-10_emotion_parent_text.qmd"
+)
+```
+
+```{r}
+#| label: text-emotion-child
+#| cache: true
+#| include: false
+#| eval: false
+
+# export text
+df_child <- dplyr::filter(data_emotion, test_name == "BASC-3 SRP")
+bwu::cat_neuropsych_results(
+  data = df_child,
+  file = "_02-10_emotion_child_text.qmd"
+)
+```
+
+```{r}
+#| label: text-emotion-teacher
+#| cache: true
+#| include: false
+#| eval: false
+
+# export text
+df_teacher <- dplyr::filter(data_emotion, test_name == "BASC-3 TRS")
+bwu::cat_neuropsych_results(
+  data = df_teacher,
+  file = "_02-10_emotion_teacher_text.qmd"
+)
+```
+
+```{r}
+#| label: qtbl-emotion-parent
+#| dev: tikz
+#| fig-process: pdf2png
+#| include: false
+
+# Set the default engine for tikz to "xetex"
+options(tikzDefaultEngine = "xetex")
+
+# Define the table name, vertical padding, and multiline setting
+table_name <- "table_emotion_parent"
+vertical_padding <- 0
+multiline <- FALSE
+pheno <- "emotion_parent"
+
+# source note
+source_note <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+_Note_: Adaptive Skills scores are reversed.")
+
+# footnotes
+fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+
+# define the groupings for the table
+grp_emotion <- list(
+  t_score = c("BASC-3 PRS", "BASC-3 TRS", "BASC-3 SRP", "PAI", "MMPI-3")
+)
+
+# Extract the data for the table
+data_emotion_parent <-
+  dplyr::filter(
+    data_emotion,
+    domain %in% c(
+      "Psychiatric Disorders",
+      "Personality Disorders",
+      "Substance Use",
+      "Psychosocial Problems",
+      "Behavioral/Emotional/Social",
+      "Emotional/Behavioral/Personality"
+    )
+  ) |>
+  dplyr::filter(test_name %in% c("BASC-3 PRS")) |>
+  dplyr::arrange(absort) |>
+  dplyr::arrange(subdomain)
+
+# Create the table using the tbl_gt function from the bwu library
+bwu::tbl_gt(
+  data = data_emotion_parent,
+  pheno = pheno,
+  table_name = table_name,
+  vertical_padding = vertical_padding,
+  source_note = source_note,
+  grp_t_score = grp_emotion[["t_score"]],
+  dynamic_grp = grp_emotion,
+  multiline = multiline
+)
+```
+
+```{r}
+#| label: qtbl-emotion-child
+#| dev: tikz
+#| fig-process: pdf2png
+#| include: false
+#| eval: false
+
+# Set the default engine for tikz to "xetex"
+options(tikzDefaultEngine = "xetex")
+
+# Define the table name, vertical padding, and multiline setting
+table_name <- "table_emotion_child"
+vertical_padding <- 0
+multiline <- FALSE
+pheno <- "emotion_child"
+
+# source note
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+_Note_: Personal Adjustment scores are reversed.")
+
+# footnotes
+fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+
+# define the groupings for the table
+grp_emotion <- list(
+  t_score = c("BASC-3 PRS", "BASC-3 TRS", "BASC-3 SRP", "PAI", "MMPI-3")
+)
+
+# Extract the data for the table
+data_emotion_child <-
+  dplyr::filter(
+    data_emotion,
+    domain %in% c(
+      "Psychiatric Disorders",
+      "Personality Disorders",
+      "Substance Use",
+      "Psychosocial Problems",
+      "Behavioral/Emotional/Social",
+      "Emotional/Behavioral/Personality"
+    )
+  ) |>
+  dplyr::filter(test_name %in% c("BASC-3 SRP", "PAI")) |>
+  dplyr::arrange(absort) |>
+  dplyr::arrange(subdomain)
+
+# Create the table using the tbl_gt function from the bwu library
+bwu::tbl_gt(
+  data = data_emotion_child,
+  pheno = pheno,
+  table_name = table_name,
+  source_note = source_note,
+  grp_t_score = grp_emotion[["t_score"]],
+  dynamic_grp = grp_emotion,
+  vertical_padding = vertical_padding,
+  multiline = multiline
+)
+```
+
+```{r}
+#| label: qtbl-emotion-teacher
+#| dev: tikz
+#| fig-process: pdf2png
+#| include: false
+#| eval: false
+
+# Set the default engine for tikz to "xetex"
+options(tikzDefaultEngine = "xetex")
+
+# Define the table name, vertical padding, and multiline setting
+table_name <- "table_emotion_teacher"
+vertical_padding <- 0
+multiline <- FALSE
+pheno <- "emotion_teacher"
+
+# source note
+source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+_Note_: Adaptive Skills scores are reversed.")
+
+# footnotes
+fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+
+# define the groupings for the table
+grp_emotion <- list(
+  t_score = c("BASC-3 PRS", "BASC-3 TRS", "BASC-3 SRP", "PAI", "MMPI-3")
+)
+
+# Extract the data for the table
+data_emotion_teacher <-
+  dplyr::filter(
+    data_emotion,
+    domain %in% c(
+      "Psychiatric Disorders",
+      "Personality Disorders",
+      "Substance Use",
+      "Psychosocial Problems",
+      "Behavioral/Emotional/Social",
+      "Emotional/Behavioral/Personality"
+    )
+  ) |>
+  dplyr::filter(test_name %in% c("BASC-3 TRS", "PAI")) |>
+  dplyr::arrange(absort) |>
+  dplyr::arrange(subdomain)
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Create the table using the tbl_gt function from the bwu library
+bwu::tbl_gt(
+  data = data_emotion_teacher,
+  pheno = pheno,
+  table_name = table_name,
+  source_note = source_note,
+  grp_t_score = grp_emotion[["t_score"]],
+  dynamic_grp = grp_emotion,
+  vertical_padding = vertical_padding,
+  multiline = multiline
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-parent
+#| include: false
+#| fig-cap: "Mood/Parent-Report"
+
+# df parent
+df_parent <-
+  dplyr::filter(data) |>
+  dplyr::filter(test_name == "BASC-3 PRS")
+
+# Dotplot arguments
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_emotion_parent.svg"
+
+# variables to plot
+x <- df_parent$z_mean_subdomain
+y <- df_parent$subdomain
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Make dotplot
+bwu::dotplot(
+  data = df_parent,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-parent-scale
+#| include: false
+#| fig-cap: "Mood/Parent-Report"
+
+# Better version, uses scales to get all the composites
+x <- df_parent$z
+y <- df_parent$scale
+filename <- "fig_emotion_parent_scale.svg"
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Make dotplot
+bwu::dotplot(
+  data = df_parent,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-child
+#| include: false
+#| fig-cap: "Mood/Child Self-Report"
+
+# df child
+df_child <-
+  dplyr::filter(data) |>
+  dplyr::filter(test_name == "BASC-3 SRP", "PAI")
+
+# `bwu` dotplot arguments
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_emotion_child.svg"
+
+# variables to plot
+x <- df_child$z_mean_subdomain
+y <- df_child$subdomain
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# make dotplot
+bwu::dotplot(
+  data = df_child,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-child-scale
+#| include: false
+#| fig-cap: "Mood/Self-Report"
+
+# arguments
+filename <- "fig_emotion_child_scale.svg"
+x <- df_child$z
+y <- df_child$scale
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Make dotplot
+bwu::dotplot(
+  data = df_child,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-teacher
+#| include: false
+#| fig-cap: "Mood/Teacher-Report"
+
+# df teacher
+df_teacher <-
+  dplyr::filter(data) |>
+  dplyr::filter(test_name == "BASC-3 TRS")
+
+# Dotplot arguments
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+filename <- "fig_emotion_teacher.svg"
+
+# variables to plot
+x <- df_teacher$z_mean_subdomain
+y <- df_teacher$subdomain
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Make dotplot
+bwu::dotplot(
+  data = df_teacher,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+```{r}
+#| label: fig-emotion-teacher-scale
+#| include: false
+#| fig-cap: "Mood/Teacher-Report"
+
+# Better version, uses scales to get all the composites
+x <- df_teacher$z
+y <- df_teacher$scale
+filename <- "fig_emotion_teacher_scale.svg"
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
+# Make dotplot
+bwu::dotplot(
+  data = df_teacher,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
+```
+
+### PARENT REPORT
+{{< include _02-10_emotion_parent_text.qmd >}}
+
+```{=typst}
+// Define a function to create a domain with a title, a table, and a figure
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Merriweather", size: 0.7em)
+  set text(..font)
+  pad(top: 0.5em)[]
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          Mood/Parent Report. Parent reports of behavioral and emotional problems in children and adolescents.
+                  ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
+```
+```{=typst}
+// Define the title of the domain
+#let title = "Behavioral/Emotional/Social"
+
+// Define the file name of the table
+#let file_qtbl = "table_emotion_parent.png"
+
+// Define the file name of the figure
+#let file_fig = "fig_emotion_parent.svg"
+
+// Call the 'domain' function with the specified title, table file name, and figure file name
+#domain(title: [#title], file_qtbl, file_fig)
+```
+
+### CHILD SELF-REPORT
+{{< include _02-10_emotion_child_text.qmd >}}
+
+```{=typst}
+// Define a function to create a domain with a title, a table, and a figure
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Merriweather", size: 0.7em)
+  set text(..font)
+  pad(top: 0.5em)[]
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          Mood/Child Self-Report. Self report of behavioral, emotional, and social difficulties.
+          ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
+```
+```{=typst}
+// Define the title of the domain
+#let title = "Behavioral/Emotional/Social"
+
+// Define the file name of the table
+#let file_qtbl = "table_emotion_child.png"
+
+// Define the file name of the figure
+#let file_fig = "fig_emotion_child.svg"
+
+// Call the 'domain' function with the specified title, table file name, and figure file name
+#domain(title: [#title], file_qtbl, file_fig)
+```
+
+### TEACHER REPORT
+
+{{< include _02-10_emotion_teacher_text.qmd >}}
+
+```{=typst}
+// Define a function to create a domain with a title, a table, and a figure
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Merriweather", size: 0.7em)
+  set text(..font)
+  pad(top: 0.5em)[]
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          Mood/Teacher Report. Teacher reports of behavioral, emotional, academic, and social difficulties.
+                  ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
+```
+```{=typst}
+// Define the title of the domain
+#let title = "Behavioral/Emotional/Social"
+
+// Define the file name of the table
+#let file_qtbl = "table_emotion_teacher.png"
+
+// Define the file name of the figure
+#let file_fig = "fig_emotion_teacher.svg"
+
+// Call the 'domain' function with the specified title, table file name, and figure file name
+#domain(title: [#title], file_qtbl, file_fig)
+```

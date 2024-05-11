@@ -110,7 +110,7 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 #| eval: true
 
 # Set the default engine for tikz to "xetex"
-options(tikzDefaltEngine = "xetex")
+options(tikzDefaultEngine = "xetex")
 
 # Define the scales to include
 include <- c(
