@@ -11,6 +11,9 @@ domains <- c("General Cognitive Ability")
 
 # Target phenotype
 pheno <- "iq"
+
+# Read the CSV file into a data frame
+iq <- vroom::vroom("neurocog.csv")
 ```
 
 ```{r}
@@ -18,20 +21,42 @@ pheno <- "iq"
 #| include: false
 #| eval: true
 
-# Read the CSV file into a data frame
-iq <- readr::read_csv("neurocog.csv")
-
-# Filter the data frame to keep only rows where 'domain' equals 'domains'
-iq <- iq |> dplyr::filter(domain == domains)
+iq <- iq |>
+  dplyr::filter(domain %in% domains)
 
 # Select specific columns from the data frame
-iq <- iq |> dplyr::select(
-  test, test_name, scale, raw_score, score, ci_95, percentile, range,
-  domain, subdomain, narrow, pass, verbal, timed, description, result,
-  z, z_mean_domain, z_sd_domain, z_mean_subdomain,
-  z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-  z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed, description, result
-)
+iq <- iq |>
+  dplyr::select(
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
+    z_mean_subdomain,
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow,
+    z_mean_pass,
+    z_sd_pass,
+    z_mean_verbal,
+    z_sd_verbal,
+    z_mean_timed,
+    z_sd_timed
+  )
 
 # Write the resulting data frame to a new CSV file
 # The file name is created by concatenating the 'pheno' variable and ".csv"
@@ -159,8 +184,8 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 
 # Define the groups for the table
 grp_iq <- list(
@@ -197,7 +222,6 @@ y <- data_iq$scale
 
 # plot args
 colors <- NULL
-# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Define the filename for the plot
@@ -207,6 +231,9 @@ filename <- "fig_iq.svg"
 # Define the scales to keep
 # keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 # data_iq <- dplyr::filter(data_iq, scale %in% keep)
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
 
 # Create the dotplot using the dotplot function from the bwu library
 bwu::dotplot(
@@ -218,6 +245,9 @@ bwu::dotplot(
   filename = filename,
   na.rm = TRUE
 )
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
 ```
 
 ```{=typst}
@@ -249,7 +279,7 @@ bwu::dotplot(
           been converted to _z_-scores, where an average score is 0 (zero) and the
           standard deviation is 1.0. Any scores below the −1.0 ticks are
           moderately concerning. Scores at or beyond the −2.0 ticks are
-          clinically signficant and a cause for greater concern.]
+          clinically significant and a cause for greater concern.]
         ],
       ),
       placement: none,
