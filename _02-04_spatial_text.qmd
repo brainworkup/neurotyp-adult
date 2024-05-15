@@ -1,12 +1,9 @@
-Biggie demonstrates a mix of average abilities in visuospatial processing.
+{{< var patient >}} demonstrates a mix of { range } to { range } abilities in visuospatial processing.
 
-- **Perception**: Average perceptual processing, discrimination, and pattern matching requiring close attention to visual detail.
+- **Perception**: { range } perceptual processing, discrimination, and pattern matching requiring close attention to visual detail.
 
-- **Reasoning**: Average inductive reasoning and nonverbal problem-solving.
+- **Reasoning**: { range } inductive reasoning and nonverbal problem-solving.
 
-- **Construction**: Constructing and recreating abstract visual designs was Average.
+- **Construction**: Constructing and recreating abstract visual designs was { range }.
 
-- **Organization**: Copying of a complex figure requiring visuospatial
-integration, planning and organization, and efficient encoding of visuospatial
-material was Low Average. This indicates executive function difficulties in planning and
-organizing complex visuospatial material.
+- **Organization**: Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was { range }. This indicates executive function difficulties in planning and organizing complex visuospatial material.

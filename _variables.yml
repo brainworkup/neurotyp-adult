@@ -1,8 +1,8 @@
 version: 0.1.0
 
 # variables:
-patient: Biggie
-first_name: Biggie
+patient: { { < var patient > } }
+first_name: { { < var patient > } }
 last_name: Smalls
 dob: 1991-01-01
 doe1: ""

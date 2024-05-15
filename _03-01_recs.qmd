@@ -12,7 +12,7 @@
 
 - **Speech-Language Therapy:** Working with a speech-language pathologist can help improve memory skills, particularly for verbal material.
 
-- **Psychoeducation:** To empower Biggie with self-awareness and enable {{< var his_her >}} to advocate for {{< var his_her >}} needs in various settings.
+- **Psychoeducation:** To empower {{< var patient >}} with self-awareness and enable {{< var his_her >}} to advocate for {{< var his_her >}} needs in various settings.
 
 - Additional support is recommended in areas like attentional function, processing speed, and cognitive efficiency. This can be achieved through occupational therapy, the use of organizational tools, and creating a distraction-free environment.
 
@@ -24,9 +24,9 @@
 
 - **Accommodated Testing:** Extended time accommodations are recommended due to relative weakness in processing speed and academic fluency.
 
-- **Calculator Use:** Please consider allowing Biggie to utilize a calculator for class assignments and examinations as {{< var he_she >}} progresses in the mathematics curriculum.
+- **Calculator Use:** Please consider allowing {{< var patient >}} to utilize a calculator for class assignments and examinations as {{< var he_she >}} progresses in the mathematics curriculum.
 
-- Biggie should receive additional support in mathematics through:
+- {{< var patient >}} should receive additional support in mathematics through:
   - Individual or small group tutoring.
   - Visual aids and hands-on activities.
   - Technology-based learning tools.

@@ -1,8 +1,8 @@
-Thank you for considering this report in your evaluation of Biggie. I am available to provide further information or clarification as needed.
+Thank you for considering this report in your evaluation of {{< var patient >}}. I am available to provide further information or clarification as needed.
 
 Respectfully submitted,
 
-It was a pleasure to work with Biggie.
+It was a pleasure to work with {{< var patient >}}.
 Please contact me with any questions or concerns regarding this patient.
 
 Sincerely,

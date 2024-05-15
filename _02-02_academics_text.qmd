@@ -2,7 +2,7 @@ Clinically significant limitations in reading abilities were highlighted by a be
 
 - **Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for {{< var his_her >}} age group. Further, {{< var his_her >}} reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from {{< var his_her >}} average IQ scores.
 
-- **Comprehension**: Low Average, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
+- **Comprehension**: { range }, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
 
 - **Fluency**: Exceptionally Low. Slow reading speed makes it difficult to read both familiar and unfamiliar text quickly and accurately. This impacts daily functioning in activities such as reading for fun or learning new vocabulary.
 

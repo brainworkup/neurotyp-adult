@@ -4,12 +4,12 @@
 
 Summarize and interpret these neuropsychological test scores related to the area
 denoted above. For scores that are Below
-Average to Exceptionally Low, give a brief example of how this could impact the patient's daily
+{ range } to Exceptionally Low, give a brief example of how this could impact the patient's daily
 functioning. Organize your summary and interpretation in order from scores that
-are Exceptionally High/Above Average to Exceptionally Low/Below Average to
+are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to
 delineate relative strengths and weaknesses, respectively. Finally, recommended
 additional support that the patient should receive in areas in which scores fall
-Below Average to Exceptionally Low, or scores that are significantly discrepant
+Below { range } to Exceptionally Low, or scores that are significantly discrepant
 and lower than expected relative to other scores (e.g., verbal reasoning versus
 nonverbal reasoning).
 
@@ -18,13 +18,13 @@ nonverbal reasoning).
 {{< var patient >}} evidenced a balanced intellectual profile with no
 significant deviations from the norm relative to same-aged peers.
 
-- **Knowledge**: Average level of acquired knowledge and verbal skills, commensurate with {{< var his_her >}} age and educational background. {{< var his_her_cap >}} understanding of facts, vocabulary, and general knowledge is typical.
+- **Knowledge**: { range } level of acquired knowledge and verbal skills, commensurate with {{< var his_her >}} age and educational background. {{< var his_her_cap >}} understanding of facts, vocabulary, and general knowledge is typical.
 
-- **Reasoning**: Average fluid/nonverbal reasoning, which indicates a typical
+- **Reasoning**: { range } fluid/nonverbal reasoning, which indicates a typical
 ability to reason, problem-solve, and adapt to new situations or tasks. {{< var he_she_cap >}} can manage new challenges and abstract reasoning tasks as
 effectively as {{< var his_her >}} peers.
 
-- **General Intelligence**: Average overall cognitive functioning for daily
+- **General Intelligence**: { range } overall cognitive functioning for daily
 tasks. While {{< var he_she >}} may occasionally find complex or highly demanding cognitive
 tasks challenging, {{< var he_she >}} generally should manage well in typical day-to-day activities.
 

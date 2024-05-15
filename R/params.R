@@ -1,8 +1,8 @@
 quarto::quarto_render(
-  input = "Biggie.qmd",
+  input = "{{< var patient >}}.qmd",
   execute_params = list(
-    patient = "Biggie",
-    first_name = "Biggie",
+    patient = "{{< var patient >}}",
+    first_name = "{{< var patient >}}",
     last_name = "Smalls",
     dob = "10/04/1999",
     doe1 = "2023-01-01",
@@ -26,5 +26,5 @@ quarto::quarto_render(
     dx2 = "anxiety",
     dx3 = "depression"
   ),
-  output_file = "Biggie2.pdf"
+  output_file = "{{< var patient >}}2.pdf"
 )

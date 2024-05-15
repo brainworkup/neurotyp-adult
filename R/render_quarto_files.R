@@ -1,12 +1,12 @@
 # Load the necessary library
 library(purrr)
 
-Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = TRUE)
+Sys.setenv(PATIENT = "{{< var patient >}}", RETURN_PLOT = TRUE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Patient file
-patient_file <- "Biggie.qmd"
+patient_file <- "{{< var patient >}}.qmd"
 
 # Create a vector of file names
 file_names <- c(
@@ -26,8 +26,8 @@ file_names <- c(
 
 # Create a list of parameters
 params <- list(
-  patient = "Biggie",
-  first_name = "Biggie",
+  patient = "{{< var patient >}}",
+  first_name = "{{< var patient >}}",
   last_name = "Smalls",
   mrn = ,
   dob = ,

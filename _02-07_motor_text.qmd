@@ -3,16 +3,16 @@
 ## Area: Sensorimotor Functions (Gross Motor and Fine Motor)
 
 Summarize and interpret these neuropsychological test scores related to the area denoted above.
-For scores that are Below Average, give a brief example of how this could impact the patient's daily functioning.
-Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively.
-Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low.
+For scores that are Below { range }, give a brief example of how this could impact the patient's daily functioning.
+Organize your summary and interpretation in order from scores that are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to delineate relative strengths and weaknesses, respectively.
+Finally, recommended additional support that the patient should receive in areas in which scores fall Below { range } to Exceptionally Low.
 
 Prefix the output/results as follows: Headers (e.g., Relative Strengths, Relative Weaknesses) should be padded with ###, and output that contains lists should be unordered and padded with - instead of ordered.
 
 <<EXAMPLE>>
 
-All scores in this area were Average.
-Fine motor speed and dexterity were Average bilaterally.
+All scores in this area were { range }.
+Fine motor speed and dexterity were { range } bilaterally.
 No evidence of atypical lateralization of fine nor gross motor skills.
 No evidence of dyspraxia.
 Graphomotor speed and accuracy (i.e., graphomotor control) was intact.
@@ -21,10 +21,10 @@ Gross motor functioning including balance and gait appeared intact on observatio
 <<START>>
 
 
-Leo's Imitating Hand Positions score of  0 () is classified as Below Average and is ranked at the  4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions is considered a relative neurocognitive weakness and moderate concern.
-Leo's Imitating Hand Positions-Dominant score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions (dominant hand) is considered undefined.
-Leo's Imitating Hand Positions-Nondominant score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions (nondominant hand) is considered undefined.
-Leo's Visuomotor Precision Completion Time score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (time) is considered undefined.
-Leo's Visuomotor Precision Errors score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (errors) is considered undefined.
-Leo's Visuomotor Precision score of  4 () is classified as Exceptionally Low and is ranked at the 4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Graphomotor speed and accuracy is considered an extreme relative neurocognitive weakness and a clinically significant concern.
-Leo's Visuomotor Precision Pencil Lifts score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (pencil lifts) is considered undefined.
+{{< var patient >}}'s Imitating Hand Positions score of  0 () is classified as Below { range } and is ranked at the  4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions is considered a relative neurocognitive weakness and moderate concern.
+{{< var patient >}}'s Imitating Hand Positions-Dominant score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions (dominant hand) is considered undefined.
+{{< var patient >}}'s Imitating Hand Positions-Nondominant score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Ability to imitate hand and finger positions (nondominant hand) is considered undefined.
+{{< var patient >}}'s Visuomotor Precision Completion Time score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (time) is considered undefined.
+{{< var patient >}}'s Visuomotor Precision Errors score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (errors) is considered undefined.
+{{< var patient >}}'s Visuomotor Precision score of  4 () is classified as Exceptionally Low and is ranked at the 4th percentile, indicating performance as good as or better than  4% of same age peers from the general population. This estimate of Graphomotor speed and accuracy is considered an extreme relative neurocognitive weakness and a clinically significant concern.
+{{< var patient >}}'s Visuomotor Precision Pencil Lifts score of NA () is classified as  and is ranked at the NAth percentile, indicating performance as good as or better than NA% of same age peers from the general population. This estimate of Graphomotor speed and accuracy (pencil lifts) is considered undefined.

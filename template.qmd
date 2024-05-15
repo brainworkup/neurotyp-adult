@@ -1,8 +1,8 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
-name: Biggie Smalls
+name: {{< var patient >}} Smalls
 doe: today
-patient: Biggie
+patient: {{< var patient >}}
 ---
 
 ```{r}
@@ -66,7 +66,7 @@ if (identical(knitr:::pandoc_to(), "latex")) {
 }
 
 # Set environment variables with default values
-Sys.setenv(PATIENT = "Biggie", RETURN_PLOT = TRUE)
+Sys.setenv(PATIENT = "{{< var patient >}}", RETURN_PLOT = TRUE)
 patient <- Sys.getenv("PATIENT")
 return_plot <- Sys.getenv("RETURN_PLOT")
 ```
@@ -84,9 +84,9 @@ validity <- readr::read_csv("validity.csv")
 ```
 
 ```{=typst}
-#let name = [Biggie Smalls]
+#let name = [{{< var patient >}} Smalls]
 #let doe = [2023-01-02]
-#let patient = [Biggie]
+#let patient = [{{< var patient >}}]
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)
 #block[

@@ -1,10 +1,10 @@
-Most scores in this area fell within the Average range of performance.
+Most scores in this area fell within the { range } range of performance.
 
 ### Attention
 
 - **Attention Span**: Challenges in sustaining focus, particularly on auditory information. This may impact tasks like listening to instructions or maintaining concentration during conversations.
 
-- **Attentional Fluency**: Average skills in managing multi-element tasks and adapting to changing task demands due to adequate divided attention and cognitive flexibility.
+- **Attentional Fluency**: { range } skills in managing multi-element tasks and adapting to changing task demands due to adequate divided attention and cognitive flexibility.
 
 ### Working Memory
 
@@ -12,14 +12,14 @@ Most scores in this area fell within the Average range of performance.
 
 ### Processing Speed
 
-- **Psychomotor Speed**: Average visual search speed and scanning, indicating satisfactory speed of processing and mental flexibility.
+- **Psychomotor Speed**: { range } visual search speed and scanning, indicating satisfactory speed of processing and mental flexibility.
 
 - **Cognitive Efficiency**: Typical performance in tasks involving quick information processing and response, with average psychomotor speed and visual scanning ability.
 
 ### Executive Functioning
 
-- **Planning**: Variable performance, mostly Low Average. Suggestive of problems
+- **Planning**: Variable performance, mostly { range }. Suggestive of problems
 in strategic planning and organization skills, which are important for structuring
 and executing tasks effectively.
 
-- **Judgment**: Average judgment and decision-making skills, reflecting the ability to consider and weigh options appropriately in various emergency situations.
+- **Judgment**: { range } judgment and decision-making skills, reflecting the ability to consider and weigh options appropriately in various emergency situations.

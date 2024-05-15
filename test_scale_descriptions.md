@@ -8,22 +8,22 @@
 
 # Child Executive Battery
 
-**Strengths (High Average Scores):**
+**Strengths ({ range } Scores):**
 
-1. **Maintenance and Resequencing of Number and Letter Strings in Working Memory:** Biggie demonstrates high average ability in tasks requiring the retention and manipulation of information, which is beneficial for complex problem-solving and following multi-step directions.
+1. **Maintenance and Resequencing of Number and Letter Strings in Working Memory:** {{< var patient >}} demonstrates high average ability in tasks requiring the retention and manipulation of information, which is beneficial for complex problem-solving and following multi-step directions.
 
-**Adequate Skills (Average Scores):**
+**Adequate Skills ({ range } Scores):**
 
-1. **Strategic Planning and Organization:** Biggie is capable of formulating an action plan, suggesting adequate executive functioning for age-related tasks.
-2. **Auditory Attentional Capacity and Sequential Recall:** Biggie can process auditory information effectively, which is necessary for listening to and remembering instructions or oral presentations.
-3. **Response Monitoring and Working Memory for Auditory Information:** These skills are average, indicating Biggie can monitor {{< var his_her >}} own responses and manipulate auditory information to a typical degree.
-4. **Visual-Motor Processing and Perceptual Speed:** These average scores imply Biggie can perform tasks involving visual perception and motor coordination at a typical rate.
-5. **Selective Attention Task Performance:** Biggie’s ability to focus on specific stimuli while ignoring distractions is typical for {{< var his_her >}} age group.
+1. **Strategic Planning and Organization:** {{< var patient >}} is capable of formulating an action plan, suggesting adequate executive functioning for age-related tasks.
+2. **Auditory Attentional Capacity and Sequential Recall:** {{< var patient >}} can process auditory information effectively, which is necessary for listening to and remembering instructions or oral presentations.
+3. **Response Monitoring and Working Memory for Auditory Information:** These skills are average, indicating {{< var patient >}} can monitor {{< var his_her >}} own responses and manipulate auditory information to a typical degree.
+4. **Visual-Motor Processing and Perceptual Speed:** These average scores imply {{< var patient >}} can perform tasks involving visual perception and motor coordination at a typical rate.
+5. **Selective Attention Task Performance:** {{< var patient >}}’s ability to focus on specific stimuli while ignoring distractions is typical for {{< var his_her >}} age group.
 6. **Reasoning for Problem-Solving:** {{< var his_her_cap >}} capacity to reason and solve problems quickly is also at an expected level.
 
-**Weaknesses (Low Average to Below Average Scores):**
+**Weaknesses ({ range } to Below { range } Scores):**
 
-1. **Working Memory with Auditory Attention and Mental Manipulation:** Falling in the low average range, Biggie may struggle with tasks requiring complex mental juggling, like advanced mathematics or understanding layered concepts in reading comprehension.
+1. **Working Memory with Auditory Attention and Mental Manipulation:** Falling in the low average range, {{< var patient >}} may struggle with tasks requiring complex mental juggling, like advanced mathematics or understanding layered concepts in reading comprehension.
 2. **Efficiency of Psychomotor Speed and Visual Coordination:** Low average scores here may translate to slower completion of tasks that require visual scanning and coordination, such as copying from the board or navigating busy environments.
 3. **Recall of Digits Backward:** A below-average score indicates difficulties with tasks requiring reverse sequencing, which could affect mathematical problem-solving and comprehension of concepts that rely on understanding sequences in reverse.
 
