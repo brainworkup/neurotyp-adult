@@ -74,10 +74,10 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 
 file_path <- here::here(patient)
 bwu::load_data(here::here(file_path))
-neurocog <- readr::read_csv("neurocog.csv")
-neurobehav <- readr::read_csv("neurobehav.csv")
-neuropsych <- readr::read_csv("neuropsych.csv")
-validity <- readr::read_csv("validity.csv")
+neurocog <- vroom::vroom("neurocog.csv")
+neurobehav <- vroom::vroom("neurobehav.csv")
+neuropsych <- vroom::vroom("neuropsych.csv")
+validity <- vroom::vroom("validity.csv")
 ```
 
 ```{=typst}

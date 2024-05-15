@@ -23,7 +23,7 @@ pheno <- "emotion"
 #| include: false
 
 # Read the CSV file into a data frame
-emotion <- readr::read_csv("neurobehav.csv")
+emotion <- vroom::vroom("neurobehav.csv")
 
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
 emotion <- emotion |> dplyr::filter(domain == domains)

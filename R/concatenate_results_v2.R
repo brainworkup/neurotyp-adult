@@ -16,7 +16,7 @@ concatenate_results <- function(df) {
 }
 
 # Read the dataset
-executive <- readr::read_csv("{{< var patient >}}/executive.csv")
+executive <- vroom::vroom("{{< var patient >}}/executive.csv")
 
 # Sort the dataset by 'percentile' in descending order
 executive <- executive %>% arrange(desc(percentile))
@@ -32,7 +32,7 @@ readr::write_lines(executive$summary, "{{< var patient >}}/_02-05_executive_text
 
 
 # Read the dataset
-verbal <- readr::read_csv("verbal.csv")
+verbal <- vroom::vroom("verbal.csv")
 
 # Sort the dataset by 'percentile' in descending order
 verbal <- verbal %>% arrange(desc(percentile))
@@ -48,7 +48,7 @@ write_lines(verbal$summary, "_02-03_verbal_text.txt", sep = "\n\n")
 
 
 # Read the dataset
-spatial <- readr::read_csv("spatial.csv")
+spatial <- vroom::vroom("spatial.csv")
 
 # Sort the dataset by 'percentile' in descending order
 spatial <- spatial %>% arrange(desc(percentile))
@@ -66,7 +66,7 @@ write_lines(spatial$summary, "_02-04_spatial_text.txt", sep = "\n\n")
 
 
 # Read the dataset
-memory <- readr::read_csv("memory.csv")
+memory <- vroom::vroom("memory.csv")
 
 # Sort the dataset by 'percentile' in descending order
 memory <- memory %>% arrange(desc(percentile))
@@ -84,7 +84,7 @@ Make this summary more succinct and integrative. Merge all separate sections int
 
 
 # Read the dataset
-adhd <- readr::read_csv("adhd.csv")
+adhd <- vroom::vroom("adhd.csv")
 
 # Sort the dataset by 'percentile' in descending order
 adhd <- adhd %>% arrange(desc(percentile))

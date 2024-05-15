@@ -13,7 +13,7 @@ pheno <- "adhd"
 #| label: export-adhd
 #| include: false
 #| eval: true
-adhd <- readr::read_csv("neurobehav.csv") |>
+adhd <- vroom::vroom("neurobehav.csv") |>
   dplyr::filter(domain == domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(

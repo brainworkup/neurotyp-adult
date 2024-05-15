@@ -21,7 +21,7 @@ pheno <- "executive"
 #| include: false
 
 # Read the CSV file into a data frame
-executive <- readr::read_csv("neurocog.csv")
+executive <- vroom::vroom("neurocog.csv")
 
 # Filter the data frame based on certain conditions
 # Keep only the rows where 'domain' equals 'domains' and 'z_mean_domain' is not NA
