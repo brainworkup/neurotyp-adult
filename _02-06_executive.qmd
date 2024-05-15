@@ -1,6 +1,6 @@
 ## Attention/Executive {#sec-executive}
 
-{{< include _02-05_executive_text.qmd >}}
+{{< include _02-06_executive_text.qmd >}}
 
 ```{r}
 #| label: setup-executive
