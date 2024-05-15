@@ -257,7 +257,7 @@ options(warn = 0) # Reset to default behavior
 ```
 
 
-<!-- ```{=typst}
+```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
@@ -281,18 +281,18 @@ options(warn = 0) # Reset to default behavior
           ),
         )
     }
-``` -->
+```
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
 #let file_fig = "fig_verbal_subdomain.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
   file_qtbl,
   file_fig
 )
-``` -->
+```
 
 
 ```{=typst}
@@ -325,7 +325,7 @@ options(warn = 0) # Reset to default behavior
 #let file_qtbl = "table_verbal.png"
 #let file_fig = "fig_verbal_narrow.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
   file_qtbl,
   file_fig
 )

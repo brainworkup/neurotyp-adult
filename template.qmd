@@ -12,6 +12,7 @@ patient: {{< var patient >}}
 
 packages <- c(
   "dplyr",
+  "collapse",
   "glue",
   "gt",
   "here",
@@ -22,6 +23,7 @@ packages <- c(
   "readxl",
   "rmarkdown",
   "snakecase",
+  "tidytable",
   "vroom",
   "xfun",
   "bwu"
