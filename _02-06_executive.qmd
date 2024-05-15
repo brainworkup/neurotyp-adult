@@ -395,7 +395,7 @@ options(warn = 0) # Reset to default behavior
 #let file_qtbl = "table_executive.png"
 #let file_fig = "fig_executive_subdomain.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
   file_qtbl,
   file_fig
   )
@@ -432,7 +432,7 @@ options(warn = 0) # Reset to default behavior
 #let file_qtbl = "table_executive.png"
 #let file_fig = "fig_executive_narrow.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
   file_qtbl,
   file_fig
   )
