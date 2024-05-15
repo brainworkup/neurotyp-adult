@@ -7,8 +7,8 @@ file_list <- c(
   "_02-02_academics.qmd",
   "_02-03_verbal.qmd",
   "_02-04_spatial.qmd",
-  "_02-05_executive.qmd",
-  "_02-06_memory.qmd",
+  "_02-06_executive.qmd",
+  "_02-05_memory.qmd",
   # "_02-07_motor.qmd",
   # "_02-08_social.qmd",
   "_02-09_adhd.qmd",
@@ -22,4 +22,3 @@ for (file in file_list) {
   cat("Knitting file:", file, "\n")
   quarto_render(file, output_format = "typst")
 }
-

@@ -14,8 +14,8 @@ file_names <- c(
   # "_02-02_academics.qmd",
   "_02-03_verbal.qmd",
   "_02-04_spatial.qmd",
-  "_02-05_executive.qmd",
-  "_02-06_memory.qmd",
+  "_02-06_executive.qmd",
+  "_02-05_memory.qmd",
   # "_02-07_motor.qmd",
   # "_02-08_social.qmd",
   "_02-09_adhd.qmd",
@@ -74,8 +74,8 @@ iq <- "_02-01_iq.qmd"
 academics <- "_02-02_academics.qmd"
 verbal <- "_02-03_verbal.qmd"
 spatial <- "_02-04_spatial.qmd"
-executive <- "_02-05_executive.qmd"
-memory <- "_02-06_memory.qmd"
+executive <- "_02-06_executive.qmd"
+memory <- "_02-05_memory.qmd"
 motor <- "_02-07_motor.qmd"
 social <- "_02-08_social.qmd"
 adhd <- "_02-09_adhd.qmd"

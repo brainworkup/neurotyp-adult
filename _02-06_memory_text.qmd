@@ -2,7 +2,7 @@
 
 ### Learning vs. Recall
 
-- **Learning Efficiency**: High average performance in learning and immediate recognition of visual material (abstract shapes). Low average performance in complex one-trial verbal learning (story learning).
+- **Learning Efficiency**: { range } performance in learning and immediate recognition of visual material (abstract shapes). { range } performance in complex one-trial verbal learning (story learning).
 
 - **Delayed Recall**: { range } performance in recalling verbal lists after a delay with cues and in recognizing visual material after a delay. Notable weaknesses in the delayed recall of complex verbal and visual material.
 
@@ -10,16 +10,16 @@
 
 - **Rote Memory (List Learning)**: { range } abilities in both learning and recalling lists of information after short and long delays, suggesting adequate rote memory skills.
 
-- **Contextual Memory (Story Memory)**: Low average abilities in learning and recalling story details immediately. Continued low average abilities in recalling story details over time, indicating difficulties with contextual memory.
+- **Contextual Memory (Story Memory)**: { range } abilities in learning and recalling story details immediately. Continued low average abilities in recalling story details over time, indicating difficulties with contextual memory.
 
 ### Visual Memory
 
-- **Figure Recall**: Below { range } performance in spontaneously recalling and
+- **Figure Recall**: { range } performance in spontaneously recalling and
 reproducing a complex abstract figure after a long-term delay, suggesting
 difficulties with visual memory retention secondary to
 deficits in the initial planning and organization of the material.
 
-- **Immediate Recognition**: High average capabilities in learning and recognizing abstract shapes immediately.
+- **Immediate Recognition**: { range } capabilities in learning and recognizing abstract shapes immediately.
 
 - **Delayed Recognition**: { range } abilities in recognizing target visual material among distractors after a delay.
 

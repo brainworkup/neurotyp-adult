@@ -115,9 +115,9 @@ validity <- readr::read_csv("validity.csv")
 
 {{< include _02-04_spatial.qmd >}}
 
-{{< include _02-05_executive.qmd >}}
+{{< include _02-05_memory.qmd >}}
 
-{{< include _02-06_memory.qmd >}}
+{{< include _02-06_executive.qmd >}}
 
 <!-- {{< include _02-07_motor.qmd >}} -->
 
