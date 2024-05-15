@@ -180,7 +180,7 @@ options(warn = 0) # Reset to default behavior
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
   pad(top: 0.5em)[]
     grid(
@@ -213,3 +213,4 @@ options(warn = 0) # Reset to default behavior
   file_fig
 )
 ```
+

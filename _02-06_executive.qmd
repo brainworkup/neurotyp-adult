@@ -6,6 +6,9 @@
 #| label: setup-executive
 #| include: false
 
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
 # domain
 domains <- c("Attention/Executive")
 
@@ -288,14 +291,14 @@ bwu::tbl_gt(
   data = data_executive,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = vertical_padding,
   fn_scaled_score = fn_scaled_score,
-  # fn_standard_score = fn_standard_score,
+  fn_standard_score = fn_standard_score,
   fn_t_score = fn_t_score,
   grp_scaled_score = grp_executive[["scaled_score"]],
-  # grp_standard_score = grp_executive[["standard_score"]],
+  grp_standard_score = grp_executive[["standard_score"]],
   grp_t_score = grp_executive[["t_score"]],
   dynamic_grp = grp_executive,
+  vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
@@ -305,13 +308,14 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
-# args
+# dotplot arguments
+filename <- "fig_executive_subdomain.svg"
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+
+# dotplot variables to plot (x, y)
 x <- data_executive$z_mean_subdomain
 y <- data_executive$subdomain
-colors <- NULL
-# return_plot <- TRUE
-return_plot <- Sys.getenv("RETURN_PLOT")
-filename <- "fig_executive_subdomain.svg"
 
 # Suppress warnings from being converted to errors
 options(warn = 1) # Set warn to 1 to make warnings not halt execution
@@ -335,16 +339,14 @@ options(warn = 0) # Reset to default behavior
 #| include: false
 #| fig-cap: "Attention and executive functions are essential for successful cognitive functioning, enabling us to perform everyday tasks, handle academic challenges, solve problems, manage our emotions, and interact effectively with others and our environment."
 
-# args2
+# dotplot arguments
+filename <- "fig_executive_narrow.svg"
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+
+# dotplot variables to plot (x, y)
 x <- data_executive$z_mean_narrow
 y <- data_executive$narrow
-colors <- NULL
-# return_plot <- TRUE
-return_plot <- Sys.getenv("RETURN_PLOT")
-filename <- "fig_executive_narrow.svg"
-
-# Suppress warnings from being converted to errors
-options(warn = 1) # Set warn to 1 to make warnings not halt execution
 
 bwu::dotplot(
   data = data_executive,
@@ -362,7 +364,7 @@ options(warn = 0) # Reset to default behavior
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
   pad(top: 0.5em)[]
     grid(
@@ -400,7 +402,7 @@ options(warn = 0) # Reset to default behavior
 ```
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
     grid(
       columns: (50%, 50%),

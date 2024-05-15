@@ -6,11 +6,17 @@
 #| label: setup-academics
 #| include: false
 
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
 # domain
 domains <- c("Academic Skills")
 
 # Target phenotype
 pheno <- "academics"
+
+# Read the CSV file into a data frame
+academics <- vroom::vroom("neurocog.csv")
 ```
 
 ```{r}
@@ -18,20 +24,45 @@ pheno <- "academics"
 #| include: false
 #| eval: true
 
-# Read the CSV file into a data frame
-academics <- readr::read_csv("neurocog.csv")
-
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
-academics <- academics |> dplyr::filter(domain == domains)
+academics <-
+  academics |>
+  dplyr::filter(domain == domains)
 
 # Select specific columns from the data frame
 academics <- academics |>
   dplyr::select(
-    test, scale, raw_score, score, ci_95, percentile, range, percent_mastery, test_name,
-    domain, subdomain, narrow, pass, verbal, timed, description, result,
-    z, z_mean_domain, z_sd_domain, z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow, z_mean_pass, z_sd_pass,
-    z_mean_verbal, z_sd_verbal, z_mean_timed, z_sd_timed
+    test,
+    test_name,
+    scale,
+    raw_score,
+    percent_mastery,
+    age_equiv,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
+    z_mean_subdomain,
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow,
+    z_mean_pass,
+    z_sd_pass,
+    z_mean_verbal,
+    z_sd_verbal,
+    z_mean_timed,
+    z_sd_timed
   )
 
 # Write the resulting data frame to a new CSV file
@@ -158,8 +189,8 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Standard Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_percent_mastery <- gt::md("Percent Mastery")
+fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_percent_mastery <- gt::md("Percent Mastery: Percentage of correct raw scores")
 
 # Define the groups for the table
 grp_academics <- list(
@@ -183,7 +214,7 @@ bwu::tbl_gt(
 ```
 
 ```{r}
-#| label: fig-academics
+#| label: fig-academics-subdomain
 #| include: false
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
@@ -192,17 +223,16 @@ bwu::tbl_gt(
 #     scale == "School Readiness Composite (SRC)"
 #   )
 
+# Define the filename for the plot
+filename <- "fig_academics_subdomain.svg"
+
 # Define the x and y variables for the dotplot
 x <- data_academics$z_mean_subdomain
 y <- data_academics$subdomain
 
 # plot args
 colors <- NULL
-# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
-
-# Define the filename for the plot
-filename <- "fig_academics.svg"
 
 # Make dotplot
 bwu::dotplot(
@@ -214,35 +244,45 @@ bwu::dotplot(
   filename = filename,
   na.rm = TRUE
 )
+```
+
+```{r}
+#| label: fig-academics-narrow
+#| include: false
+#| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
+
+# data_academics <- data_academics |>
+#   dplyr::filter(
+#     scale == "School Readiness Composite (SRC)"
+#   )
+
+# Define the filename for the plot
+filename <- "fig_academics_narrow.svg"
 
 # Define the x and y variables for the dotplot
-x2 <- data_academics$z_mean_narrow
-y2 <- data_academics$narrow
+x <- data_academics$z_mean_narrow
+y <- data_academics$narrow
 
-filename2 <- "fig_academics2.svg"
+# plot args
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
 
+# Make dotplot
 bwu::dotplot(
   data = data_academics,
-  x = x2,
-  y = y2,
+  x = x,
+  y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename2,
+  filename = filename,
   na.rm = TRUE
 )
 ```
 
-<!-- ```{=typst} -->
-
-#let domain(title: none, file_qtbl, file_fig) = { let font = (font: "Merriweather", size: 0.7em) set text(..font) pad(top: 0.5em)\[\] grid( columns: (50%, 50%), gutter: 8pt, figure( \[#image(file_qtbl)\], caption: figure.caption(position: top, \[#title\]), kind: "qtbl", supplement: \[Table\], ), figure( \[#image(file_fig, width: auto)\], caption: figure.caption( position: bottom, \[ *Reading ability* consists of three interrelated abilities: decoding, comprehension, and fluency. *Writing ability* can be described in terms of spelling, grammar, expression of ideas, and writing fluency. *Math ability* can be described in terms of calculation skills, applied problem solving, and math fluency. \], ), placement: none, kind: "image", supplement: \[Figure\], gap: 0.5em, ), ) } <!-- ``` -->
-
-<!-- ```{=typst} -->
-
-#let title = "Academic Achievement" #let file_qtbl = "table_academics.png" #let file_fig = "fig_academics.svg" #domain(title: \[#title Test Scores\], file_qtbl, file_fig) <!-- ``` -->
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
   pad(top: 0.5em)[]
   grid(
@@ -273,9 +313,51 @@ bwu::dotplot(
 ```{=typst}
 #let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
-#let file_fig = "fig_academics2.svg"
+#let file_fig = "fig_academics_subdomain.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
+  file_qtbl,
+  file_fig,
+  )
+```
+
+
+```{=typst}
+#let domain(title: none, file_qtbl, file_fig) = {
+  let font = (font: "Roboto Slab", size: 0.5em)
+  set text(..font)
+  pad(top: 0.5em)[]
+  grid(
+    columns: (50%, 50%),
+    gutter: 8pt,
+    figure(
+      [#image(file_qtbl)],
+      caption: figure.caption(position: top, [#title]),
+      kind: "qtbl",
+      supplement: [Table],
+    ),
+    figure(
+      [#image(file_fig, width: auto)],
+      caption: figure.caption(
+        position: bottom,
+        [
+          _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
+        ],
+      ),
+      placement: none,
+      kind: "image",
+      supplement: [Figure],
+      gap: 0.5em,
+    ),
+  )
+}
+```
+```{=typst}
+#let title = "Academic Skills"
+#let file_qtbl = "table_academics.png"
+#let file_fig = "fig_academics_narrow.svg"
+#domain(
+  title: [#title Scores],
   file_qtbl,
   file_fig,
   )

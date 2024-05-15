@@ -169,7 +169,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
   figure(
     [#image(file_fig, width: 85%)],

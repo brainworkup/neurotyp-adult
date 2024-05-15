@@ -76,6 +76,7 @@ readr::write_excel_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, app
 data <- iq
 
 # Define the scales of interest
+# TODO: Add RBANS
 scales <- c(
   "Auditory Working Memory (AWMI)",
   "Cognitive Proficiency (CPI)",
@@ -138,7 +139,7 @@ bwu::cat_neuropsych_results(data = data_iq, file = "_02-01_iq_text.qmd")
 options(tikzDefaultEngine = "xetex")
 
 # Define the scales to include
-include <- c(
+subset <- c(
   "Auditory Working Memory (AWMI)",
   "Cognitive Proficiency (CPI)",
   "Crystallized Knowledge",
@@ -174,8 +175,8 @@ include <- c(
   "Working Memory"
 )
 
-# Filter the data to include only the specified scales
-data_iq <- dplyr::filter(data_iq, scale %in% include)
+# Filter the data to subset only the specified scales
+data_iq <- dplyr::filter(data_iq, scale %in% subset)
 
 # Define the table name, vertical padding, and multiline setting
 pheno <- "iq"
@@ -215,7 +216,6 @@ bwu::tbl_gt(
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
-
 # Define the x and y variables for the dotplot
 x <- data_iq$z
 y <- data_iq$scale
@@ -253,7 +253,7 @@ options(warn = 0) # Reset to default behavior
 ```{=typst}
 // Define a function to create a domain with a title, a table, and a figure
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Merriweather", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
   pad(top: 0.5em)[]
   grid(
@@ -279,7 +279,7 @@ options(warn = 0) # Reset to default behavior
           been converted to _z_-scores, where an average score is 0 (zero) and the
           standard deviation is 1.0. Any scores below the −1.0 ticks are
           moderately concerning. Scores at or beyond the −2.0 ticks are
-          clinically significant and a cause for greater concern.]
+          clinically signficant and a cause for greater concern.]
         ],
       ),
       placement: none,
@@ -302,5 +302,5 @@ options(warn = 0) # Reset to default behavior
 
 // Call the 'domain' function with the specified title, table file name, and figure file name
 // The title is appended with ' Index Scores'
-#domain(title: [#title Index Scores], file_qtbl, file_fig)
+#domain(title: [#title Scores], file_qtbl, file_fig)
 ```
