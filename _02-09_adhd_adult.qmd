@@ -14,7 +14,7 @@ pheno <- "adhd"
 #| include: false
 #| eval: true
 adhd <- vroom::vroom("neurobehav.csv") |>
-  dplyr::filter(domain == domains) |>
+  dplyr::filter(domain %in% domains) |>
   dplyr::filter(!is.na(z_mean_domain)) |>
   dplyr::select(
     scale, score, z, percentile, range, test_name,

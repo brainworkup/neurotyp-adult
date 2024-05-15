@@ -26,7 +26,7 @@ pheno <- "emotion"
 emotion <- vroom::vroom("neurobehav.csv")
 
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
-emotion <- emotion |> dplyr::filter(domain == domains)
+emotion <- emotion |> dplyr::filter(domain %in% domains)
 
 # Select specific columns from the data frame
 emotion <- emotion |>
@@ -39,12 +39,14 @@ emotion <- emotion |>
     ci_95,
     percentile,
     range,
+    base_rate,
     domain,
     subdomain,
     narrow,
     pass,
     verbal,
     timed,
+    absort,
     description,
     result,
     z,
@@ -286,7 +288,7 @@ multiline <- FALSE
 pheno <- "emotion_child"
 
 # source note
-source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+source_note <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 _Note_: Personal Adjustment scores are reversed.")
 
@@ -637,6 +639,7 @@ options(warn = 0) # Reset to default behavior
 ```
 
 ### CHILD SELF-REPORT
+
 {{< include _02-10_emotion_child_text.qmd >}}
 
 ```{=typst}

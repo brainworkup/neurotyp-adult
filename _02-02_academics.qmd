@@ -27,7 +27,7 @@ academics <- vroom::vroom("neurocog.csv")
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
 academics <-
   academics |>
-  dplyr::filter(domain == domains)
+  dplyr::filter(domain %in% domains)
 
 # Select specific columns from the data frame
 academics <- academics |>

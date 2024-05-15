@@ -81,8 +81,8 @@ validity <- vroom::vroom("validity.csv")
 ```
 
 ```{=typst}
-#let name = [{{< var patient >}} Smalls]
-#let doe = [2023-01-02]
+#let name = [{{< var first_name >}} {{< var last_name >}}]
+#let doe = [2024-01-01]
 #let patient = [{{< var patient >}}]
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)

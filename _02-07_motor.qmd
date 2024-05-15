@@ -23,7 +23,7 @@ motor <- vroom::vroom("neurocog.csv")
 # Filter the data frame based on certain conditions
 # Keep only the rows where 'domain' equals 'domains' and 'z_mean_domain' is not NA
 motor <- motor |>
-  dplyr::filter(domain == domains)
+  dplyr::filter(domain %in% domains)
 
 # Select specific columns from the data frame
 motor <- motor |>
@@ -129,8 +129,8 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 
 # Groupings
 grp_motor <- list(
@@ -143,12 +143,12 @@ bwu::tbl_gt(
   data = data_motor,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = vertical_padding,
   fn_t_score = fn_t_score,
   fn_scaled_score = fn_scaled_score,
   grp_t_score = grp_motor[["t_score"]],
   grp_scaled_score = grp_motor[["scaled_score"]],
   dynamic_grp = grp_motor,
+  vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
@@ -159,11 +159,10 @@ bwu::tbl_gt(
 #| eval: true
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
-# Dotplot args
+# dotplot args
 x <- data_motor$z_mean_narrow
 y <- data_motor$narrow
 colors <- NULL
-# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
 
@@ -217,7 +216,7 @@ options(warn = 0) # Reset to default behavior
 #let file_qtbl = "table_motor.png"
 #let file_fig = "fig_motor.svg"
 #domain(
-  title: [#title Test Scores],
+  title: [#title Scores],
   file_qtbl,
   file_fig
 )

@@ -21,7 +21,7 @@ pheno <- "spatial"
 spatial <- vroom::vroom("neurocog.csv")
 
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
-spatial <- spatial |> dplyr::filter(domain == domains)
+spatial <- spatial |> dplyr::filter(domain %in% domains)
 
 spatial <- spatial |>
   dplyr::select(
