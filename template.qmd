@@ -1,6 +1,6 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
-name: {{< var patient >}} Smalls
+name: {{< var first_name >}} {{< var last_name >}}
 doe: today
 patient: {{< var patient >}}
 ---
@@ -11,33 +11,19 @@ patient: {{< var patient >}}
 #| cache: false
 
 packages <- c(
-  "ggtext",
-  "ggthemes",
+  "dplyr",
   "glue",
   "gt",
-  "gtExtras",
-  "hablar",
   "here",
-  "htmlwidgets",
   "janitor",
   "knitr",
-  "magick",
-  "png",
-  "manipulateWidget",
   "quarto",
+  "readr",
   "readxl",
   "rmarkdown",
-  "scales",
   "snakecase",
-  "stats",
-  "svglite",
-  "tidyselect",
-  "tidytext",
-  "tidyverse",
-  "webshot2",
-  "widgetframe",
+  "vroom",
   "xfun",
-  "yaml",
   "bwu"
 )
 
@@ -60,9 +46,18 @@ knitr::opts_knit$set(width = 80, digits = 2, warnPartialMatchArgs = FALSE)
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 knitr::knit_hooks$set(optipng = knitr::hook_optipng)
 
-# Set plot hook for LaTeX output
+# Check if the output format is LaTeX
 if (identical(knitr:::pandoc_to(), "latex")) {
-  knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
+  knit_hooks$set(plot = function(x, options) {
+    # Adjust here with whatever you need to do with your plots for LaTeX output
+    paste("\\begin{figure}[htbp!]",
+      "\\centering",
+      "\\includegraphics[width=\\maxwidth]{", x, "}",
+      "\\caption{", options$fig.cap, "}",
+      "\\end{figure}",
+      sep = "\n"
+    )
+  })
 }
 
 # Set environment variables with default values

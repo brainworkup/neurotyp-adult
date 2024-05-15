@@ -2,6 +2,7 @@
 
 INSTRUCTIONS:
 1. Upload and use the "neurocog.csv" or "neurobehav.csv" file and any of the following csv files:
+
 - iq.csv
 - academics.csv
 - verbal.csv
@@ -16,11 +17,11 @@ INSTRUCTIONS:
 
 2. Summarize and interpret this overall neuropsychological profile and individual test scores related to the area denoted below.
 
-3. Interpret individual test scores under the "scale" column; use "test_name", "scale", "score", "percentile", "ci_95" if available, and "result" in your interpretation.
+3. Interpret individual test scores under the "scale" column/variable; use these additional variables: "test_name", "scale", "score", "percentile", "ci_95" (if available), and "result" in your interpretation.
 
 4. Compute means, standard deviations, and 95% confidence intervals (remove missing/NA data) across these variables: "domain", "subdomain", "narrow domain".
 
-5. Scores and/or domains/subdomains in the Below Average (scores range between the 2nd and 8th percentiles) to Exceptionally Low (scores are at the 1st percentile or lower) range are considered areas of "relative weakness"; as such, give a brief example of how this could impact the patient's daily functioning, such as at home, school, work, or socially. If no scores are in this range, you can ignore this step.
+5. Scores and/or domains/subdomains in the Below Average range (scores range between the 2nd and 8th percentiles) or Exceptionally Low range (scores are at the 1st percentile or lower) range are considered areas of "relative weakness"; as such, give a brief example of how this could impact the patient's daily functioning, such as at home, school, work, or socially. If no scores are in this range, you can ignore this step.
 
 6. Finally, recommended additional support the patient should receive in areas in which scores fall Below Average to Exceptionally Low. If no scores are in this range, you can ignore this step.
 
@@ -38,12 +39,13 @@ Note: example summary text for report is provided below for each area/section
 
 - **General Intelligence**: { range } overall cognitive functioning for daily tasks. While {{< var patient >}} may occasionally find complex or highly demanding cognitive tasks challenging, they generally should manage well in typical day-to-day activities.
 
-
 ## Area: Academic Skills/Academic Achievement
 
-Clinically significant limitations in reading abilities were highlighted by a Below Average, clinically sensitive composite reading score, indicating a risk for dyslexia among students.
+<<EXAMPLE>>
 
-- **Reading Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for {{< var his_her >}} age group. Further, {{< var his_her >}} reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from {{< var his_her >}} average IQ scores.
+Clinically significant limitations in academic abilities were highlighted by a { range }, clinically sensitive composite reading score, indicating a risk for dyslexia among students.
+
+- **Reading Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile and significantly below what is typical for {{< var his_her >}} age group. Further, {{< var his_her >}} reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from {{< var his_her >}} average IQ scores.
 
 - **Reading Comprehension**: { range }, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
 
@@ -54,6 +56,8 @@ Note: If the .csv file contains any spelling, writing/written expression, or wri
 Note: If the .csv file contains any math, math computation, quantitative reasoning, or math fluency tests, create similar summaries as above.
 
 ## Area: Verbal/Language
+
+<<EXAMPLE>>
 
 {{< var patient >}} evidenced a range of abilities in verbal skills, with notable challenges in { subdomain or narrow subdomain }.
 
@@ -67,6 +71,8 @@ Note: If the .csv file contains any math, math computation, quantitative reasoni
 
 ## Area: Visual Perception/Construction
 
+<<EXAMPLE>>
+
 {{< var patient >}} demonstrates a mix of { range } to { range } abilities in visuospatial processing.
 
 - **Perception**: { range } perceptual processing, discrimination, and pattern matching requiring close attention to visual detail.
@@ -78,6 +84,8 @@ Note: If the .csv file contains any math, math computation, quantitative reasoni
 - **Organization**: Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was { range }. This indicates executive function difficulties in planning and organizing complex visuospatial material.
 
 ## Area: Learning and Memory
+
+<<EXAMPLE>>
 
 {{< var patient >}} demonstrated a range of performance across different memory tasks.
 
@@ -106,6 +114,8 @@ deficits in the initial planning and organization of the material.
 
 ## Area: Attention/Executive Functioning
 
+<<EXAMPLE>>
+
 Most scores in this area fell within the { range } to { range } range of performance.
 
 ### Attention
@@ -132,6 +142,8 @@ Most scores in this area fell within the { range } to { range } range of perform
 
 ## Area: Sensorimotor Functions (Gross Motor and Fine Motor)
 
+<<EXAMPLE>>
+
 All scores in this area were { range }.
 Fine motor speed and dexterity were { range } bilaterally.
 No evidence of atypical lateralization of fine nor gross motor skills.
@@ -141,10 +153,14 @@ Gross motor functioning including balance and gait appeared intact on observatio
 
 ## Area: Social Cognition and Social-Emotional Functioning (including autism spectrum disorder (ASD))
 
+<<EXAMPLE>>
+
 Emotional intelligence and social cognition were examined through a combination of performance-based tests and semi-structured clinical interviews. Performance-based testing on measures to gauge aspects of social-emotional processing and social aptitude, which are important aspects of how individuals process social information about other adults, groups, and social contexts, was intact. Global social perception fell in the { range } range, but {{< var his_her >}} overall score was significantly lower than predicted by {{< var his_her >}} General Ability Index. {{< var his_her_cap >}} ability to recognize and interpret the emotional state (happy, sad, angry, afraid, surprised, disgusted, and neutral) from a series of adult faces was average. Notably, {{< var he_she >}} performed a subset of these tasks better with multisensory input (e.g., both seeing and hearing the material).^[For example, {{< var he_she >}} had to first listen to an affectively laden audio recording and match the emotion of the speaker with the same emotion from several faces (including complex emotions such as sarcasm and confusion). Then {{< var he_she >}} had to listen to an additional set of statements and, using the prosody from the voice, match the implied tone of the speaker to one of various two-person interactions utilizing facial expressions and body language. If there was a mismatch between the speaker’s tone and the actual content of the statement that was spoken (e.g., when the speaker was being sarcastic), {{< var he_she >}} had to describe what the speaker actually meant.] {{< var patient >}} obtained { range } to Above-{ range } scores on these multisensory tasks requiring problem-solving skills in addition to basic social-emotional perception. Further, {{< var he_she >}} provided exceptionally precise verbal responses on these tasks, relying on cognition, not intuition.
 
 
 ## Area: Attention-deficit/hyperactivity disorder (ADHD) and Executive Functioning (rating scales)
+
+<<EXAMPLE>>
 
 The observer ratings provided by {{< var observer >}} revealed significant elevations in
 {{< var patient >}}'s ADHD symptomatology and executive functioning across several
