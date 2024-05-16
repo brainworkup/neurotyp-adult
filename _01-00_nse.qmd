@@ -1,7 +1,6 @@
 # NEUROBEHAVIORAL STATUS EXAM {#sec-nse}
 
 ```{r}
-```{r}
 #| label: import-nse-txt
 #| include: false
 #| eval: false
@@ -17,7 +16,7 @@ file_path <- function(patient, scale, ext) {
 input_path <- here::here(file_path)
 start_pattern <- "PATIENT:"
 end_pattern <- "PROVIDER"
-output_path <- "~/reports/{{< var patient >}}/NeurobehavioralStatusExam_Text_{{< var patient >}}.md"
+output_path <- "~/reports/Biggie/NeurobehavioralStatusExam_Text_Biggie.md"
 txt <- bwu::read_write_transcript_otterai(
   input = input_path,
   output = output_path,
@@ -25,7 +24,6 @@ txt <- bwu::read_write_transcript_otterai(
   end = end_pattern
 )
 bwu::save_as_markdown(text = txt, output_path = output_path)
-```
 ```
 
 ## Reason for Referral
@@ -88,10 +86,6 @@ Laborum enim culpa excepteur non dolore ut consequat officia nisi proident.
 ### Educational History
 
 Ea eiusmod eiusmod officia. Ut adipisicing magna nostrud aute in enim laboris ipsum amet. Ex est occaecat irure. Aliqua ea excepteur non ea dolore culpa commodo irure ipsum non. Ea in nisi laboris id laborum laborum reprehenderit officia in ad Lorem aliqua consectetur anim. Ex pariatur eu quis tempor. Amet veniam deserunt laborum do laborum eu ex.
-
-Aliqua laborum consequat occaecat officia eu quis cillum culpa. Incididunt consequat occaecat non ullamco fugiat laboris tempor nulla. Magna amet nisi laboris eiusmod nostrud ut esse non eu irure esse. Enim amet mollit et ea labore nulla anim veniam eiusmod laboris irure.
-
-Magna quis excepteur aliqua do cillum est duis incididunt pariatur voluptate voluptate ullamco do. Consequat ea sit elit deserunt mollit consectetur laborum est eiusmod. Do cupidatat ad irure officia ea in nisi irure adipisicing. Sint culpa nulla do non ullamco aliquip id occaecat anim proident. Qui laboris tempor quis ullamco esse laborum deserunt. Magna proident consequat ex reprehenderit excepteur amet et est exercitation.
 
 ### Occupational History
 

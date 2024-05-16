@@ -72,7 +72,7 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 #| label: data-load
 #| include: false
 
-file_path <- here::here(patient)
+file_path <- here::here()
 bwu::load_data(here::here(file_path))
 neurocog <- vroom::vroom("neurocog.csv")
 neurobehav <- vroom::vroom("neurobehav.csv")

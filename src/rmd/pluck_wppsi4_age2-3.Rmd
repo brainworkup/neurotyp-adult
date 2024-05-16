@@ -109,7 +109,7 @@ output:
 ```{r setup, include = FALSE}
 Sys.setenv(
   JAVA_HOME =
-    "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
+    "/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-22.0.1+8.1/Contents/Home"
 )
 # Sys.setenv(DYLD_LIBRARY_PATH = "Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/lib/server")
 options(java.parameters = "-Xmx16000m")
