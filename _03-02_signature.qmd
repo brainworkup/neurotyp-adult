@@ -13,7 +13,7 @@ Sincerely,
 #| out-width: 10em
 #| echo: false
 #| eval: true
-knitr::include_graphics("jwt_phd.png")
+knitr::include_graphics("jwt_sig.png")
 ```
 
 ```{=typst}
@@ -29,4 +29,3 @@ Keck School of Medicine of USC \
 CA License No. PSY29212
 ]
 ```
-
