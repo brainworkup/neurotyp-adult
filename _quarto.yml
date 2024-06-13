@@ -2,7 +2,8 @@ project:
   type: default
   execute-dir: file
   render:
-    - {{< var patient >}}.qmd
+    - Biggie.qmd
+    # - {{< var patient >}}.qmd
 
 format:
   neurotyp-typst:
@@ -10,7 +11,7 @@ format:
     keep-md: true
     papersize: "us-letter"
     bodyfont: "ScholaX"
-    sansfont: "Work Sans" #"ScholaX"
+    sansfont: "Work Sans"
     fontsize: 12pt
     number-sections: false
     citeproc: false
