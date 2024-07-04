@@ -3,9 +3,14 @@
 ```{r}
 #| label: setup-adhd
 #| include: false
+
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
 # domain
 domains <- c("ADHD")
-# phenotype
+
+# target phenotype
 pheno <- "adhd"
 ```
 
@@ -13,23 +18,55 @@ pheno <- "adhd"
 #| label: export-adhd
 #| include: false
 #| eval: true
-adhd <- vroom::vroom("neurobehav.csv") |>
-  dplyr::filter(domain %in% domains) |>
-  dplyr::filter(!is.na(z_mean_domain)) |>
+
+# Read the CSV file into a data frame
+adhd <- vroom::vroom("neurobehav.csv")
+
+# Filter the data frame based on certain conditions
+# Keep only the rows where 'domain' equals 'domains' and 'z_mean_domain' is not NA
+adhd <- adhd |>
+  dplyr::filter(domain %in% domains)
+
+# Select specific columns from the data frame
+adhd <- adhd |>
   dplyr::select(
-    scale, score, z, percentile, range, test_name,
-    domain, subdomain, narrow, description, result,
-    z_mean_domain, z_sd_domain, z_mean_subdomain,
-    z_sd_subdomain, z_mean_narrow, z_sd_narrow
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    description,
+    result,
+    z,
+    z_mean_domain,
+    z_sd_domain,
+    z_mean_subdomain,
+    z_sd_subdomain,
+    z_mean_narrow,
+    z_sd_narrow
   )
-readr::write_csv(adhd, paste0(pheno, ".csv"))
+
+# Write the 'adhd' data frame to a CSV file
+# The file name is derived from the 'pheno' variable
+readr::write_excel_csv(adhd, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}
 #| label: data-adhd
 #| include: false
 
-data <- bwu::read_data(pheno = "adhd")
+# read and filter data
+data <- adhd
+
 scales <- c(
   "Activation",
   "Focus",
@@ -91,21 +128,53 @@ scales <- c(
   "CEFI-OR Organization",
   "CEFI-OR Planning",
   "CEFI-OR Self-Monitoring",
-  "CEFI-OR Working Memory"
+  "CEFI-OR Working Memory",
+  # caars-2
+  "CAARS2-OR Inattention/Executive Dysfunction",
+  "CAARS2-OR Hyperactivity",
+  "CAARS2-OR Impulsivity",
+  "CAARS2-OR Emotional Dysregulation",
+  "CAARS2-OR Negative Self-Concept",
+  "CAARS2-OR ADHD Inattentive Symptoms",
+  "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms",
+  "CAARS2-OR Total ADHD Symptoms",
+  "CAARS2-OR ADHD Index",
+  "CAARS2-SR Inattention/Executive Dysfunction",
+  "CAARS2-SR Hyperactivity",
+  "CAARS2-SR Impulsivity",
+  "CAARS2-SR Emotional Dysregulation",
+  "CAARS2-SR Negative Self-Concept",
+  "CAARS2-SR ADHD Inattentive Symptoms",
+  "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms",
+  "CAARS2-SR Total ADHD Symptoms",
+  "CAARS2-SR ADHD Index",
+  "Inattention/Executive Dysfunction",
+  "Hyperactivity",
+  "Impulsivity",
+  "Emotional Dysregulation",
+  "Negative Self-Concept",
+  "ADHD Inattentive Symptoms",
+  "ADHD Hyperactive/Impulsive Symptoms",
+  "Total ADHD Symptoms",
+  "ADHD Index"
 )
+
+# Filter the data using the filter_data function from the bwu library
+# The domain is specified by the 'domains' variable
+# The scale is specified by the 'scales' variable
 data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
 #| label: text-adhd-self
 #| cache: true
-#| eval: false
+#| eval: true
 #| include: false
 
 # Self-report
 data_adhd_self <-
   data_adhd |>
-  dplyr::filter(test == "caars_sr" | test == "cefi_sr") |>
+  dplyr::filter(test == "caars_sr" | test == "cefi_sr" | test == "caars2_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
@@ -121,7 +190,7 @@ bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_tex
 # Observer reports
 data_adhd_observer <-
   data_adhd |>
-  dplyr::filter(test == "caars_or" | test == "cefi_or") |>
+  dplyr::filter(test == "caars_or" | test == "cefi_or" | test == "caars2_or") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
 # Flatten the text
@@ -132,45 +201,49 @@ bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult
 #| label: qtbl-adhd-self
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: false
+#| eval: true
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
-grp_adhd <- list(
-  standard_score = c("CEFI Self-Report", "CEFI Observer-Report"),
-  t_score = c("CAARS Self-Report", "CAARS Observer-Report")
-)
-grp_caars <- list(
-  t_score = c("CAARS Self-Report", "CAARS Observer-Report")
-)
-grp_cefi <- list(
-  standard_score = c("CEFI Self-Report", "CEFI Observer-Report")
-)
+# table arguments
+table_name <- "table_adhd_self"
+vertical_padding <- 0
+multiline <- TRUE
+
 # footnotes
-fn_standard_score <- gt::md("CEFI Standard Score: Mean = 100 [50th‰], SD ± 15
+fn_standard_score <- gt::md("CEFI Standard score: Mean = 100 [50th‰], SD ± 15
 [16th‰, 84th‰].
 
 Lower scores reflect reduced functioning.")
 
-fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+fn_t_score <- gt::md("CAARS _T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 Higher scores reflect reduced functioning.")
 
+# groupings
+grp_adhd <- list(
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report"),
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report")
+)
+grp_caars <- list(
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report")
+)
+grp_cefi <- list(
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report")
+)
+
 # variables
 data_adhd_self <-
-  dplyr::mutate(data_adhd_self, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR "))
-pheno <- "adhd_self"
-table_name <- "table_adhd_self"
-vertical_padding <- 0
-multiline <- TRUE
+  dplyr::mutate(data_adhd_self, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR |CAARS-2 SR "))
+
 fn_standard_score <- fn_standard_score
 fn_t_score <- fn_t_score
 grp_self <- list(
   standard_score = c("CEFI Self-Report"),
-  t_score = c("CAARS Self-Report")
+  t_score = c("CAARS Self-Report", "CAARS-2 Self-Report")
 )
 
-# Self-Report
+# make `gt` table
 bwu::tbl_gt(
   data = data_adhd_self,
   pheno = pheno,
@@ -193,31 +266,50 @@ bwu::tbl_gt(
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
+# table arguments
+table_name <- "table_adhd_observer"
+vertical_padding <- 0
+multiline <- TRUE
+
 # footnotes
-fn_standard_score <- gt::md("CEFI Standard Score: Mean = 100 [50th‰], SD ± 15
+fn_standard_score <- gt::md("CEFI Standard score: Mean = 100 [50th‰], SD ± 15
 [16th‰, 84th‰].
 
 Lower scores reflect reduced functioning.")
 
-fn_t_score <- gt::md("CAARS *T*-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+fn_t_score <- gt::md("CAARS T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 Higher scores reflect reduced functioning.")
 
-# Observer-Report
+# groupings
+grp_adhd <- list(
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report"),
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report")
+)
+grp_caars <- list(
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report")
+)
+grp_cefi <- list(
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report")
+)
+
+# variables
 data_adhd_observer <-
-  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-OR |CEFI-OR "))
-pheno <- "adhd_observer"
-table_name <- "table_adhd_observer"
-vertical_padding <- 0
-multiline <- TRUE
+  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR |CAARS-2 SR "))
+
 fn_standard_score <- fn_standard_score
 fn_t_score <- fn_t_score
 grp_observer <- list(
   standard_score = c("CEFI Observer-Report"),
-  t_score = c("CAARS Observer-Report")
+  t_score = c("CAARS Observer-Report", "CAARS-2 Observer-Report")
 )
 
-# Observer-Report
+# variables
+data_adhd_observer <-
+  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-OR |CEFI-OR |CAARS-2 OR "))
+pheno <- "adhd_observer"
+
+# make `gt` table
 bwu::tbl_gt(
   data = data_adhd_observer,
   pheno = pheno,
@@ -234,31 +326,36 @@ bwu::tbl_gt(
 
 ```{r}
 #| label: fig-adhd-self
-#| eval: false
+#| eval: true
 #| include: false
 #| fig-height: 6
 #| out-height: 100%
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
-# data for self-report dotplot
-pheno <- "adhd_self"
-# data_adhd_self <- dplyr::filter(data_adhd, filename %in% c("caars_sr.csv", "cefi_sr.csv"))
-colors <- NULL
-# return_plot <- TRUE
-return_plot <- Sys.getenv("RETURN_PLOT")
+# dotplot arguments
 filename <- "fig_adhd_self.svg"
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+
+# dotplot variables to plot (x, y)
 x <- data_adhd_self$z
 y <- data_adhd_self$scale
 
-# Make dotplot
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
 bwu::dotplot(
   data = data_adhd_self,
   x = x,
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
 ```
 
 ```{r}
@@ -269,25 +366,30 @@ bwu::dotplot(
 #| out-height: 100%
 #| fig-cap: "Attention and executive functions are multidimensional concepts that contain several related processes. Both concepts require self-regulatory skills and have some common subprocesses; therefore, it is common to treat them together, or even to refer to both processes when talking about one or the other."
 
-# data for adhd observer dotplot
-pheno <- "adhd_observer"
-# data_adhd_observer <- dplyr::filter(data_adhd, filename %in% c("caars_or.csv", "cefi_or.csv"))
-colors <- NULL
-# return_plot <- TRUE
-return_plot <- Sys.getenv("RETURN_PLOT")
+# dotplot arguments
 filename <- "fig_adhd_observer.svg"
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
+
+# dotplot variables to plot (x, y)
 x <- data_adhd_observer$z
 y <- data_adhd_observer$scale
 
-# Make dotplot
+# Suppress warnings from being converted to errors
+options(warn = 1) # Set warn to 1 to make warnings not halt execution
+
 bwu::dotplot(
   data = data_adhd_observer,
   x = x,
   y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
+
+# Reset warning options to default if needed
+options(warn = 0) # Reset to default behavior
 ```
 
 ### SELF-REPORT
@@ -324,7 +426,7 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let title = "Self-Report of ADHD/EF
+#let title = "ADHD Self Ratings"
 #let file_qtbl = "table_adhd_self.png"
 #let file_fig = "fig_adhd_self.svg"
 #domain(title: [#title], file_qtbl, file_fig)
@@ -369,7 +471,7 @@ bwu::dotplot(
 ```
 
 ```{=typst}
-#let title = "Observer Ratings of ADHD/EF"
+#let title = "ADHD Observer Ratings"
 #let file_qtbl = "table_adhd_observer.png"
 #let file_fig = "fig_adhd_observer.svg"
 #domain(title: [#title], file_qtbl, file_fig)

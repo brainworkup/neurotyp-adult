@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from WISC-5"
 params:
-  patient: Brooklyn
+  patient: Biggie
   test: wisc5
   test_name: WISC-5
   file:
@@ -120,21 +120,16 @@ knitr::opts_chunk$set(
   warning = FALSE,
   error = TRUE
 )
-library(dplyr)
 library(hablar)
 library(here)
 library(knitr)
 library(magrittr)
-library(purrr)
-library(readr)
 library(rJava)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
 library(snakecase)
 library(tabulapdf)
-library(tibble)
-library(tidyr)
 library(tidyverse)
 library(bwu)
 ```

@@ -1,9 +1,9 @@
 ---
-title: "Pluck Tables from CAARS2-2"
+title: "Pluck Tables from CAARS-2"
 params:
-  patient: Biggie
+  patient: Jemiel
   test:
-    label: "CAARS 2:"
+    label: "CAARS-2:"
     value: [caars2_sr]
     input: select
     multiple: no
@@ -46,42 +46,24 @@ knitr::opts_chunk$set(
 )
 library(hablar)
 library(here)
+library(knitr)
 library(magrittr)
-library(readr)
 library(rJava)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
-library(tabulizer)
-library(tibble)
-library(tidyr)
-library(dplyr)
+library(snakecase)
+library(tabulapdf)
+library(tidyverse)
 library(bwu)
 ```
 
-## Patient
+## Patient/Test
 
 ```{r patient}
 patient <- params$patient
-```
-
-## Test
-
-```{r test}
 test <- params$test
-```
-
-## Test Name
-
-```{r testname}
 test_name <- params$test_name
-```
-
-## Upload/attach PDF
-
-```{r file}
-# file <- file.choose()
-file <- file.path(params$file)
 ```
 
 ## Pages
@@ -90,14 +72,13 @@ file <- file.path(params$file)
 pages <- params$pages
 ```
 
-```{r write-file}
-writeLines(
-  file, here::here("pre_csv", paste0(test, ".pdf"))
-)
-```
+## File upload/attach PDF
 
-```{r read-file}
-# test <- readLines(here::here(patient, "pre_csv", paste0(test, ".pdf")))
+```{r}
+# file <- file.path(file.choose())
+# saveRDS(file, "caars2.rds")
+# input_file_path <- readRDS("caars2.rds")
+file <- file.path(params$file)
 ```
 
 ## Locate areas
@@ -129,19 +110,47 @@ if (params$test == "caars2_or") {
 # java -jar tabula-java.jar  -a 571.838,34.808,623.093,576.428 -p 4 "$1" 
 ```
 
-```{r area-unknown, eval=FALSE}
-# area <- bwu::gpluck_locate_areas(
-#   file = file,
-#   pages = pages
-# )
+# Extract tables with `tabulapdf`
+
+### UseThis - updated July 2024
+
+```{r}
+# This works well so far
+plucked_tables_caars2 <- tabulapdf::extract_tables(
+  file = file,
+  pages = pages,
+  output = "matrix",
+  method = "stream",
+  guess = TRUE
+)
+
+# Save the entire list to an R data file
+save(plucked_tables_caars2, file = "plucked_tables_caars2.RData")
+
+# Load the entire list from an R data file
+load("plucked_tables_caars2.RData")
 ```
 
-```{r save-area}
-saveRDS(area, here::here("pre_csv", paste0(test, "_area.rds")))
-```
+### Function process_caars2_tables
 
-```{r read-area}
-# area <- readRDS(here::here(patient, "pre_csv", paste0(test, "_area.rds")))
+```{r}
+library(dplyr)
+library(purrr)
+
+process_caars2_tables <- function(caars2_data) {
+  table_list <- purrr::map(caars2_data, as_tibble) %>%
+    set_names(paste0("table", 1:length(caars2_data))) # Rename tables
+
+  list2env(table_list, .GlobalEnv) # Assign to global environment
+}
+
+# Example Usage:
+process_caars2_tables(plucked_tables_caars2)
+
+# Loop over the list and write each matrix to a CSV file
+for (i in seq_along(plucked_tables_caars2)) {
+  write.csv(plucked_tables_caars2[[i]], file = paste0(test, "_", i, ".csv"), row.names = FALSE)
+}
 ```
 
 ## Extract table
@@ -163,9 +172,11 @@ plucked_tables <- bwu::gpluck_extract_tables(
 
 ### df1
 
-```{r pluck1}
+```{r}
 library(dplyr)
 library(tidyr)
+
+plucked_tables <- plucked_tables_caars2
 
 # Convert matrix to data frame and set proper column names
 df1 <- as.data.frame(plucked_tables[[1]])
@@ -186,9 +197,11 @@ df1
 
 ### df2
 
-```{r pluck2}
+```{r}
 library(dplyr)
 library(tidyr)
+
+plucked_tables <- plucked_tables_caars2
 
 # Convert matrix to data frame and set proper column names
 df2 <- as.data.frame(plucked_tables[[2]])
@@ -212,6 +225,8 @@ df2
 ```{r pluck3}
 library(dplyr)
 library(tidyr)
+
+plucked_tables <- plucked_tables_caars2
 
 # Convert matrix to data frame and set proper column names
 df3 <- as.data.frame(plucked_tables[[3]])
@@ -286,32 +301,45 @@ df3_transformed <- transform_data(df3)
 combined_df <- dplyr::bind_rows(df1_transformed, df2_transformed, df3_transformed)
 ```
 
-### row names
+## Scales
 
-```{r rownames}
-if (params$test == "caars2_sr") {
-  combined_df[1, 1] <- c("CAARS2-SR Inattention/Executive Dysfunction")
-  combined_df[2, 1] <- c("CAARS2-SR Hyperactivity")
-  combined_df[3, 1] <- c("CAARS2-SR Impulsivity")
-  combined_df[4, 1] <- c("CAARS2-SR Emotional Dysregulation")
-  combined_df[5, 1] <- c("CAARS2-SR Negative Self-Concept")
-  combined_df[6, 1] <- c("CAARS2-SR ADHD Inattentive Symptoms")
-  combined_df[7, 1] <- c("CAARS2-SR ADHD Hyperactive/Impulsive Symptoms")
-  combined_df[8, 1] <- c("CAARS2-SR Total ADHD Symptoms")
-  combined_df[9, 1] <- c("CAARS2-SR ADHD Index")
-  combined_df <- combined_df[1:9, ]
-} else if (params$test == "caars2_or") {
-  combined_df[1, 1] <- c("CAARS2-OR Inattention/Executive Dysfunction")
-  combined_df[2, 1] <- c("CAARS2-OR Hyperactivity")
-  combined_df[3, 1] <- c("CAARS2-OR Impulsivity")
-  combined_df[4, 1] <- c("CAARS2-OR Emotional Dysregulation")
-  combined_df[5, 1] <- c("CAARS2-OR Negative Self-Concept")
-  combined_df[6, 1] <- c("CAARS2-OR ADHD Inattentive Symptoms")
-  combined_df[7, 1] <- c("CAARS2-OR ADHD Hyperactive/Impulsive Symptoms")
-  combined_df[8, 1] <- c("CAARS2-OR Total ADHD Symptoms")
-  combined_df[9, 1] <- c("CAARS2-OR ADHD Index")
-  combined_df <- combined_df[1:9, ]
-}
+```{r}
+
+combined_df[1, 1] <- c("Inattention/Executive Dysfunction")
+combined_df[2, 1] <- c("Hyperactivity")
+combined_df[3, 1] <- c("Impulsivity")
+combined_df[4, 1] <- c("Emotional Dysregulation")
+combined_df[5, 1] <- c("Negative Self-Concept")
+combined_df[6, 1] <- c("ADHD Inattentive Symptoms")
+combined_df[7, 1] <- c("ADHD Hyperactive/Impulsive Symptoms")
+combined_df[8, 1] <- c("Total ADHD Symptoms")
+combined_df[9, 1] <- c("ADHD Index")
+combined_df <- combined_df[1:9, ]
+
+
+# if (params$test == "caars2_sr") {
+#   combined_df[1, 1] <- c("CAARS2-SR Inattention/Executive Dysfunction")
+#   combined_df[2, 1] <- c("CAARS2-SR Hyperactivity")
+#   combined_df[3, 1] <- c("CAARS2-SR Impulsivity")
+#   combined_df[4, 1] <- c("CAARS2-SR Emotional Dysregulation")
+#   combined_df[5, 1] <- c("CAARS2-SR Negative Self-Concept")
+#   combined_df[6, 1] <- c("CAARS2-SR ADHD Inattentive Symptoms")
+#   combined_df[7, 1] <- c("CAARS2-SR ADHD Hyperactive/Impulsive Symptoms")
+#   combined_df[8, 1] <- c("CAARS2-SR Total ADHD Symptoms")
+#   combined_df[9, 1] <- c("CAARS2-SR ADHD Index")
+#   combined_df <- combined_df[1:9, ]
+# } else if (params$test == "caars2_or") {
+#   combined_df[1, 1] <- c("CAARS2-OR Inattention/Executive Dysfunction")
+#   combined_df[2, 1] <- c("CAARS2-OR Hyperactivity")
+#   combined_df[3, 1] <- c("CAARS2-OR Impulsivity")
+#   combined_df[4, 1] <- c("CAARS2-OR Emotional Dysregulation")
+#   combined_df[5, 1] <- c("CAARS2-OR Negative Self-Concept")
+#   combined_df[6, 1] <- c("CAARS2-OR ADHD Inattentive Symptoms")
+#   combined_df[7, 1] <- c("CAARS2-OR ADHD Hyperactive/Impulsive Symptoms")
+#   combined_df[8, 1] <- c("CAARS2-OR Total ADHD Symptoms")
+#   combined_df[9, 1] <- c("CAARS2-OR ADHD Index")
+#   combined_df <- combined_df[1:9, ]
+# }
 ```
 
 ## Mutate columns
@@ -412,117 +440,174 @@ if (length(subdomain_col) > 0) {
 
 ## Narrow subdomains
 
-```{r narrow}
-if (params$test == "caars2_sr") {
-  table <-
-    table |>
-    dplyr::mutate(
-      narrow = dplyr::case_when(
-        scale ==
-          "CAARS2-SR Inattention/Executive Dysfunction" ~ "Inattention Self-Report",
-        scale ==
-          "CAARS2-SR Hyperactivity" ~ "Hyperactivity Self-Report",
-        scale ==
-          "CAARS2-SR Impulsivity" ~ "Impulsivity Self-Report",
-        scale ==
-          "CAARS2-SR Emotional Dysregulation" ~ "Self-Concept Self-Report",
-        scale ==
-          "CAARS2-SR Negative Self-Concept" ~ "Self-Concept Self-Report",
-        scale ==
-          "CAARS2-SR ADHD Inattentive Symptoms" ~ "Inattention Self-Report",
-        scale ==
-          "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms" ~ "Hyperactivity Self-Report",
-        scale ==
-          "CAARS2-SR Total ADHD Symptoms" ~ "Combined Symptoms Self-Report",
-        scale ==
-          "CAARS2-SR ADHD Index" ~ "ADHD Index Self-Report",
-        scale ==
-          "CAARS2-SR Inconsistency Index" ~ "Inconsistency Self-Report",
-        TRUE ~ as.character(narrow)
-      )
+```{r}
+
+table <-
+  table |>
+  dplyr::mutate(
+    narrow = dplyr::case_when(
+      scale ==
+        "Inattention/Executive Dysfunction" ~ "Inattention",
+      scale ==
+        "Hyperactivity" ~ "Hyperactivity",
+      scale ==
+        "Impulsivity" ~ "Impulsivity",
+      scale ==
+        "Emotional Dysregulation" ~ "Self-Concept",
+      scale ==
+        "Negative Self-Concept" ~ "Self-Concept",
+      scale ==
+        "ADHD Inattentive Symptoms" ~ "Inattention",
+      scale ==
+        "ADHD Hyperactive/Impulsive Symptoms" ~ "Hyperactivity",
+      scale ==
+        "Total ADHD Symptoms" ~ "Combined Symptoms",
+      scale ==
+        "ADHD Index" ~ "ADHD Index",
+      scale ==
+        "Inconsistency Index" ~ "Inconsistency",
+      TRUE ~ as.character(narrow)
     )
-} else if (params$test == "caars2_or") {
-  table <-
-    table |>
-    dplyr::mutate(
-      narrow = dplyr::case_when(
-        scale ==
-          "CAARS2-OR Inattention/Executive Dysfunction" ~ "Inattention Observer-Report",
-        scale ==
-          "CAARS2-OR Hyperactivity" ~ "Hyperactivity Observer-Report",
-        scale ==
-          "CAARS2-OR Impulsivity" ~ "Impulsivity Observer-Report",
-        scale ==
-          "CAARS2-OR Negative Self-Concept" ~ "Self-Concept Observer-Report",
-        scale ==
-          "CAARS2-OR Emotional Dysregulation" ~ "Emotion/Mood Observer-Report",
-        scale ==
-          "CAARS2-OR ADHD Inattentive Symptoms" ~ "Inattention Observer-Report",
-        scale ==
-          "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms" ~ "Hyperactivity Observer-Report",
-        scale ==
-          "CAARS2-OR Total ADHD Symptoms" ~ "Combined Symptoms Observer-Report",
-        scale ==
-          "CAARS2-OR ADHD Index" ~ "ADHD Index Observer-Report",
-        TRUE ~ as.character(narrow)
-      )
-    )
-}
+  )
+
+
+# if (params$test == "caars2_sr") {
+#   table <-
+#     table |>
+#     dplyr::mutate(
+#       narrow = dplyr::case_when(
+#         scale ==
+#           "CAARS2-SR Inattention/Executive Dysfunction" ~ "Inattention Self-Report",
+#         scale ==
+#           "CAARS2-SR Hyperactivity" ~ "Hyperactivity Self-Report",
+#         scale ==
+#           "CAARS2-SR Impulsivity" ~ "Impulsivity Self-Report",
+#         scale ==
+#           "CAARS2-SR Emotional Dysregulation" ~ "Self-Concept Self-Report",
+#         scale ==
+#           "CAARS2-SR Negative Self-Concept" ~ "Self-Concept Self-Report",
+#         scale ==
+#           "CAARS2-SR ADHD Inattentive Symptoms" ~ "Inattention Self-Report",
+#         scale ==
+#           "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms" ~ "Hyperactivity Self-Report",
+#         scale ==
+#           "CAARS2-SR Total ADHD Symptoms" ~ "Combined Symptoms Self-Report",
+#         scale ==
+#           "CAARS2-SR ADHD Index" ~ "ADHD Index Self-Report",
+#         scale ==
+#           "CAARS2-SR Inconsistency Index" ~ "Inconsistency Self-Report",
+#         TRUE ~ as.character(narrow)
+#       )
+#     )
+# } else if (params$test == "caars2_or") {
+#   table <-
+#     table |>
+#     dplyr::mutate(
+#       narrow = dplyr::case_when(
+#         scale ==
+#           "CAARS2-OR Inattention/Executive Dysfunction" ~ "Inattention Observer-Report",
+#         scale ==
+#           "CAARS2-OR Hyperactivity" ~ "Hyperactivity Observer-Report",
+#         scale ==
+#           "CAARS2-OR Impulsivity" ~ "Impulsivity Observer-Report",
+#         scale ==
+#           "CAARS2-OR Negative Self-Concept" ~ "Self-Concept Observer-Report",
+#         scale ==
+#           "CAARS2-OR Emotional Dysregulation" ~ "Emotion/Mood Observer-Report",
+#         scale ==
+#           "CAARS2-OR ADHD Inattentive Symptoms" ~ "Inattention Observer-Report",
+#         scale ==
+#           "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms" ~ "Hyperactivity Observer-Report",
+#         scale ==
+#           "CAARS2-OR Total ADHD Symptoms" ~ "Combined Symptoms Observer-Report",
+#         scale ==
+#           "CAARS2-OR ADHD Index" ~ "ADHD Index Observer-Report",
+#         TRUE ~ as.character(narrow)
+#       )
+#     )
+# }
 ```
 
 ## Scale descriptions
 
-```{r description}
-if (params$test == "caars2_sr") {
-  table <-
-    table |>
-    dplyr::mutate(
-      description = dplyr::case_when(
-        scale == "CAARS2-SR Inattention/Executive Dysfunction" ~
-          "i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized",
-        scale == "CAARS2-SR Hyperactivity" ~
-          "i.e., problems with working at the same task for long periods of time, feeling more restless than others seem to be, fidgeting",
-        scale == "CAARS2-SR Impulsivity" ~
-          "i.e., engaging in more impulsive acts than others do, low frustration tolerance, quick and frequent mood changes, feeling easily angered and irritated by people",
-        scale == "CAARS2-SR Emotional Dysregulation" ~
-          "i.e., poor social relationships, low self-esteem and self confidence",
-        scale == "CAARS2-SR Negative Self-Concept" ~
-          "i.e., poor social relationships, low self-esteem and self confidence",
-        scale == "CAARS2-SR ADHD Inattentive Symptoms" ~
-          "i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD",
-        scale == "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms" ~
-          "i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD",
-        scale == "CAARS2-SR Total ADHD Symptoms" ~
-          "i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD",
-        scale == "CAARS2-SR ADHD Index" ~
-          "composite indicator for identifying individuals 'at-risk' for ADHD (self-reported)",
-        TRUE ~ as.character(description)
-      )
+```{r}
+table <-
+  table |>
+  dplyr::mutate(
+    description = dplyr::case_when(
+      scale == "Inattention/Executive Dysfunction" ~
+        "i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized",
+      scale == "Hyperactivity" ~
+        "i.e., problems with working at the same task for long periods of time, feeling more restless than others seem to be, fidgeting",
+      scale == "Impulsivity" ~
+        "i.e., engaging in more impulsive acts than others do, low frustration tolerance, quick and frequent mood changes, feeling easily angered and irritated by people",
+      scale == "Emotional Dysregulation" ~
+        "i.e., poor social relationships, low self-esteem and self confidence",
+      scale == "Negative Self-Concept" ~
+        "i.e., poor social relationships, low self-esteem and self confidence",
+      scale == "ADHD Inattentive Symptoms" ~
+        "i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD",
+      scale == "ADHD Hyperactive/Impulsive Symptoms" ~
+        "i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD",
+      scale == "Total ADHD Symptoms" ~
+        "i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD",
+      scale == "ADHD Index" ~
+        "composite indicator for identifying individuals 'at-risk' for ADHD (self-reported)",
+      TRUE ~ as.character(description)
     )
-} else if (params$test == "caars2_or") {
-  table <-
-    table |>
-    dplyr::mutate(
-      description = dplyr::case_when(
-        scale == "CAARS2-OR Inattention/Executive Dysfunction" ~ "i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized",
-        scale == "CAARS2-OR Hyperactivity" ~ "i.e., problems with working at the same task for long periods of time, feeling more restless than others seem to be, fidgeting",
-        scale == "CAARS2-OR Impulsivity" ~
-          "i.e., engaging in more impulsive acts than others do, low frustration tolerance, quick and frequent mood changes, feeling easily angered and irritated by people",
-        scale == "CAARS2-OR Emotional Dysregulation" ~
-          "i.e., poor regulation of emotions",
-        scale == "CAARS2-OR Negative Self-Concept" ~
-          "i.e., poor social relationships, low self-esteem and self confidence",
-        scale ==
-          "CAARS2-OR ADHD Inattentive Symptoms" ~
-          "i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD",
-        scale ==
-          "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms" ~ "i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD",
-        scale == "CAARS2-OR Total ADHD Symptoms" ~ "i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD",
-        scale == "CAARS2-OR ADHD Index" ~ "composite indicator for identifying individuals 'at-risk' for ADHD (observer reported)",
-        TRUE ~ as.character(description)
-      )
-    )
-}
+  )
+
+
+# if (params$test == "caars2_sr") {
+#   table <-
+#     table |>
+#     dplyr::mutate(
+#       description = dplyr::case_when(
+#         scale == "CAARS2-SR Inattention/Executive Dysfunction" ~
+#           "i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized",
+#         scale == "CAARS2-SR Hyperactivity" ~
+#           "i.e., problems with working at the same task for long periods of time, feeling more restless than others seem to be, fidgeting",
+#         scale == "CAARS2-SR Impulsivity" ~
+#           "i.e., engaging in more impulsive acts than others do, low frustration tolerance, quick and frequent mood changes, feeling easily angered and irritated by people",
+#         scale == "CAARS2-SR Emotional Dysregulation" ~
+#           "i.e., poor social relationships, low self-esteem and self confidence",
+#         scale == "CAARS2-SR Negative Self-Concept" ~
+#           "i.e., poor social relationships, low self-esteem and self confidence",
+#         scale == "CAARS2-SR ADHD Inattentive Symptoms" ~
+#           "i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD",
+#         scale == "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms" ~
+#           "i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD",
+#         scale == "CAARS2-SR Total ADHD Symptoms" ~
+#           "i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD",
+#         scale == "CAARS2-SR ADHD Index" ~
+#           "composite indicator for identifying individuals 'at-risk' for ADHD (self-reported)",
+#         TRUE ~ as.character(description)
+#       )
+#     )
+# } else if (params$test == "caars2_or") {
+#   table <-
+#     table |>
+#     dplyr::mutate(
+#       description = dplyr::case_when(
+#         scale == "CAARS2-OR Inattention/Executive Dysfunction" ~ "i.e., trouble concentrating, difficulty planning or completing tasks, forgetfulness, absent-mindedness, being disorganized",
+#         scale == "CAARS2-OR Hyperactivity" ~ "i.e., problems with working at the same task for long periods of time, feeling more restless than others seem to be, fidgeting",
+#         scale == "CAARS2-OR Impulsivity" ~
+#           "i.e., engaging in more impulsive acts than others do, low frustration tolerance, quick and frequent mood changes, feeling easily angered and irritated by people",
+#         scale == "CAARS2-OR Emotional Dysregulation" ~
+#           "i.e., poor regulation of emotions",
+#         scale == "CAARS2-OR Negative Self-Concept" ~
+#           "i.e., poor social relationships, low self-esteem and self confidence",
+#         scale ==
+#           "CAARS2-OR ADHD Inattentive Symptoms" ~
+#           "i.e., behave in a manner consistent with the DSM-5 Inattentive Presentation of ADHD",
+#         scale ==
+#           "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms" ~ "i.e., behave in a manner consistent with the DSM-5 Hyperactive-Impulsive Presentation of ADHD",
+#         scale == "CAARS2-OR Total ADHD Symptoms" ~ "i.e., behave in a manner consistent with the DSM-5 diagnostic criteria for Combined Presentation of ADHD",
+#         scale == "CAARS2-OR ADHD Index" ~ "composite indicator for identifying individuals 'at-risk' for ADHD (observer reported)",
+#         TRUE ~ as.character(description)
+#       )
+#     )
+# }
 ```
 
 ## Glue results
@@ -533,32 +618,32 @@ if (params$test == "caars2_sr") {
     table |>
     dplyr::mutate(
       result = dplyr::case_when(
-        scale == "CAARS2-SR Inattention/Executive Dysfunction" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Inattention/Executive Dysfunction" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR Hyperactivity" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Hyperactivity" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR Impulsivity" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Impulsivity" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR Emotional Dysregulation" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Emotional Dysregulation" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR Negative Self-Concept" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Negative Self-Concept" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR ADHD Inattentive Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported ADHD Inattentive Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported ADHD Hyperactive/Impulsive Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR Total ADHD Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Self-reported Total ADHD Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-SR ADHD Index" ~ glue::glue(
-          "- {patient}'s {description} was {range}.\n"
+        scale == "Self-reported ADHD Index" ~ glue::glue(
+          "- {patient}'s {description} was {range}.\n\n"
         ),
 
         TRUE ~ as.character(result)
@@ -569,32 +654,32 @@ if (params$test == "caars2_sr") {
     table |>
     dplyr::mutate(
       result = dplyr::case_when(
-        scale == "CAARS2-OR Inattention/Executive Dysfunction" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Inattention/Executive Dysfunction" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR Hyperactivity" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Hyperactivity" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR Impulsivity" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Impulsivity" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR Emotional Dysregulation" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Emotional Dysregulation" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR Negative Self-Concept" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Negative Self-Concept" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR ADHD Inattentive Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported ADHD Inattentive Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported ADHD Hyperactive/Impulsive Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR Total ADHD Symptoms" ~ glue::glue(
-          "- {scale} ({description}) was {range}.\n"
+        scale == "Observer reported Total ADHD Symptoms" ~ glue::glue(
+          "- {scale} ({description}) was {range}.\n\n"
         ),
-        scale == "CAARS2-OR ADHD Index" ~ glue::glue(
-          "- {patient}'s observer-rated {description} was {range}.\n"
+        scale == "Observer reported ADHD Index" ~ glue::glue(
+          "- {patient}'s observer-rated {description} was {range}.\n\n"
         ),
         TRUE ~ as.character(result)
       )
@@ -610,8 +695,8 @@ if (params$test == "caars2_sr") {
 table <-
   table |>
   dplyr::relocate(
-    c(raw_score, score, percentile, range, ci_95),
-    .before = test
+    c(raw_score, score, ci_95, percentile, range),
+    .after = scale
   )
 
 table <- table |> dplyr::select(-c(guideline, elevated_items, symptom_count))
@@ -619,8 +704,8 @@ table <- table |> dplyr::select(-c(guideline, elevated_items, symptom_count))
 
 ## Write out csv
 
-```{r write}
-file_path <- here::here("csv", paste0(params$test, ".csv"))
+```{r}
+file_path <- here::here("data", "csv", paste0(params$test, ".csv"))
 readr::write_csv(table, file_path, col_names = TRUE, na = "")
 ```
 
