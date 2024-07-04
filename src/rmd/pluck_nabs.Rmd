@@ -212,7 +212,7 @@ output:
 ```{r setup, include = FALSE}
 Sys.setenv(
   JAVA_HOME =
-    "/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-22.0.1+8.1/Contents/Home"
+    "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 )
 options(java.parameters = "-Xmx16000m")
 knitr::opts_chunk$set(
@@ -232,8 +232,8 @@ library(rJava)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
-library(tabulapdf)
-library(tabulapdfjars)
+library(tabulizer)
+library(tabulizerjars)
 library(tibble)
 library(tidyr)
 library(dplyr)

@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables BASC-3 PRS Adolescent"
 params:
-  patient: Biggie
+  patient: Felix
   test: basc3_prs_adolescent
   test_name: "BASC-3 PRS"
   file:
@@ -30,7 +30,7 @@ library(readr)
 library(rJava)
 library(rmarkdown)
 library(shiny)
-library(tabulapdf)
+library(tabulizer)
 library(tibble)
 library(tidyr)
 library(bwu)
@@ -38,7 +38,7 @@ library(rmdformats)
 # Set JAVA environment
 Sys.setenv(
   JAVA_HOME =
-    "/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-22.0.1+8.1/Contents/Home"
+    "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 )
 options(java.parameters = "-Xmx16000m")
 # Set knitr options
@@ -76,7 +76,7 @@ pages <- params$pages
 
 ```{r file}
 # pdf_file <- file.path(file.choose())
-# pdf_file <- "/Users/joey/neuropsychology/Biggie/pdf/BASC-3-PRS-Report_51189744_1693458387761.pdf"
+# pdf_file <- "/Users/joey/neuropsychology/Felix/pdf/BASC-3-PRS-Report_51189744_1693458387761.pdf"
 pdf_file <- params$file
 ```
 
@@ -440,13 +440,13 @@ if (params$test == "basc3_prs_child") {
 }
 ```
 
-## Pluck Text
+## Pluck Text2
 
 ```{r text2}
 library(pdftools)
 library(stringr)
 
-patient <- "Biggie"
+patient <- "Felix"
 
 file <- here::here(patient, "pdf", "basc3_prs.pdf")
 
@@ -460,7 +460,7 @@ text <- get_text(file)
 text
 
 get_table <- function(files, ...) {
-  L <- tabulapdf::extract_tables(files, output = "data.frame")
+  L <- tabulizer::extract_tables(files, output = "data.frame")
   i <- which.max(lengths(L))
   data.frame(L[[i]])
 }
