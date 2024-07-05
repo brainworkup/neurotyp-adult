@@ -177,6 +177,7 @@ data_adhd_self <-
   dplyr::filter(test == "caars_sr" | test == "cefi_sr" | test == "caars2_sr") |>
   dplyr::arrange(dplyr::desc(percentile)) |>
   dplyr::distinct(.keep_all = FALSE)
+
 # Flatten the text
 bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_text_self.qmd")
 ```

@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from NAB-Screener (NAB-S)"
 params:
-  patient: Daniel
+  patient: Biggie
   test:
     label: "Test"
     value: nabs
@@ -15,7 +15,7 @@ params:
     value: NAB
     input: select
     multiple: no
-    choices: [NAB, NAB-S]    
+    choices: [NAB, NAB-S]
   file:
     label: "No file selected"
     value: file
@@ -210,11 +210,8 @@ output:
 ## Load libraries
 
 ```{r setup, include = FALSE}
-Sys.setenv(
-  JAVA_HOME =
-    "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
-)
-options(java.parameters = "-Xmx16000m")
+Sys.setenv(JAVA_HOME = "/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-22.0.1+8.1/Contents/Home")
+# options(java.parameters = "-Xmx16000m")
 knitr::opts_chunk$set(
   root.dir = normalizePath("./"),
   echo = TRUE,
@@ -222,21 +219,23 @@ knitr::opts_chunk$set(
   warning = FALSE,
   error = TRUE
 )
-library(tidytable)
-library(bwu)
+library(fs)
+library(glue)
 library(hablar)
 library(here)
+library(knitr)
 library(magrittr)
-library(readr)
+library(miniUI)
+library(pdftools)
 library(rJava)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
-library(tabulizer)
-library(tabulizerjars)
-library(tibble)
-library(tidyr)
-library(dplyr)
+library(snakecase)
+library(tabulapdf)
+library(tidyverse)
+library(xfun)
+library(bwu)
 ```
 
 ## Patient
@@ -264,14 +263,6 @@ file <- file.path(params$file)
 pages <- params$pages
 ```
 
-```{r wfile}
-writeLines(file, here::here(patient, "pre_csv", "nabs_pdf"))
-```
-
-```{r, readfile, eval = FALSE}
-file <- readLines(here::here(patient, "pre_csv", "nabs_pdf"))
-```
-
 ## Locate areas
 
 ```{r areas-known}
@@ -292,14 +283,6 @@ area2 <- bwu::gpluck_locate_areas(
   file = file,
   pages = c(2, 5, 6, 7, 8, 8)
 )
-```
-
-```{r s-area}
-saveRDS(area, here::here(patient, "pre_csv", "area_nabs.rds"))
-```
-
-```{r r-area, eval=FALSE}
-area <- readRDS(here::here(patient, "pre_csv", "area_nabs.rds"))
 ```
 
 # Extract tables
@@ -1521,7 +1504,7 @@ for (i in 1:nrow(df)) {
 # Write final csv table
 
 ```{r write-out}
-readr::write_excel_csv(nabs, here::here("csv", "nabs.csv"), col_names = TRUE, na = "")
+readr::write_excel_csv(nabs, here::here("data", "csv", "nabs.csv"), col_names = TRUE, na = "")
 
 if (any(is.na(nabs$percentile))) {
   stop("STOP!!! NA value found in percentile column. Please fill in missing values.")
@@ -1533,6 +1516,6 @@ if (any(is.na(nabs$percentile))) {
 ```{r writeout-g}
 table <- nabs
 test <- "g2"
-file_path <- here::here("csv", paste0(test, ".csv"))
-readr::write_excel_csv(nabs, here::here("csv", "nabs.csv"), append = TRUE, na = "")
+file_path <- here::here("data", paste0(test, ".csv"))
+readr::write_excel_csv(nabs, here::here("data", "csv", "nabs.csv"), append = TRUE, na = "")
 ```

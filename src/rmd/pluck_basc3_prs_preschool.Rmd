@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables BASC-3 PRS Preschool"
 params:
-  patient: Leo
+  patient: Biggie
   test:
     label: "BASC-3:"
     value: [basc3_prs_preschool]
@@ -101,7 +101,7 @@ file <- params$file
 ```{r eval = FALSE}
 library(tabulapdf)
 
-file <- file.path("/Users/joey/reports/Leo/pdf/BASC-3-PRS-Report-with-Intervention-Recommendations_57306339_1714773274018.pdf")
+file <- file.path("/Users/joey/reports/Biggie/pdf/BASC-3-PRS-Report-with-Intervention-Recommendations_57306339_1714773274018.pdf")
 
 # f <- file.path(file.choose(""))
 

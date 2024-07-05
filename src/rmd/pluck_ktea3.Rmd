@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from KTEA-3"
 params:
-  patient: Brooklyn
+  patient: Biggie
   test:
     label: "Test"
     value: ktea3
@@ -130,7 +130,6 @@ knitr::opts_chunk$set(
   warning = FALSE,
   error = TRUE
 )
-library(bwu)
 library(fs)
 library(glue)
 library(hablar)
@@ -160,7 +159,7 @@ test_name <- "KTEA-3"
 ## Patient initials
 
 ```{r patient}
-patient <- "Brooklyn"
+patient <- "Biggie"
 ```
 
 ## Pages
