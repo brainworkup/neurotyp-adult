@@ -280,12 +280,7 @@ params:
       - Word Generation Perseverations
   column_names1:
     label: Table 1 Column Names
-    value:
-      - scale
-      - score
-      - percentile
-      - ci_95
-      - category
+    value: [scale, score, percentile, ci_95, category]
     input: select
     multiple: yes
     choices:
@@ -296,14 +291,7 @@ params:
       - category
   column_names2:
     label: Tables 2-4
-    value:
-      - scale
-      - raw_score
-      - z_score
-      - score
-      - percentile
-      - base_rate
-      - category
+    value: [scale, raw_score, z_score, score, percentile, base_rate, category]
     input: select
     multiple: yes
     choices:
@@ -448,15 +436,14 @@ library(bwu)
 
 ```{r}
 # source("pluck_nab_params.R")
-
 patient <- params$patient
 test <- params$test
 test_name <- params$test_name
 pages <- params$pages
 # file <- file.path(file.choose())
-# file <- file.path(params$file)
-# saveRDS(file, "nab.rds")
-file <- readRDS("nab.rds")
+file <- file.path(params$file)
+saveRDS(file, "nab.rds")
+# file <- readRDS("nab.rds")
 ```
 
 ## Areas
@@ -523,7 +510,7 @@ areas <- list(
 saveRDS(areas, file = "areas_list.rds")
 
 # Load the areas list from a file
-areas <- readRDS("areas_list.rds")
+# areas <- readRDS("areas_list.rds")
 ```
 
 ```{r eval = FALSE}
@@ -536,13 +523,17 @@ areas <- tabulapdf::locate_areas(
 
 ```{r}
 # Saves areas as text files in df or list
-# assuming areas is already defined and contains the desired structure
-
 # Convert the list to a data frame
 areas_df <- do.call(rbind, lapply(areas, function(x) as.data.frame(t(x))))
 
 # Write the data frame to a text file
-write.table(areas_df, file = "areas_nab.txt", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+write.table(areas_df,
+  file = "areas_nab.txt",
+  sep = "\t",
+  row.names = FALSE,
+  col.names = TRUE,
+  quote = FALSE
+)
 
 # Save the list structure to a text file
 dput(areas, file = "areas_nab.txt")
@@ -560,13 +551,15 @@ plucked_tables <- tabulapdf::extract_tables(
   pages = pages,
   area = areas,
   guess = NULL,
-  method = "decide",
+  method = "lattice",
   output = "matrix"
 )
 
 # Save the list of data frames to a file
 saveRDS(plucked_tables, file = "plucked_tables.rds")
+```
 
+```{r}
 # Load the list of data frames from the file
 plucked_tables <- readRDS("plucked_tables.rds")
 
@@ -581,19 +574,20 @@ str(plucked_tables)
 library(dplyr)
 library(tibble)
 library(glue)
+library(rlang)
 
 # Function to handle percentile conversion
 convert_percentile <- function(df, column_name) {
+  column_sym <- rlang::sym(column_name)
+
   df <- df %>%
     mutate(original_percentile = .data[[column_name]]) %>% # Store original percentile values
-    mutate(temp_column = as.numeric(ifelse(grepl("^>", .data[[column_name]]),
+    mutate(temp_column = as.numeric(ifelse(
+      grepl("^>", .data[[column_name]]),
       as.numeric(sub("^>", "", .data[[column_name]])) + 0.1,
-      ifelse(grepl("^<", .data[[column_name]]),
-        0.99,
-        .data[[column_name]]
-      )
+      ifelse(grepl("^<", .data[[column_name]]), 0.9, .data[[column_name]])
     ))) %>%
-    mutate(!!column_name := temp_column) %>%
+    mutate(!!column_sym := temp_column) %>%
     select(-temp_column)
   return(df)
 }
@@ -633,7 +627,7 @@ table_index <- 1
 save_path <- "data"
 
 # Extract table1
-table <- tibble::as_tibble(plucked_tables[[table_index]])
+table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names1
 
 # Specify the columns to be converted
@@ -675,14 +669,15 @@ write.csv(table, glue("{save_path}/{test}_table{table_index}.csv"), row.names = 
 
 # make table 1
 table1 <- table
+print(table1)
 ```
 
 ## NAB Attention (Table 2)
 
 ```{r}
+
 # Extract table
 table_index <- 2
-
 table <- tibble::as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names2
 
@@ -702,9 +697,6 @@ tidy_table <- tidy_data(table)
 
 # Convert columns again after tidying to ensure types are preserved
 table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
-
-# Assign to the original table variable
-table <- tidy_table
 
 if (params$test == "nabs") {
   table[1, 1] <- c("Orientation")
@@ -755,15 +747,15 @@ write.csv(table, glue("{save_path}/{test}_table{table_index}.csv"), row.names = 
 
 # make table 2
 table2 <- table
+print(table2)
 ```
 
 ## NAB Language (Table 3)
 
 ```{r}
-# extract table
-table_index <- 3
 
-# Assuming is already defined
+# Extract table
+table_index <- 3
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names2
 
@@ -772,17 +764,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score", "base_rate")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nabs") {
   table[1, 1] <- c("Auditory Comprehension")
@@ -832,10 +824,9 @@ print(table3)
 ## NAB List Learning (Table 4)
 
 ```{r}
-# extract table
-table_index <- 4
 
-# Assuming is already defined
+# Extract table
+table_index <- 4
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names2
 
@@ -844,17 +835,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score", "base_rate")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nab") {
   table[1, 1] <- c("List Learning List A Trial 1 Immediate Recall")
@@ -896,29 +887,28 @@ print(table4)
 ## NAB Shape Learning (Table 5)
 
 ```{r}
-# extract table
-table_index <- 5
 
-# Assuming is already defined
+# Extract table
+table_index <- 5
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names3
 
-# Specify the columns to be converted
+# Table 5-9 don't have base_rate
 to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nabs") {
   table[1, 1] <- c("Visual Discrimination")
@@ -949,10 +939,9 @@ print(table5)
 ## NAB Story Learning (Table 6)
 
 ```{r}
-# extract table
-table_index <- 6
 
-# Assuming is already defined
+# Extract table
+table_index <- 6
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names3
 
@@ -961,17 +950,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nab") {
   table[1, 1] <- c("Story Learning Trial 1 Phrase Unit")
@@ -1003,10 +992,9 @@ print(table6)
 ## NAB Daily Living Memory (Table 7)
 
 ```{r}
-# extract table
-table_index <- 7
 
-# Assuming is already defined
+# Extract table
+table_index <- 7
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names3
 
@@ -1015,17 +1003,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nab") {
   table[1, 1] <- c("Daily Living Memory Immediate Recall")
@@ -1049,15 +1037,15 @@ write.csv(table, glue("{save_path}/{test}_table{table_index}.csv"), row.names = 
 
 # make table 7
 table7 <- table
+print(table7)
 ```
 
 ## NAB Spatial Module (Table 8)
 
 ```{r}
-# extract table
-table_index <- 8
 
-# Assuming is already defined
+# Extract table
+table_index <- 8
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names3
 
@@ -1066,17 +1054,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nab") {
   table[1, 1] <- c("Visual Discrimination")
@@ -1103,14 +1091,15 @@ write.csv(table, glue("{save_path}/{test}_table{table_index}.csv"), row.names = 
 
 # make table 8
 table8 <- table
+print(table8)
 ```
 
 ## NAB Executive Functions Module (Table 9)
 
 ```{r}
-# extract table
-table_index <- 9
 
+# Extract table
+table_index <- 9
 table <- as_tibble(plucked_tables[[table_index]])
 colnames(table) <- params$column_names3
 
@@ -1119,17 +1108,17 @@ to_integer <- c("raw_score", "score", "percentile")
 to_double <- c("z_score")
 to_factor <- c("category")
 
+# Apply the convert_percentile function to the percentile column
+table <- convert_percentile(table, "percentile")
+
 # Use the function to convert the columns
 table <- convert_columns(table, to_integer, to_double, to_factor)
 
-# Use the function to tidy the data frame
+# Tidy the data frame
 tidy_table <- tidy_data(table)
 
-# View the resulting tidy data frame
-print(tidy_table)
-
-# scales
-table <- tidy_table
+# Convert columns again after tidying to ensure types are preserved
+table <- convert_columns(tidy_table, to_integer, to_double, to_factor)
 
 if (params$test == "nab") {
   table[1, 1] <- c("Mazes")
@@ -1142,13 +1131,14 @@ if (params$test == "nab") {
   table[2, 1] <- c("Judgment")
   table[3, 1] <- c("Categories")
   table[4, 1] <- c("Word Generation")
-} 
+}
 
 # Save table as csv file
 write.csv(table, glue("{save_path}/{test}_table{table_index}.csv"), row.names = FALSE)
 
 # make table 9
 table9 <- table
+print(table9)
 ```
 
 ## Mutate
@@ -1158,10 +1148,7 @@ table1 <- bwu::gpluck_make_columns(
   table1,
   test = params$test,
   test_name = params$test_name,
-  raw_score = "",
-  z_score = "",
   range = "",
-  base_rate = "",
   domain = "",
   subdomain = "",
   narrow = "",
@@ -1184,8 +1171,8 @@ table2 <- bwu::gpluck_make_columns(
   subdomain = "",
   narrow = "",
   pass = "",
-  verbal = "",
-  timed = "",
+  verbal = "Nonverbal",
+  timed = "Timed",
   score_type = "t_score",
   test_type = "npsych_test",
   description = "",
@@ -1310,7 +1297,7 @@ table9 <- bwu::gpluck_make_columns(
   subdomain = "",
   narrow = "",
   pass = "",
-  verbal = "",
+  verbal = "Nonverbal",
   timed = "Untimed",
   score_type = "t_score",
   test_type = "npsych_test",
@@ -1394,115 +1381,114 @@ dsb <- c(
   "Digits Backward",
   "Digits Backward Longest Span"
 )
-nlt <- c(
-  "Numbers & Letters Part A Speed",
-  "Numbers & Letters Part A Efficiency",
-  "Numbers & Letters Part B Efficiency",
-  "Numbers & Letters Part C Efficiency",
-  "Numbers & Letters Part D Efficiency"
-)
-nle <- c(
-  "Numbers & Letters Part A Errors"
-)
 
-table2 <-
-  table2 |>
+# Table 2
+table2 <- table2 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% orientation ~ "Attention",
-      scale %in% dsf ~ "Attention",
-      scale %in% dsb ~ "Working Memory",
-      scale == "Numbers & Letters Part A Speed" ~ "Processing Speed",
-      scale == "Numbers & Letters Part A Errors" ~ "Attention",
-      scale == "Numbers & Letters Part A Efficiency" ~ "Processing Speed",
-      scale == "Numbers & Letters Part B Efficiency" ~ "Attention",
-      scale == "Numbers & Letters Part C Efficiency" ~ "Attention",
-      scale == "Numbers & Letters Part D Efficiency" ~ "Attention",
-      scale == "Numbers & Letters Part D Disruption" ~ "Attention",
-      scale == "Dots" ~ "Working Memory",
-      scale == "Driving Scenes" ~ "Attention",
+      grepl(orientation, scale) ~ "Attention",
+      grepl(dsf, scale) ~ "Attention",
+      grepl(dsb, scale) ~ "Working Memory",
+      grepl("Numbers & Letters Part A Speed", scale) ~ "Processing Speed",
+      grepl("Numbers & Letters Part A Errors", scale) ~ "Attention",
+      grepl("Numbers & Letters Part A Efficiency", scale) ~ "Processing Speed",
+      grepl("Numbers & Letters Part B Efficiency", scale) ~ "Attention",
+      grepl("Numbers & Letters Part C Efficiency", scale) ~ "Attention",
+      grepl("Numbers & Letters Part D Efficiency", scale) ~ "Attention",
+      grepl("Numbers & Letters Part D Disruption", scale) ~ "Attention",
+      grepl("Dots", scale) ~ "Working Memory",
+      grepl("Driving Scenes", scale) ~ "Daily Living",
       TRUE ~ as.character(subdomain)
     )
   )
 
-# Table 3  
-table3 <-
-  table3 |>
+# Table 3
+table3 <- table3 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% c("Auditory Comprehension") ~ "Listening Ability",
-      scale %in% c("Naming") ~ "Retrieval",
-      scale %in% c("Oral Production") ~ "Expression",
-      scale %in% c("Reading Comprehension") ~ "Comprehension",
-      scale %in% c("Writing") ~ "Expression",
-      scale %in% c("Bill Payment") ~ "Daily Living",
+      grepl("Auditory Comprehension", scale) ~ "Listening Ability",
+      grepl("Naming", scale) ~ "Retrieval",
+      grepl("Oral Production", scale) ~ "Expression",
+      grepl("Reading Comprehension", scale) ~ "Comprehension",
+      grepl("Writing", scale) ~ "Expression",
+      grepl("Bill Payment", scale) ~ "Daily Living",
       TRUE ~ as.character(subdomain)
     )
   )
+```
 
-# Table 4
-table4 <-
-  table4 |>
+```{r}
+# Update the subdomain calculation
+table4 <- table4 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% c("Trial") ~ "Learning Trials",
-      scale %in% c("Immediate") ~ "Learning Efficiency",
-      scale %in% c("Short Delayed", "Long Delayed") ~ "Delayed Recall",
-      scale %in% c("Recognition", "Discriminability") ~ "Delayed Recall",
-      scale %in% c("Semantic Clusters") ~ "Learning Efficiency",
-      scale %in% c("Perseverations", "Intrusions") ~ "Attention",
+      grepl("Trial", scale) ~ "Learning Efficiency",
+      grepl("Immediate Recall", scale) ~ "Learning Efficiency",
+      grepl("Short Delayed", scale) ~ "Delayed Recall",
+      grepl("Long Delayed", scale) ~ "Delayed Recall",
+      grepl("Recognition", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Discriminability", scale) ~ "Delayed Recall",
+      grepl("Semantic Clusters", scale) ~ "Learning Efficiency",
+      grepl("Perseverations", scale) ~ "Attention",
+      grepl("Intrusions", scale) ~ "Attention",
       TRUE ~ as.character(subdomain)
     )
   )
 
 # Table 5
-table5 <-
-  table5 |>
+table5 <- table5 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% c("Trial") ~ "Learning Trials",
-      scale %in% c("Immediate") ~ "Learning Efficiency",
-      scale %in% c("Delayed") ~ "Delayed Recall",
-      scale %in% c("Recognition", "Discriminability") ~ "Delayed Recall",
+      grepl("Trial", scale) ~ "Learning Efficiency",
+      grepl("Immediate", scale) ~ "Learning Efficiency",
+      grepl("Delayed", scale) ~ "Delayed Recall",
+      grepl("Recognition", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Discriminability", scale) ~ "Delayed Recall",
       TRUE ~ as.character(subdomain)
     )
   )
 
 # Table 6
-table6 <-
-  table6 |>
+table6 <- table6 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% c("Trial") ~ "Learning Trials",
-      scale %in% c("Immediate") ~ "Learning Efficiency",
-      scale %in% c("Delayed") ~ "Delayed Recall",
-      scale %in% c("Recognition", "Discriminability") ~ "Delayed Recall",
+      grepl("Trial", scale) ~ "Learning Efficiency",
+      grepl("Immediate", scale) ~ "Learning Efficiency",
+      grepl("Delayed", scale) ~ "Delayed Recall",
+      grepl("Recognition", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Discriminability", scale) ~ "Delayed Recall",
       TRUE ~ as.character(subdomain)
     )
   )
 
 # Table 7
-table7 <-
-  table7 |>
+table7 <- table7 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale %in% c("Immediate") ~ "Learning Efficiency",
-      scale %in% c("Delayed") ~ "Delayed Recall",
-      scale %in% c("Recognition", "Discriminability") ~ "Delayed Recall",
+      grepl("Immediate", scale) ~ "Learning Efficiency",
+      grepl("Delayed", scale) ~ "Delayed Recall",
+      grepl("Recognition", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Discriminability", scale) ~ "Delayed Recall",
       TRUE ~ as.character(subdomain)
     )
   )
+```
 
+```{r}
 # Table 8
-table8 <-
-  table8 |>
+table8 <- table8 |>
   dplyr::mutate(
     subdomain = dplyr::case_when(
-      scale == "Visual Discrimination" ~ "Perception",
-      scale == "Design Construction" ~ "Construction",
-      scale %in% c("Copy") ~ "Organization",
-      scale %in% c("Recall", "Retention") ~ "Delayed Recall",
-      scale == "Map Reading" ~ "Awareness",
+      grepl("Visual Discrimination", scale) ~ "Perception",
+      grepl("Design Construction", scale) ~ "Construction",
+      grepl("Copy", scale) ~ "Organization",
+      grepl("Recall", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Map Reading", scale) ~ "Daily Living",
       TRUE ~ as.character(subdomain)
     )
   )
@@ -1533,7 +1519,7 @@ table1 <-
       scale == "Language Index (LAN)" ~ "Language Index",
       scale == "Memory Index (MEM)" ~ "Memory Index",
       scale == "Spatial Index (SPT)" ~ "Spatial Index",
-      scale == "Executive Functions Index (EXE)" ~ "Executive Functions Index",
+      scale == "Executive Functions Index (EXE)" ~ "Executive Index",
       scale == "Total NAB Index (T-NAB)" ~ "Neurocognitive Index",
       TRUE ~ as.character(narrow)
     )
@@ -1543,17 +1529,18 @@ table2 <-
   table2 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale %in% orientation ~ "Orientation",
-      scale %in% dsf ~ "Attention Span",
-      scale %in% dsb ~ "Verbal Working Memory",
-      scale == "Numbers & Letters Part A Speed" ~ "Psychomotor Speed",
-      scale == "Numbers & Letters Part A Errors" ~ "Response Monitoring",
-      scale == "Numbers & Letters Part A Efficiency" ~ "Cognitive Efficiency",
-      scale == "Numbers & Letters Part B Efficiency" ~ "Attentional Fluency",
-      scale == "Numbers & Letters Part C Efficiency" ~ "Attentional Fluency",
-      scale == "Numbers & Letters Part D Efficiency" ~ "Attentional Fluency",
-      scale == "Dots" ~ "Nonverbal Working Memory",
-      scale == "Driving Scenes" ~ "Attentional Capacity",
+      grepl(orientation, scale) ~ "Orientation",
+      grepl(dsf, scale) ~ "Attention Span",
+      grepl(dsb, scale) ~ "Verbal Working Memory",
+      grepl("Part A Speed", scale) ~ "Psychomotor Speed",
+      grepl("Part A Errors", scale) ~ "Response Monitoring",
+      grepl("Numbers & Letters Part A Efficiency", scale) ~ "Cognitive Efficiency",
+      grepl("Numbers & Letters Part B Efficiency", scale) ~ "Attentional Fluency",
+      grepl("Numbers & Letters Part C Efficiency", scale) ~ "Attentional Fluency",
+      grepl("Numbers & Letters Part D Efficiency", scale) ~ "Attentional Fluency",
+      grepl("Part D Disruption", scale) ~ "Disruption",
+      grepl("Dots", scale) ~ "Nonverbal Working Memory",
+      grepl("Driving Scenes", scale) ~ "Everyday Attention",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1562,12 +1549,12 @@ table3 <-
   table3 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale %in% c("Auditory Comprehension") ~ "Auditory Comprehension",
-      scale %in% c("Naming") ~ "Naming",
-      scale %in% c("Oral Production") ~ "Expression",
-      scale %in% c("Reading Comprehension") ~ "Comprehension",
-      scale %in% c("Writing") ~ "Expression",
-      scale %in% c("Bill Payment") ~ "Daily Living",
+      grepl("Auditory Comprehension", scale) ~ "Auditory Comprehension",
+      grepl("Naming", scale) ~ "Naming",
+      grepl("Oral Production", scale) ~ "Verbal Expression",
+      grepl("Reading Comprehension", scale) ~ "Reading Comprehension",
+      grepl("Writing", scale) ~ "Written Expression",
+      grepl("Bill Payment", scale) ~ "Everyday Language",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1576,8 +1563,8 @@ table4 <-
   table4 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale %in% c("List Learning Immediate") ~ "Word-List Learning",
-      scale %in% c("List Learning Delayed") ~ "Free-Recall Memory",
+      grepl("List Learning Immediate", scale) ~ "Word-List Learning",
+      grepl("List Learning Delayed", scale) ~ "Free-Recall Memory",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1586,8 +1573,8 @@ table5 <-
   table5 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale %in% c("Shape") ~ "Visual Memory",
-      scale %in% c("Recognition") ~ "Visual Memory",
+      grepl("Shape", scale) ~ "Visual Memory",
+      grepl("Recognition", scale) ~ "Visual Memory",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1595,7 +1582,7 @@ table5 <-
 table6 <-
   table6 |>
   dplyr::mutate(narrow = dplyr::case_when(
-    scale %in% c("Story Learning") ~ "Story Memory",
+    grepl("Story Learning", scale) ~ "Story Memory",
     TRUE ~ as.character(narrow)
   ))
 
@@ -1603,8 +1590,8 @@ table7 <-
   table7 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale == c("Daily Living Memory") ~ "Daily Living",
-      scale == c("Daily Living Memory Recall") ~ "Daily Living",
+      grepl("Daily Living Memory", scale) ~ "Everyday Memory",
+      grepl("Daily Living Memory Recall", scale) ~ "Everyday Memory",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1613,20 +1600,25 @@ table8 <-
   table8 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      scale == "Visual Discrimination" ~ "Perception",
-      scale == "Design Construction" ~ "Construction",
+      grepl("Visual Discrimination", scale) ~ "Perception",
+      grepl("Design Construction", scale) ~ "Construction",
+      grepl("Copy", scale) ~ "Organization",
+      grepl("Recall", scale) ~ "Delayed Recall",
+      grepl("Retention", scale) ~ "Delayed Recall",
+      grepl("Map Reading", scale) ~ "Everyday Spatial",
       TRUE ~ as.character(narrow)
     )
   )
+
 table9 <-
   table9 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
       scale == "Mazes" ~ "Planning",
+      scale == "Categories" ~ "Concept Formation",
       scale == "Word Generation" ~ "Generativity",
       scale == "Word Generation Perseverations" ~ "Response Monitoring",
-      scale == "Judgment" ~ "Judgment",
-      scale == "Categories" ~ "Concept Formation",
+      scale == "Judgment" ~ "Everyday Decision-Making",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1654,10 +1646,10 @@ table2 <-
   dplyr::mutate(
     pass = dplyr::case_when(
       scale %in% orientation ~ "Attention",
-      scale %in% dsf ~ "Sequential",
-      scale %in% dsb ~ "Attention",
-      scale %in% nlt ~ "Attention",
-      scale %in% nle ~ "Attention",
+      grepl(dsf, scale) ~ "Sequential",
+      grepl(dsb, scale) ~ "Attention",
+      grepl(c("Part A Efficiency", "Part A Speed"), scale) ~ "Processing Speed",
+      grepl(c("Part B Efficiency", "Part C Efficiency", "Part D Efficiency"), scale) ~ "Attention",
       TRUE ~ as.character(pass)
     )
   )
@@ -1666,8 +1658,8 @@ table3 <-
   table3 |>
   dplyr::mutate(
     pass = dplyr::case_when(
-      scale %in% c("Auditory Comprehension") ~ "Sequential",
-      scale %in% c("Naming") ~ "Knowledge",
+      grepl("Auditory Comprehension", scale) ~ "Sequential",
+      grepl("Naming", scale) ~ "Knowledge",
       TRUE ~ as.character(pass)
     )
   )
@@ -1676,7 +1668,7 @@ table4 <-
   table4 |>
   dplyr::mutate(
     pass = dplyr::case_when(
-      scale %in% c("List Learning") ~ "Sequential",
+      grepl("List Learning", scale) ~ "Sequential",
       TRUE ~ as.character(pass)
     )
   )
@@ -1685,8 +1677,8 @@ table8 <-
   table8 |>
   dplyr::mutate(
     pass = dplyr::case_when(
-      scale %in% c("Copy") ~ "Planning",
-      scale == c("Recall") ~ "Simultaneous",
+      grepl("Copy", scale) ~ "Planning",
+      grepl("Recall", scale) ~ "Simultaneous",
       TRUE ~ as.character(pass)
     )
   )
@@ -1698,6 +1690,8 @@ table9 <-
       scale == "Mazes" ~ "Planning",
       scale == "Word Generation" ~ "Sequential",
       scale == "Word Generation Perseverations" ~ "Attention",
+      scale == "Categories" ~ "Simultaneous",
+      scale == "Judgment" ~ "Knowledge",
       TRUE ~ as.character(pass)
     )
   )
@@ -1724,13 +1718,9 @@ table2 <-
   table2 |>
   dplyr::mutate(
     verbal = dplyr::case_when(
-      scale %in% orientation ~ "Verbal",
-      scale %in% dsf ~ "Verbal",
-      scale %in% dsb ~ "Verbal",
-      scale %in% nlt ~ "Nonverbal",
-      scale %in% nle ~ "Nonverbal",
-      scale %in% c("Dots") ~ "Nonverbal",
-      scale %in% c("Driving") ~ "",
+      grepl(orientation, scale) ~ "Verbal",
+      grepl(dsf, scale) ~ "Verbal",
+      grepl(dsb, scale) ~ "Verbal",
       TRUE ~ as.character(verbal)
     )
   )
@@ -1740,13 +1730,12 @@ table9 <-
   dplyr::mutate(
     verbal = dplyr::case_when(
       scale == "Mazes" ~ "Nonverbal",
-      scale %in% c("Word Generation") ~ "Verbal",
-      scale %in% c("Judgment") ~ "Verbal",
-      scale %in% c("Categories") ~ "",
+      grepl("Word Generation", scale) ~ "Verbal",
+      grepl("Judgment", scale) ~ "Verbal",
+      grepl("Categories", scale) ~ "",
       TRUE ~ as.character(verbal)
     )
   )
-
 ```
 
 ## Timed
@@ -1770,11 +1759,9 @@ table2 <-
   table2 |>
   dplyr::mutate(
     timed = dplyr::case_when(
-      scale %in% orientation ~ "Untimed",
-      scale %in% dsf ~ "Untimed",
-      scale %in% dsb ~ "Untimed",
-      scale %in% nlt ~ "Timed",
-      scale %in% nle ~ "Timed",
+      grepl(orientation, scale) ~ "Untimed",
+      grepl(dsf, scale) ~ "Untimed",
+      grepl(dsb, scale) ~ "Untimed",
       TRUE ~ as.character(timed)
     )
   )
@@ -1849,25 +1836,12 @@ table1 <-
   table1 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Attention Index (ATT)" ~ "An overall screening measure of the examinee's attentional functioning",
-      
-      scale ==
-        "Language Index (LAN)" ~ "The patient’s general ability to access and apply acquired word knowledge, to verbalize meaningful concepts, think about verbal information, and express themself using words",
-      
-      scale ==
-        "Memory Index (MEM)" ~ "A composite measure of the examinee's verbal and visual memory functioning",
-      
-      scale ==
-        "Spatial Index (SPT)" ~ "A composite screening measure of visuoperceptual skills, attention to detail, and visuoconstructional skills",
-      
-      scale ==
-        "Executive Functions Index (EXE)" ~ "A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity",
-      
-      scale == "Total NAB Index (T-NAB)" ~ "An omnibus measure of neuropsychological
-      functioning (independent of general intelligence) in the domains of
-      attentional and executive functioning, language processing,
-      visuospatial processing, and learning and memory",
+      scale == "Attention Index (ATT)" ~ "An overall screening measure of the examinee's attentional functioning",
+      scale == "Language Index (LAN)" ~ "The patient's general ability to access and apply acquired word knowledge, to verbalize meaningful concepts, think about verbal information, and express themself using words",
+      scale == "Memory Index (MEM)" ~ "A composite measure of the examinee's verbal and visual memory functioning",
+      scale == "Spatial Index (SPT)" ~ "A composite screening measure of visuoperceptual skills, attention to detail, and visuoconstructional skills",
+      scale == "Executive Functions Index (EXE)" ~ "A composite measure of executive skills involving planning, inhibition, speed/fluency, and generativity",
+      scale == "Total NAB Index (T-NAB)" ~ "An omnibus measure of neuropsychological functioning (independent of general intelligence) in the domains of attentional and executive functioning, language processing, visuospatial processing, and learning and memory",
       TRUE ~ as.character(description)
     )
   )
@@ -1879,31 +1853,17 @@ table2 <-
       scale == "Orientation" ~ "Orientation to person, place, time, and situation",
       scale == "Digits Forward" ~ "Auditory attentional capacity, or how much information can be processed at once",
       scale == "Digits Forward Longest Span" ~ "Auditory attentional capacity",
-      
       scale == "Digits Backward" ~ "A measure of both attentional capacity and working memory",
-      
       scale == "Digits Backward Longest Span" ~ "Working memory for orally presented information",
-      
       scale == "Numbers & Letters Part A Speed" ~ "Focused attention and rapid visual scanning",
-      
       scale == "Numbers & Letters Part A Errors" ~ "A marker of reduced focus and distractibility",
-      
-      scale == "Numbers & Letters Part A Efficiency" ~ "Focused attention and
-      rapid visual scanning on overall measure of efficiency in performing a
-      selective attention letter cancellation task",
-      
-      scale == "Numbers & Letters Part B Efficiency" ~ "A speeded focused 
-      attention letter-counting task requiring the patient to count all of the 
-      target X’s in successive rows of random numbers and letters (instead of 
-      having to draw marks through each X)", # CHECK
-      
-      scale == "Numbers & Letters Part C Efficiency" ~ "A speeded serial addition task in which they had to add the numbers in successive rows of random numbers and letters on a page",
-      
-      scale == "Numbers & Letters Part D Efficiency" ~ "Performance on a complex measure of divided attention, information processing speed, and inhibition",
-      
+      scale == "Numbers & Letters Part A Efficiency" ~ "Focused attention and rapid visual scanning on a while performing a selective attention letter-cancellation task (motor)",
+      scale == "Numbers & Letters Part B Efficiency" ~ "A speeded focused attention letter-counting task requiring the patient to count all of the target letters (X) in successive rows of random numbers and letters (psycho, count)",
+      scale == "Numbers & Letters Part C Efficiency" ~ "A speeded serial addition task requiring the patient to add numbers in successive rows of random numbers and letters on a page (psycho, add)",
+      scale == "Numbers & Letters Part D Efficiency" ~ "Performance on a complex measure of divided attention (cancelling + counting), information processing speed, and inhibition",
+      scale == "Numbers & Letters Part D Disruption" ~ "I dont like this measure",
       scale == "Dots" ~ "Performance on a delayed recognition visual span task, in which an array of dots was exposed for a brief period, followed by a blank page, and then a new array with one additional dot that the patient had to point out",
-      
-      scale == "Driving Scences" ~ "A test of visual scanning, attention to detail, and selective attention in which he viewed a series of six driving scenes (as viewed from behind a steering wheel) and then had to indicate subtle changes of what was new, different, or missing relative to the previously viewed scene",
+      scale == "Driving Scenes" ~ "A test of visual scanning, attention to detail, and selective attention requiring the patient to view a series of successive driving scenes (as viewed from behind a steering wheel) and then indicate subtle changes of what was new, different, or missing relative to the previously viewed scene",
       TRUE ~ as.character(description)
     )
   )
@@ -1912,12 +1872,11 @@ table3 <-
   table3 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale == "Oral Expression" ~ "Timed oral productivity and the ability to generate descriptive components of a picture of a family scene on a task requiring initiating and sustaining verbal behavior",
+      scale == "Oral Production" ~ "Timed oral productivity and the ability to generate descriptive components of a picture of a family scene on a task requiring initiating and sustaining verbal behavior",
       scale == "Auditory Comprehension" ~ "Auditory comprehension (i.e., the ability to receive, process, and execute oral instructions of increasing syntactic complexity)",
       scale == "Naming" ~ "Word-finding ability and retrieval fluency on a confrontation naming task",
       scale == "Reading Comprehension" ~ "Reading comprehension, which the patient was shown a photograph of an object along with six printed words (five foil words and the sixth word that correctly named the object), requiring them to point to the correct word, and then presented with a photograph of a scene involving one or more people engaged in an activity with four printed sentences (three foil sentences and the fourth sentence correctly describing the photograph), requiring them to point to the correct sentence",
       scale == "Writing" ~ "On a measure of narrative writing in which the patient was shown the same colorful picture of a family scene used in the oral production test and then asked to write about the scene",
-      
       scale == "Bill Payment" ~ "Performance on a bill payment task in which the patient was presented with a utility bill statement, check ledger, check, and envelope, and asked to follow a series of commands requiring oral and written responses of increasing complexity",
       TRUE ~ as.character(description)
     )
@@ -1927,18 +1886,21 @@ table4 <-
   table4 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Shape Learning Immediate Recognition" ~ "Learning and recognition of visual material (abstract shapes)",
-      scale ==
-        "Shape Learning Delayed Recognition" ~ "Recognition of the target visual material among nontarget distractors after a delay period",
-      scale ==
-        "Shape Learning Percent Retention" ~ "Percentage of visual detail retained over time, scaled to how much was initially learned",
-      scale ==
-        "Story Learning Immediate Recall" ~ "Performance on a more complex one-trial verbal learning and recall task (story learning)",
-      scale ==
-        "Story Learning Delayed Recall" ~ "Delayed recall of the story details over time",
-      scale ==
-        "Story Learning Percent Retention" ~ "The percentage of story detail retained over time, scaled to how much was initially learned",
+      scale == "List Learning List A Trial 1 Immediate Recall" ~ "Total words recalled on the first trial of a list-learning task",
+      scale == "List Learning List A Trial 2 Immediate Recall" ~ "Total words recalled on the second trial of a list-learning task",
+      scale == "List Learning List A Trial 3 Immediate Recall" ~ "Total words recalled on the third trial of a list-learning task",
+      scale == "List Learning List A Immediate Recall" ~ "Total words recalled immediately after all learning trials of List A",
+      scale == "List Learning List B Immediate Recall" ~ "Total words recalled immediately after a single presentation of List B, an interference list",
+      scale == "List Learning List A Short Delayed Recall" ~ "Total words recalled after a short delay following the initial learning trials of List A",
+      scale == "List Learning List A Long Delayed Recall" ~ "Total words recalled after a long delay following the initial learning trials of List A",
+      scale == "List Learning List A Percent Retention" ~ "Percentage of words retained from List A after a delay, calculated as the ratio of words recalled after the delay to the words recalled immediately",
+      scale == "List Learning List A Long Delayed Forced-Choice Recognition" ~ "Number of words correctly recognized from List A after a long delay, using a forced-choice format",
+      scale == "List Learning List A Long Delayed Forced-Choice Recognition False Alarms" ~ "Number of false alarms, or incorrect recognitions, in the forced-choice recognition task for List A after a long delay",
+      scale == "List Learning List A Discriminability Index" ~ "Measure of the ability to distinguish between target and non-target words in the forced-choice recognition task for List A after a long delay",
+      scale == "List Learning List A Recall vs Recognition Index" ~ "Comparison of recall and recognition performance for List A, highlighting differences in retrieval success",
+      scale == "List Learning Semantic Clusters" ~ "Number of semantically related clusters of words recalled during the List Learning task",
+      scale == "List Learning Perseverations" ~ "Number of repeated responses or perseverations made during the List Learning task",
+      scale == "List Learning Intrusions" ~ "Number of non-list words incorrectly recalled during the List Learning task",
       TRUE ~ as.character(description)
     )
   )
@@ -1947,18 +1909,19 @@ table5 <-
   table5 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Shape Learning Immediate Recognition" ~ "Learning and recognition of visual material (abstract shapes)",
-      scale ==
-        "Shape Learning Delayed Recognition" ~ "Recognition of the target visual material among nontarget distractors after a delay period",
-      scale ==
-        "Shape Learning Percent Retention" ~ "Percentage of visual detail retained over time, scaled to how much was initially learned",
-      scale ==
-        "Story Learning Immediate Recall" ~ "Performance on a more complex one-trial verbal learning and recall task (story learning)",
-      scale ==
-        "Story Learning Delayed Recall" ~ "Delayed recall of the story details over time",
-      scale ==
-        "Story Learning Percent Retention" ~ "The percentage of story detail retained over time, scaled to how much was initially learned",
+      scale == "Shape Learning Trial 1 Immediate Recognition" ~ "Total shapes correctly recognized on the first trial of a shape-learning task",
+      scale == "Shape Learning Trial 2 Immediate Recognition" ~ "Total shapes correctly recognized on the second trial of a shape-learning task",
+      scale == "Shape Learning Trial 3 Immediate Recognition" ~ "Total shapes correctly recognized on the third trial of a shape-learning task",
+      scale == "Shape Learning Immediate Recognition" ~ "Total shapes correctly recognized immediately after all learning trials",
+      scale == "Shape Learning Delayed Recognition" ~ "Total shapes correctly recognized after a delay following the initial learning trials",
+      scale == "Shape Learning Percent Retention" ~ "Percentage of shapes retained after a delay, calculated as the ratio of shapes recognized after the delay to the shapes recognized immediately",
+      scale == "Shape Learning Delayed Forced-Choice Recognition" ~ "Number of shapes correctly recognized after a delay using a forced-choice format",
+      scale == "Shape Learning Delayed Forced-Choice Recognition False Alarms" ~ "Number of false alarms, or incorrect recognitions, in the forced-choice recognition task after a delay",
+      scale == "Shape Learning Discriminability Index" ~ "Measure of the ability to distinguish between target and non-target shapes in the forced-choice recognition task after a delay",
+      # nabs
+      scale == "Shape Learning Immediate Recognition" ~ "Learning and recognition of visual material (abstract shapes)",
+      scale == "Shape Learning Delayed Recognition" ~ "Recognition of the target visual material among nontarget distractors after a delay period",
+      scale == "Shape Learning Percent Retention" ~ "Percentage of visual detail retained over time, scaled to how much was initially learned",
       TRUE ~ as.character(description)
     )
   )
@@ -1967,18 +1930,19 @@ table6 <-
   table6 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Shape Learning Immediate Recognition" ~ "Learning and recognition of visual material (abstract shapes)",
-      scale ==
-        "Shape Learning Delayed Recognition" ~ "Recognition of the target visual material among nontarget distractors after a delay period",
-      scale ==
-        "Shape Learning Percent Retention" ~ "Percentage of visual detail retained over time, scaled to how much was initially learned",
-      scale ==
-        "Story Learning Immediate Recall" ~ "Performance on a more complex one-trial verbal learning and recall task (story learning)",
-      scale ==
-        "Story Learning Delayed Recall" ~ "Delayed recall of the story details over time",
-      scale ==
-        "Story Learning Percent Retention" ~ "The percentage of story detail retained over time, scaled to how much was initially learned",
+      scale == "Story Learning Trial 1 Phrase Unit" ~ "The number of important phrases recalled from the story on the first attempt",
+      scale == "Story Learning Trial 2 Phrase Unit" ~ "The number of important phrases recalled from the story on the second attempt",
+      scale == "Story Learning Phrase Unit Immediate Recall" ~ "The number of important phrases recalled immediately after hearing the entire story",
+      scale == "Story Learning Thematic Unit Immediate Recall" ~ "The number of key ideas or themes recalled immediately after hearing the entire story",
+      scale == "Story Learning Trial 1 Thematic Unit" ~ "The number of key ideas or themes recalled from the story on the first attempt",
+      scale == "Story Learning Trial 2 Thematic Unit" ~ "The number of key ideas or themes recalled from the story on the second attempt",
+      scale == "Story Learning Phrase Unit Delayed Recall" ~ "The number of important phrases recalled after a delay, without hearing the story again",
+      scale == "Story Learning Thematic Unit Delayed Recall" ~ "The number of key ideas or themes recalled after a delay, without hearing the story again",
+      scale == "Story Learning Phrase Unit Percent Retention" ~ "The percentage of important phrases retained after a delay compared to the initial recall immediately after hearing the story",
+      # maybe not exact name
+      scale == "Story Learning Immediate Recall" ~ "Performance on a more complex one-trial verbal learning and recall task (story learning)",
+      scale == "Story Learning Delayed Recall" ~ "Delayed recall of the story details over time",
+      scale == "Story Learning Percent Retention" ~ "The percentage of story detail retained over time, scaled to how much was initially learned",
       TRUE ~ as.character(description)
     )
   )
@@ -1987,30 +1951,38 @@ table7 <-
   table7 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Shape Learning Immediate Recognition" ~ "Learning and recognition of visual material (abstract shapes)",
-      scale ==
-        "Shape Learning Delayed Recognition" ~ "Recognition of the target visual material among nontarget distractors after a delay period",
-      scale ==
-        "Shape Learning Percent Retention" ~ "Percentage of visual detail retained over time, scaled to how much was initially learned",
-      scale ==
-        "Story Learning Immediate Recall" ~ "Performance on a more complex one-trial verbal learning and recall task (story learning)",
-      scale ==
-        "Story Learning Delayed Recall" ~ "Delayed recall of the story details over time",
-      scale ==
-        "Story Learning Percent Retention" ~ "The percentage of story detail retained over time, scaled to how much was initially learned",
+      scale == "Daily Living Memory Immediate Recall" ~ "The number of daily living tasks recalled immediately after presentation.",
+      scale == "Daily Living Memory Delayed Recall" ~ "The number of daily living tasks recalled after a delay.",
+      scale == "Daily Living Memory Retention" ~ "The percentage of daily living tasks retained over time compared to the initial recall.",
+      scale == "Daily Living Memory Delayed Recognition" ~ "The number of daily living tasks correctly recognized after a delay.",
+      scale == "Daily Living Memory Recall vs. Recognition" ~ "A comparison of the number of daily living tasks recalled versus those recognized.",
+      scale == "Medication Instructions Immediate Recall" ~ "The number of medication instructions recalled immediately after presentation.",
+      scale == "Medication Instructions Delayed Recall" ~ "The number of medication instructions recalled after a delay.",
+      scale == "Medication Instructions Delayed Recognition" ~ "The number of medication instructions correctly recognized after a delay.",
+      scale == "Name/Address/Phone Immediate Recall" ~ "The number of details about a name, address, and phone number recalled immediately after presentation.",
+      scale == "Name/Address/Phone Delayed Recall" ~ "The number of details about a name, address, and phone number recalled after a delay.",
+      scale == "Name/Address/Phone Delayed Recognition" ~ "The number of details about a name, address, and phone number correctly recognized after a delay.",
       TRUE ~ as.character(description)
     )
   )
 
-table8 <-
-  table8 |>
+table8 <- table8 |>
   dplyr::mutate(
     description = dplyr::case_when(
-      scale ==
-        "Visual Discrimination" ~ "Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail",
-      scale ==
-        "Design Construction" ~ "Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus",
+      scale == "Visual Discrimination" ~ "Perceptual processing, discrimination, and pattern matching of a series of abstract images requiring close attention to visual detail",
+      scale == "Design Construction" ~ "Constructing and recreating abstract visual designs (tangrams) from a model using flat polygons (tans) to reproduce each stimulus",
+      scale == "Visual Discrimination" ~ "The ability to distinguish between different visual stimuli",
+      scale == "Design Construction" ~ "The ability to construct designs from visual patterns",
+      scale == "Figure Drawing Copy" ~ "The accuracy of copying a figure from a model",
+      scale == "Figure Drawing Copy Organization" ~ "The organization of elements when copying a figure from a model",
+      scale == "Figure Drawing Copy Fragmentation" ~ "The degree of fragmentation when copying a figure from a model",
+      scale == "Figure Drawing Copy Planning" ~ "The planning involved in copying a figure from a model",
+      scale == "Figure Drawing Immediate Recall" ~ "The accuracy of recalling and drawing a figure immediately after seeing it",
+      scale == "Figure Drawing Immediate Recall Organization" ~ "The organization of elements when recalling and drawing a figure immediately after seeing it",
+      scale == "Figure Drawing Immediate Recall Fragmentation" ~ "The degree of fragmentation when recalling and drawing a figure immediately after seeing it",
+      scale == "Figure Drawing Immediate Recall Planning" ~ "The planning involved in recalling and drawing a figure immediately after seeing it",
+      scale == "Figure Drawing Percent Retention" ~ "The percentage of the figure retained and accurately redrawn after a delay",
+      scale == "Map Reading" ~ "The ability to understand and interpret map information",
       TRUE ~ as.character(description)
     )
   )
@@ -2022,8 +1994,8 @@ table9 <-
       scale == "Mazes" ~ "Planning and foresight, inhibition, and psychomotor speed examined through a series of timed maze-tracing tasks of increasing difficulty",
       scale == "Word Generation" ~ "Retrieval fluency, ideational fluency, and generativity",
       scale == "Word Generation Perseverations" ~ "Self-monitoring and perseverative tendencies",
-      scale %in% c("Judgment") ~ "Judgment and decision-making in everyday situations",
-      scale %in% c("Categories") ~ "Concept formation and abstract reasoning",
+      scale == "Judgment" ~ "Judgment and decision-making in everyday situations",
+      scale == "Categories" ~ "Concept formation and abstract reasoning",
       TRUE ~ as.character(description)
     )
   )
@@ -2036,30 +2008,12 @@ table1 <-
   table1 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale ==
-        "Total NAB Index (T-NAB)" ~ glue::glue(
-        "{description} fell in the {range} range.\n"
-      ),
-      scale ==
-        "Attention Index (ATT)" ~ glue::glue(
-        "{description} was {range}.\n"
-      ),
-      scale ==
-        "Language Index (LAN)" ~ glue::glue(
-        "{description} fell in the {range} classification range.\n"
-      ),
-      scale ==
-        "Memory Index (MEM)" ~ glue::glue(
-        "{description} was {range}.\n"
-      ),
-      scale ==
-        "Spatial Index (SPT)" ~ glue::glue(
-        "{description} fell in the {range} classification range.\n"
-      ),
-      scale ==
-        "Executive Functions Index (EXE)" ~ glue::glue(
-        "{description} fell in the {range} range.\n"
-      ),
+      scale == "Total NAB Index (T-NAB)" ~ glue::glue("{description} fell in the {range} range.\n"),
+      scale == "Attention Index (ATT)" ~ glue::glue("{description} was {range}.\n"),
+      scale == "Language Index (LAN)" ~ glue::glue("{description} fell in the {range} classification range.\n"),
+      scale == "Memory Index (MEM)" ~ glue::glue("{description} was {range}.\n"),
+      scale == "Spatial Index (SPT)" ~ glue::glue("{description} fell in the {range} classification range.\n"),
+      scale == "Executive Functions Index (EXE)" ~ glue::glue("{description} fell in the {range} range.\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2068,25 +2022,19 @@ table2 <-
   table2 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale ==
-        "Orientation" ~ glue::glue("{description} was intact.\n"),
-      scale ==
-        "Digits Forward" ~ glue::glue("{description} fell within the {range}.\n"),
-      scale ==
-        "Digits Forward Longest Span" ~ glue::glue("{description} was {range} ({raw_score} digits forward).\n"),
-      scale ==
-        "Digits Backward" ~ glue::glue("{description} fell within the {range}.\n"),
-      scale ==
-        "Digits Backward Longest Span" ~ glue::glue("{description} was {range} ({raw_score} digits backward).\n\n"),
-      
-      scale == "Numbers & Letters Part A Speed" ~ glue::glue("{description} fell within the {range}.\n\n"),
-      scale == "Numbers & Letters Part A Errors" ~ glue::glue("{description} fell within the {range}.\n\n"),
+      scale == "Orientation" ~ glue::glue("{description} was intact.\n"),
+      scale == "Digits Forward" ~ glue::glue("{description} fell within the {range} range.\n"),
+      scale == "Digits Forward Longest Span" ~ glue::glue("{description} was {range} ({raw_score} digits forward).\n"),
+      scale == "Digits Backward" ~ glue::glue("{description} fell within the {range}.\n"),
+      scale == "Digits Backward Longest Span" ~ glue::glue("{description} was {range} ({raw_score} digits backward).\n\n"),
+      scale == "Numbers & Letters Part A Speed" ~ glue::glue("{description} fell within the {range} range.\n\n"),
+      scale == "Numbers & Letters Part A Errors" ~ glue::glue("{description} fell within the {range} range.\n\n"),
       scale == "Numbers & Letters Part A Efficiency" ~ glue::glue("{description} was {range}.\n"),
       scale == "Numbers & Letters Part B Efficiency" ~ glue::glue("{description} was {range}.\n"),
-      scale == "Numbers & Letters Part C Efficiency" ~ glue::glue("{description} fell within the {range}.\n\n"),
-      scale == "Numbers & Letters Part D Efficiency" ~ glue::glue("{description} fell within the {range}.\n\n"),      
-      scale == "Dots" ~ glue::glue("{description} fell within the {range}.\n\n"),
-      scale == "Driving Scences" ~ glue::glue("{description} fell within the {range}.\n\n"),
+      scale == "Numbers & Letters Part C Efficiency" ~ glue::glue("{description} fell within the {range} range.\n\n"),
+      scale == "Numbers & Letters Part D Efficiency" ~ glue::glue("{description} fell within the {range} range.\n\n"),
+      scale == "Dots" ~ glue::glue("{description} fell within the {range} range.\n\n"),
+      scale == "Driving Scenes" ~ glue::glue("{description} fell within the {range} range.\n\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2095,12 +2043,12 @@ table3 <-
   table3 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale == "Oral Expression" ~ glue::glue("{description} was {range}.\n\n"),
+      scale == "Oral Production" ~ glue::glue("{description} was {range}.\n\n"),
       scale == "Auditory Comprehension" ~ glue::glue("{description} was {range}.\n\n"),
       scale == "Naming" ~ glue::glue("{description} was {range}, with no obvious dysfluency in conversational/informal expression.\n\n"),
       scale == "Reading Comprehension" ~ glue::glue("{description} was {range}.\n\n"),
       scale == "Writing" ~ glue::glue("{description} performance was {range} in terms of writing legibility, spelling, and syntax, but {range} for conveyance.\n\n"),
-      scale == "Bill Payment" ~ glue::glue("{description} fell within the {range}.\n\n"),
+      scale == "Bill Payment" ~ glue::glue("{description} fell within the {range} range.\n\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2109,10 +2057,7 @@ table4 <-
   table4 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale %in% c("List Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Shape Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Story Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Daily Living") ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("List Learning", scale) ~ glue::glue("{description} fell within the {range} range.\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2121,10 +2066,7 @@ table5 <-
   table5 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale %in% c("List Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Shape Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Story Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Daily Living") ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Shape Learning", scale) ~ glue::glue("{description} was {range}.\n\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2133,10 +2075,10 @@ table6 <-
   table6 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale %in% c("List Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Shape Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Story Learning") ~ glue::glue("{description} was {range}.\n\n"),
-      scale %in% c("Daily Living") ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("List Learning", scale) ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Shape Learning", scale) ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Story Learning", scale) ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Daily Living", scale) ~ glue::glue("{description} was {range}.\n\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2145,7 +2087,7 @@ table7 <-
   table7 |>
   dplyr::mutate(
     result = dplyr::case_when(
-      scale %in% c("Daily Living") ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Daily Living", scale) ~ glue::glue("{description} was {range}.\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2156,8 +2098,8 @@ table8 <-
     result = dplyr::case_when(
       scale == "Visual Discrimination" ~ glue::glue("{description} was {range}.\n\n"),
       scale == "Design Construction" ~ glue::glue("{description} fell in the {range} range.\n\n"),
-      scale %in% c("Figure") ~ glue::glue("{description} fell in the {range} range.\n\n"),
-      scale %in% c("Map") ~ glue::glue("{description} was {range}.\n\n"),
+      grepl("Figure", scale) ~ glue::glue("{description} fell in the {range} range.\n\n"),
+      scale == "Map Reading" ~ glue::glue("{description} was {range}.\n\n"),
       TRUE ~ as.character(result)
     )
   )
@@ -2167,60 +2109,82 @@ table9 <-
   dplyr::mutate(
     result = dplyr::case_when(
       scale == "Mazes" ~ glue::glue("{description} fell in the {range} range.\n"),
-      scale == "Word Generation" ~ glue::glue("{description} was {range}.\n\n"),
+      scale == "Word Generation" ~ glue::glue("{description} was {range}.\n"),
       scale == "Word Generation Perseverations" ~ glue::glue("{description} was {range}.\n"),
-      scale %in% c("Judgment") ~ glue::glue("{description} fell in the {range} range.\n"),
-      scale %in% c("Categories") ~ glue::glue("{description} fell in the {range} range.\n\n"),
+      scale == "Judgment" ~ glue::glue("{description} fell in the {range} range.\n"),
+      scale == "Categories" ~ glue::glue("{description} fell in the {range} range.\n"),
       TRUE ~ as.character(result)
     )
   )
-
 ```
 
 ## Merge
 
 ```{r}
-if (params$test == "nab") {
-  df <- df |> dplyr::bind_rows(table1:table9)
-  nab <- df
-} else if (params$test == "nabs") {
-  df <- df |> dplyr::bind_rows(table1:table6)
-  nabs <- df
-} else if (params$test == "nab_main") {
-  df <- df |> dplyr::bind_rows(table1:table9)
-  nab_main <- df
+library(dplyr)
+# Function to ensure only data frames are included
+ensure_data_frames <- function(...) {
+  tables <- list(...)
+  data_frames <- lapply(tables, function(tbl) {
+    if (is.data.frame(tbl)) {
+      return(tbl)
+    } else {
+      return(NULL)
+    }
+  })
+  return(Filter(Negate(is.null), data_frames))
 }
+
+# Debugging: Print the tables to check their structure
+print_tables <- function(...) {
+  tables <- list(...)
+  for (i in seq_along(tables)) {
+    cat("Table", i, ":\n")
+    print(tables[[i]])
+    cat("\n")
+  }
+}
+
+# Debugging: Print tables to verify they are data frames
+print_tables(table1, table2, table3, table4, table5, table6, table7, table8, table9)
+
+# Merge based on the condition
+if (params$test == "nab") {
+  df_list <- ensure_data_frames(table1, table2, table3, table4, table5, table6, table7, table8, table9)
+  df <- bind_rows(df_list)
+} else if (params$test == "nabs") {
+  df_list <- ensure_data_frames(table1, table2, table3, table4, table5, table6)
+  df <- bind_rows(df_list)
+} else if (params$test == "nab_main") {
+  df_list <- ensure_data_frames(table1, table2, table3, table4, table5, table6, table7, table8, table9)
+  df <- bind_rows(df_list)
+}
+
+# Print the resulting merged data frame to verify
+print(df)
 ```
 
 ## Sort
 
-```{r eval=F}
-
-# Concatenate the indices into a single vector
-row_indices <- c(6, 1, 7, 12:19, 2, 20, 24, 3, 27:32, 4, 33:34, 5, 35:37)
-# Use slice to select the rows by these indices
-nabs <- nabs |>
-  dplyr::slice(row_indices)
-
-# Concatenate the indices into a single vector
-row_indices <- c(6, 1, 7, 12:19, 2, 20, 24, 3, 27:32, 4, 33:34, 5, 35:37)
-# Use slice to select the rows by these indices
-nabs <- nabs |>
-  dplyr::slice(row_indices)
-
-# Concatenate the indices into a single vector
-row_indices <- c(6, 1, 7, 12:19, 2, 20, 24, 3, 27:32, 4, 33:34, 5, 35:37)
-# Use slice to select the rows by these indices
-nabs <- nabs |>
-  dplyr::slice(row_indices)
+```{r}
+if (params$test == "nab") {
+  # Concatenate the indices into a single vector
+  row_indices <- c(6, c(1, 7:24), c(2, 25:44), c(3, 45:88), c(4, 89:100), c(5, 101:105))
+  # Use slice to select the rows by these indices
+  df <- df |> dplyr::slice(row_indices)
+} else if (params$test == "nabs") {
+  row_indices <- c(6, 1, 7, 12:19, 2, 20, 24, 3, 27:32, 4, 33:34, 5, 35:37)
+  df <- df |> dplyr::slice(row_indices)
+} else if (params$test == "nab_main") {
+  row_indices <- c(1:length)
+  df <- df |> dplyr::slice(row_indices)
+}
 ```
 
 ## 95% CI
 
 ```{r eval=F}
 library(bwu)
-
-df <- nabs
 
 # Assuming df is your dataframe and calc_ci_95 is your function
 for (i in seq_len(df)) {
@@ -2240,14 +2204,35 @@ for (i in seq_len(df)) {
 ## Save
 
 ```{r}
-library(readr)
+df <-
+  df |>
+  dplyr::select(
+    test,
+    test_name,
+    scale,
+    raw_score,
+    score,
+    ci_95,
+    percentile,
+    range,
+    domain,
+    subdomain,
+    narrow,
+    pass,
+    verbal,
+    timed,
+    score_type,
+    test_type,
+    description,
+    result
+  )
 
-df <- nab
-readr::write_excel_csv(df, here::here("data", "csv", "nab.csv"), col_names = TRUE, na = "")
-
-if (any(is.na(nab$percentile))) {
-  stop("STOP!!! NA value found in percentile column. Please fill in missing values.")
-}
+vroom::vroom_write(df,
+  here::here("data", "csv", "nab.csv"),
+  delim = ",",
+  col_names = TRUE,
+  na = ""
+)
 ```
 
 ## "g" version 2
@@ -2256,5 +2241,5 @@ if (any(is.na(nab$percentile))) {
 table <- params$test
 g <- "g2"
 file_path <- here::here("data", paste0(g, ".csv"))
-readr::write_excel_csv(g, here::here("data", "g2.csv"), append = TRUE, na = "")
+# readr::write_excel_csv(df, file_path, append = TRUE, na = "")
 ```

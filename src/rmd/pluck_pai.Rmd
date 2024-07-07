@@ -1,7 +1,7 @@
 ---
 title: "Import CSV file from PAI"
 params:
-  patient: Biggie
+  patient: Reiner
   test: pai
   test_name: PAI
   file:
@@ -35,6 +35,19 @@ library(rlang)
 library(bwu)
 ```
 
+## Parameters
+
+```{r}
+# source("pluck_params_rdls.R")
+patient <- params$patient
+test <- params$test
+test_name <- params$test_name
+# file <- file.path(file.choose())
+file <- file.path(params$file)
+# saveRDS(file, "pai.rds")
+# file <- readRDS("pai.rds")
+```
+
 ## Patient
 
 ```{r patient}
@@ -65,7 +78,7 @@ Let me break down the tasks and show you how to handle each:
 To create a file path using the `here::here()` function, you would do something like this:
 
 ```{r}
-file_path <- here::here("pdf", "pai.pdf")
+file_path <- here::here("data", "pai.pdf")
 ```
 
 This creates a file path that joins your project directory, the value stored in `patient`, "pre_csv", and "pai.pdf".
@@ -83,12 +96,11 @@ read_content <- readLines(file_path)
 Bringing it all together, using the two chunks you provided:
 
 ```{r write}
-file_path <- here::here("pdf", "pai.pdf")
-content <- "This is some sample content." # replace with your actual content
+# file_path <- here::here("pdf", "pai.pdf")
+# content <- "This is some sample content." # replace with your actual content
 ```
 
 ```{r read}
-file_path <- here::here("pdf", "pai.pdf")
 read_content <- readLines(file_path)
 ```
 
@@ -113,9 +125,9 @@ Specify date range to exclude entire database.
 Copy over to pre_csv.
 
 ```{r pluck}
-plucked_table <-
+plucked_tables <-
   readr::read_csv(
-    here::here("pre_csv", "pariconnectexportPAI.csv")
+    here::here("data", "pariconnectexportPAI.csv")
   )
 ```
 
@@ -124,14 +136,14 @@ plucked_table <-
 ### Subset and rename columns
 
 ```{r subset}
-df_clinical <- plucked_table |>
+df_clinical <- plucked_tables |>
   dplyr::select(
     SOM_T:AGG_P_T, ALC_Est, DRG_Est
   ) |>
   tidyr::gather() |>
   dplyr::rename(scale = key, score = value)
 
-df_validity <- plucked_table |>
+df_validity <- plucked_tables |>
   dplyr::select(
     ICN_T:PIM_T,
     MAL_T:HRI_T
@@ -139,7 +151,7 @@ df_validity <- plucked_table |>
   tidyr::gather() |>
   dplyr::rename(scale = key, score = value)
 
-df_inatt <- plucked_table |>
+df_inatt <- plucked_tables |>
   dplyr::select(IINATTN_T) |>
   tidyr::gather() |>
   dplyr::rename(scale = key, score = value)
@@ -171,7 +183,7 @@ adhd_items <- c(
   "R325"
 )
 
-df_adhd <- plucked_table |>
+df_adhd <- plucked_tables |>
   dplyr::select(adhd_items) |>
   tidyr::gather() |>
   dplyr::rename(scale = key, score = value)
@@ -781,21 +793,21 @@ df_intatt <-
 ```{r writeout}
 readr::write_csv(
   df_clinical,
-  here::here("csv", "pai_clinical.csv"),
+  here::here("data", "csv", "pai_clinical.csv"),
   col_names = TRUE,
   na = ""
 )
 
 readr::write_csv(
   df_validity,
-  here::here("csv", "pai_validity.csv"),
+  here::here("data", "csv", "pai_validity.csv"),
   col_names = TRUE,
   na = ""
 )
 
 readr::write_csv(
   df_inatt,
-  here::here("csv", "pai_inatt.csv"),
+  here::here("data", "csv", "pai_inatt.csv"),
   col_names = TRUE,
   na = ""
 )
@@ -821,9 +833,9 @@ get_text <- function(file) {
 }
 pai_text <- get_text(file)
 
-readr::write_lines(pai_text, here::here("pai_text_dirty.md"), sep = "\n")
-readr::write_lines(pai_text, here::here("pai_text_dirty.txt"), sep = "\n")
-readr::write_lines(pai_text, here::here("pai_text_dirty.typ"), sep = "\n")
+# readr::write_lines(pai_text, here::here("pai_text_dirty.md"), sep = "\n")
+# readr::write_lines(pai_text, here::here("pai_text_dirty.txt"), sep = "\n")
+# readr::write_lines(pai_text, here::here("pai_text_dirty.typ"), sep = "\n")
 ```
 
 ## Squish text and save

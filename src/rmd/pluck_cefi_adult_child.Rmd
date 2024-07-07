@@ -8,18 +8,18 @@ params:
     input: select
     multiple: no
     choices:
-      - cefi_sr
       - cefi_or
-      - cefi_sr_12-18
       - cefi_or_5-18
+      - cefi_sr
+      - cefi_sr_12-18
   test_name:
     label: "Test Name:"
-    value: CEFI Observer-Report #CEFI Self-Report
+    value: "CEFI Self"
     input: select
     multiple: no
     choices:
-      - CEFI Self-Report
-      - CEFI Observer-Report
+      - CEFI Self
+      - CEFI Observer
   file:
     label: "No file selected"
     value: file
