@@ -1,4 +1,4 @@
-Most scores in this area fell within the { range } range of performance.
+Attention and working memory tasks measured the patient’s ability to register, maintain, and manipulate visual and auditory information in conscious awareness, which requires attention and concentration, short-term ‘working’ memory, as well as visual and auditory discrimination; with performance on these measures related to the ability to identify visual and auditory information, maintain it in temporary storage, and manipulate it for use in problem solving.
 
 ### Attention
 
@@ -10,7 +10,13 @@ Most scores in this area fell within the { range } range of performance.
 
 - **Working Memory Capacity**: Sufficient capacity for handling orally presented information and reorganizing data, essential for complex cognitive tasks.
 
+- **Verbal Working Memory**: TODO; Sufficient capacity for handling orally presented information and reorganizing data, essential for complex cognitive tasks.
+
+- **Nonverbal Working Memory**: TODO; Sufficient capacity for handling orally presented information and reorganizing data, essential for complex cognitive tasks.
+
 ### Processing Speed
+
+Processing speed tasks assessed the patient’s ability to rapidly identify, register, and implement decisions about visual stimuli, with performance on these measures related to visual scanning, visual discrimination, short-term visual memory, visuomotor coordination, and concentration.
 
 - **Psychomotor Speed**: { range } visual search speed and scanning, indicating satisfactory speed of processing and mental flexibility.
 
@@ -18,8 +24,10 @@ Most scores in this area fell within the { range } range of performance.
 
 ### Executive Functioning
 
-- **Planning**: Variable performance, mostly { range }. Suggestive of problems
-in strategic planning and organization skills, which are important for structuring
-and executing tasks effectively.
+Measures of executive functioning are used as proxies for behaviors and skills that allow one to successfully carry out instrumental and social activities, such as planning, engaging with others effectively, problem solving, and successfully interacting with the environment to get needs met; with performance on these tasks related to a diverse set of higher-level cognitive functions such as conceptualization, set shifting, generativity, and mental flexibility.
+
+- **Planning**: Variable performance, mostly { range }. Patient's performance is suggestive of problems in strategic planning and organization skills, which are important for structuring and executing tasks effectively.
 
 - **Judgment**: { range } judgment and decision-making skills, reflecting the ability to consider and weigh options appropriately in various emergency situations.
+
+- **Inhibition**: { range } TODO; inhib.

@@ -232,14 +232,6 @@ if (params$test == "cvlt3") {
 # )
 ```
 
-```{r save-areas}
-# saveRDS(area, here::here(patient, "pre_csv", "area_cvlt3.rds"))
-```
-
-```{r read-areas}
-# area <- readRDS(here::here(patient, "pre_csv", "area_cvlt3.rds"))
-```
-
 ## Extract table
 
 ```{r extract}

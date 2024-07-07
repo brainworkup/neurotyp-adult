@@ -366,7 +366,7 @@ if (params$test == "nabs") {
   table2[11, 1] <- c("Numbers & Letters Part A Errors")
   table2[12, 1] <- c("Numbers & Letters Part A Efficiency")
   table2[13, 1] <- c("Numbers & Letters Part B Efficiency")
-} else if (params$test == "nab") {
+} else if (params$test == "nab_main") {
   table2[1, 1] <- c("Digits Forward")
   table2[2, 1] <- c("Digits Backward")
   table2[3, 1] <- c("Dots")
@@ -376,9 +376,9 @@ if (params$test == "nabs") {
   table2[7, 1] <- c("Numbers & Letters Part D Efficiency")
   table2[8, 1] <- c("Driving Scenes")
 }
-table2[10, 5] <- 1
-table2[12, 5] <- 1
-table2[13, 5] <- 1
+# table2[10, 5] <- 1
+# table2[12, 5] <- 1
+# table2[13, 5] <- 1
 ```
 
 # NAB Language
@@ -402,14 +402,14 @@ if (params$test == "nabs") {
   table3[5, 1] <- c("Naming")
   table3[6, 1] <- c("Naming Semantic Cuing")
   table3[7, 1] <- c("Naming Phonemic Cuing")
-} else if (params$test == "nab") {
+} else if (params$test == "nab_main") {
   table3[1, 1] <- c("Oral Production")
   table3[2, 1] <- c("Auditory Comprehension")
   table3[3, 1] <- c("Naming")
   table3[4, 1] <- c("Writing")
   table3[5, 1] <- c("Bill Payment")
 }
-table3[1, 5] <- 1
+# table3[1, 5] <- 1
 ```
 
 # NAB Memory
@@ -440,7 +440,7 @@ if (params$test == "nabs") {
   table4[4, 1] <- c("Story Learning Immediate Recall")
   table4[5, 1] <- c("Story Learning Delayed Recall")
   table4[6, 1] <- c("Story Learning Percent Retention")
-} else if (params$test == "nab") {
+} else if (params$test == "nab_main") {
   table4[1, 1] <- c("List Learning Immediate Recall")
   table4[2, 1] <- c("List Learning Short Delayed Recall")
   table4[3, 1] <- c("List Learning Long Delayed Recall")
@@ -706,6 +706,19 @@ table1 <-
 ```
 
 ```{r objects}
+shl <- c(
+  "Shape Learning Immediate Recognition",
+  "Shape Learning Delayed Recognition",
+  "Shape Learning Percent Retention"
+)
+stl <- c(
+  "Story Learning Immediate Recall",
+  "Story Learning Delayed Recall",
+  "Story Learning Percent Retention"
+)
+```
+
+```{r}
 orientation <- c(
   "Orientation",
   "Orientation to Self",
@@ -724,24 +737,14 @@ dsb <- c(
 nlt <- c(
   "Numbers & Letters Part A Speed",
   "Numbers & Letters Part A Efficiency",
-  "Numbers & Letters Part B Efficiency"
+  "Numbers & Letters Part B Efficiency",
+  "Numbers & Letters Part C Efficiency",
+  "Numbers & Letters Part D Efficiency"
 )
 nle <- c(
   "Numbers & Letters Part A Errors"
 )
-shl <- c(
-  "Shape Learning Immediate Recognition",
-  "Shape Learning Delayed Recognition",
-  "Shape Learning Percent Retention"
-)
-stl <- c(
-  "Story Learning Immediate Recall",
-  "Story Learning Delayed Recall",
-  "Story Learning Percent Retention"
-)
-```
 
-```{r subdomain2}
 table2 <-
   table2 |>
   dplyr::mutate(
