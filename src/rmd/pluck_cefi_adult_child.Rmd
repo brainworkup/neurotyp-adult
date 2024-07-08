@@ -4,7 +4,7 @@ title: |
   <center> Self and Observer Reports </center>
 date: "`r Sys.Date()`"
 params:
-  patient: "Reiner"
+  patient: "{{< var patient >}}"
   test:
     label: "CEFI"
     value: cefi_or

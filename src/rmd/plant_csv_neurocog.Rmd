@@ -2,11 +2,11 @@
 title: "Plant CSV files of Neurocognitive Tests"
 params:
   patient:
-    label: "Patient First Name:"
-    value: Biggie
+    label: "Patient's first name:"
+    value: "{{< var patient >}}"
     input: text
   test_name:
-    label: "Full Name of Test/Test Battery:"
+    label: "Formal Name of Test/Test Battery:"
     value: NIH EXAMINER
     input: radio
     choices:

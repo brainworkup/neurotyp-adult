@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables BASC-3 PRS Preschool"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test:
     label: "BASC-3:"
     value: [basc3_prs_preschool]

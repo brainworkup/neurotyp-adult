@@ -3,7 +3,7 @@ title: "Plant Validity Indicators"
 params:
   patient:
     label: "Patient First Name:"
-    value: Biggie
+    value: "{{< var patient >}}"
     input: text
   test_name:
     label: "Full Name of Test/Test Battery:"

@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables WPPSI-IV Ages 2-3"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test: wppsi4
   test_name: "WPPSI-IV"
   version: "WPPSI-IV: Ages 2-3"

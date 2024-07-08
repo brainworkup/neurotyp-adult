@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables BASC-3 PRS Adolescent"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test: basc3_prs_adolescent
   test_name: "BASC-3 PRS"
   file:
@@ -354,10 +354,10 @@ if (params$test == "basc3_prs_adolescent") {
 test <- params$test
 readr::write_csv(
   df,
-  here::here(patient, "csv", paste0(test, ".csv")), 
-  col_names = TRUE, 
+  here::here(patient, "csv", paste0(test, ".csv")),
+  col_names = TRUE,
   na = ""
-  )
+)
 ```
 
 ## Pluck Text
@@ -368,7 +368,6 @@ file <- fs::fs_path(params$file)
 
 # BASC-3 PRS Child
 if (params$test == "basc3_prs_child") {
-  
   ## extract text
   get_text <- function(file) {
     txt <- pdftools::pdf_text(file) |>
@@ -388,23 +387,24 @@ if (params$test == "basc3_prs_child") {
 
   # save as markdown
   readr::write_lines(
-    basc3_prs_squished, 
-    here::here(patient, "basc3_prs_text.md"), 
-    sep = "\n")
+    basc3_prs_squished,
+    here::here(patient, "basc3_prs_text.md"),
+    sep = "\n"
+  )
   # save as quarto
   readr::write_lines(
-    basc3_prs_squished, 
-    here::here(patient, "basc3_prs_text.qmd"), 
-    sep = "\n")
-  # save as text
-  readr::write_lines(basc3_prs_squished, 
-    here::here(patient, "basc3_prs_text.txt"), 
+    basc3_prs_squished,
+    here::here(patient, "basc3_prs_text.qmd"),
     sep = "\n"
-    )
+  )
+  # save as text
+  readr::write_lines(basc3_prs_squished,
+    here::here(patient, "basc3_prs_text.txt"),
+    sep = "\n"
+  )
 
-# BASC-3 SRP Adolescent?
+  # BASC-3 SRP Adolescent?
 } else if (params$test == "basc3_prs_adolescent") {
-
   ## extract text
   get_text <- function(file) {
     txt <- pdftools::pdf_text(file) |>
@@ -421,22 +421,22 @@ if (params$test == "basc3_prs_child") {
     stringr::str_replace_all(basc3_prs_adolescent_txt, "\\s{2,}", "- ") |>
     stringr::str_remove_all(",")
   basc3_prs_adolescent_squished
-  
+
   # save as markdown
-  readr::write_lines(basc3_prs_adolescent_squished, 
+  readr::write_lines(basc3_prs_adolescent_squished,
     here::here(patient, "basc3_prs_adolescent_text.md"),
     sep = "\n"
-    )
+  )
   # save as quarto
-  readr::write_lines(basc3_prs_adolescent_squished, 
+  readr::write_lines(basc3_prs_adolescent_squished,
     here::here(patient, "basc3_prs_adolescent_text.qmd"),
     sep = "\n"
-    )
+  )
   # save as text
-  readr::write_lines(basc3_prs_adolescent_squished, 
-    here::here(patient, "basc3_prs_adolescent_text.txt"), 
+  readr::write_lines(basc3_prs_adolescent_squished,
+    here::here(patient, "basc3_prs_adolescent_text.txt"),
     sep = "\n"
-    )
+  )
 }
 ```
 
@@ -508,21 +508,21 @@ library(tibble)
 parse_extracted_text <- function(text) {
   # Split text by lines
   lines <- unlist(strsplit(text, split = "\n"))
-  
+
   # Filter lines containing scores
   score_lines <- lines[str_detect(lines, "-")]
-  
+
   # Extract names, raw values, and T scores using regex
   names <- str_extract(score_lines, ".*(?=\\s*-\\s*)")
   values <- str_extract_all(score_lines, "(?<=-\\s*)[^-]*")
-  
+
   # Convert to data.frame
   df <- tibble(
     Name = names,
     RawValue = sapply(values, function(x) x[1]),
     TScore = sapply(values, function(x) x[2])
   )
-  
+
   return(df)
 }
 
@@ -555,21 +555,21 @@ library(tibble)
 parse_extracted_text <- function(text) {
   # Split text by lines
   lines <- unlist(strsplit(text, split = "\n"))
-  
+
   # Filter lines containing scores
   score_lines <- lines[str_detect(lines, "-")]
-  
+
   # Split by hyphen and trim whitespace
   split_values <- str_split(score_lines, "-")
   trimmed_values <- lapply(split_values, str_trim)
-  
+
   # Convert to data.frame
   df <- tibble(
     Name = sapply(trimmed_values, `[[`, 1),
     RawValue = sapply(trimmed_values, `[[`, 2),
     TScore = sapply(trimmed_values, `[[`, 3)
   )
-  
+
   return(df)
 }
 

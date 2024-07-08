@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables Bracken School Readiness 4th ed (BSRA-4)"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test: bsra4
   test_name: "BSRA-4"
   version: "BSRA-4"

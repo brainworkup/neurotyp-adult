@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from KTEA-3"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test:
     label: "Test"
     value: ktea3
@@ -481,7 +481,6 @@ table2 <-
       scale == "Letter Naming Facility" ~ "Naming Facility",
       scale == "Writing Fluency" ~ "Writing Speed",
       scale == "Math Fluency" ~ "Number Facility",
-
       scale == "Math Concepts & Applications" ~ "Mathematical Knowledge",
       scale == "Letter & Word Recognition" ~ "Reading Decoding",
       scale == "Written Expression" ~ "Writing Ability",
@@ -723,7 +722,7 @@ ktea3 <- ktea3 |>
   dplyr::filter(!is.na(description) & description != "") |>
   dplyr::filter(!is.na(score) & score != "") |>
   dplyr::slice(-(2:7)) |>
-  dplyr::slice(-11,-17,-18)
+  dplyr::slice(-11, -17, -18)
 ```
 
 ## Write out final csv

@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from Brown EF/A Scales"
 params:
-  patient: Biggie
+  patient: "{{< var patient >}}"
   test:
     label: "Brown EF/A"
     value: [brown_efa_parent]
@@ -161,7 +161,8 @@ colnames1 <- c(
   "raw_score",
   "score",
   "percentile",
-  "ci_95")
+  "ci_95"
+)
 colnames(df) <- colnames1
 
 # Convert columns to double
@@ -217,9 +218,11 @@ df <- bwu::gpluck_make_columns(
   result = ""
 )
 
-df <- 
+df <-
   dplyr::relocate(df,
-    c(test, test_name), .before = scale) |> 
+    c(test, test_name),
+    .before = scale
+  ) |>
   dplyr::relocate(c(raw_score), .before = score)
 ```
 
@@ -352,10 +355,10 @@ if (params$test == "brown_efa_parent") {
 test <- params$test
 readr::write_csv(
   df,
-  here::here(patient, "csv", paste0(test, ".csv")), 
-  col_names = TRUE, 
+  here::here(patient, "csv", paste0(test, ".csv")),
+  col_names = TRUE,
   na = ""
-  )
+)
 ```
 
 ## Pluck Text
@@ -366,7 +369,6 @@ file <- fs::as_fs_path(params$file)
 
 # Brown EFA Parent
 if (params$test == "brown_efa_parent") {
-  
   ## extract text
   get_text <- function(file) {
     txt <- pdftools::pdf_text(file) |>
@@ -386,23 +388,24 @@ if (params$test == "brown_efa_parent") {
 
   # save as markdown
   readr::write_lines(
-    brown_efa_parent_squished, 
-    here::here(patient, "brown_efa_parent_text.md"), 
-    sep = "\n")
+    brown_efa_parent_squished,
+    here::here(patient, "brown_efa_parent_text.md"),
+    sep = "\n"
+  )
   # save as quarto
   readr::write_lines(
-    brown_efa_parent_squished, 
-    here::here(patient, "brown_efa_parent_text.qmd"), 
-    sep = "\n")
-  # save as text
-  readr::write_lines(brown_efa_parent_squished, 
-    here::here(patient, "brown_efa_parent_text.txt"), 
+    brown_efa_parent_squished,
+    here::here(patient, "brown_efa_parent_text.qmd"),
     sep = "\n"
-    )
+  )
+  # save as text
+  readr::write_lines(brown_efa_parent_squished,
+    here::here(patient, "brown_efa_parent_text.txt"),
+    sep = "\n"
+  )
 
-# Brown EFA Self Report
+  # Brown EFA Self Report
 } else if (params$test == "brown_efa_self") {
-
   ## extract text
   get_text <- function(file) {
     txt <- pdftools::pdf_text(file) |>
@@ -419,21 +422,21 @@ if (params$test == "brown_efa_parent") {
     stringr::str_replace_all(brown_efa_self_txt, "\\s{2,}", "- ") |>
     stringr::str_remove_all(",")
   brown_efa_self_squished
-  
+
   # save as markdown
-  readr::write_lines(brown_efa_self_squished, 
+  readr::write_lines(brown_efa_self_squished,
     here::here(patient, "brown_efa_self_text.md"),
     sep = "\n"
-    )
+  )
   # save as quarto
-  readr::write_lines(brown_efa_self_squished, 
+  readr::write_lines(brown_efa_self_squished,
     here::here(patient, "brown_efa_self_text.qmd"),
     sep = "\n"
-    )
+  )
   # save as text
-  readr::write_lines(brown_efa_self_squished, 
-    here::here(patient, "brown_efa_self_text.txt"), 
+  readr::write_lines(brown_efa_self_squished,
+    here::here(patient, "brown_efa_self_text.txt"),
     sep = "\n"
-    )
+  )
 }
 ```
