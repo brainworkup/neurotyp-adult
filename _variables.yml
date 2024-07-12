@@ -5,25 +5,25 @@ patient: Biggie
 first_name: Biggie
 last_name: Smalls
 dob: 1991-01-01
-doe1: ""
-doe2: ""
-doe3: ""
-sex: NA
-sex_cap: NA
-age: ""
-education: ""
-handedness: ""
-referral: ""
-observer: ""
-observer_relation: ""
-attorney: ""
-mr_mrs: ""
-he_she: NA
-he_she_cap: NA
-his_her:
-his_her_cap:
-him_her:
-him_her_cap:
+doe1: 
+doe2: 
+doe3: 
+sex: 
+sex_cap: 
+age: 
+education: 
+handedness: 
+referral: 
+observer: 
+observer_relation: 
+attorney: 
+mr_mrs: Mrs.
+he_she: she
+he_she_cap: She
+his_her: her
+his_her_cap: Her
+him_her: her
+him_her_cap: Her
 dx1: attention-deficit/hyperactivity disorder (ADHD)
 dx2: anxiety
 dx3: depression

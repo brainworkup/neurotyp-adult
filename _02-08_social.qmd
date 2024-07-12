@@ -1,4 +1,4 @@
-## Social Cognition/Autism Spectrum Disorder {#sec-social}
+## Social Cognition {#sec-social}
 
 {{< include _02-08_social_text.qmd >}}
 
@@ -116,7 +116,22 @@ scales <- c(
   "General Impressions",
   "CARS-2 Total Score",
   # CARS-2 High Functioning Version
-  "CARS-2 HF Total Score"
+  "Social-Emotional Understanding",
+  "Emotional Expression and Regulation of Emotions",
+  "Relating to People",
+  "Body Use",
+  "Object Use in Play",
+  "Adaptation to Change/Restricted Interests",
+  "Visual Response",
+  "Listening Response",
+  "Taste, Smell, and Touch Response and Use",
+  "Fear or Anxiety",
+  "Verbal Communication",
+  "Nonverbal Communication",
+  "Thinking/Cognitive Integration Skills",
+  "Level of Consistency of Intellectual Response",
+  "General Impressions",
+  "CARS 2-HF Total Score"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -149,29 +164,148 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Index Score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_scaled_score <- gt::md("Scaled Score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-Score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
-fn_raw_score <- gt::md("Raw Score: Range = 0-4")
+fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
+fn_t_score <- gt::md("T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_z_score <- gt::md("z-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_raw_score <- gt::md("Raw score: Range = 0-4")
 
 # Groupings
 grp_social <- list(
-  scaled_score = c("NEPSY-2", "ACS Social Cognition"),
-  t_score = c("CARS-2", "GARS-3", "CARS-2 HF", "CARS-2 High Functioning Version"),
-  raw_score = c("CARS-2", "CARS-2 HF")
+  # scaled_score = c("NEPSY-2", "ACS Social Cognition"),
+  # t_score = c("CARS-2", "GARS-3", "CARS-2 HF", "CARS-2 High Functioning Version", "CARS 2-HF"),
+  raw_score = c("CARS-2", "CARS-2 HF", "CARS 2-HF")
 )
+
+data_social <- data_social |> dplyr::select(c(test_name, scale, raw_score, score, percentile, range))
+
+# tbl_gt2 <-
+#   function(data,
+#            pheno = NULL,
+#            table_name = NULL,
+#            source_note = NULL,
+#            names = NULL,
+#            title = NULL,
+#            tab_stubhead = NULL,
+#            caption = NULL,
+#            process_md = FALSE,
+#            fn_scaled_score = NULL,
+#            fn_standard_score = NULL,
+#            fn_t_score = NULL,
+#            fn_z_score = NULL,
+#            fn_raw_score = NULL,
+#            grp_scaled_score = NULL,
+#            grp_standard_score = NULL,
+#            grp_t_score = NULL,
+#            grp_z_score = NULL,
+#            grp_raw_score = NULL,
+#            dynamic_grp,
+#            vertical_padding = NULL,
+#            multiline = TRUE,
+#            ...,
+#            # Add a new argument to control displayed columns
+#            table_vars = c("range")) {
+#     # Create data counts
+#     data_counts <- data |>
+#       dplyr::select(test_name, scale, all_of(table_vars)) |>
+#       dplyr::mutate(across(any_of(c("score", "percentile", "raw_score")), ~ tidyr::replace_na(., replace = 0)))
+
+#     # Create table
+#     table <- data_counts |>
+#       dplyr::mutate(
+#         score = if_else(score == 0, NA_integer_, score),
+#         percentile = if_else(percentile == 0, NA_integer_, percentile),
+#         test_name = as.character(paste0(test_name)),
+#         scale = as.character(scale)
+#       ) |>
+#       # gt table formatting
+#       gt::gt(
+#         rowname_col = "scale",
+#         groupname_col = "test_name",
+#         process_md = process_md,
+#         caption = caption,
+#         rownames_to_stub = FALSE,
+#         id = paste0("table_", pheno)
+#       ) |>
+#       cols_label(
+#         test_name = md("**Test**"),
+#         scale = md("**Scale**"),
+#         raw_score = md("**Raw Score**"),
+#         score = md("**Score**"),
+#         percentile = md("**‰ Rank**"),
+#         range = md("**Range**")
+#       ) |>
+#       tab_header(title = title) |>
+#       tab_stubhead(label = tab_stubhead) |>
+#       sub_missing(missing_text = "--") |>
+#       tab_stub_indent(rows = scale, indent = 2) |>
+#       cols_align(
+#         align = "center",
+#         # Use any_of to dynamically select columns
+#         columns = any_of(c("raw_score", "score", "percentile", "range"))
+#       )
+
+#     # Extract unique row groups from the data to check against the groups we want to apply footnotes to
+#     existing_row_groups <- unique(data$test_name)
+
+#     # Filter out non-existent groups
+#     grp_scaled_score <- intersect(grp_scaled_score, existing_row_groups)
+#     grp_standard_score <- intersect(grp_standard_score, existing_row_groups)
+#     grp_t_score <- intersect(grp_t_score, existing_row_groups)
+#     grp_z_score <- intersect(grp_z_score, existing_row_groups)
+#     grp_raw_score <- intersect(grp_raw_score, existing_row_groups)
+
+#     # Concatenate footnotes
+#     fn_combined <- list(
+#       scaled_score = fn_scaled_score,
+#       standard_score = fn_standard_score,
+#       t_score = fn_t_score,
+#       z_score = fn_z_score,
+#       raw_score = fn_raw_score
+#     )
+
+#     # Add footnotes
+#     for (score_type in names(fn_combined)) {
+#       fn <- fn_combined[[score_type]]
+#       groups <- get(paste0("grp_", score_type))
+#       if (!is.null(fn) && any(groups %in% dynamic_grp[[score_type]])) {
+#         table <- table |>
+#           tab_footnote(
+#             footnote = glue::glue_collapse(fn, sep = " "),
+#             locations = cells_row_groups(groups = groups)
+#           )
+#       }
+#     }
+
+#     # Adding source note
+#     table <- table |>
+#       tab_style(style = cell_text(size = "small"), locations = cells_source_notes()) |>
+#       tab_source_note(source_note = source_note) |>
+#       gtExtras::gt_theme_538() |>
+#       tab_options(
+#         row_group.font.weight = "bold",
+#         footnotes.multiline = multiline,
+#         footnotes.font.size = "small"
+#       ) |>
+#       opt_vertical_padding(scale = vertical_padding)
+
+#     gt::gtsave(table, glue::glue("table_{pheno}.pdf"))
+#     gt::gtsave(table, glue::glue("table_{pheno}.png"))
+
+#     return(table)
+#   }
 
 # make `gt` table
 bwu::tbl_gt(
   data = data_social,
   pheno = pheno,
   table_name = table_name,
-  fn_scaled_score = fn_scaled_score,
-  fn_t_score = fn_t_score,
+  # table_vars = c("raw_score", "range"),
+  # fn_scaled_score = fn_scaled_score,
+  # fn_t_score = fn_t_score,
   fn_raw_score = fn_raw_score,
-  grp_scaled_score = grp_social[["scaled_score"]],
-  grp_t_score = grp_social[["t_score"]],
+  # grp_scaled_score = grp_social[["scaled_score"]],
+  # grp_t_score = grp_social[["t_score"]],
   grp_raw_score = grp_social[["raw_score"]],
   dynamic_grp = grp_social,
   vertical_padding = vertical_padding,
@@ -189,7 +323,8 @@ bwu::tbl_gt(
 exclude <- c(
   "CARS-2 Total Score",
   "Theory of Mind Verbal",
-  "Affect Recognition"
+  "Affect Recognition",
+  "CARS 2-HF Total Score"
 )
 
 data_social <- data_social |>

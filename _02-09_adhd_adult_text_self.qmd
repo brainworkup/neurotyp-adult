@@ -1,29 +1,5 @@
-<<PROMPT>>
+Biggie reported significant self-reported negative self-concept, with above-average inattention and executive dysfunction symptoms. She scored highly on ADHD hyperactive/impulsive symptoms and above average on both total ADHD symptoms and inattentive symptoms.
 
-## Area: Attention-deficit/hyperactivity disorder (ADHD) and executive functioning
+Clinical Profile: Jemiel's primary concerns include poor social relationships, low self-esteem, trouble concentrating, difficulty planning tasks, forgetfulness, and being disorganized.
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below { range }, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below { range } to Exceptionally Low.
-
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
-
-- On the CAARS scales, higher scores reflect reduced functioning, but on the CEFI scales, lower scores reflect reduced functioning.
-- 
-- For scores that are above average or higher on the CAARS, give a brief example of how this could impact the patient's daily functioning.
-- 
-- For scores that are below average or worse on the CEFI, give a brief example of how this could impact the patient's daily functioning.
-
-<<EXAMPLE>>
-
-{{< var patient >}} completed self-report rating scales of adult ADHD symptoms and executive functioning in everyday life. Consistent and overlapping difficulties were reported in the areas of:
-
-<!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
-
-On the companion observer-reports, it was reported that {{< var patient >}} evidences moderate to severe difficulties in the areas of:
-
-<!-- insert 2-3 of the highest and lowest scores on the CAARS-SR and CEFI-SR -->
-
-<<START>>
-
-
+Executive Dysfunctions/Weaknesses: The CAARS-2 and CEFI Adult assessments highlighted weaknesses in flexibility (average), attention (average), self-monitoring (low average), planning (low average), organization (low average), and initiation (exceptionally low).

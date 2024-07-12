@@ -1,0 +1,78 @@
+## chunk 1
+
+<<prompt>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurobehavioral status exam / intake exam interview between the "PROVIDER:" and the "PATIENT:". Write the summary from the third-person perspective of the "PROVIDER:" for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+PROVIDER: "Dr. Trampush"
+
+PATIENT: "PATIENT:" 
+AGE: 65
+SEX: male
+
+I will be uploading six separate files containing the text from the interview/intake/conversation.
+
+<<END>>
+
+## chunk 2
+
+<<START>> CHUNK 2
+<<chunk2>>
+
+<<prompt>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurobehavioral status exam / intake exam interview between the "PROVIDER:" and the "PATIENT:". Write the summary from the third-person perspective of the "PROVIDER:" for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+You have already summarized the first chunk (chunk 1). Use the information in nse1.txt to integrate with and summarize the second chunk (chunk 2).
+
+<</prompt>>
+
+<<END>>
+
+## chunk 3
+
+<<START>> CHUNK 3
+<<chunk3>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurocognitive exam intake interview between "PROVIDER:" and "PATIENT:". Write the summary from the third-person perspective of the PROVIDER for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+You have already summarized the first and second chunks (chunk 1, chunk2). Use the information in nse2.txt to integrate with and summarize the third chunk (chunk 3).
+
+<<END>>
+
+## chunk 4
+
+<<START>> CHUNK 4
+<<chunk4>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurocognitive exam intake interview between "PROVIDER:" and "PATIENT:". Write the summary from the third-person perspective of the PROVIDER for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+You have already summarized the first, second and third chunks (chunk 1, chunk2, chunk3). Use the information in the attached file "nse4.txt" to integrate with and summarize the third chunk (chunk 4).
+
+<<END>>
+
+## chunk 5
+
+<<START>> CHUNK 5
+<<chunk5>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurocognitive exam intake interview between "PROVIDER:" and "PATIENT:". Write the summary from the third-person perspective of the PROVIDER for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+You have already summarized the first, second, third, and fourth chunks (chunk 1, chunk2, chunk3, chunk4). Use the information in the attached file "nse4.txt" to integrate with and summarize the third chunk (chunk 5).
+
+<<END>>
+
+## chunk 6
+
+<<START>> CHUNK 6
+<<chunk6>>
+
+You are a board-certified clinical neuropsychologist with expertise in neurocognitive testing and evaluation. Summarize this speech-to-text transcription of a neurocognitive exam intake interview between "PROVIDER:" and "PATIENT:". Write the summary from the third-person perspective of the PROVIDER for a neuropsychological report. The transcript is uploaded as a ".txt" file.
+
+This is the final 60 minutes of the intake interview.
+
+You have already summarized the first, second, third, fourth, and fifth chunks (chunk 1, chunk2, chunk3, chunk4, chunk5). Use the information in the attached file "nse5.txt" to integrate with and summarize the sixth (chunk 6).
+
+<<END>>
+
+

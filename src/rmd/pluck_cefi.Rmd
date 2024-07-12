@@ -4,25 +4,27 @@ title: |
   <center> Self and Observer Reports </center>
 date: "`r Sys.Date()`"
 params:
-  patient: "{{< var patient >}}"
+  patient: Biggie
   test:
     label: "CEFI"
-    value: cefi_or
+    value: cefi_sr
     input: select
     multiple: no
     choices:
-      - cefi_or
-      - cefi_or_5-18
       - cefi_sr
+      - cefi_or
       - cefi_sr_12-18
+      - cefi_or_5-18
   test_name:
     label: "Test Name:"
-    value: CEFI Observer
+    value: CEFI Self
     input: select
     multiple: no
     choices:
       - CEFI Self
       - CEFI Observer
+      - CEFI Self-Report
+      - CEFI Observer-Report
   file:
     label: "No file selected"
     value: file
@@ -46,11 +48,11 @@ Sys.setenv(
 options(java.parameters = "-Xmx16000m")
 knitr::opts_chunk$set(
   root.dir = normalizePath("./"),
-  echo = TRUE,
-  message = TRUE,
+  echo = FALSE,
+  message = FALSE,
   warning = TRUE,
   error = TRUE,
-  include = FALSE
+  include = TRUE
 )
 library(dplyr)
 library(fs)
@@ -90,8 +92,6 @@ if (params$test == "cefi_sr" || params$test == "cefi_sr_12-18") {
 } else if (params$test == "cefi_or" || params$test == "cefi_or_5-18") {
   saveRDS(file, "cefi_observer.rds")
 }
-# file <- readRDS("cefi_self.rds")
-# file <- readRDS("cefi_observer.rds")
 ```
 
 ## Areas

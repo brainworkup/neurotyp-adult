@@ -3,7 +3,6 @@ project:
   execute-dir: file
   render:
     - Biggie.qmd
-    # - {{< var patient >}}.qmd
 
 format:
   neurotyp-typst:

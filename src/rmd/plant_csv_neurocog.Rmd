@@ -1,12 +1,15 @@
 ---
-title: "Plant CSV files of Neurocognitive Tests"
+title: |
+  <center> Neurocognitive Tests</center>
+  <center> Individual tests </center>
+date: "`r Sys.Date()`"
 params:
   patient:
+    value: Biggie
     label: "Patient's first name:"
-    value: "{{< var patient >}}"
     input: text
   test_name:
-    label: "Formal Name of Test/Test Battery:"
+    label: "Name of Test/Test Battery:"
     value: NIH EXAMINER
     input: radio
     choices:
@@ -323,44 +326,54 @@ output:
 ## Setup
 
 ```{r setup, include = FALSE}
+# Set JAVA environment
 Sys.setenv(
-  JAVA_HOME = "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
+  JAVA_HOME =
+    "/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-22.0.1+8.1/Contents/Home"
 )
 options(java.parameters = "-Xmx16000m")
 knitr::opts_chunk$set(
   root.dir = normalizePath("./"),
   echo = TRUE,
   message = TRUE,
-  warning = FALSE,
-  error = TRUE
+  warning = TRUE,
+  error = TRUE,
+  include = FALSE
 )
+library(dplyr)
+library(fs)
+library(glue)
+library(hablar)
 library(here)
 library(knitr)
 library(magrittr)
-library(readr)
+library(miniUI)
+library(pdftools)
+library(rJava)
 library(rmarkdown)
+library(rmdformats)
 library(shiny)
 library(snakecase)
-library(glue)
-library(tibble)
-library(tidyr)
-library(dplyr)
-library(tidytable)
-library(purrr)
-library(rlang)
+library(tabulapdf)
+library(tidyverse)
+library(xfun)
+library(yaml)
 library(bwu)
 ```
 
-## Patient
+## Parameters
 
-```{r patient}
+```{r}
 patient <- params$patient
+test <- params$test
+test_name <- params$test_name
 ```
+
 
 ## Make data frame
 
 ```{r make-df}
-data <- data.frame(
+data <- tibble::as_tibble(
   test = (params$test),
   test_name = (params$test_name),
   test_type = (params$test_type),
@@ -645,7 +658,7 @@ data <- data |> dplyr::select(-.z)
 table <- data
 test <- table$test
 scale <- snakecase::to_snake_case(table$scale)
-file_path <- here::here(patient, "pre_csv", paste0(test, "_", scale, ".csv"))
+file_path <- here::here("data", paste0(test, "_", scale, ".csv"))
 readr::write_excel_csv(
   table,
   file_path,
@@ -667,7 +680,7 @@ has_headers <- function(file_path) {
 ```{r writeout-test}
 table <- data
 test <- table$test
-file_path <- here::here(patient, "csv", paste0(test, ".csv"))
+file_path <- here::here("data", "csv", paste0(test, ".csv"))
 
 readr::write_excel_csv(
   table,
@@ -680,7 +693,7 @@ readr::write_excel_csv(
 ```{r writeout-g}
 table <- data
 test <- "g"
-file_path <- here::here(patient, "csv", paste0(test, ".csv"))
+file_path <- here::here("data", paste0(test, ".csv"))
 
 readr::write_excel_csv(
   table,
