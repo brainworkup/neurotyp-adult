@@ -67,110 +67,6 @@ readr::write_excel_csv(adhd, paste0(pheno, ".csv"), na = "", col_names = TRUE, a
 # read and filter data
 data <- adhd
 
-# scales <- c(
-#   # "CAARS-SR Inattention/Memory Problems",
-#   # "CAARS-SR Hyperactivity/Restlessness",
-#   # "CAARS-SR Impulsivity/Emotional Lability",
-#   # "CAARS-SR Problems with Self-Concept",
-#   # "CAARS-SR DSM-5 Inattentive Symptoms",
-#   # "CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms",
-#   # "CAARS-SR DSM-5 ADHD Symptoms Total",
-#   # "CAARS-SR ADHD Index",
-#   # "CEFI-SR Full Scale",
-#   # "CEFI-SR Attention",
-#   # "CEFI-SR Emotion Regulation",
-#   # "CEFI-SR Flexibility",
-#   # "CEFI-SR Inhibitory Control",
-#   # "CEFI-SR Initiation",
-#   # "CEFI-SR Organization",
-#   # "CEFI-SR Planning",
-#   # "CEFI-SR Self-Monitoring",
-#   # "CEFI-SR Working Memory",
-#   "CEFI Self Full Scale",
-#   "CEFI Self Attention",
-#   "CEFI Self Emotion Regulation",
-#   "CEFI Self Flexibility",
-#   "CEFI Self Inhibitory Control",
-#   "CEFI Self Initiation",
-#   "CEFI Self Organization",
-#   "CEFI Self Planning",
-#   "CEFI Self Self-Monitoring",
-#   "CEFI Self Working Memory",
-# "CAARS-OR Inattention/Memory Problems",
-# "CAARS-OR Hyperactivity/Restlessness",
-# "CAARS-OR Impulsivity/Emotional Lability",
-# "CAARS-OR Problems with Self-Concept",
-# "CAARS-OR DSM-5 Inattentive Symptoms",
-# "CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms",
-# "CAARS-OR DSM-5 ADHD Symptoms Total",
-# "CAARS-OR ADHD Index",
-#   "CEFI-OR Full Scale",
-#   "CEFI-OR Attention",
-#   "CEFI-OR Emotion Regulation",
-#   "CEFI-OR Flexibility",
-#   "CEFI-OR Inhibitory Control",
-#   "CEFI-OR Initiation",
-#   "CEFI-OR Organization",
-#   "CEFI-OR Planning",
-#   "CEFI-OR Self-Monitoring",
-#   "CEFI-OR Working Memory",
-#   "CAARS2 Observer Inattention/Memory Problems",
-#   "CAARS2 Observer Hyperactivity/Restlessness",
-#   "CAARS2 Observer Impulsivity/Emotional Lability",
-#   "CAARS2 Observer Problems with Self-Concept",
-#   "CAARS2 Observer DSM-5 Inattentive Symptoms",
-#   "CAARS2 Observer DSM-5 Hyperactive-Impulsive Symptoms",
-#   "CAARS2 Observer DSM-5 ADHD Symptoms Total",
-#   "CAARS2 Observer ADHD Index",
-#   # "CEFI Observer Full Scale",
-#   # "CEFI Observer Attention",
-#   # "CEFI Observer Emotion Regulation",
-#   # "CEFI Observer Flexibility",
-#   # "CEFI Observer Inhibitory Control",
-#   # "CEFI Observer Initiation",
-#   # "CEFI Observer Organization",
-#   # "CEFI Observer Planning",
-#   # "CEFI Observer Self-Monitoring",
-#   # "CEFI Observer Working Memory",
-#   # caars-2
-#   "CAARS2-OR Inattention/Executive Dysfunction",
-#   "CAARS2-OR Hyperactivity",
-#   "CAARS2-OR Impulsivity",
-#   "CAARS2-OR Emotional Dysregulation",
-#   "CAARS2-OR Negative Self-Concept",
-#   "CAARS2-OR ADHD Inattentive Symptoms",
-#   "CAARS2-OR ADHD Hyperactive/Impulsive Symptoms",
-#   "CAARS2-OR Total ADHD Symptoms",
-#   "CAARS2-OR ADHD Index",
-#   "CAARS2 Observer Inattention/Executive Dysfunction",
-#   "CAARS2 Observer Hyperactivity",
-#   "CAARS2 Observer Impulsivity",
-#   "CAARS2 Observer Emotional Dysregulation",
-#   "CAARS2 Observer Negative Self-Concept",
-#   "CAARS2 Observer ADHD Inattentive Symptoms",
-#   "CAARS2 Observer ADHD Hyperactive/Impulsive Symptoms",
-#   "CAARS2 Observer Total ADHD Symptoms",
-#   "CAARS2 Observer ADHD Index",
-#   "CAARS2-SR Inattention/Executive Dysfunction",
-#   "CAARS2-SR Hyperactivity",
-#   "CAARS2-SR Impulsivity",
-#   "CAARS2-SR Emotional Dysregulation",
-#   "CAARS2-SR Negative Self-Concept",
-#   "CAARS2-SR ADHD Inattentive Symptoms",
-#   "CAARS2-SR ADHD Hyperactive/Impulsive Symptoms",
-#   "CAARS2-SR Total ADHD Symptoms",
-#   "CAARS2-SR ADHD Index",
-#   "CAARS2 Self Inattention/Executive Dysfunction",
-#   "CAARS2 Self Hyperactivity",
-#   "CAARS2 Self Impulsivity",
-#   "CAARS2 Self Emotional Dysregulation",
-#   "CAARS2 Self Negative Self-Concept",
-#   "CAARS2 Self ADHD Inattentive Symptoms",
-#   "CAARS2 Self ADHD Hyperactive/Impulsive Symptoms",
-#   "CAARS2 Self Total ADHD Symptoms",
-#   "CAARS2 Self ADHD Index"
-# )
-
 scales <- c(
   "Activation",
   "Focus",
@@ -198,35 +94,6 @@ scales <- c(
   "Planning",
   "Self-Monitoring",
   "Working Memory",
-  "CEFI Self Full Scale",
-  "CEFI Self Attention",
-  "CEFI Self Emotion Regulation",
-  "CEFI Self Flexibility",
-  "CEFI Self Inhibitory Control",
-  "CEFI Self Initiation",
-  "CEFI Self Organization",
-  "CEFI Self Planning",
-  "CEFI Self Self-Monitoring",
-  "CEFI Self Working Memory",
-  # caars-2
-  "CAARS2 Observer Inattention/Executive Dysfunction",
-  "CAARS2 Observer Hyperactivity",
-  "CAARS2 Observer Impulsivity",
-  "CAARS2 Observer Emotional Dysregulation",
-  "CAARS2 Observer Negative Self-Concept",
-  "CAARS2 Observer ADHD Inattentive Symptoms",
-  "CAARS2 Observer ADHD Hyperactive/Impulsive Symptoms",
-  "CAARS2 Observer Total ADHD Symptoms",
-  "CAARS2 Observer ADHD Index",
-  "CAARS2 Self Inattention/Executive Dysfunction",
-  "CAARS2 Self Hyperactivity",
-  "CAARS2 Self Impulsivity",
-  "CAARS2 Self Emotional Dysregulation",
-  "CAARS2 Self Negative Self-Concept",
-  "CAARS2 Self ADHD Inattentive Symptoms",
-  "CAARS2 Self ADHD Hyperactive/Impulsive Symptoms",
-  "CAARS2 Self Total ADHD Symptoms",
-  "CAARS2 Self ADHD Index",
   "Inattention/Executive Dysfunction",
   "Hyperactivity",
   "Impulsivity",
@@ -235,7 +102,43 @@ scales <- c(
   "ADHD Inattentive Symptoms",
   "ADHD Hyperactive/Impulsive Symptoms",
   "Total ADHD Symptoms",
-  "ADHD Index"
+  "ADHD Index",
+  "CAARS-OR Inattention/Memory Problems",
+  "CAARS-OR Hyperactivity/Restlessness",
+  "CAARS-OR Impulsivity/Emotional Lability",
+  "CAARS-OR Problems with Self-Concept",
+  "CAARS-OR DSM-5 Inattentive Symptoms",
+  "CAARS-OR DSM-5 Hyperactive-Impulsive Symptoms",
+  "CAARS-OR DSM-5 ADHD Symptoms Total",
+  "CAARS-OR ADHD Index",
+  "CAARS-SR Inattention/Memory Problems",
+  "CAARS-SR Hyperactivity/Restlessness",
+  "CAARS-SR Impulsivity/Emotional Lability",
+  "CAARS-SR Problems with Self-Concept",
+  "CAARS-SR DSM-5 Inattentive Symptoms",
+  "CAARS-SR DSM-5 Hyperactive-Impulsive Symptoms",
+  "CAARS-SR DSM-5 ADHD Symptoms Total",
+  "CAARS-SR ADHD Index",
+  "CEFI-OR Full Scale",
+  "CEFI-OR Attention",
+  "CEFI-OR Emotion Regulation",
+  "CEFI-OR Flexibility",
+  "CEFI-OR Inhibitory Control",
+  "CEFI-OR Initiation",
+  "CEFI-OR Organization",
+  "CEFI-OR Planning",
+  "CEFI-OR Self-Monitoring",
+  "CEFI-OR Working Memory",
+  "CEFI-SR Full Scale",
+  "CEFI-SR Attention",
+  "CEFI-SR Emotion Regulation",
+  "CEFI-SR Flexibility",
+  "CEFI-SR Inhibitory Control",
+  "CEFI-SR Initiation",
+  "CEFI-SR Organization",
+  "CEFI-SR Planning",
+  "CEFI-SR Self-Monitoring",
+  "CEFI-SR Working Memory"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -286,9 +189,14 @@ bwu::cat_neuropsych_results(data = data_adhd_observer, file = "_02-09_adhd_adult
 options(tikzDefaultEngine = "xetex")
 
 # table arguments
+pheno <- "adhd_self"
 table_name <- "table_adhd_self"
 vertical_padding <- 0
 multiline <- TRUE
+
+# variables
+data_adhd_self <-
+  dplyr::mutate(data_adhd_self, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR |CAARS2 Self "))
 
 # footnotes
 fn_standard_score <- gt::md("CEFI Standard score: Mean = 100 [50th‰], SD ± 15
@@ -296,7 +204,7 @@ fn_standard_score <- gt::md("CEFI Standard score: Mean = 100 [50th‰], SD ± 15
 
 Lower scores reflect reduced functioning.")
 
-fn_t_score <- gt::md("CAARS2 T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+fn_t_score <- gt::md("CAARS T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
 Higher scores reflect reduced functioning.")
 
@@ -313,12 +221,6 @@ grp_caars <- list(
 grp_cefi <- list(
   standard_score = c("CEFI Self-Report", "CEFI Observer-Report", "CEFI Self", "CEFI Observer")
 )
-
-# variables
-data_adhd_self <- dplyr::mutate(data_adhd_self, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR "))
-
-fn_standard_score <- fn_standard_score
-fn_t_score <- fn_t_score
 
 grp_self <- list(
   standard_score = c("CEFI Self-Report", "CEFI Self"),
@@ -349,39 +251,33 @@ bwu::tbl_gt(
 options(tikzDefaultEngine = "xetex")
 
 # table arguments
+pheno <- "adhd_observer"
 table_name <- "table_adhd_observer"
 vertical_padding <- 0
 multiline <- TRUE
 
+# variables
+data_adhd_observer <-
+  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-OR |CEFI-OR |CAARS2 Observer "))
+
 # groupings
 grp_adhd <- list(
-  standard_score = c("CEFI Observer-Report", "CEFI Observer"),
-  t_score = c("CAARS Observer-Report", "CAARS-2 Observer-Report", "CAARS2 Observer")
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report", "CEFI Self", "CEFI Observer"),
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report", "CAARS2 Self", "CAARS2 Observer")
 )
 
 grp_caars <- list(
-  t_score = c("CAARS Observer-Report", "CAARS-2 Observer-Report", "CAARS2 Observer")
+  t_score = c("CAARS Self-Report", "CAARS Observer-Report", "CAARS-2 Self-Report", "CAARS-2 Observer-Report", "CAARS2 Self", "CAARS2 Observer")
 )
 
 grp_cefi <- list(
-  standard_score = c("CEFI Observer-Report", "CEFI Observer")
+  standard_score = c("CEFI Self-Report", "CEFI Observer-Report", "CEFI Self", "CEFI Observer")
 )
-
-# variables
-data_adhd_observer <-
-  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-SR |CEFI-SR |CAARS2 Observer "))
-
-fn_standard_score <- fn_standard_score
-fn_t_score <- fn_t_score
 
 grp_observer <- list(
   standard_score = c("CEFI Observer-Report", "CEFI Observer"),
   t_score = c("CAARS Observer-Report", "CAARS-2 Observer-Report", "CAARS2 Observer")
 )
-
-# variables
-data_adhd_observer <-
-  dplyr::mutate(data_adhd_observer, scale = stringr::str_remove_all(scale, "CAARS-OR |CEFI-OR |CAARS2 Observer "))
 
 # make `gt` table
 bwu::tbl_gt(

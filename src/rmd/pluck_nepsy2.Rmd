@@ -15,8 +15,6 @@ output:
     highlight: kate
 ---
 
-# NEPSY-2
-
 ## Setup
 
 ```{r setup, include = FALSE}
