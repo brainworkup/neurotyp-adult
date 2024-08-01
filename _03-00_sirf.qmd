@@ -70,7 +70,7 @@ g <-
   )
 
 # save g.csv
-readr::write_csv(g, "data/g.csv")
+readr::write_csv(g, "data/csv/g.csv")
 ```
 
 ```{r}
@@ -79,7 +79,7 @@ readr::write_csv(g, "data/g.csv")
 #| eval: true
 #| fig-cap: "Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1."
 
-g <- vroom::vroom("data/g.csv")
+g <- vroom::vroom("data/csv/g.csv")
 
 # scales
 keep <- c(
