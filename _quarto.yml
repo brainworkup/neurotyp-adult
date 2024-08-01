@@ -14,7 +14,7 @@ format:
     fontsize: 12pt
     number-sections: false
     citeproc: false
-    csl: /src/bib/apa
+    csl: /src/bib/apa.csl
 
 execute:
   warning: false
