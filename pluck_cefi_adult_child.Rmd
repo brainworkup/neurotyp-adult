@@ -4,7 +4,7 @@ title: |
   <center> Self and Observer Reports </center>
 date: "`r Sys.Date()`"
 params:
-  patient: Jemiel
+  patient: Biggie
   test:
     label: "CEFI"
     value: cefi_sr
@@ -480,7 +480,7 @@ if (params$test == "cefi_sr" || params$test == "cefi_sr_12-18") {
     )
   }
 
-# CEFI Observer
+  # CEFI Observer
 } else if (params$test == "cefi_or" || params$test == "cefi_or_5-18") {
   ## extract text
   cefi_or_txt <- get_text(file)

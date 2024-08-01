@@ -76,7 +76,7 @@ pages <- params$pages
 
 ```{r file}
 # pdf_file <- file.path(file.choose())
-# pdf_file <- "/Users/joey/neuropsychology/Felix/pdf/BASC-3-PRS-Report_51189744_1693458387761.pdf"
+# pdf_file <- "/Users/joey/neuropsychology/Biggie/pdf/BASC-3-PRS-Report_51189744_1693458387761.pdf"
 pdf_file <- params$file
 ```
 
@@ -446,7 +446,7 @@ if (params$test == "basc3_prs_child") {
 library(pdftools)
 library(stringr)
 
-patient <- "Felix"
+patient <- "Biggie"
 
 file <- here::here(patient, "pdf", "basc3_prs.pdf")
 

@@ -6,9 +6,9 @@ You are a board-certified clinical neuropsychologist with expertise in neurocogn
 
 PROVIDER: "Dr. Trampush"
 
-PATIENT: "PATIENT:" 
-AGE: 65
-SEX: male
+PATIENT: "PATIENT:"
+AGE: 
+SEX: 
 
 I will be uploading six separate files containing the text from the interview/intake/conversation.
 
@@ -74,5 +74,3 @@ This is the final 60 minutes of the intake interview.
 You have already summarized the first, second, third, fourth, and fifth chunks (chunk 1, chunk2, chunk3, chunk4, chunk5). Use the information in the attached file "nse5.txt" to integrate with and summarize the sixth (chunk 6).
 
 <<END>>
-
-

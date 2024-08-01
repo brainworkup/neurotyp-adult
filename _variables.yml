@@ -1,29 +1,29 @@
 version: 0.1.0
 
-# variables:
+# VARIABLES
 patient: Biggie
 first_name: Biggie
 last_name: Smalls
 dob: 1991-01-01
-doe1: 
-doe2: 
-doe3: 
-sex: 
-sex_cap: 
-age: 
-education: 
-handedness: 
-referral: 
-observer: 
-observer_relation: 
-attorney: 
-mr_mrs: Mrs.
-he_she: she
-he_she_cap: She
-his_her: her
-his_her_cap: Her
-him_her: her
-him_her_cap: Her
+doe1: 2024-01-01
+doe2:
+doe3:
+sex:
+sex_cap:
+age:
+education:
+handedness:
+referral:
+observer:
+observer_relation:
+attorney:
+mr_mrs:
+he_she:
+he_she_cap:
+his_her:
+his_her_cap:
+him_her:
+him_her_cap:
 dx1: attention-deficit/hyperactivity disorder (ADHD)
 dx2: anxiety
 dx3: depression

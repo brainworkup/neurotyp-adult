@@ -36,8 +36,7 @@ academics <- academics |>
     test_name,
     scale,
     raw_score,
-    percent_mastery,
-    age_equiv,
+    # age_equiv,
     score,
     ci_95,
     percentile,
@@ -148,15 +147,7 @@ scales <- c(
   "Word Recognition Fluency",
   "Writing Fluency",
   "Written Expression",
-  "Written Language Composite",
-  # Bracken-4
-  "School Readiness Composite (SRC)",
-  "Colors",
-  "Letters",
-  "Numbers/Counting",
-  "Sizes/Comparisons",
-  "Shapes",
-  "Self-/Social Awareness"
+  "Written Language Composite"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -190,12 +181,10 @@ multiline <- TRUE
 
 # footnotes
 fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_percent_mastery <- gt::md("Percent Mastery: Percentage of correct raw scores")
 
 # Define the groups for the table
 grp_academics <- list(
-  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5", "BSRA-4"),
-  percent_mastery = c("BSRA-4")
+  standard_score = c("KTEA-3", "WIAT-4", "WRAT-5")
 )
 
 # Create the table using the tbl_gt function from the bwu library
@@ -204,9 +193,7 @@ bwu::tbl_gt(
   pheno = pheno,
   table_name = table_name,
   fn_standard_score = fn_standard_score,
-  fn_percent_mastery = fn_percent_mastery,
   grp_standard_score = grp_academics[["standard_score"]],
-  grp_percent_mastery = grp_academics[["percent_mastery"]],
   dynamic_grp = grp_academics,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -321,37 +308,6 @@ bwu::dotplot(
   )
 ```
 
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
-  set text(..font)
-  pad(top: 0.5em)[]
-  grid(
-    columns: (50%, 50%),
-    gutter: 8pt,
-    figure(
-      [#image(file_qtbl)],
-      caption: figure.caption(position: top, [#title]),
-      kind: "qtbl",
-      supplement: [Table],
-    ),
-    figure(
-      [#image(file_fig, width: auto)],
-      caption: figure.caption(
-        position: bottom,
-        [
-          _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
-        ],
-      ),
-      placement: none,
-      kind: "image",
-      supplement: [Figure],
-      gap: 0.5em,
-    ),
-  )
-}
-```
 ```{=typst}
 #let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
