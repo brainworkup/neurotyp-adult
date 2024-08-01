@@ -43,19 +43,18 @@ library(vroom)
 library(bwu)
 ```
 
-### Export PAI CSV file from PARiConnect
+## Export PAI CSV file from PARiConnect
 
 Need to export csv file from PARiConnect before processing.
 "Export Client Data" tab, then click "Univ of Southern Cali" then "PAI".
 Specify date range to exclude entire database.
 
-## Patient
-
-```{r patient}
-patient <- params$patient
-```
-
 ## Parameters
+
+```{r}
+file_path <- here::here("data", "pdf", "pai.pdf")
+read_content <- readLines(file_path)
+```
 
 ```{r}
 patient <- params$patient
@@ -69,12 +68,6 @@ test <- params$test
 test_name <- params$test_name
 ```
 
-
-```{r}
-file_path <- here::here("data", "pdf", "pai.pdf")
-read_content <- readLines(file_path)
-```
-
 ## Import PAI CSV file from PARiConnect
 
 ```{r}
@@ -82,15 +75,13 @@ plucked_tables <-
   readr::read_csv(
     here::here("data", "pariconnectexportPAI.csv")
   )
-
-# pai <- plucked_tables
 ```
 
-## Clinical and validity scales
+## PAI Clinical and validity scales
 
 ### Subset and rename columns
 
-```{r subset}
+```{r}
 pai <- plucked_tables |>
   tidyr::gather() |>
   dplyr::rename(scale = key, score = value)
@@ -150,7 +141,7 @@ df_adhd <- plucked_tables |>
 
 ### Convert T scores to z scores to percentiles
 
-```{r t2z2p}
+```{r}
 pai <- pai |>
   dplyr::mutate(z = (score - 50) / 10) |>
   dplyr::mutate(percentile = trunc(pnorm(z) * 100)) |>
@@ -281,6 +272,7 @@ df_clinical <- df_clinical |> dplyr::slice(
 ## Add/mutate columns
 
 ```{r mutate}
+# TODO: Probably delete pai df
 pai <-
   bwu::gpluck_make_columns(
     data = pai,
@@ -298,10 +290,11 @@ pai <-
     test_type = "rating_scale",
     score_type = "t_score",
     absort = paste0(
-      tolower(test), "_", tolower(scale), "_", seq_len(nrow(pai)),
+      tolower(test), "_", tolower(scale), "_", seq_len(nrow(pai))),
     description = "",
     result = ""
-  )
+    )
+
 
 df_clinical <-
   bwu::gpluck_make_columns(
@@ -392,7 +385,7 @@ df_inatt <- bwu::gpluck_make_score_ranges(
 
 ## Domains
 
-```{r domains}
+```{r}
 df_clinical <-
   df_clinical |>
   dplyr::mutate(
@@ -753,14 +746,14 @@ df_inatt <-
   dplyr::mutate(result = glue::glue("{patient}'s score on {.data$scale} ({.data$description}) was {.data$range}."))
 ```
 
-# Finalize and save
+## Finalize and save
 
-## relocate variables
+### relocate variables
 
-```{r relocate}
-df <-
-  pai |>
-  dplyr::relocate(c(raw_score, score, percentile, range, ci_95), .after = scale)
+```{r}
+# df <-
+#   pai |>
+#   dplyr::relocate(c(raw_score, score, percentile, range, ci_95), .after = scale)
 
 df <-
   df_clinical |>
@@ -807,7 +800,7 @@ readr::write_csv(
 )
 ```
 
-## Extract text, squish text, and save
+## Text: extract, squish, save
 
 Replace long spaces with a col break symbol.
 Save text to markdown, quarto, and typst formats.
