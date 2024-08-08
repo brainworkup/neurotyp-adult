@@ -18,12 +18,8 @@
 			"editorWarning.foreground": "#000000ff",
 			"panel.border": "#32a1fe",
 			"sash.hoverBorder": "#32a1fe",
-			"statusBar.background": "#018afc",
-			"statusBar.foreground": "#e7e7e7",
-			"statusBarItem.hoverBackground": "#32a1fe",
-			"statusBarItem.remoteBackground": "#018afc",
-			"statusBarItem.remoteForeground": "#e7e7e7",
-			"tab.activeBorder": "#32a1fe"
+			"tab.activeBorder": "#32a1fe",
+			"sideBar.border": "#32a1fe"
 		},
 		"peacock.color": "#018afc"
 	}
