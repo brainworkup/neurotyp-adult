@@ -384,7 +384,13 @@ options(warn = 0) # Reset to default behavior
       [#image(file_fig)],
       caption: figure.caption(
         position: bottom,
-        [Adult ADHD symptoms and executive functioning self-reported by the patient.],
+        [Attention and executive functions are multidimensional concepts that contain
+          several related processes. Both concepts require self-regulatory skills and have
+          some common subprocesses; therefore, it is common to treat them together, or
+          even to refer to both processes when talking about one or the other.
+        
+        
+        ],
       ),
       placement: none,
       kind: "image",
@@ -423,10 +429,7 @@ options(warn = 0) # Reset to default behavior
       caption: figure.caption(
         position: bottom,
         [
-          Attention and executive functions are multidimensional concepts that contain
-          several related processes. Both concepts require self-regulatory skills and have
-          some common subprocesses; therefore, it is common to treat them together, or
-          even to refer to both processes when talking about one or the other.
+          Observer-report of the patient's ADHD symptoms and executive functioning in daily life.
         ],
       ),
       placement: none,

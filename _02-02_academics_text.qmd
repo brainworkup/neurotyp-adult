@@ -1,9 +1,62 @@
-Clinically significant limitations in reading abilities were highlighted by a below-average, clinically sensitive composite score, indicating a risk for dyslexia among students.
+Brooklyn's academic performance is characterized by a much-lower-than-expected profile given her IQ/ability scores, with some areas demonstrating Average skills and others falling Below Average. In terms of written expression, sentence-level writing fluency, and non-oral reading fluency, Brooklyn's abilities fell within the average range. This suggests that Brooklyn has a typical foundation in written communication and reading comprehension skills. However, Brooklyn exhibited difficulties in specific areas, such as phonic decoding fluency, which was classified as Low Average. Similarly, Brooklyn's performance in paper-and-pencil math calculation skills, mathematical principle application, and overall mathematics skills was also classified as Low Average. These results indicate that Brooklyn may struggle with decoding and processing written language, as well as applying mathematical concepts and solving problems. Notably, Brooklyn's overall academic achievement, incorporating reading, math, and writing skills, was classified as Low Average. This is in stark contrast to her overall intellectual skills. This indicates Brooklyn experiences difficulties in multiple academic domains, which will impact their overall academic performance and potential for academic success.
 
-- **Decoding**: Decoding skills (comprised of regular words, irregular words, and non-real words used to assess phonetic decoding skills) are universally impaired, with scores mostly in the 1st to 2nd percentile range and significantly below what is typical for {{< var his_her >}} age group. Further, {{< var his_her >}} reading scores were significantly lower than mathematically predicted, deviating more than two standard deviations from {{< var his_her >}} average IQ scores.
+---
 
-- **Comprehension**: { range }, suggesting mild-to-moderate difficulties in various aspects of reading comprehension. Individuals with similar difficulties find it challenging to read and understand text at the expected level for their age, which affects academic performance and daily activities that involve reading, like following instructions or engaging with written material.
+Brooklyn's academic profile presents a significant discrepancy between her intellectual potential and her current academic achievement. This disparity warrants careful consideration and targeted intervention strategies.
 
-- **Fluency**: Exceptionally Low. Slow reading speed makes it difficult to read both familiar and unfamiliar text quickly and accurately. This impacts daily functioning in activities such as reading for fun or learning new vocabulary.
+Cognitive Ability vs. Academic Achievement:
+Brooklyn's overall intellectual skills are substantially higher than her academic performance, indicating a notable underachievement pattern across multiple domains.
 
+Areas of Relative Strength:
+1. Written Expression: Average performance in sentence-level writing fluency.
+2. Reading Comprehension: Non-oral reading fluency falls within the Average range.
 
+These areas suggest a foundational capacity for written communication and reading comprehension that aligns with age-appropriate expectations.
+
+Areas Requiring Attention:
+1. Phonological Processing: Low Average performance in phonic decoding fluency.
+2. Mathematics:
+   - Low Average skills in paper-and-pencil math calculations.
+   - Low Average ability in applying mathematical principles.
+   - Overall mathematics skills classified as Low Average.
+3. Overall Academic Achievement: Composite score incorporating reading, math, and writing skills falls in the Low Average range.
+
+These results indicate challenges in:
+- Decoding and processing written language
+- Applying mathematical concepts
+- Problem-solving across academic domains
+
+Implications:
+The discrepancy between Brooklyn's intellectual capacity and her academic performance suggests the presence of specific learning challenges. These difficulties manifest across multiple academic areas, potentially impacting her overall educational progress and achievement potential.
+
+Recommendations:
+1. Comprehensive psychoeducational evaluation to identify specific learning disabilities or processing deficits.
+2. Development of an individualized education plan (IEP) or 504 plan to address identified areas of need.
+3. Targeted interventions in phonological processing and mathematics.
+4. Leveraging Brooklyn's strengths in written expression and reading comprehension to support learning in other areas.
+5. Regular monitoring of academic progress and adjustment of interventions as needed.
+
+---
+
+**Academic Performance Profile**
+
+Brooklyn's academic performance is characterized by a significant discrepancy between her intellectual abilities and her academic achievements. Despite possessing above-average cognitive abilities, her academic performance falls short of expectations, with both average and below-average skills demonstrated across various domains.
+
+**Strengths**
+
+Brooklyn exhibits average skills in written expression, sentence-level writing fluency, and non-oral reading fluency, indicating a solid foundation in written communication and reading comprehension.
+
+**Weaknesses**
+
+However, significant deficits are noted in the following areas:
+
+* **Phonic Decoding Fluency**: Brooklyn's performance falls within the Low Average range, suggesting difficulties in decoding and processing written language.
+* **Mathematics**: Her performance in paper-and-pencil math calculation skills, mathematical principle application, and overall mathematics skills is classified as Low Average, indicating struggles with applying mathematical concepts and solving problems.
+
+**Overall Academic Achievement**
+
+Brooklyn's overall academic achievement, encompassing reading, math, and writing skills, falls within the Low Average range. This significant discrepancy between her intellectual abilities and academic achievements suggests that Brooklyn experiences difficulties in multiple academic domains, which will impact her overall academic performance and potential for academic success.
+
+**Implications**
+
+These findings have significant implications for Brooklyn's academic development. It is essential to address these weaknesses through targeted interventions, accommodations, and strategies to support her academic growth and achievement. By doing so, we can help Brooklyn bridge the gap between her intellectual potential and her academic performance.

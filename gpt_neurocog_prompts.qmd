@@ -22,7 +22,7 @@
 
 4. Compute means, standard deviations, and 95% confidence intervals (remove missing/NA data) across these variables: "domain", "subdomain", "narrow domain".
 
-5. Scores and/or domains/subdomains in the Below Average range (scores range between the 2nd and 8th percentiles) or Exceptionally Low range (scores are at the 1st percentile or lower) range are considered areas of "relative weakness"; as such, give a brief example of how this could impact the patient's daily functioning, such as at home, school, work, or socially. If no scores are in this range, you can ignore this step.
+5. Scores and/or domains/subdomains in the Below Average range (scores range between the 2nd and 8th percentiles) or Exceptionally Low range (scores are at the 2nd percentile or lower) range are considered areas of "relative weakness"; as such, give a brief example of how this could impact the patient's daily functioning, such as at home, school, work, or socially. If no scores are in this range, you can ignore this step.
 
 6. Finally, recommended additional support the patient should receive in areas in which scores fall Below Average to Exceptionally Low. If no scores are in this range, you can ignore this step.
 

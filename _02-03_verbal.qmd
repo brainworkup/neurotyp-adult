@@ -126,7 +126,10 @@ scales <- c(
   "Semantic vs. Initial Letter",
   "Word Generation",
   "Word Structure",
-  "Writing"
+  "Writing",
+  "Word Generation-Semantic",
+  "Word Generation-Initial Letter",
+  "Semantic vs. Initial Letter Contrast"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -170,9 +173,9 @@ fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰
 
 # Define the groups for the table
 grp_verbal <- list(
-  scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS", "WPPSI-IV", "CELF-5"),
-  standard_score = c("NAB", "WPPSI-IV", "NAB-S", "CELF-5"),
-  t_score = c("NAB", "NIH EXAMINER", "WASI-2")
+  scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS", "WPPSI-IV", "CELF-5", "RBANS"),
+  standard_score = c("NAB", "WPPSI-IV", "NAB-S", "CELF-5", "RBANS"),
+  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "WASI-2")
 )
 
 # make `gt` table

@@ -5,6 +5,7 @@
 ```{r}
 #| label: setup-emotion
 #| include: false
+
 # domain
 domains <- c(
   "Psychiatric Disorders", "Personality Disorders", "Substance Use",
@@ -34,7 +35,10 @@ readr::write_csv(emotion, paste0(pheno, ".csv"))
 #| label: data-emotion
 #| include: false
 
-data <- bwu::read_data(pheno = pheno)
+# read and filter data
+data <- adhd
+
+# scales in this domain
 scales <- c(
   "Activity Level",
   "Affective (A)",
