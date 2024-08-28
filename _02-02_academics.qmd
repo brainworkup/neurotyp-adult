@@ -203,6 +203,8 @@ bwu::tbl_gt(
 ```{r}
 #| label: fig-academics-subdomain
 #| include: false
+#| fig-height: 6
+#| out-height: 100%
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
 
 # data_academics <- data_academics |>
@@ -210,16 +212,14 @@ bwu::tbl_gt(
 #     scale == "School Readiness Composite (SRC)"
 #   )
 
-# Define the filename for the plot
+# Arguments
 filename <- "fig_academics_subdomain.svg"
+colors <- NULL
+return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Define the x and y variables for the dotplot
 x <- data_academics$z_mean_subdomain
 y <- data_academics$subdomain
-
-# plot args
-colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Make dotplot
 bwu::dotplot(
@@ -236,12 +236,9 @@ bwu::dotplot(
 ```{r}
 #| label: fig-academics-narrow
 #| include: false
+#| fig-height: 6
+#| out-height: 100%
 #| fig-cap: "_Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency."
-
-# data_academics <- data_academics |>
-#   dplyr::filter(
-#     scale == "School Readiness Composite (SRC)"
-#   )
 
 # Define the filename for the plot
 filename <- "fig_academics_narrow.svg"
@@ -279,25 +276,26 @@ bwu::dotplot(
       [#image(file_qtbl)],
       caption: figure.caption(position: top, [#title]),
       kind: "qtbl",
-      supplement: [Table],
+      supplement: [*Table*],
     ),
     figure(
       [#image(file_fig, width: auto)],
       caption: figure.caption(
         position: bottom,
         [
-          _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
-        ],
+          Reading, writing, and math are the three main academic skills assessed on exam. _Reading ability_ consists of three interrelated abilities: decoding, comprehension, and fluency. _Writing ability_ can be described in terms of spelling, grammar, expression of ideas, and writing fluency. _Math ability_ can be described in terms of calculation skills, applied problem solving, and math fluency.
+          ],
       ),
       placement: none,
       kind: "image",
-      supplement: [Figure],
+      supplement: [*Figure*],
       gap: 0.5em,
     ),
   )
 }
 ```
-```{=typst}
+
+<!-- ```{=typst}
 #let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics_subdomain.svg"
@@ -306,7 +304,7 @@ bwu::dotplot(
   file_qtbl,
   file_fig,
   )
-```
+``` -->
 
 ```{=typst}
 #let title = "Academic Skills"

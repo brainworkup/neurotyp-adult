@@ -6,7 +6,7 @@
 #| eval: false
 
 patient <- "{{< var patient >}}"
-scale <- "NSE_otterai_"
+scale <- "nse_otterai_"
 ext <- ".txt"
 file_path <- function(patient, scale, ext) {
   result <- ""
@@ -16,7 +16,7 @@ file_path <- function(patient, scale, ext) {
 input_path <- here::here(file_path)
 start_pattern <- "PATIENT:"
 end_pattern <- "PROVIDER:"
-output_path <- "~/reports/paste0(patient)/NSE_text_", patient, ".md"
+output_path <- "~/reports/paste0(patient)/nse_text_", patient, ".md"
 txt <- bwu::read_write_transcript_otterai(
   input = input_path,
   output = output_path,

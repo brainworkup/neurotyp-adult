@@ -154,7 +154,7 @@ bwu::cat_neuropsych_results(
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
-# variablse
+# variables
 source_note <- gt::md("_T_-Score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].")
 table_name <- "table_emotion"
 vertical_padding <- 0
@@ -255,7 +255,6 @@ colnames(df4)[1] <- "test_name"
 x <- data_emotion$z_mean_subdomain
 y <- data_emotion$subdomain
 colors <- NULL
-# return_plot <- TRUE
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_emotion.svg"
 
@@ -270,7 +269,7 @@ bwu::dotplot(
 )
 ```
 
-<!-- ```{=typst}
+```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Roboto Slab", size: 0.5em)
   set text(..font)
@@ -283,17 +282,20 @@ bwu::dotplot(
           supplement: [*Table*],
           ),
         figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom,[Emotional/Behavioral/Personality]),
+          caption: figure.caption(position: bottom,
+          [
+            Emotional/Behavioral/Personality
+            ]),
           placement: none,
           kind: "image",
-          supplement: [*Fig.*],
+          supplement: [*Figure*],
           gap: 0.5em,
         ),
       )
   }
-``` -->
+```
 
-<!-- ```{=typst}
+```{=typst}
 #let title = "Personality Assessment Inventory (PAI)"
 #let file_qtbl = "table_emotion.png"
 #let file_fig = "fig_emotion.svg"
@@ -302,4 +304,4 @@ bwu::dotplot(
   file_qtbl,
   file_fig
   )
-``` -->
+```

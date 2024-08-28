@@ -96,7 +96,9 @@ scales <- c(
   "Visuomotor Precision Errors",
   "Visuomotor Precision Pencil Lifts",
   "Visuomotor Precision Completion Time",
-  "Visuomotor Precision"
+  "Visuomotor Precision",
+  "FT Dominant Hand Combined",
+  "FT Nondominant Hand Combined"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -130,7 +132,7 @@ multiline <- TRUE
 
 # footnotes
 fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_t_score <- gt::md("T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
 
 # Groupings
 grp_motor <- list(
@@ -160,11 +162,12 @@ bwu::tbl_gt(
 #| fig-cap: "Sensorimotor tasks refer to the capacity to control hand movements quickly, smoothly, and with adequate precision, which are required to engage in activities such as writing and drawing."
 
 # dotplot args
-x <- data_motor$z_mean_narrow
-y <- data_motor$narrow
 colors <- NULL
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_motor.svg"
+
+x <- data_motor$z_mean_narrow
+y <- data_motor$narrow
 
 # Suppress warnings from being converted to errors
 options(warn = 1) # Set warn to 1 to make warnings not halt execution
@@ -195,7 +198,7 @@ options(warn = 0) # Reset to default behavior
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [Table],
+          supplement: [*Table*],
           ),
         figure([#image(file_fig, width: auto)],
           caption: figure.caption(position: bottom, [
@@ -205,7 +208,7 @@ options(warn = 0) # Reset to default behavior
             ]),
           placement: none,
           kind: "image",
-          supplement: [Figure],
+          supplement: [*Figure*],
           gap: 0.5em,
         ),
       )

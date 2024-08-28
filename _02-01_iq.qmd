@@ -284,7 +284,7 @@ options(warn = 0) # Reset to default behavior
       ),
       placement: none,
       kind: "image",
-      supplement: [Figure],
+      supplement: [*Figure*],
       gap: 0.5em,
     ),
   )

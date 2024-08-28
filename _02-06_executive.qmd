@@ -266,8 +266,9 @@ data_executive <-
     "Word Generation",
     "Working Memory (WMI)",
     "Working Memory",
-    "Zoo Locations"
-    # add RBANS
+    "Zoo Locations",
+    "RBANS Digit Span",
+    "RBANS Coding"
   ))
 
 # table arguments
@@ -278,8 +279,8 @@ multiline <- TRUE
 # footnotes
 fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
 fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_t_score <- gt::md("T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_z_score <- gt::md("z-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
 
 # groupings
 grp_executive <- list(
@@ -402,33 +403,7 @@ options(warn = 0) # Reset to default behavior
   file_fig
   )
 ```
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
-  set text(..font)
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [Table],
-          ),
-        figure([#image(file_fig, width: auto)],
-          caption: figure.caption(position: bottom, [
-            Attention and executive functions are essential for successful
-            cognitive functioning, enabling us to perform everyday tasks, handle
-            academic challenges, solve problems, manage our emotions, and
-            interact effectively with others and our environment.
-            ]),
-          placement: none,
-          kind: "image",
-          supplement: [Figure],
-          gap: 0.5em,
-        ),
-      )
-  }
-```
+
 ```{=typst}
 #let title = "Attention/Executive"
 #let file_qtbl = "table_executive.png"

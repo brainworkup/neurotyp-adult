@@ -137,7 +137,6 @@ bwu::dotplot(
 #| include: false
 #| eval: true
 #| fig-cap: "Broad cognitive domains"
-#| out-width: 100%
 
 # args
 data <- vroom::vroom("neurocog.csv")
