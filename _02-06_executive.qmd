@@ -153,7 +153,9 @@ scales <- c(
   "Word Generation",
   "Working Memory (WMI)",
   "Working Memory",
-  "Zoo Locations"
+  "Zoo Locations",
+  "RBANS Digit Span",
+  "RBANS Coding"
 )
 
 # Filter the data using the filter_data function from the bwu library

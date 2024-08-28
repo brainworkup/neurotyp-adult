@@ -94,15 +94,15 @@ validity <- vroom::vroom("validity.csv")
 
 {{< include _00-00_tests.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 {{< include _01-00_nse.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-# NEUROCOGNITIVE FINDINGS {#sec-nt}
-
 {{< include _02-00_behav-obs.qmd >}}
+
+# NEUROCOGNITIVE FINDINGS {#sec-nt}
 
 {{< include _02-01_iq.qmd >}}
 

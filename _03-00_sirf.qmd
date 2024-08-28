@@ -137,45 +137,53 @@ bwu::dotplot(
 #| include: false
 #| eval: true
 #| fig-cap: "Broad cognitive domains"
+#| out-width: 100%
 
 # args
 data <- vroom::vroom("neurocog.csv")
-data2 <- dplyr::filter(data, scale != "Cognitive Proficiency")
+data <- dplyr::filter(data, scale != "Cognitive Proficiency")
 
-data2 <-
-  data2 |>
+# comment out if using subdomains
+data <-
+  data |>
   dplyr::group_by(domain, .add = TRUE) |>
   dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
   dplyr::ungroup()
 
-x2 <- data2$z_mean_domain
-y2 <- data2$domain
+x <- data$z_mean_domain
+y <- data$domain
+
+# x <- data$z_mean_subdomain
+# y <- data$subdomain
+
 colors <- NULL
 return_plot <- Sys.getenv("RETURN_PLOT")
 filename <- "fig_domains.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data2,
-  x = x2,
-  y = y2,
+  data = data,
+  x = x,
+  y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
 ```
 
 ```{=typst}
 #let domain(file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
+  let font = (font: "Roboto Slab", size: 0.7em)
   set text(..font)
   figure(
-    [#image(file_fig, width: 85%)],
+    [#image(file_fig, width: 75%)],
     placement: none,
     caption: figure.caption(
       position: bottom,
-      [Overall neurocognitive function subdomain plots of the patient's strengths and
-        weaknesses. _Note:_ _z_-scores have a mean of 0 and a standard deviation of 1.],
+      [
+        Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-scores have a mean of 0 and a standard deviation of 1.
+        ],
     ),
     kind: "image",
     supplement: [Figure],
