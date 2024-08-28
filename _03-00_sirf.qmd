@@ -192,10 +192,10 @@ bwu::dotplot(
 }
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let file_fig = "fig_g.svg"
 #domain(file_fig)
-```
+``` -->
 
 ```{=typst}
 #let file_fig = "fig_domains.svg"

@@ -1,20 +1,20 @@
-Thank you for considering this report in your evaluation of {{< var mr_mrs >}} {{< var last_name >}}. I am available to provide further information or clarification as needed.
+<!-- Thank you for considering this report in your evaluation of {{< var mr_mrs >}} {{< var last_name >}}. I am available to provide further information or clarification as needed.
 
-Respectfully submitted,
+Respectfully submitted, -->
 
-<!-- It was a pleasure to work with {{< var patient >}}.
-Please contact me with any questions or concerns regarding this patient. -->
+It was a pleasure to work with {{< var patient >}}.
+I am available to provide further information or clarification as needed.
 
-<!-- Sincerely, -->
+Sincerely,
 
 ```{r}
 #| label: signature
 #| fig-align: left
-#| out-width: 10em
+#| out-width: 7em
 #| echo: false
 #| eval: true
 
-sig_path <- file.path("/src/img/jwt_sig.png")
+sig_path <- file.path(here::here("src", "img", "jwt_sig.png"))
 knitr::include_graphics(sig_path)
 # knitr::include_graphics("jwt_sig.png")
 ```
