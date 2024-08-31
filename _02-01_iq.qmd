@@ -76,7 +76,6 @@ readr::write_excel_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, app
 data <- iq
 
 # Define the scales of interest
-# TODO: Add RBANS
 scales <- c(
   "Auditory Working Memory (AWMI)",
   "Cognitive Proficiency (CPI)",
@@ -103,6 +102,7 @@ scales <- c(
   "RBANS Total Index",
   "Test of Premorbid Functioning",
   "TOPF Standard Score",
+  "Total NAB Index (T-NAB)",
   "Verbal Comprehension (VCI)",
   "Verbal Comprehension",
   "Visual Perception/Construction",
@@ -110,7 +110,12 @@ scales <- c(
   "Vocabulary Acquisition (VAI)",
   "Word Reading",
   "Working Memory (WMI)",
-  "Working Memory"
+  "Working Memory",
+  "Attention Index (ATT)",
+  "Language Index (LAN)",
+  "Spatial Index (SPT)",
+  "Memory Index (MEM)",
+  "Executive Functions Index (EXE)"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -165,6 +170,7 @@ subset <- c(
   "RBANS Total Index",
   "Test of Premorbid Functioning",
   "TOPF Standard Score",
+  "Total NAB Index (T-NAB)",
   "Verbal Comprehension (VCI)",
   "Verbal Comprehension",
   "Visual Perception/Construction",
@@ -172,7 +178,12 @@ subset <- c(
   "Vocabulary Acquisition (VAI)",
   "Word Reading",
   "Working Memory (WMI)",
-  "Working Memory"
+  "Working Memory",
+  "Attention Index (ATT)",
+  "Language Index (LAN)",
+  "Spatial Index (SPT)",
+  "Memory Index (MEM)",
+  "Executive Functions Index (EXE)"
 )
 
 # Filter the data to subset only the specified scales
@@ -185,8 +196,7 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_standard_score <- gt::md("Score = Standard score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
 
 # Define the groups for the table
 grp_iq <- list(
@@ -203,9 +213,7 @@ bwu::tbl_gt(
   table_name = table_name,
   vertical_padding = vertical_padding,
   fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
   grp_standard_score = grp_iq[["standard_score"]],
-  grp_t_score = grp_iq[["t_score"]],
   dynamic_grp = grp_iq,
   multiline = multiline
 )
@@ -217,8 +225,11 @@ bwu::tbl_gt(
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
 # Define the x and y variables for the dotplot
-x <- data_iq$z
-y <- data_iq$scale
+# x <- data_iq$z
+# y <- data_iq$scale
+
+x <- data_iq$z_mean_subdomain
+y <- data_iq$subdomain
 
 # plot args
 colors <- NULL
@@ -227,7 +238,6 @@ return_plot <- Sys.getenv("RETURN_PLOT")
 # Define the filename for the plot
 filename <- "fig_iq.svg"
 
-# Filter the data to keep only the specified scales
 # Define the scales to keep
 # keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 # data_iq <- dplyr::filter(data_iq, scale %in% keep)
@@ -263,23 +273,14 @@ options(warn = 0) # Reset to default behavior
       [#image(file_qtbl)],
       caption: figure.caption(position: top, [#title]),
       kind: "qtbl",
-      supplement: [Table],
+      supplement: [*Table*],
     ),
     figure(
       [#image(file_fig, width: auto)],
       caption: figure.caption(
         position: bottom,
         [
-          _General Ability_ refers to an overall capacity to reason, to solve
-          problems, and to learn useful information. _Crystallized Knowledge_
-          involves understanding the world through language and reasoning.
-          _Fluid Reasoning_ is the logical analysis and solution of new
-          problems, identifying underlying patterns, and applying
-          logic.#footnote[In the figures presented here and below, scores have
-          been converted to _z_-scores, where an average score is 0 (zero) and the
-          standard deviation is 1.0. Any scores below the −1.0 ticks are
-          moderately concerning. Scores at or beyond the −2.0 ticks are
-          clinically signficant and a cause for greater concern.]
+          _Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction._Neurocognitive Index_ refers to an overall capacity to reason, to solve problems, and to learn useful information; _Acquired Knowledge_ involves understanding the world through language and reasoning; _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.#footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically signficant and a cause for greater concern.]
         ],
       ),
       placement: none,
@@ -290,6 +291,7 @@ options(warn = 0) # Reset to default behavior
   )
 }
 ```
+
 ```{=typst}
 // Define the title of the domain
 #let title = "General Cognitive Ability"
@@ -300,7 +302,6 @@ options(warn = 0) # Reset to default behavior
 // Define the file name of the figure
 #let file_fig = "fig_iq.svg"
 
-// Call the 'domain' function with the specified title, table file name, and figure file name
 // The title is appended with ' Index Scores'
 #domain(title: [#title Scores], file_qtbl, file_fig)
 ```

@@ -1,3 +1,7 @@
+---
+format: typst
+---
+
 ## Attention/Executive {#sec-executive}
 
 {{< include _02-06_executive_text.qmd >}}
@@ -70,6 +74,9 @@ readr::write_excel_csv(executive, paste0(pheno, ".csv"), na = "", col_names = TR
 ```{r}
 #| label: data-executive
 #| include: false
+
+# read and filter data
+data <- executive
 
 scales <- c(
   "Animal Coding",
@@ -184,7 +191,7 @@ scales <- c(
 # Filter the data using the filter_data function from the bwu library
 # The domain is specified by the 'domains' variable
 # The scale is specified by the 'scales' variable
-data_executive <- bwu::filter_data(data = executive, domain = domains, scale = scales)
+data_executive <- bwu::filter_data(data, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -336,8 +343,8 @@ source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰
 # groupings
 grp_executive <- list(
   scaled_score = c("WAIS-IV", "D-KEFS", "NEPSY-2", "WISC-5", "WISC-V", "WPPSI-IV", "RBANS"),
-  standard_score = c("NAB", "NAB-S", "WISC-5", "WISC-V", "WAIS-IV", "WPPSI-IV", "WASI-II", "RBANS", "NAB Executive Functions", "NAB Attention"),
-  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "Trail Making Test", "Daily Living", "NAB Executive Functions", "NAB Attention")
+  standard_score = c("NAB", "NAB-S", "WISC-5", "WISC-V", "WAIS-IV", "WPPSI-IV", "WASI-II", "RBANS"),
+  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "Trail Making Test", "Daily Living")
 )
 
 # make `gt` table

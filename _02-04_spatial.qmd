@@ -68,9 +68,6 @@ readr::write_excel_csv(spatial, paste0(pheno, ".csv"), na = "", col_names = TRUE
 #| label: data-spatial
 #| include: false
 
-# Read data and filter
-data <- spatial
-
 scales <- c(
   "Arrows",
   "Bicycle Drawing",
@@ -100,16 +97,28 @@ scales <- c(
   "Spatial Domain",
   "Visual Discrimination",
   "Visual Puzzles",
-  "Visuospatial/Constructional Index"
+  "Visuospatial/Constructional Index",
+  "Spatial Index (SPT)",
+  "Visual Discrimination",
+  "Design Construction",
+  "Figure Drawing Copy",
+  "Figure Drawing Copy Organization",
+  "Figure Drawing Copy Fragmentation",
+  "Figure Drawing Copy Planning",
+  "Figure Drawing Immediate Recall",
+  "Figure Drawing Immediate Recall Organization",
+  "Figure Drawing Immediate Recall Fragmentation",
+  "Figure Drawing Immediate Recall Planning",
+  "Figure Drawing Percent Retention",
+  "Map Reading"
 )
-
 
 # Filter the data using the filter_data function from the bwu library
 # The domain is specified by the 'domains' variable
 # The scale is specified by the 'scales' variable
 data_spatial <-
   bwu::filter_data(
-    data,
+    data = spatial,
     domain = domains,
     scale = scales
   )
@@ -139,15 +148,20 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Score = Scaled score (Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰])")
+fn_standard_score <- gt::md("Score = Index score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
+fn_t_score <- gt::md("Score = T score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
+fn_z_score <- gt::md("Score = z-score (Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰])")
+source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
 
+# TODO:
+# source_note <- list(t_score = gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])"))
+
+# grouping
 grp_spatial <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "WPPSI-IV", "WISC-V"),
-  standard_score = c("NAB", "WPPSI-IV", "NAB-S"),
-  t_score = c("NAB", "Rey Complex Figure", "WASI-2", "NAB-S")
+  standard_score = c("NAB", "WPPSI-IV", "NAB-S", "NAB Spatial"),
+  t_score = c("NAB", "Rey Complex Figure", "WASI-2", "NAB-S", "NAB Spatial")
 )
 
 # make `gt` table
@@ -155,12 +169,13 @@ bwu::tbl_gt(
   data = data_spatial,
   pheno = pheno,
   table_name = table_name,
-  fn_scaled_score = fn_scaled_score,
-  fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
-  grp_scaled_score = grp_spatial[["scaled_score"]],
-  grp_standard_score = grp_spatial[["standard_score"]],
-  grp_t_score = grp_spatial[["t_score"]],
+  source_note = source_note,
+  # fn_scaled_score = fn_scaled_score,
+  # fn_standard_score = fn_standard_score,
+  # fn_t_score = fn_t_score,
+  # grp_scaled_score = grp_spatial[["scaled_score"]],
+  # grp_standard_score = grp_spatial[["standard_score"]],
+  # grp_t_score = grp_spatial[["t_score"]],
   dynamic_grp = grp_spatial,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -178,6 +193,9 @@ filename <- "fig_spatial.svg"
 # x and y axis variables
 x <- data_spatial$z_mean_subdomain
 y <- data_spatial$subdomain
+
+# x <- data_spatial$z_mean_narrow
+# y <- data_spatial$narrow
 
 # plot args
 colors <- NULL
@@ -206,7 +224,7 @@ bwu::dotplot(
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [Table],
+          supplement: [*Table*],
           ),
         figure([#image(file_fig)],
           caption: figure.caption(position: bottom, [
@@ -218,12 +236,13 @@ bwu::dotplot(
             ]),
           placement: none,
           kind: "image",
-          supplement: [Figure],
+          supplement: [*Figure*],
           gap: 0.5em,
           ),
         )
     }
 ```
+
 ```{=typst}
 #let title = "Visual Perception/Construction"
 #let file_qtbl = "table_spatial.png"

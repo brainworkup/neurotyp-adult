@@ -22,4 +22,60 @@ deficits in the initial planning and organization of the material.
 - **Immediate Recognition**: { range } capabilities in learning and recognizing abstract shapes immediately.
 
 - **Delayed Recognition**: { range } abilities in recognizing target visual material among distractors after a delay.
+Total shapes correctly recognized on the first trial of a shape-learning task was Exceptionally High.
+
+Total shapes correctly recognized immediately after all learning trials was Exceptionally High.
+
+NA
+Total shapes correctly recognized on the third trial of a shape-learning task was Above Average.
+
+Total shapes correctly recognized on the second trial of a shape-learning task was High Average.
+
+Total shapes correctly recognized after a delay following the initial learning trials was High Average.
+
+Total words recalled after a long delay following the initial learning trials of List A fell within the High Average range.
+Total words recalled on the first trial of a list-learning task fell within the High Average range.
+Total words recalled on the second trial of a list-learning task fell within the High Average range.
+Percentage of words retained from List A after a delay, calculated as the ratio of words recalled after the delay to the words recalled immediately fell within the High Average range.
+fell within the High Average range.
+The number of key ideas or themes recalled from the story on the second attempt was High Average.
+
+The percentage of important phrases retained after a delay compared to the initial recall immediately after hearing the story was High Average.
+
+The number of daily living tasks correctly recognized after a delay. was High Average.
+NA
+NA
+NA
+Total words recalled immediately after all learning trials of List A fell within the Average range.
+Total words recalled after a short delay following the initial learning trials of List A fell within the Average range.
+Total words recalled immediately after a single presentation of List B, an interference list fell within the Average range.
+The number of important phrases recalled after a delay, without hearing the story again was Average.
+
+Total words recalled on the third trial of a list-learning task fell within the Average range.
+Number of false alarms, or incorrect recognitions, in the forced-choice recognition task for List A after a long delay fell within the Average range.
+Measure of the ability to distinguish between target and non-target words in the forced-choice recognition task for List A after a long delay fell within the Average range.
+Number of shapes correctly recognized after a delay using a forced-choice format was Average.
+
+Measure of the ability to distinguish between target and non-target shapes in the forced-choice recognition task after a delay was Average.
+
+The number of key ideas or themes recalled immediately after hearing the entire story was Average.
+
+The number of key ideas or themes recalled after a delay, without hearing the story again was Average.
+
+The percentage of daily living tasks retained over time compared to the initial recall. was Average.
+A comparison of the number of daily living tasks recalled versus those recognized. was Average.
+NA
+NA
+Percentage of shapes retained after a delay, calculated as the ratio of shapes recognized after the delay to the shapes recognized immediately was Average.
+
+The number of important phrases recalled from the story on the second attempt was Average.
+
+The number of key ideas or themes recalled from the story on the first attempt was Average.
+
+The number of important phrases recalled immediately after hearing the entire story was Low Average.
+
+Number of words correctly recognized from List A after a long delay, using a forced-choice format fell within the Low Average range.
+Number of false alarms, or incorrect recognitions, in the forced-choice recognition task after a delay was Low Average.
+
+The number of important phrases recalled from the story on the first attempt was Low Average.
 
