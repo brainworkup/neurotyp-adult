@@ -37,7 +37,7 @@
         ]
       ]
     }),
-    numbering: "1/1",
+    numbering: "1",
     number-align: center,
     columns: cols,
   )
@@ -47,7 +47,9 @@
   show heading.where(level: 1): set align(left)
 
   // Set paragraph justification and leading.
-  set par(justify: true, leading: 1em, linebreaks: "optimized")
+  set par(justify: true)
+  // set par(leading: 1em)
+  set par(linebreaks: "optimized")
 
   // Set text and body font family.
   set text(font: body-font, size: fontsize, lang: lang, region: region)
@@ -55,9 +57,6 @@
 
   // Set heading numbering.
   set heading(numbering: sectionnumbering)
-
-  // Set paragraph spacing.
-  show par: set block(above: 1.75em, below: 1.75em)
 
   // Set heading font.
   show heading: set text(font: sans-font, weight: "semibold")
@@ -72,14 +71,6 @@
     }
   }
 
-  // Configure lists and links.
-  show enum: set block(above: 1em, below: 1em)
-  // show enum: set par(leading: 0.85em)
-  set enum(indent: 0em, body-indent: 0.25em, tight: false)
-
-  show list: set block(above: 1em, below: 1em)
-  // show list: set par(leading: 0.85em)
-  set list(indent: 0em, body-indent: 0.25em, marker: ([•], [--]), tight: false)
 
   show link: set text(font: body-font, fill: rgb(4, 1, 23), weight: 450)
   show link: underline

@@ -68,16 +68,18 @@ readr::write_excel_csv(memory, paste0(pheno, ".csv"), na = "", col_names = TRUE,
 #| label: data-memory
 #| include: false
 
-# read and filter data
-data <- memory
-
 # Memory scales
 scales <- c(
   "CVLT-3 Forced-Choice Recognition Hits",
   "CVLT-3 Total Intrusions",
   "CVLT-3 Total Repetitions",
   "Daily Living Memory Delayed Recall",
+
+  "Daily Living Memory Delayed Recognition",
   "Daily Living Memory Immediate Recall",
+
+  "Daily Living Memory Recall vs. Recognition",
+  "Daily Living Memory Retention",
   "Delayed Memory Index",
   "Designs I",
   "Designs II",
@@ -86,7 +88,22 @@ scales <- c(
   "List B Correct",
   "List B Free Recall Correct",
   "List Learning Immediate Recall",
+  "List Learning Intrusions",
+  "List Learning List A Discriminability Index",
+  "List Learning List A Immediate Recall",
+  "List Learning List A Long Delayed Forced-Choice Recognition False Alarms",
+  "List Learning List A Long Delayed Forced-Choice Recognition",
+  "List Learning List A Long Delayed Recall",
+  "List Learning List A Percent Retention",
+  "List Learning List A Recall vs. Recognition Index",
+  "List Learning List A Short Delayed Recall",
+  "List Learning List A Trial 1 Immediate Recall",
+  "List Learning List A Trial 2 Immediate Recall",
+  "List Learning List A Trial 3 Immediate Recall",
+  "List Learning List B Immediate Recall",
   "List Learning Long Delayed Recall",
+  "List Learning Perseverations",
+  "List Learning Semantic Clusters",
   "List Learning Short Delayed Recall",
   "List Learning",
   "List Memory Delay Effect",
@@ -106,6 +123,9 @@ scales <- c(
   "Long-Delay Free Recall",
   "Long-Delay Recognition Discriminability",
   "Long-Delay Recognition Response Bias",
+  "Medication Instructions Delayed Recall",
+  "Medication Instructions Delayed Recognition",
+  "Medication Instructions Immediate Recall",
   "Memory Domain",
   "Memory for Designs Content",
   "Memory for Designs Delayed Content",
@@ -115,7 +135,11 @@ scales <- c(
   "Memory for Designs",
   "Memory for Faces Delayed",
   "Memory for Faces",
+  "Memory Index (MEM)",
   "NAB Memory Index",
+  "Name/Address/Phone Delayed Recall",
+  "Name/Address/Phone Delayed Recognition",
+  "Name/Address/Phone Immediate Recall",
   "Narrative Memory Free and Cued Recall",
   "Narrative Memory Free Recall",
   "Narrative Memory Recall",
@@ -124,9 +148,15 @@ scales <- c(
   "Recognition Discriminability Nonparametric",
   "ROCFT Delayed Recall",
   "Sentence Repetition",
+  "Shape Learning Delayed Forced-Choice Recognition False Alarms",
+  "Shape Learning Delayed Forced-Choice Recognition",
   "Shape Learning Delayed Recognition",
+  "Shape Learning Discriminability Index",
   "Shape Learning Immediate Recognition",
   "Shape Learning Percent Retention",
+  "Shape Learning Trial 1 Immediate Recognition",
+  "Shape Learning Trial 2 Immediate Recognition",
+  "Shape Learning Trial 3 Immediate Recognition",
   "Short Delay Cued Recall",
   "Short Delay Free Recall",
   "Short-Delay Cued Recall",
@@ -134,6 +164,15 @@ scales <- c(
   "Story Learning Delayed Recall",
   "Story Learning Immediate Recall",
   "Story Learning Percent Retention",
+  "Story Learning Phrase Unit Delayed Recall",
+  "Story Learning Phrase Unit Immediate Recall",
+  "Story Learning Phrase Unit Percent Retention",
+  "Story Learning Thematic Unit Delayed Recall",
+  "Story Learning Thematic Unit Immediate Recall",
+  "Story Learning Trial 1 Phrase Unit",
+  "Story Learning Trial 1 Thematic Unit",
+  "Story Learning Trial 2 Phrase Unit",
+  "Story Learning Trial 2 Thematic Unit",
   "Story Memory",
   "Story Recall",
   "Total False Positives",
@@ -159,7 +198,7 @@ scales <- c(
 # Filter the data using the filter_data function from the bwu library
 # The domain is specified by the 'domains' variable
 # The scale is specified by the 'scales' variable
-data_memory <- bwu::filter_data(data, domain = domains, scale = scales)
+data_memory <- bwu::filter_data(data = memory, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -180,8 +219,8 @@ bwu::cat_neuropsych_results(data = data_memory, file = "_02-05_memory_text.qmd")
 # Set the default engine for tikz to "xetex"
 options(tikzDefaultEngine = "xetex")
 
-# more filtering for exe tables
-data_memory <-
+# more filtering for mem tables
+data_memory_tbl <-
   data_memory |>
   dplyr::filter(scale %in% c(
     "CVLT-3 Forced-Choice Recognition Hits",
@@ -237,14 +276,14 @@ data_memory <-
     "Sentence Repetition",
     "Shape Learning Delayed Recognition",
     "Shape Learning Immediate Recognition",
-    "Shape Learning Percent Retention",
+    # "Shape Learning Percent Retention",
     "Short Delay Cued Recall",
     "Short Delay Free Recall",
     "Short-Delay Cued Recall",
     "Short-Delay Free Recall",
     "Story Learning Delayed Recall",
     "Story Learning Immediate Recall",
-    "Story Learning Percent Retention",
+    # "Story Learning Percent Retention",
     "Story Memory",
     "Story Recall",
     "Total False Positives",
@@ -264,7 +303,52 @@ data_memory <-
     "Visual Reproduction I",
     "Visual Reproduction II",
     "Word List Interference-Recall",
-    "Word List Interference-Repetition"
+    "Word List Interference-Repetition",
+    "Memory Index (MEM)",
+    # "List Learning List A Trial 1 Immediate Recall",
+    # "List Learning List A Trial 2 Immediate Recall",
+    # "List Learning List A Trial 3 Immediate Recall",
+    "List Learning List A Immediate Recall",
+    # "List Learning List B Immediate Recall",
+    "List Learning List A Short Delayed Recall",
+    "List Learning List A Long Delayed Recall",
+    # "List Learning List A Percent Retention",
+    # "List Learning List A Long Delayed Forced-Choice Recognition",
+    # "List Learning List A Long Delayed Forced-Choice Recognition False Alarms",
+    "List Learning List A Discriminability Index",
+    # "List Learning List A Recall vs. Recognition Index",
+    # "List Learning Semantic Clusters",
+    # "List Learning Perseverations",
+    # "List Learning Intrusions",
+    # "Shape Learning Trial 1 Immediate Recognition",
+    # "Shape Learning Trial 2 Immediate Recognition",
+    # "Shape Learning Trial 3 Immediate Recognition",
+    "Shape Learning Immediate Recognition",
+    "Shape Learning Delayed Recognition",
+    # "Shape Learning Percent Retention",
+    # "Shape Learning Delayed Forced-Choice Recognition",
+    # "Shape Learning Delayed Forced-Choice Recognition False Alarms",
+    "Shape Learning Discriminability Index",
+    # "Story Learning Trial 1 Phrase Unit",
+    # "Story Learning Trial 2 Phrase Unit",
+    "Story Learning Phrase Unit Immediate Recall",
+    "Story Learning Thematic Unit Immediate Recall",
+    # "Story Learning Trial 1 Thematic Unit",
+    # "Story Learning Trial 2 Thematic Unit",
+    "Story Learning Phrase Unit Delayed Recall",
+    "Story Learning Thematic Unit Delayed Recall",
+    # "Story Learning Phrase Unit Percent Retention",
+    "Daily Living Memory Immediate Recall",
+    "Daily Living Memory Delayed Recall",
+    # "Daily Living Memory Retention",
+    # "Daily Living Memory Delayed Recognition",
+    # "Daily Living Memory Recall vs. Recognition",
+    "Medication Instructions Immediate Recall",
+    "Medication Instructions Delayed Recall",
+    # "Medication Instructions Delayed Recognition",
+    "Name/Address/Phone Immediate Recall",
+    "Name/Address/Phone Delayed Recall"
+    # "Name/Address/Phone Delayed Recognition"
   ))
 
 # table arguments
@@ -273,30 +357,32 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("_z_-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Score = Scaled score (Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰])")
+fn_standard_score <- gt::md("Score = Index score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
+fn_t_score <- gt::md("Score = T score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
+fn_z_score <- gt::md("Score = z-score (Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰])")
+source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
 
 # groupings
 grp_memory <- list(
-  standard_score = c("CVLT-3", "CVLT-3 Brief", "NAB", "NAB-S", "CVLT-C"), # Also NAB if decide to keep here
-  t_score = c("NAB", "Rey Complex Figure", "NAB-S"),
+  standard_score = c("CVLT-3", "CVLT-3 Brief", "NAB", "NAB-S", "CVLT-C",  "NAB Memory"),
+  t_score = c("NAB", "Rey Complex Figure", "NAB-S", "NAB Memory"),
   scaled_score = c("CVLT-3 Brief", "NEPSY-2", "CVLT-C", "CVLT-3")
 )
 
 # make `gt` table
 bwu::tbl_gt(
-  data = data_memory,
+  data = data_memory_tbl,
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
-  fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
-  fn_scaled_score = fn_scaled_score,
-  grp_standard_score = grp_memory[["standard_score"]],
-  grp_t_score = grp_memory[["t_score"]],
-  grp_scaled_score = grp_memory[["scaled_score"]],
+  source_note = source_note,
+  # fn_standard_score = fn_standard_score,
+  # fn_t_score = fn_t_score,
+  # fn_scaled_score = fn_scaled_score,
+  # grp_standard_score = grp_memory[["standard_score"]],
+  # grp_t_score = grp_memory[["t_score"]],
+  # grp_scaled_score = grp_memory[["scaled_score"]],
   dynamic_grp = grp_memory,
   multiline = multiline
 )

@@ -71,13 +71,11 @@ readr::write_excel_csv(executive, paste0(pheno, ".csv"), na = "", col_names = TR
 #| label: data-executive
 #| include: false
 
-# read and filter data
-data <- executive
-
 scales <- c(
   "Animal Coding",
   "Arithmetic",
   "Attention Domain",
+  "Attention Index (ATT)",
   "Attention Index",
   "Auditory Working Memory (AWMI)",
   "Bug Search",
@@ -108,7 +106,6 @@ scales <- c(
   "Digits Forward",
   "Dots",
   "Driving Scenes",
-  "Spatial Addition",
   "Executive Functions Domain",
   "Judgment",
   "Letter Fluency",
@@ -129,15 +126,22 @@ scales <- c(
   "Numbers & Letters Part C Efficiency",
   "Numbers & Letters Part D Disruption",
   "Numbers & Letters Part D Efficiency",
+  "Orientation to Place",
+  "Orientation to Self",
+  "Orientation to Situation",
+  "Orientation to Time",
   "Orientation",
   "Picture Memory",
   "Picture Span",
   "Processing Speed (PSI)",
   "Processing Speed",
   "Psychomotor Speed",
+  "RBANS Coding",
+  "RBANS Digit Span",
   "ROCFT Copy",
   "Sentence Repetition",
   "Similarities",
+  "Spatial Addition",
   "Spatial Span",
   "Statue-Body Movement",
   "Statue-Eye Opening",
@@ -154,14 +158,33 @@ scales <- c(
   "Working Memory (WMI)",
   "Working Memory",
   "Zoo Locations",
-  "RBANS Digit Span",
-  "RBANS Coding"
+  ## Daily Living
+  "Driving Scenes",
+  "Judgment",
+  "Bill Payment",
+  "Map Reading",
+  "Daily Living Memory Immediate Recall",
+  "Daily Living Memory Delayed Recall",
+  # other
+  "Writing Legibility",
+  "Writing Spelling",
+  "Writing Syntax",
+  "Writing Conveyance",
+  "List Learning Semantic Clusters",
+  "List Learning Perseverations",
+  "List Learning Intrusions",
+  "Figure Drawing Copy Organization",
+  "Figure Drawing Copy Fragmentation",
+  "Figure Drawing Copy Planning",
+  "Figure Drawing Immediate Recall Organization",
+  "Figure Drawing Immediate Recall Fragmentation",
+  "Figure Drawing Immediate Recall Planning"
 )
 
 # Filter the data using the filter_data function from the bwu library
 # The domain is specified by the 'domains' variable
 # The scale is specified by the 'scales' variable
-data_executive <- bwu::filter_data(data, domain = domains, scale = scales)
+data_executive <- bwu::filter_data(data = executive, domain = domains, scale = scales)
 ```
 
 ```{r}
@@ -183,10 +206,10 @@ bwu::cat_neuropsych_results(data = data_executive, file = "_02-06_executive_text
 options(tikzDefaultEngine = "xetex")
 
 # more filtering for exe tables
-data_executive <-
+data_executive_tbl <-
   data_executive |>
-  dplyr::filter(test_name != "CVLT-3 Brief") |>
-  dplyr::filter(scale != "Orientation") |>
+  # dplyr::filter(test_name != "CVLT-3 Brief") |>
+  # dplyr::filter(scale != "Orientation") |>
   dplyr::filter(scale %in% c(
     "Animal Coding",
     "Arithmetic",
@@ -215,10 +238,6 @@ data_executive <-
     "Digit Span Forward",
     "Digit Span Sequencing",
     "Digit Span",
-    "Digits Backward Longest Span",
-    "Digits Backward",
-    "Digits Forward Longest Span",
-    "Digits Forward",
     "Dots",
     "Driving Scenes",
     "Spatial Addition",
@@ -235,14 +254,6 @@ data_executive <-
     "Mazes",
     "NAB Attention Index",
     "NAB Executive Functions Index",
-    "Numbers & Letters Part A Efficiency",
-    # "Numbers & Letters Part A Errors",
-    # "Numbers & Letters Part A Speed",
-    "Numbers & Letters Part B Efficiency",
-    "Numbers & Letters Part C Efficiency",
-    "Numbers & Letters Part D Disruption",
-    "Numbers & Letters Part D Efficiency",
-    "Orientation",
     "Picture Memory",
     "Picture Span",
     "Processing Speed (PSI)",
@@ -262,13 +273,52 @@ data_executive <-
     "TMT, Part B",
     "Total Deviation Score",
     "Unstructured Task",
-    "Word Generation Perseverations",
+    # "Word Generation Perseverations",
     "Word Generation",
     "Working Memory (WMI)",
     "Working Memory",
     "Zoo Locations",
     "RBANS Digit Span",
-    "RBANS Coding"
+    "RBANS Coding",
+    "Attention Index (ATT)",
+    "Orientation",
+    # "Orientation to Self",
+    # "Orientation to Time",
+    # "Orientation to Place",
+    # "Orientation to Situation",
+    "Digits Forward",
+    # "Digits Forward Longest Span",
+    "Digits Backward",
+    # "Digits Backward Longest Span",
+    "Dots",
+    # "Numbers & Letters Part A Speed",
+    # "Numbers & Letters Part A Errors",
+    "Numbers & Letters Part A Efficiency",
+    "Numbers & Letters Part B Efficiency",
+    "Numbers & Letters Part C Efficiency",
+    "Numbers & Letters Part D Efficiency",
+    # "Numbers & Letters Part D Disruption",
+    ## Daily Living
+    "Driving Scenes",
+    "Bill Payment",
+    "Daily Living Memory Immediate Recall",
+    "Daily Living Memory Delayed Recall",
+    "Map Reading",
+    "Judgment"
+    # other
+    # "Writing Legibility",
+    # "Writing Spelling",
+    # "Writing Syntax",
+    # "Writing Conveyance",
+    # "List Learning Semantic Clusters",
+    # "List Learning Perseverations",
+    # "List Learning Intrusions",
+    # "Figure Drawing Copy Organization",
+    # "Figure Drawing Copy Fragmentation",
+    # "Figure Drawing Copy Planning",
+    # "Figure Drawing Immediate Recall Organization",
+    # "Figure Drawing Immediate Recall Fragmentation",
+    # "Figure Drawing Immediate Recall Planning"
   ))
 
 # table arguments
@@ -277,29 +327,31 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
-fn_z_score <- gt::md("z-score: Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Score = Scaled score (Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰])")
+fn_standard_score <- gt::md("Score = Index score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
+fn_t_score <- gt::md("Score = T score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
+fn_z_score <- gt::md("Score = z-score (Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰])")
+source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
 
 # groupings
 grp_executive <- list(
   scaled_score = c("WAIS-IV", "D-KEFS", "NEPSY-2", "WISC-5", "WISC-V", "WPPSI-IV", "RBANS"),
-  standard_score = c("NAB", "NAB-S", "WISC-5", "WISC-V", "WAIS-IV", "WPPSI-IV", "WASI-II", "RBANS"),
-  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "Trail Making Test")
+  standard_score = c("NAB", "NAB-S", "WISC-5", "WISC-V", "WAIS-IV", "WPPSI-IV", "WASI-II", "RBANS", "NAB Executive Functions", "NAB Attention"),
+  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "Trail Making Test", "Daily Living", "NAB Executive Functions", "NAB Attention")
 )
 
 # make `gt` table
 bwu::tbl_gt(
-  data = data_executive,
+  data = data_executive_tbl,
   pheno = pheno,
   table_name = table_name,
-  fn_scaled_score = fn_scaled_score,
-  fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
-  grp_scaled_score = grp_executive[["scaled_score"]],
-  grp_standard_score = grp_executive[["standard_score"]],
-  grp_t_score = grp_executive[["t_score"]],
+  source_note = source_note,
+  # fn_scaled_score = fn_scaled_score,
+  # fn_standard_score = fn_standard_score,
+  # fn_t_score = fn_t_score,
+  # grp_scaled_score = grp_executive[["scaled_score"]],
+  # grp_standard_score = grp_executive[["standard_score"]],
+  # grp_t_score = grp_executive[["t_score"]],
   dynamic_grp = grp_executive,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -403,7 +455,6 @@ options(warn = 0) # Reset to default behavior
   file_fig
   )
 ```
-
 ```{=typst}
 #let title = "Attention/Executive"
 #let file_qtbl = "table_executive.png"

@@ -68,9 +68,6 @@ readr::write_excel_csv(verbal, paste0(pheno, ".csv"), na = "", col_names = TRUE,
 #| label: data-verbal
 #| include: false
 
-# Read data and filter
-data <- verbal
-
 scales <- c(
   "Academic Language Readiness Index",
   "Auditory Comprehension Colors",
@@ -129,7 +126,28 @@ scales <- c(
   "Writing",
   "Word Generation-Semantic",
   "Word Generation-Initial Letter",
-  "Semantic vs. Initial Letter Contrast"
+  "Semantic vs. Initial Letter Contrast",
+  "Language Index (LAN)",
+  "Oral Production",
+  "Auditory Comprehension",
+  "Auditory Comprehension Colors",
+  "Auditory Comprehension Shapes",
+  "Auditory Comprehension Colors/Shapes/Numbers",
+  "Auditory Comprehension Pointing",
+  "Auditory Comprehension Yes/No",
+  "Auditory Comprehension Paper Folding",
+  "Naming",
+  "Naming Semantic Cuing",
+  "Naming Phonemic Cuing",
+  "Reading Comprehension",
+  "Reading Comprehension Words",
+  "Reading Comprehension Sentences",
+  "Writing",
+  "Writing Legibility",
+  "Writing Spelling",
+  "Writing Syntax",
+  "Writing Conveyance",
+  "Bill Payment"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -137,7 +155,7 @@ scales <- c(
 # The scale is specified by the 'scales' variable
 data_verbal <-
   bwu::filter_data(
-    data,
+    data = verbal,
     domain = domains,
     scale = scales
   )
@@ -149,7 +167,7 @@ data_verbal <-
 #| include: false
 
 # export text
-bwu::cat_neuropsych_results(data = verbal, file = "_02-03_verbal_text.qmd")
+bwu::cat_neuropsych_results(data = data_verbal, file = "_02-03_verbal_text.qmd")
 ```
 
 ```{r}
@@ -161,34 +179,39 @@ bwu::cat_neuropsych_results(data = verbal, file = "_02-03_verbal_text.qmd")
 # Set the default engine for tikz to "xetex"
 options(tikzDefaultEngine = "xetex")
 
+data_verbal_tbl <- filter(data_verbal, !is.na(percentile))
+
 # args
 table_name <- "table_verbal"
 vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_scaled_score <- gt::md("Scaled score: Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]")
-fn_standard_score <- gt::md("Index score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
-fn_t_score <- gt::md("_T_-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+fn_scaled_score <- gt::md("Score = Scaled score (Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰])")
+fn_standard_score <- gt::md("Score = Index score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
+fn_t_score <- gt::md("Score = T score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
+fn_z_score <- gt::md("Score = z-score (Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰])")
+source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
 
 # Define the groups for the table
 grp_verbal <- list(
   scaled_score = c("WAIS-IV", "WISC-5", "NEPSY-2", "D-KEFS", "WPPSI-IV", "CELF-5", "RBANS"),
-  standard_score = c("NAB", "WPPSI-IV", "NAB-S", "CELF-5", "RBANS"),
-  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "WASI-2")
+  standard_score = c("NAB", "WPPSI-IV", "NAB-S", "CELF-5", "RBANS", "NAB Language"),
+  t_score = c("NAB", "NAB-S", "NIH EXAMINER", "WASI-2", "NAB Language")
 )
 
 # make `gt` table
 bwu::tbl_gt(
-  data = data_verbal,
+  data = data_verbal_tbl,
   pheno = pheno,
   table_name = table_name,
-  fn_scaled_score = fn_scaled_score,
-  fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
-  grp_scaled_score = grp_verbal[["scaled_score"]],
-  grp_standard_score = grp_verbal[["standard_score"]],
-  grp_t_score = grp_verbal[["t_score"]],
+  source_note = source_note,
+  # fn_scaled_score = fn_scaled_score,
+  # fn_standard_score = fn_standard_score,
+  # fn_t_score = fn_t_score,
+  # grp_scaled_score = grp_verbal[["scaled_score"]],
+  # grp_standard_score = grp_verbal[["standard_score"]],
+  # grp_t_score = grp_verbal[["t_score"]],
   dynamic_grp = grp_verbal,
   vertical_padding = vertical_padding,
   multiline = multiline
@@ -259,7 +282,6 @@ bwu::dotplot(
 options(warn = 0) # Reset to default behavior
 ```
 
-
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
   let font = (font: "Roboto Slab", size: 0.5em)
@@ -271,7 +293,7 @@ options(warn = 0) # Reset to default behavior
         figure([#image(file_qtbl)],
           caption: figure.caption(position: top, [#title]),
           kind: "qtbl",
-          supplement: [Table],
+          supplement: [*Table*],
           ),
         figure([#image(file_fig)],
           caption: figure.caption(position: bottom, [
@@ -279,13 +301,12 @@ options(warn = 0) # Reset to default behavior
             ]),
           placement: none,
           kind: "image",
-          supplement: [Figure],
+          supplement: [*Figure*],
           gap: 0.5em,
           ),
         )
     }
 ```
-
 ```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
@@ -295,33 +316,6 @@ options(warn = 0) # Reset to default behavior
   file_qtbl,
   file_fig
 )
-```
-
-
-```{=typst}
-#let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
-  set text(..font)
-  pad(top: 0.5em)[]
-    grid(
-      columns: (50%, 50%),
-      gutter: 8pt,
-        figure([#image(file_qtbl)],
-          caption: figure.caption(position: top, [#title]),
-          kind: "qtbl",
-          supplement: [Table],
-          ),
-        figure([#image(file_fig)],
-          caption: figure.caption(position: bottom, [
-            Verbal and language functioning refers to the ability to access and apply acquired word knowledge, to verbalize meaningful concepts, to understand complex multistep instructions, to think about verbal information, and to express oneself using words.
-            ]),
-          placement: none,
-          kind: "image",
-          supplement: [Figure],
-          gap: 0.5em,
-          ),
-        )
-    }
 ```
 ```{=typst}
 #let title = "Verbal/Language"

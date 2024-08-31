@@ -64,9 +64,6 @@ readr::write_excel_csv(adhd, paste0(pheno, ".csv"), na = "", col_names = TRUE, a
 #| label: data-adhd
 #| include: false
 
-# read and filter data
-data <- adhd
-
 scales <- c(
   "Activation",
   "Focus",
@@ -144,7 +141,7 @@ scales <- c(
 # Filter the data using the filter_data function from the bwu library
 # The domain is specified by the 'domains' variable
 # The scale is specified by the 'scales' variable
-data_adhd <- bwu::filter_data(data, domain = domains, scale = scales)
+data_adhd <- bwu::filter_data(data = adhd, domain = domains, scale = scales)
 ```
 
 ```{r}
