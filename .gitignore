@@ -68,8 +68,8 @@ run_scrape_pdf_nse.R
 secure_data
 validity.csv
 prompt.txt
-.quartoignore
+# .quartoignore
 pai.rds
 neurotyp.code-workspace
-neurotyp.code-workspace
+adult.code-workspace
 .prompts/
