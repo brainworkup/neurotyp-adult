@@ -35,5 +35,7 @@
 -   Wechsler Individual Achievement Test, 4th ed (WIAT-4)
 -   Wechsler Individual Achievement Test, 4th ed (WIAT-4): Word Reading, Reading Comprehension, Pseudoword Decoding, Orthographic Fluency, Decoding Fluency
 -   Wechsler Memory Scale, 4th ed (WMS-4): Logical Memory, Verbal Paired Associates, Visual Reproduction, Visual Paired Associates, Designs, Spatial Addition, Symbol Span, Spatial Span
+-   Wechsler Memory Scale, 4th ed (WMS-4)
+-   Wide Range Achievement Test, 5th ed (WRAT-5)
 -   Wide Range Achievement Test, 5th ed, Blue Form (WRAT-5): Word Reading
 -   Wide Range Achievement Test, 5th ed, Green Form (WRAT-5): Word Reading

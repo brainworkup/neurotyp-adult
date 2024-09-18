@@ -11,7 +11,6 @@ Sincerely,
 
 sig_path <- file.path(here::here("src", "img", "jwt_sig.png"))
 knitr::include_graphics(sig_path)
-# knitr::include_graphics("jwt_sig.png")
 ```
 
 ```{=typst}
