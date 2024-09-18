@@ -116,3 +116,6 @@ test_scale_descriptions.md
 typst_packages.typ
 _extensions/neurotyp-adult/typst-template.pdf
 .prompts/
+neurotyp_functions.R
+pluck_cefi_adult_child.Rmd
+preprocess_report.R
