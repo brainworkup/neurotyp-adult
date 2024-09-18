@@ -107,8 +107,8 @@ Temporary Items
 *.zip
 *.xlsx
 R/
-.quartoignore
 
+.quartoignore
 gpt_neurocog_prompts.qmd
 adult.code-workspace
 read_data_scales.csv
