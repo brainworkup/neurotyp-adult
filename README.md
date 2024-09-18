@@ -1,4 +1,4 @@
-# Neurotyp Format for Typst using Quarto
+# Neurotyp Adult Report Format for Typst using Quarto
 
 ## Use template
 
