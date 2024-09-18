@@ -347,8 +347,7 @@
 
 ## Circadian Rhythm Sleep-Wake Disorders
 
-- 307.45 (G47.21) Circadian Rhythm Sleep-Wake Disorders, Delayed sleep phase
-  type, Specify if: Familial, Overlapping with non-24-hour sleep-wake type
+- 307.45 (G47.21) Circadian Rhythm Sleep-Wake Disorders, Delayed sleep phase type, Specify if: Familial, Overlapping with non-24-hour sleep-wake type
 - 307.45 (G47.22) Circadian Rhythm Sleep-Wake Disorders, Advanced sleep phase
   type, Specify if: Familial
 - 307.45 (G47.23) Circadian Rhythm Sleep-Wake Disorders, Irregular sleep-wake

@@ -1,4 +1,10 @@
-Attention and working memory tasks measured the patient’s ability to register, maintain, and manipulate visual and auditory information in conscious awareness, which requires attention and concentration, short-term ‘working’ memory, as well as visual and auditory discrimination; with performance on these measures related to the ability to identify visual and auditory information, maintain it in temporary storage, and manipulate it for use in problem solving.
+<<PROMPT>>
+
+## Area: Attention/Executive
+
+Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below { range } to Exceptionally Low, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below { range } to Exceptionally Low, or scores that are significantly discrepant and lower than expected relative to other scores (e.g., verbal reasoning versus nonverbal reasoning).
+
+<<EXAMPLE>>
 
 ### Attention
 
@@ -16,15 +22,11 @@ Attention and working memory tasks measured the patient’s ability to register,
 
 ### Processing Speed
 
-Processing speed tasks assessed the patient’s ability to rapidly identify, register, and implement decisions about visual stimuli, with performance on these measures related to visual scanning, visual discrimination, short-term visual memory, visuomotor coordination, and concentration.
-
 - **Psychomotor Speed**: { range } visual search speed and scanning, indicating satisfactory speed of processing and mental flexibility.
 
 - **Cognitive Efficiency**: Typical performance in tasks involving quick information processing and response, with average psychomotor speed and visual scanning ability.
 
 ### Executive Functioning
-
-Measures of executive functioning are used as proxies for behaviors and skills that allow one to successfully carry out instrumental and social activities, such as planning, engaging with others effectively, problem solving, and successfully interacting with the environment to get needs met; with performance on these tasks related to a diverse set of higher-level cognitive functions such as conceptualization, set shifting, generativity, and mental flexibility.
 
 - **Planning**: Variable performance, mostly { range }. Patient's performance is suggestive of problems in strategic planning and organization skills, which are important for structuring and executing tasks effectively.
 

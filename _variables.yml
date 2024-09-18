@@ -10,39 +10,25 @@ doe2: 2024-02-01
 doe3: 2024-03-01
 sex: male
 sex_cap: Male
-age:
-education:
+age: 18
+education: 14 years
 handedness: right
-referral:
-observer:
-observer_relation:
-attorney:
-mr_mrs:
-he_she:
-he_she_cap:
-his_her:
-his_her_cap:
-him_her:
-him_her_cap:
+referral: Dr. Dre
+observer: Tupac Shakur
+observer_relation: Complicated
+attorney: Johnny Cochrane
+mr_mrs: Mr.
+he_she: he
+he_she_cap: He
+his_her: his
+his_her_cap: His
+him_her: him
+him_her_cap: Him
 dx1: attention-deficit/hyperactivity disorder (ADHD)
 dx2: anxiety
 dx3: depression
-dsm5_dx1:
-dsm5_dx2:
-dsm5_dx3:
-dsm5_dx4:
-dsm5_dx5:
-
-email:
-  info: joey.trampush@brainworkup.org
-  support: info@brainworkup.org
-
-engine:
-  jupyter: "[Jupyter](https://jupyter.org)"
-  knitr: "[Knitr](<https://yihui.name/knitr>)"
-
-books:
-  adhd2.0: "[ADHD 2.0](https://drhallowell.com/read/books-by-ned/)"
-  take_charge_adhd: "[Taking Charge of Adult ADHD, Second Edition: Proven Strategies to Succeed at Work, at Home, and in Relationships](https://www.guilford.com/books/Taking-Charge-of-Adult-ADHD/Russell-Barkley/9781462546855)"
-  psych_central: "[PsychCentral for Adult ADHD](https://psychcentral.com/adhd/adhd-resources#for-adults-with-adhd)"
-  launch_adhd: "[Launching in Young Adulthood with ADHD… Ready or Not!](https://www.chrisdendy.com/product-page/launching-in-young-adulthood-with-adhd-ready-or-not)"
+dsm5_dx1: 314.01 (F90.2) Attention-Deficit/Hyperactivity Disorder (ADHD), Combined Presentation
+dsm5_dx2: Anxiety
+dsm5_dx3: Depression
+dsm5_dx4: LD
+dsm5_dx5: Family factors etc
