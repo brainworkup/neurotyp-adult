@@ -106,16 +106,17 @@ Temporary Items
 .history/
 *.zip
 *.xlsx
-R/
 
-.quartoignore
-gpt_neurocog_prompts.qmd
-adult.code-workspace
-read_data_scales.csv
-test_scale_descriptions.md
-typst_packages.typ
+
 _extensions/neurotyp-adult/typst-template.pdf
 .prompts/
+.quartoignore
+adult.code-workspace
+gpt_neurocog_prompts.qmd
 neurotyp_functions.R
 pluck_cefi_adult_child.Rmd
 preprocess_report.R
+R/
+read_data_scales.csv
+test_scale_descriptions.md
+typst_packages.typ
