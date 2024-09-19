@@ -103,8 +103,7 @@
 - 301.7 (F60.2) Antisocial Personality Disorder
 - 312.33 (F63.1) Pyromania
 - 312.32 (F63.2) Kleptomania
-- 312.89 (F91.8) Other Specified Disruptive, Impulse-Control, and Conduct
-  Disorder
+- 312.89 (F91.8) Other Specified Disruptive, Impulse-Control, and Conduct Disorder
 - 312.9 (F91.9) Unspecified Disruptive, Impulse-Control, and Conduct Disorder
 
 ## Depressive Disorders
@@ -115,29 +114,22 @@
 - 296.21 (F32.0) Major Depressive Disorder, Single episode, Mild
 - 296.22 (F32.1) Major Depressive Disorder, Single episode, Moderate
 - 296.23 (F32.2) Major Depressive Disorder, Single episode, Severe
-- 296.24 (F32.3) Major Depressive Disorder, Single episode, With psychotic
-  features
+- 296.24 (F32.3) Major Depressive Disorder, Single episode, With psychotic features
 - 296.25 (F32.4) Major Depressive Disorder, Single episode, In partial remission
 - 296.26 (F32.5) Major Depressive Disorder, Single episode, In full remission
 - 296.20 (F32.9) Major Depressive Disorder, Single episode, Unspecified
 - 296.31 (F33.0) Major Depressive Disorder, Recurrent episode, Mild
 - 296.32 (F33.1) Major Depressive Disorder, Recurrent episode, Moderate
 - 296.33 (F33.2) Major Depressive Disorder, Recurrent episode, Severe
-- 296.34 (F33.3) Major Depressive Disorder, Recurrent episode, With psychotic
-  features
-- 296.35 (F33.41) Major Depressive Disorder, Recurrent episode, In partial
-  remission
-- 296.36 (F33.42) Major Depressive Disorder, Recurrent episode, In full
-  remission
+- 296.34 (F33.3) Major Depressive Disorder, Recurrent episode, With psychotic features
+- 296.35 (F33.41) Major Depressive Disorder, Recurrent episode, In partial remission
+- 296.36 (F33.42) Major Depressive Disorder, Recurrent episode, In full remission
 - 296.30 (F33.9) Major Depressive Disorder, Recurrent episode, Unspecified
 - 300.4 (F34.1) Persistent Depressive Disorder (Dysthymia)
 - 625.4 (F32.81) Premenstrual Dysphoric Disorder
-- 293.83 (F06.31) Depressive Disorder Due to Another Medical Condition, With
-  depressive features
-- 293.83 (F06.32) Depressive Disorder Due to Another Medical Condition, With
-  major depressive—like episode
-- 293.83 (F06.34) Depressive Disorder Due to Another Medical Condition, With
-  mixed features
+- 293.83 (F06.31) Depressive Disorder Due to Another Medical Condition, With depressive features
+- 293.83 (F06.32) Depressive Disorder Due to Another Medical Condition, With major depressive—like episode
+- 293.83 (F06.34) Depressive Disorder Due to Another Medical Condition, With mixed features
 - 311 (F32.89) Other Specified Depressive Disorder
 - 311 (F32.9) Unspecified Depressive Disorder
 
@@ -250,12 +242,9 @@
 - 296.7 (F31.9) Bipolar I Disorder, Current or most recent episode unspecified
 - 296.89 (F31.81) Bipolar II Disorder
 - 301.13 (F34.0) Cyclothymic Disorder, Specify if: With anxious distress
-- XXX.XX (F06.33) Bipolar and Related Disorder Due to Another Medical Condition,
-  With manic features
-- XXX.XX (F06.33) Bipolar and Related Disorder Due to Another Medical Condition,
-  With manic- or hypomanic-like episode
-- XXX.XX (F06.34) Bipolar and Related Disorder Due to Another Medical Condition,
-  With mixed features
+- XXX.XX (F06.33) Bipolar and Related Disorder Due to Another Medical Condition, With manic features
+- XXX.XX (F06.33) Bipolar and Related Disorder Due to Another Medical Condition, With manic- or hypomanic-like episode
+- XXX.XX (F06.34) Bipolar and Related Disorder Due to Another Medical Condition, With mixed features
 - 296.89 (F31.89) Other Specified Bipolar and Related Disorder
 - 296.80 (F31.9) Unspecified Bipolar and Related Disorder
 
@@ -347,7 +336,8 @@
 
 ## Circadian Rhythm Sleep-Wake Disorders
 
-- 307.45 (G47.21) Circadian Rhythm Sleep-Wake Disorders, Delayed sleep phase type, Specify if: Familial, Overlapping with non-24-hour sleep-wake type
+- 307.45 (G47.21) Circadian Rhythm Sleep-Wake Disorders, Delayed sleep phase
+  type, Specify if: Familial, Overlapping with non-24-hour sleep-wake type
 - 307.45 (G47.22) Circadian Rhythm Sleep-Wake Disorders, Advanced sleep phase
   type, Specify if: Familial
 - 307.45 (G47.23) Circadian Rhythm Sleep-Wake Disorders, Irregular sleep-wake

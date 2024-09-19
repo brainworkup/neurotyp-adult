@@ -1,7 +1,7 @@
 ---
 title: "Pluck Tables from NAB-Screener (NAB-S)"
 params:
-  patient: "{{< var patient >}}"
+  patient: Macdonald
   test:
     label: "Test"
     value: nabs
@@ -238,29 +238,18 @@ library(xfun)
 library(bwu)
 ```
 
-## Patient
+## Parameters
 
-```{r patient}
+```{r}
+# source("pluck_nabs_params.R")
 patient <- params$patient
-```
-
-## Test
-
-```{r test}
 test <- params$test
 test_name <- params$test_name
-```
-
-## Upload/attach PDF
-
-```{r choose}
-file <- file.path(params$file)
-```
-
-## Pages
-
-```{r pages}
 pages <- params$pages
+# file <- file.path(file.choose())
+file <- file.path(params$file)
+saveRDS(file, "nabs.rds")
+# file <- readRDS("nabs.rds")
 ```
 
 ## Locate areas
@@ -366,7 +355,7 @@ if (params$test == "nabs") {
   table2[11, 1] <- c("Numbers & Letters Part A Errors")
   table2[12, 1] <- c("Numbers & Letters Part A Efficiency")
   table2[13, 1] <- c("Numbers & Letters Part B Efficiency")
-} else if (params$test == "nab_main") {
+} else if (params$test == "nab") {
   table2[1, 1] <- c("Digits Forward")
   table2[2, 1] <- c("Digits Backward")
   table2[3, 1] <- c("Dots")
@@ -402,7 +391,7 @@ if (params$test == "nabs") {
   table3[5, 1] <- c("Naming")
   table3[6, 1] <- c("Naming Semantic Cuing")
   table3[7, 1] <- c("Naming Phonemic Cuing")
-} else if (params$test == "nab_main") {
+} else if (params$test == "nab") {
   table3[1, 1] <- c("Oral Production")
   table3[2, 1] <- c("Auditory Comprehension")
   table3[3, 1] <- c("Naming")

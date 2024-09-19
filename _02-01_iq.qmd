@@ -202,7 +202,7 @@ fn_standard_score <- gt::md("Score = Standard score (Mean = 100 [50th‰], SD ±
 grp_iq <- list(
   standard_score = c(
     "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4",
-    "WASI-2", "WISC-5", "WISC-V", "WRAT-5", "KTEA-3", "NAB", "NAB-S", "RBANS", "WPPSI-IV"
+    "WASI-2", "WISC-5", "WISC-V", "WRAT-5", "KTEA-3", "NAB", "NAB-S", "RBANS", "WPPSI-IV", "NAB Daily Living"
   )
 )
 
@@ -233,7 +233,7 @@ y <- data_iq$subdomain
 
 # plot args
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 
 # Define the filename for the plot
 filename <- "fig_iq.svg"
@@ -280,7 +280,7 @@ options(warn = 0) # Reset to default behavior
       caption: figure.caption(
         position: bottom,
         [
-          _Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction._Neurocognitive Index_ refers to an overall capacity to reason, to solve problems, and to learn useful information; _Acquired Knowledge_ involves understanding the world through language and reasoning; _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.#footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically signficant and a cause for greater concern.]
+          _Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction._Neurocognitive Index_ refers to an overall capacity to reason, to solve problems, and to learn useful information; _Acquired Knowledge_ involves understanding the world through language and reasoning; _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.#footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically significant and a cause for greater concern.]
         ],
       ),
       placement: none,
