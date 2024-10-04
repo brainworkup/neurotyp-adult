@@ -279,8 +279,7 @@ options(warn = 0) # Reset to default behavior
       [#image(file_fig, width: auto)],
       caption: figure.caption(
         position: bottom,
-        [
-          _Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction._Neurocognitive Index_ refers to an overall capacity to reason, to solve problems, and to learn useful information; _Acquired Knowledge_ involves understanding the world through language and reasoning; _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic.#footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically significant and a cause for greater concern.]
+        [_Premorbid Ability_ represents an estimate of the individual’s intellectual functioning prior to the onset of any known or suspected brain disease or dysfunction. _Neurocognitive Index_ reflects overall cognitive capacity, including reasoning, problem-solving, and learning new information. _Acquired Knowledge_ refers to an individual’s understanding of the world through language and reasoning, while _Fluid Reasoning_ involves analyzing and solving novel problems by identifying patterns and applying logic. #footnote[In the figures presented here and below, scores are presented as z-scores, where the average is 0.0 with a standard deviation of 1.0. Scores below −1.0 are moderately concerning, while those at or below −2.0 are clinically significant and warrant further attention.]
         ],
       ),
       placement: none,
