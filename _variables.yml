@@ -5,9 +5,10 @@ patient: Biggie
 first_name: Biggie
 last_name: Smalls
 dob: 1991-01-01
-doe1: 2024-01-01
+doe: 2024-01-01
 doe2: 2024-02-01
 doe3: 2024-03-01
+date_of_report: 2024-10-02
 sex: male
 sex_cap: Male
 age: 18
