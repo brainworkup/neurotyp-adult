@@ -63,5 +63,4 @@
 
 ## Recommendations for Follow-Up Evaluation
 
-- A follow-up assessment in 12-18 months is suggested to measure progress and assess the interventions' impact, unless urgent concerns arise. Continuous monitoring and reassessment are vital to adjust support as {{< var first_name >}} develops and {{< var his_her >}} needs change.
-
+A follow-up assessment in 12-18 months is suggested to measure progress and assess the interventions' impact, unless urgent concerns arise. Continuous monitoring and reassessment are vital to adjust support as {{< var first_name >}} develops and {{< var his_her >}} needs change.

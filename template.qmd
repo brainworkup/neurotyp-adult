@@ -1,8 +1,9 @@
 ---
 title: NEUROCOGNITIVE EXAMINATION
-name: {{< var first_name >}} {{< var last_name >}}
-doe: 2024-07-04
 patient: Biggie
+name: Biggie Smalls
+doe: {{< var doe >}}
+date_of_report: {{< var date_of_report >}}
 ---
 
 ```{r}
@@ -30,7 +31,7 @@ packages <- c(
 )
 
 # Function to load packages one by one
-load_packages <- function(packages2) {
+load_packages <- function(packages) {
   for (pkg in packages) {
     if (!require(pkg, character.only = TRUE)) {
       install.packages(pkg)
@@ -44,23 +45,13 @@ load_packages <- function(packages2) {
 load_packages(packages)
 
 # Set knitr options
-knitr::opts_knit$set(width = 80, digits = 2, warnPartialMatchArgs = FALSE)
-knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
-knitr::knit_hooks$set(optipng = knitr::hook_optipng)
-
-# Check if the output format is LaTeX
-if (identical(knitr:::pandoc_to(), "latex")) {
-  knit_hooks$set(plot = function(x, options) {
-    # Adjust here with whatever you need to do with your plots for LaTeX output
-    paste("\\begin{figure}[htbp!]",
-      "\\centering",
-      "\\includegraphics[width=\\maxwidth]{", x, "}",
-      "\\caption{", options$fig.cap, "}",
-      "\\end{figure}",
-      sep = "\n"
-    )
-  })
-}
+knitr::opts_knit$set(
+  width = 80,
+  digits = 2,
+  warnPartialMatchArgs = FALSE,
+  crop = knitr::hook_pdfcrop,
+  optipng = knitr::hook_optipng
+)
 
 # Set environment variables with default values
 Sys.setenv(PATIENT = "{{< var patient >}}", RETURN_PLOT = TRUE)
@@ -82,13 +73,14 @@ validity <- vroom::vroom("validity.csv")
 
 ```{=typst}
 #let name = [{{< var first_name >}} {{< var last_name >}}]
-#let doe = [2024-01-01]
+#let doe = [{{< var date_of_report >}}]
 #let patient = [{{< var patient >}}]
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)
 #block[
-*PATIENT NAME:* #name \
-*DATES OF EXAM:* {{< var doe1 >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
+*PATIENT NAME:* #name, Age {{< var age >}}  \
+*DATES OF EXAM:* {{< var doe >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
+*DATE OF REPORT*: {{< var date_of_report >}} \
 ]
 ```
 

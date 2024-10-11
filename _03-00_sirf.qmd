@@ -76,7 +76,7 @@ readr::write_csv(g, "data/csv/g.csv")
 ```{r}
 #| label: fig-sirf
 #| include: false
-#| eval: true
+#| eval: false
 #| fig-cap: "Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1."
 
 g <- vroom::vroom("data/csv/g.csv")
@@ -135,47 +135,54 @@ bwu::dotplot(
 ```{r}
 #| label: fig-domains
 #| include: false
-#| eval: true
+#| eval: false
 #| fig-cap: "Broad cognitive domains"
 
 # args
 data <- vroom::vroom("neurocog.csv")
-data2 <- dplyr::filter(data, scale != "Cognitive Proficiency")
+data <- dplyr::filter(data, scale != "Cognitive Proficiency")
 
-data2 <-
-  data2 |>
+# comment out if using subdomains
+data <-
+  data |>
   dplyr::group_by(domain, .add = TRUE) |>
   dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
   dplyr::ungroup()
 
-x2 <- data2$z_mean_domain
-y2 <- data2$domain
+x <- data$z_mean_domain
+y <- data$domain
+
+# x <- data$z_mean_subdomain
+# y <- data$subdomain
+
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 filename <- "fig_domains.svg"
 
 # Make dotplot
 bwu::dotplot(
-  data = data2,
-  x = x2,
-  y = y2,
+  data = data,
+  x = x,
+  y = y,
   colors = colors,
   return_plot = return_plot,
-  filename = filename
+  filename = filename,
+  na.rm = TRUE
 )
 ```
 
 ```{=typst}
 #let domain(file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
+  let font = (font: "Roboto Slab", size: 0.7em)
   set text(..font)
   figure(
-    [#image(file_fig, width: 85%)],
+    [#image(file_fig, width: 75%)],
     placement: none,
     caption: figure.caption(
       position: bottom,
-      [Overall neurocognitive function subdomain plots of the patient's strengths and
-        weaknesses. _Note:_ _z_-scores have a mean of 0 and a standard deviation of 1.],
+      [
+        Plots depicting the patient’s strengths and weaknesses across neurocognitive function subdomains. Note: z-scores are standardized with a mean of 0 and a standard deviation of 1.
+        ],
     ),
     kind: "image",
     supplement: [Figure],
@@ -184,10 +191,10 @@ bwu::dotplot(
 }
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let file_fig = "fig_g.svg"
 #domain(file_fig)
-```
+``` -->
 
 ```{=typst}
 #let file_fig = "fig_domains.svg"
