@@ -9,7 +9,7 @@ _freeze/
 .env
 .env*
 .flaskenv*
-.gitignore
+# .gitignore
 .history/
 .idea
 .prompts/

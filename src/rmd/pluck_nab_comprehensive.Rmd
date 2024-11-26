@@ -4,7 +4,7 @@ title: |
   <center> Comprehensive Score Report </center>
 date: "`r Sys.Date()`"
 params:
-  patient: Biggie
+  patient: Edward
   test: nab
   test_name: NAB
   pages: [2, 3, 6, 9, 10, 10, 11, 13, 16]
@@ -414,19 +414,20 @@ knitr::opts_chunk$set(
 library(dplyr)
 library(fs)
 library(glue)
-library(hablar)
 library(here)
 library(knitr)
 library(magrittr)
-library(miniUI)
 library(pdftools)
-library(rJava)
+library(readr)
+library(rlang)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
 library(snakecase)
 library(tabulapdf)
-library(tidyverse)
+library(tibble)
+library(tidyr)
+library(vroom)
 library(xfun)
 library(yaml)
 library(bwu)
@@ -441,7 +442,7 @@ test <- params$test
 test_name <- params$test_name
 pages <- params$pages
 # file <- file.path(file.choose())
-file <- file.path(params$file)
+# file <- file.path(params$file)
 saveRDS(file, "nab.rds")
 # file <- readRDS("nab.rds")
 ```
@@ -514,14 +515,13 @@ saveRDS(areas, file = "areas_list.rds")
 ```
 
 ```{r eval = FALSE}
+# If need to locate areas
 # file <- file.path(file.choose())
 areas <- tabulapdf::locate_areas(
   file = file,
   pages = c(2, 3, 6, 9, 10, 10, 11, 13, 16)
 )
-```
 
-```{r}
 # Saves areas as text files in df or list
 # Convert the list to a data frame
 areas_df <- do.call(rbind, lapply(areas, function(x) as.data.frame(t(x))))
@@ -675,7 +675,6 @@ print(table1)
 ## NAB Attention (Table 2)
 
 ```{r}
-
 # Extract table
 table_index <- 2
 table <- tibble::as_tibble(plucked_tables[[table_index]])
@@ -753,7 +752,6 @@ print(table2)
 ## NAB Language (Table 3)
 
 ```{r}
-
 # Extract table
 table_index <- 3
 table <- as_tibble(plucked_tables[[table_index]])
@@ -824,7 +822,6 @@ print(table3)
 ## NAB List Learning (Table 4)
 
 ```{r}
-
 # Extract table
 table_index <- 4
 table <- as_tibble(plucked_tables[[table_index]])
@@ -887,7 +884,6 @@ print(table4)
 ## NAB Shape Learning (Table 5)
 
 ```{r}
-
 # Extract table
 table_index <- 5
 table <- as_tibble(plucked_tables[[table_index]])
@@ -939,7 +935,6 @@ print(table5)
 ## NAB Story Learning (Table 6)
 
 ```{r}
-
 # Extract table
 table_index <- 6
 table <- as_tibble(plucked_tables[[table_index]])
@@ -992,7 +987,6 @@ print(table6)
 ## NAB Daily Living Memory (Table 7)
 
 ```{r}
-
 # Extract table
 table_index <- 7
 table <- as_tibble(plucked_tables[[table_index]])
@@ -1043,7 +1037,6 @@ print(table7)
 ## NAB Spatial Module (Table 8)
 
 ```{r}
-
 # Extract table
 table_index <- 8
 table <- as_tibble(plucked_tables[[table_index]])
@@ -1097,7 +1090,6 @@ print(table8)
 ## NAB Executive Functions Module (Table 9)
 
 ```{r}
-
 # Extract table
 table_index <- 9
 table <- as_tibble(plucked_tables[[table_index]])
@@ -1563,8 +1555,8 @@ table4 <-
   table4 |>
   dplyr::mutate(
     narrow = dplyr::case_when(
-      grepl("List Learning Immediate", scale) ~ "Word-List Learning",
-      grepl("List Learning Delayed", scale) ~ "Free-Recall Memory",
+      grepl("List Learning", scale) ~ "Word-List Learning",
+      grepl("List Learning", scale) ~ "Free-Recall Memory",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1591,7 +1583,9 @@ table7 <-
   dplyr::mutate(
     narrow = dplyr::case_when(
       grepl("Daily Living Memory", scale) ~ "Everyday Memory",
-      grepl("Daily Living Memory Recall", scale) ~ "Everyday Memory",
+      grepl("Medication Instructions", scale) ~ "Everyday Memory",
+      grepl("Name/Address/Phone", scale) ~ "Everyday Memory",
+      grepl("Recognition", scale) ~ "Recognition Memory",
       TRUE ~ as.character(narrow)
     )
   )
@@ -1645,11 +1639,18 @@ table2 <-
   table2 |>
   dplyr::mutate(
     pass = dplyr::case_when(
-      scale %in% orientation ~ "Attention",
-      grepl(dsf, scale) ~ "Sequential",
+      grepl(orientation, scale) ~ "Knowledge",
+      grepl(dsf, scale) ~ "Attention",
       grepl(dsb, scale) ~ "Attention",
-      grepl(c("Part A Efficiency", "Part A Speed"), scale) ~ "Processing Speed",
-      grepl(c("Part B Efficiency", "Part C Efficiency", "Part D Efficiency"), scale) ~ "Attention",
+      grepl("Part A Speed", scale) ~ "Planning",
+      grepl("Part A Errors", scale) ~ "Attention",
+      grepl("Numbers & Letters Part A Efficiency", scale) ~ "Planning",
+      grepl("Numbers & Letters Part B Efficiency", scale) ~ "Planning",
+      grepl("Numbers & Letters Part C Efficiency", scale) ~ "Planning",
+      grepl("Numbers & Letters Part D Efficiency", scale) ~ "Planning",
+      grepl("Part D Disruption", scale) ~ "Attention",
+      grepl("Dots", scale) ~ "Attention",
+      grepl("Driving Scenes", scale) ~ "Attention",
       TRUE ~ as.character(pass)
     )
   )
@@ -1762,6 +1763,20 @@ table2 <-
       grepl(orientation, scale) ~ "Untimed",
       grepl(dsf, scale) ~ "Untimed",
       grepl(dsb, scale) ~ "Untimed",
+      TRUE ~ as.character(timed)
+    )
+  )
+
+table8 <-
+  table8 |>
+  dplyr::mutate(
+    timed = dplyr::case_when(
+      grepl("Visual Discrimination", scale) ~ "Untimed",
+      grepl("Design Construction", scale) ~ "Timed",
+      grepl("Copy", scale) ~ "Untimed",
+      grepl("Recall", scale) ~ "Untimed",
+      grepl("Retention", scale) ~ "Untimed",
+      grepl("Map Reading", scale) ~ "Untimed",
       TRUE ~ as.character(timed)
     )
   )
@@ -2227,20 +2242,36 @@ df <-
     description,
     result
   )
+```
 
-vroom::vroom_write(df,
-  here::here("data", "csv", "nab.csv"),
-  delim = ",",
-  col_names = TRUE,
-  na = ""
+## Write out final csv
+
+```{r write}
+readr::write_excel_csv(df, here::here("data", "csv", paste0(test, ".csv")), col_names = TRUE)
+```
+
+## Write to "g2.csv" file
+
+```{r g2, eval = TRUE}
+has_headers <- function(file_path) {
+  if (!file.exists(file_path)) {
+    return(FALSE) # File doesn't exist, headers are needed
+  }
+  # Check if the file has at least one line (header)
+  return(length(readLines(file_path, n = 1)) > 0)
+}
+
+csv_file <- df
+g <- "g2"
+file_path <- here::here("data", paste0(g, ".csv"))
+
+readr::write_excel_csv(
+  csv_file,
+  file_path,
+  append = TRUE,
+  col_names = !has_headers(file_path),
+  quote = "all"
 )
 ```
 
-## "g" version 2
-
-```{r}
-table <- params$test
-g <- "g2"
-file_path <- here::here("data", paste0(g, ".csv"))
-# readr::write_excel_csv(df, file_path, append = TRUE, na = "")
-```
+THE END!!

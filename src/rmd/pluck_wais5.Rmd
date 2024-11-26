@@ -12,7 +12,7 @@ params:
       - wais5
   test_name:
     label: "Test Name"
-    value: [WAIS-IV]
+    value: [WAIS-5]
     input: select
     multiple: no
     choices:
@@ -30,7 +30,7 @@ params:
     label: "No file selected"
     value: file
     input: file
-  pages: [2,4]
+  pages: [2, 4]
   table1:
     label: "Index Scores"
     value: "Verbal Comprehension (VCI)"
