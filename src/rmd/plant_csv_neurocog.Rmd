@@ -5,7 +5,7 @@ title: |
 date: "`r Sys.Date()`"
 params:
   patient:
-    value: Biggie
+    value: Edward
     label: "Patient's first name:"
     input: text
   test_name:
@@ -373,7 +373,7 @@ test_name <- params$test_name
 ## Make data frame
 
 ```{r make-df}
-data <- tibble::tibble(
+data <- tibble::as_tibble(
   test = (params$test),
   test_name = (params$test_name),
   test_type = (params$test_type),

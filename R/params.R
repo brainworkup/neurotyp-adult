@@ -1,6 +1,6 @@
 # Parameters
 
-patient <- "Edward"
+patient <- "Biggie"
 
 test <- "wais5"
 test_name <- "WAIS-5"

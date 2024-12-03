@@ -116,7 +116,7 @@ gpt_neurocog_prompts.qmd
 neurotyp_functions.R
 pluck_cefi_adult_child.Rmd
 preprocess_report.R
-R/
+# R/
 read_data_scales.csv
 test_scale_descriptions.md
 typst_packages.typ
