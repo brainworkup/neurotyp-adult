@@ -79,7 +79,8 @@ validity <- vroom::vroom("validity.csv")
 #show block: set par(leading: 0.65em)
 #block[
 *PATIENT NAME:* #name, Age {{< var age >}}  \
-*DATES OF EXAM:* {{< var doe >}}, {{< var doe2 >}}, and {{< var doe3 >}} \
+*DATE OF BIRTH:* {{< var dob >}} \
+*DATE OF EXAM:* {{< var doe >}} \
 *DATE OF REPORT*: {{< var date_of_report >}} \
 ]
 ```
