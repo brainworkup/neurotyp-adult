@@ -1,15 +1,8 @@
 ## Overall Evaluation Interpretation
 
-{{< var first_name >}} {{< var last_name >}} is a {{< var age >}}-year-old {{< var handedness >}}-handed {{< var sex >}} with a history of {{< var dx1 >}}, {{< var dx2 >}}, and {{< var dx3 >}} who was referred for neuropsychological testing as part of a comprehensive work-up for attention-deficit/hyperactivity disorder. General cognitive ability is well within normal limits, and there is no evidence of decline from premorbid estimates. No deficits were detected in the domains of attention, processing speed, motor functioning, or visuospatial skills. Although many aspects of executive functioning, language functioning, and memory were within normal limits, {{< var he_she >}} demonstrated mildly inefficient problem solving and hypothesis testing, weaknesses in word retrieval, and inefficiency in new learning of verbal information. There is no evidence of a mood disorder at this time.
-
-In conclusion, the cognitive profile is ...
+On {{< var doe >}}, I conducted a neuropsychological and psychodiagnostic assessment with {{< var mr_mrs >}} {{< var first_name >}} {{< var last_name >}}, gathering data on {{< var his_her >}} developmental, medical, and psychosocial histories, past and current symptomatology, arrest history, and concluding with a structured psychiatric evaluation and neurocognitive examination. The evaluation provided meaningful information and objective data relevant to determining if {{< var first_name >}} {{< var last_name >}} is a candidate for Mental Health Diversion given the nature and severity of his untreated bipolar disorder and compromised mental state at the time of the incident.
 
 ### Diagnostic Impression
 
-- {{< var dsm5_dx1 >}}
-- {{< var dsm5_dx2 >}}
-- {{< var dsm5_dx3 >}}
-- {{< var dsm5_dx4 >}}
-- {{< var dsm5_dx5 >}}
-
-- [DSM-5/ICD-10 Codes](_03-00_dsm5_icd10_dx.qmd)
+1. 296.44 (F31.2) Bipolar I Disorder, With psychotic features, Most recent episode manic
+1. 799.59 (R41.9) Unspecified Neurocognitive Disorder

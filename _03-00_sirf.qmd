@@ -119,7 +119,7 @@ data <- g
 x <- g$z
 y <- g$scale
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 filename <- "fig_g.svg"
 
 bwu::dotplot(
@@ -135,18 +135,18 @@ bwu::dotplot(
 ```{r}
 #| label: fig-domains
 #| include: false
-#| eval: false
+#| eval: true
 #| fig-cap: "Broad cognitive domains"
 
-# args
-data <- vroom::vroom("neurocog.csv")
-data <- dplyr::filter(data, scale != "Cognitive Proficiency")
+# Read the data and filter out "Cognitive Proficiency" scale
+data <- vroom::vroom("neurocog.csv") |>
+  dplyr::filter(scale != "Cognitive Proficiency")
 
-# comment out if using subdomains
+# Calculate M,SD
 data <-
   data |>
   dplyr::group_by(domain, .add = TRUE) |>
-  dplyr::mutate(z_mean_domain = mean(z), z_sd_domain = sd(z)) |>
+  dplyr::mutate(z_mean_domain = mean(z, na.rm = TRUE), z_sd_domain = sd(z, na.rm = TRUE)) |>
   dplyr::ungroup()
 
 x <- data$z_mean_domain
@@ -156,7 +156,6 @@ y <- data$domain
 # y <- data$subdomain
 
 colors <- NULL
-return_plot <- TRUE
 filename <- "fig_domains.svg"
 
 # Make dotplot
@@ -165,7 +164,7 @@ bwu::dotplot(
   x = x,
   y = y,
   colors = colors,
-  return_plot = return_plot,
+  return_plot = TRUE,
   filename = filename,
   na.rm = TRUE
 )
@@ -176,7 +175,7 @@ bwu::dotplot(
   let font = (font: "Roboto Slab", size: 0.7em)
   set text(..font)
   figure(
-    [#image(file_fig, width: 75%)],
+    [#image(file_fig, width: 70%)],
     placement: none,
     caption: figure.caption(
       position: bottom,

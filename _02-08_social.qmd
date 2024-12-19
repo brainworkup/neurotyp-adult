@@ -334,7 +334,7 @@ data_social <- data_social |>
 x <- data_social$raw_score
 y <- data_social$scale
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 filename <- "fig_social.svg"
 
 # Suppress warnings from being converted to errors

@@ -26,16 +26,20 @@ Following are examples of information that may be included:
 • Statements such as, “Results of this assessment are considered a valid reflection of Mark’s current level of functioning.”
 • If results are felt to be invalid, explain why. -->
 
+## Mental Status/Behavioral Observations
+
 ::: {.block above="1.2em"}
 - **Attention/Orientation**: Orientation to person, place, time, and situation was intact.
 - **Appearance**: Appropriate grooming and dress for context.
 - **Behavior/Attitude**: Cooperative, engaged. No gross behavioral apathy or disinhibition observed.
-- **Speech/Language**: Fluent and normal in rate, volume, and prosody.
-- **Mood/Affect**: Neutral, range was full and appropriate.
-- **Sensory/Motor**: Performance was not limited by any obvious sensory or motor difficulties.
-- **Cognitive Process**: Coherent and goal directed.
-- **Effort/Validity**: Normal; Word Choice = ##/50, RDS = ##, DCT = #.#, CVLT-3 Forced-Choice Recognition = #/9.
+- **Speech/Language**: Speech was fluent with normal rate, volume, and prosody. However, his expression was often tangential and disorganized, frequently losing linearity in his thoughts. He was highly talkative and occasionally paused briefly before continuing to express himself due to losing his train of thought.
+- **Mood/Affect**: Neutral, range was full and appropriate. Appropriate to situation. Denies suicidal and homicidal ideation.
+- **Sensory/Motor**: There were no apparent sensory difficulties impacting his performance. However, he exhibited an obvious bilateral intention tremor (hand shaking), a side effect from his antipsychotic medication, which affected his fine motor skills, particularly when performing tasks like writing.
+- **Cognitive Process**: No delusions or hallucinations.
+- **Insight and Judgment:** Shows insight into condition, improved but previously poor judgment. 
+- **Effort/Validity**: Normal; Word Choice = xx/50, RDS = x.
 :::
+
 
 ::: {.block above="1.2em"}
 **Appearance and Behavior:**

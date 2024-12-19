@@ -163,7 +163,7 @@ bwu::tbl_gt(
 
 # dotplot args
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 filename <- "fig_motor.svg"
 
 x <- data_motor$z_mean_narrow

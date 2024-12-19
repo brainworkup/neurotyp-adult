@@ -2,19 +2,6 @@
 
 ## Area: Emotion/Personality and Personality Assessment Inventory (PAI)
 
-Summarize and interpret these neuropsychological test scores related to the area
-denoted above. For scores that are Below
-{ range }, give a brief example of how this could impact the patient's daily
-functioning. Organize your summary and interpretation in order from scores that
-are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to
-delineate relative strengths and weaknesses, respectively. Finally, recommended
-additional support that the patient should receive in areas in which scores fall
-Below { range } to Exceptionally Low.
-
-Prefix the output/results as follows: Headers (e.g., Relative Strengths,
-Relative Weaknesses) should be padded with ###, and output that contains lists should be
-unordered and padded with - instead of ordered.
-
 <<EXAMPLE>>
 
 {{< var patient >}} completed an objective, self-report inventory of personality and emotional functioning. Given their scores on the validity scales, there are no problems with interpreting the clinical profile. They responded in an open and forthright manner, indicating only modestly elevated levels of stress and anxiety. They seem to have a positive self-image and are likely viewed by others as warm and friendly. There do not appear to be any contributing emotional factors that would account for their current cognitive difficulties.

@@ -166,6 +166,10 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 ```
 
 ```{r}
+# source("tbl_flextable.R")
+```
+
+```{r}
 #| label: qtbl-academics
 #| dev: tikz
 #| fig-process: pdf2png
@@ -188,6 +192,7 @@ grp_academics <- list(
 )
 
 # Create the table using the tbl_gt function from the bwu library
+# source("table_gt.R")
 bwu::tbl_gt(
   data = data_academics,
   pheno = pheno,
@@ -215,7 +220,6 @@ bwu::tbl_gt(
 # Arguments
 filename <- "fig_academics_subdomain.svg"
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Define the x and y variables for the dotplot
 x <- data_academics$z_mean_subdomain
@@ -227,7 +231,7 @@ bwu::dotplot(
   x = x,
   y = y,
   colors = colors,
-  return_plot = return_plot,
+  return_plot = TRUE,
   filename = filename,
   na.rm = TRUE
 )
@@ -249,7 +253,6 @@ y <- data_academics$narrow
 
 # plot args
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
 
 # Make dotplot
 bwu::dotplot(
@@ -257,12 +260,11 @@ bwu::dotplot(
   x = x,
   y = y,
   colors = colors,
-  return_plot = return_plot,
+  return_plot = TRUE,
   filename = filename,
   na.rm = TRUE
 )
 ```
-
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
@@ -294,7 +296,7 @@ bwu::dotplot(
   )
 }
 ```
-
+````{=html}
 <!-- ```{=typst}
 #let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
@@ -305,6 +307,7 @@ bwu::dotplot(
   file_fig,
   )
 ``` -->
+````
 
 ```{=typst}
 #let title = "Academic Skills"

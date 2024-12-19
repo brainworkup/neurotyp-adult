@@ -169,8 +169,6 @@ bwu::cat_neuropsych_results(data = data_adhd_self, file = "_02-09_adhd_adult_tex
 #| fig-process: pdf2png
 #| eval: true
 #| include: false
-
-# Set the default engine for tikz to "xetex"
 options(tikzDefaultEngine = "xetex")
 
 # table arguments
@@ -197,13 +195,9 @@ fn_t_score <- gt::md("CAARS T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84t
 
 Higher scores reflect reduced functioning.")
 
-# source_note <- gt::md("CAARS T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+source_note <- gt::md("CAARS T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
-# Higher scores reflect reduced functioning.")
-
-source_note <- gt::md("CEFI Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰].
-
-Lower scores reflect reduced functioning in the given area.")
+Higher scores reflect reduced functioning.")
 
 # groupings
 grp_adhd <- list(
@@ -229,16 +223,17 @@ bwu::tbl_gt(
   data = data_adhd_self,
   pheno = pheno,
   table_name = table_name,
-  vertical_padding = vertical_padding,
   source_note = source_note,
-  # fn_standard_score = fn_standard_score,
+  fn_standard_score = fn_standard_score,
   # fn_t_score = fn_t_score,
-  # grp_standard_score = grp_self[["standard_score"]],
+  grp_standard_score = grp_self[["standard_score"]],
   # grp_t_score = grp_self[["t_score"]],
   dynamic_grp = grp_self,
+  vertical_padding = vertical_padding,
   multiline = multiline
 )
 ```
+
 
 
 ```{r}
@@ -251,7 +246,6 @@ bwu::tbl_gt(
 # dotplot variables to plot (x, y)
 x <- data_adhd_self$z
 y <- data_adhd_self$scale
-
 # dotplot arguments
 filename <- "fig_adhd_self.svg"
 colors <- NULL
@@ -309,7 +303,7 @@ options(warn = 0) # Reset to default behavior
 ```
 
 ```{=typst}
-#let title = "ADHD/Executive Function Self Ratings"
+#let title = "ADHD Self Ratings"
 #let file_qtbl = "table_adhd_self.png"
 #let file_fig = "fig_adhd_self.svg"
 #domain(

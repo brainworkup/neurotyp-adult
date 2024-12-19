@@ -72,24 +72,24 @@ validity <- vroom::vroom("validity.csv")
 ```
 
 ```{=typst}
-#let name = [{{< var first_name >}} {{< var last_name >}}]
+#let name = [{{< var last_name >}}, {{< var first_name >}}]
 #let doe = [{{< var date_of_report >}}]
 #let patient = [{{< var patient >}}]
 #v(2em, weak: true)
 #show block: set par(leading: 0.65em)
 #block[
-*PATIENT NAME:* #name, Age {{< var age >}}  \
-*DATE OF BIRTH:* {{< var dob >}} \
-*DATE OF EXAM:* {{< var doe >}} \
+*PATIENT NAME:* #name \
+*DATE OF BIRTH:* {{< var dob >}}, Age {{< var age >}} \
+*DATE OF EXAM:* {{< var doe >}}, {{< var doe2 >}} \
 *DATE OF REPORT*: {{< var date_of_report >}} \
 ]
 ```
 
 {{< include _00-00_tests.qmd >}}
 
-<!-- {{< pagebreak >}} -->
+{{< pagebreak >}}
 
-{{< include _01-00_nse.qmd >}}
+{{< include _01-00_nse_forensic.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
@@ -108,6 +108,8 @@ validity <- vroom::vroom("validity.csv")
 {{< include _02-05_memory.qmd >}}
 
 {{< include _02-06_executive.qmd >}}
+
+{{< include _02-12_daily_living.qmd >}}
 
 <!-- {{< include _02-07_motor.qmd >}} -->
 

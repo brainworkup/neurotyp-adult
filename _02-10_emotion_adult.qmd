@@ -184,7 +184,7 @@ bwu::cat_neuropsych_results(
 #| label: qtbl-emotion
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: true
+#| eval: false
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -194,9 +194,10 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # Source/footnote
-source_note <- gt::md("Score = _T_ score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])
+source_note <- gt::md("PAI _T_ score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
 
-_Note_: Higher scores reflect reduced functioning")
+Higher scores reflect reduced functioning.")
+
 
 # groupings
 grp_emotion <- list(
@@ -239,7 +240,12 @@ data_emotion <- data_emotion |>
   dplyr::arrange(scale)
 
 # View the arranged data
-print(data_emotion)
+# print(data_emotion)
+
+# Source/footnote
+source_note <- gt::md("PAI _T_ score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰].
+
+Higher scores reflect reduced functioning.")
 
 # make `gt` table
 bwu::tbl_gt(
@@ -260,7 +266,7 @@ bwu::tbl_gt(
 #| out-height: 100%
 
 colors <- NULL
-return_plot <- Sys.getenv("RETURN_PLOT")
+return_plot <- TRUE
 filename <- "fig_emotion.svg"
 
 # arguments
@@ -305,6 +311,7 @@ bwu::dotplot(
       )
   }
 ```
+
 ```{=typst}
 #let title = "Personality Assessment Scores"
 #let file_qtbl = "table_emotion.png"

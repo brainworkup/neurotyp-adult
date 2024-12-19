@@ -57,3 +57,37 @@
   - Judgment
 - Hare Psychopathy Checklist, Revised (PCL-R)
 - Personality Assessment Inventory (PAI)
+- Personality Assessment Inventory (PAI); not completed, digital version not allowed in the testing environment
+
+
+
+# TESTS ADMINISTERED {#sec-tests}
+
+- Comprehensive Neuropsychiatric Symptom and History Interview
+
+- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
+
+- Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): 
+  - Similarities
+  - Matrix Reasoning
+
+- Wide Range Achievement Test, 5th ed (WRAT-5):
+  - Word Reading
+  - Math Computation
+
+- NIH Executive Abilities--Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
+  - Behavioral Rating Scale
+
+- Advanced Clinical Solutions (ACS):
+  - Word Choice Test
+
+- Dot Counting Test (DCT)
+
+- Neuropsychological Assessment Battery (NAB):
+  - Attention Module 
+  - Language Module
+  - Memory Module
+  - Spatial Module
+  - Executive Functions Module
+
+- Personality Assessment Inventory (PAI)

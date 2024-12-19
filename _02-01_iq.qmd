@@ -115,8 +115,7 @@ scales <- c(
   "Language Index (LAN)",
   "Spatial Index (SPT)",
   "Memory Index (MEM)",
-  "Executive Functions Index (EXE)",
-  "Judgment"
+  "Executive Functions Index (EXE)"
 )
 
 # Filter the data using the filter_data function from the bwu library
@@ -184,8 +183,7 @@ subset <- c(
   "Language Index (LAN)",
   "Spatial Index (SPT)",
   "Memory Index (MEM)",
-  "Executive Functions Index (EXE)",
-  "Judgment"
+  "Executive Functions Index (EXE)"
 )
 
 # Filter the data to subset only the specified scales
@@ -198,16 +196,16 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Score = Standard score (Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰])")
-fn_t_score <- gt::md("Score = T-score (Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰])")
+fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+
+source_note <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
 
 # Define the groups for the table
 grp_iq <- list(
   standard_score = c(
     "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4",
     "WASI-2", "WISC-5", "WISC-V", "WRAT-5", "KTEA-3", "NAB", "NAB-S", "RBANS", "WPPSI-IV"
-  ),
-  t_score = c("NAB Daily Living")
+  )
 )
 
 # Create the table using the tbl_gt function from the bwu library
@@ -216,10 +214,9 @@ bwu::tbl_gt(
   pheno = pheno,
   table_name = table_name,
   vertical_padding = vertical_padding,
-  fn_standard_score = fn_standard_score,
-  fn_t_score = fn_t_score,
-  grp_standard_score = grp_iq[["standard_score"]],
-  grp_t_score = grp_iq[["t_score"]],
+  source_note = source_note,
+  # fn_standard_score = fn_standard_score,
+  # grp_standard_score = grp_iq[["standard_score"]],
   dynamic_grp = grp_iq,
   multiline = multiline
 )
@@ -234,11 +231,11 @@ bwu::tbl_gt(
 # x <- data_iq$z
 # y <- data_iq$scale
 
-x <- data_iq$z_mean_subdomain
-y <- data_iq$subdomain
+# x <- data_iq$z_mean_subdomain
+# y <- data_iq$subdomain
 
-# x <- data_iq$z_mean_narrow
-# y <- data_iq$narrow
+x <- data_iq$z_mean_narrow
+y <- data_iq$narrow
 
 # plot args
 colors <- NULL
@@ -272,7 +269,7 @@ options(warn = 0) # Reset to default behavior
 ```{=typst}
 // Define a function to create a domain with a title, a table, and a figure
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.7em)
+  let font = (font: "Roboto Slab", size: 0.6em)
   set text(..font)
   pad(top: 0.5em)[]
   grid(
@@ -288,7 +285,9 @@ options(warn = 0) # Reset to default behavior
       [#image(file_fig, width: auto)],
       caption: figure.caption(
         position: bottom,
-        [_Premorbid Ability_ represents an estimate of the individual’s intellectual functioning prior to the onset of any known or suspected brain disease or dysfunction. _Neurocognitive Index_ reflects overall cognitive capacity, including verbal and nonverbal reasoning, problem-solving, and learning new information. Scores are presented as z-scores, where the average is 0 with a standard deviation of 1.],
+        [
+        The Neurocognitive Index evaluates cognitive functioning across five domains: Attention (focus, concentration, and information processing), Language (verbal communication, naming, comprehension, and fluency), Memory (immediate and delayed verbal and visual recall), Spatial (visuospatial perception, construction, and orientation), and Executive Functions (planning, problem-solving, and mental flexibility). #footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically significant and a cause for greater concern.]
+        ],
       ),
       placement: none,
       kind: "image",

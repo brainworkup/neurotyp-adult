@@ -2,10 +2,5 @@
 
 ## Area: Academic Skills
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below { range } to Exceptionally Low, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above { range } to Exceptionally Low/Below { range } to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below { range } to Exceptionally Low, or scores that are significantly discrepant and lower than expected relative to other scores (e.g., verbal reasoning versus nonverbal reasoning).
-
-<<EXAMPLE>>
-
-TODO:
 
 <<END>>

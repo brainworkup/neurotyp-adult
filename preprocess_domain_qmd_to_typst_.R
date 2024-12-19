@@ -1,15 +1,17 @@
-# Load the knitr package
+# Load the quarto and knitr packages
 library(quarto)
+library(knitr)
 
 # Predefined list of input files
 file_list <- c(
   "_02-01_iq.qmd",
-  "_02-02_academics.qmd",
+  # "_02-02_academics.qmd",
   "_02-03_verbal.qmd",
   "_02-04_spatial.qmd",
   "_02-05_memory.qmd",
   "_02-06_executive.qmd",
-  "_02-07_motor.qmd",
+  "_02-12_daily_living.qmd",
+  # "_02-07_motor.qmd",
   # "_02-08_social.qmd",
   "_02-09_adhd_adult.qmd",
   "_02-10_emotion_adult.qmd",
