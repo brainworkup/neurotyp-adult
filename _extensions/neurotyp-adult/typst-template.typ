@@ -1,9 +1,10 @@
 #let report(
   title: "NEUROCOGNITIVE EXAMINATION",
   author: "Joey W. Trampush, Ph.D.",
+  patient: [],
   name: [],
   doe: [],
-  patient: [],
+  date_of_report: [],
   date: none,
   cols: 1,
   paper: "a4",
