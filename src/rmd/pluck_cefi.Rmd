@@ -48,11 +48,10 @@ Sys.setenv(
 options(java.parameters = "-Xmx16000m")
 knitr::opts_chunk$set(
   root.dir = normalizePath("./"),
-  echo = FALSE,
+  echo = TRUE,
   message = FALSE,
   warning = TRUE,
-  error = TRUE,
-  include = TRUE
+  error = TRUE
 )
 library(dplyr)
 library(fs)

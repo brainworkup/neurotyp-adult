@@ -4,7 +4,7 @@ title: |
   <center> Comprehensive Score Report </center>
 date: "`r Sys.Date()`"
 params:
-  patient: Edward
+  patient: Biggie
   test: nab
   test_name: NAB
   pages: [2, 3, 6, 9, 10, 10, 11, 13, 16]

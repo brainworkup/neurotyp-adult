@@ -1,10 +1,10 @@
 ---
-title: "Pluck Tables from WAIS-IV"
+title: "Pluck Tables from WAIS-V"
 params:
-  patient: Edward
+  patient: Biggie
   test:
     label: "Test"
-    value: wais4
+    value: wais5
     input: select
     multiple: no
     choices:
@@ -12,12 +12,12 @@ params:
       - wais5
   test_name:
     label: "Test Name"
-    value: [WAIS-5]
+    value: [WAIS-V]
     input: select
     multiple: no
     choices:
       - WAIS-IV
-      - WAIS-5
+      - WAIS-V
   version:
     label: "Brief (4 subtest) or Full (8 subtest) version"
     value: full
@@ -220,11 +220,17 @@ knitr::opts_chunk$set(
   warning = FALSE,
   error = TRUE
 )
+library(dplyr)
+library(fs)
+library(glue)
 library(hablar)
 library(here)
 library(knitr)
 library(magrittr)
+library(miniUI)
+library(pdftools)
 library(readr)
+library(rJava)
 library(rmarkdown)
 library(rmdformats)
 library(shiny)
@@ -232,7 +238,8 @@ library(snakecase)
 library(tabulapdf)
 library(tibble)
 library(tidyr)
-library(dplyr)
+library(tidyverse)
+library(xfun)
 library(bwu)
 ```
 
@@ -286,7 +293,7 @@ pages <- params$pages
 ```{r eval = FALSE}
 library(tabulapdf)
 
-f <- file.path("/Users/joey/reports/Edward/pdf/Edward_adhd_ld_battery-2a4e56ea-524d-496f-a277-5d4f356a60ca.pdf")
+f <- file.path("/Users/joey/reports/Biggie/pdf/Biggie_adhd_ld_battery-2a4e56ea-524d-496f-a277-5d4f356a60ca.pdf")
 
 # f <- file.path(file.choose(""))
 
