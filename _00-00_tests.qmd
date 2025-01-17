@@ -18,14 +18,12 @@
 - Delis-Kaplan Executive Function System (D-KEFS): Color-Word Interference Test
 - Dot Counting Test (DCT)
 - Grooved Pegboard Test
-- Neuropsychological Assessment Battery (NAB): Attention, Language, Memory, Spatial, and Executive Functions Modules
-- Neuropsychological Assessment Battery, Screener (NAB-S): Attention, Language, Memory, Spatial, and Executive Functions Modules
-- NIH Executive Abilities--Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER): Unstructured Task, Verbal Fluency, Behavioral Rating Scale
 - Repeatable Battery for the Assessment of Neuropsychological Status (RBANS)
 - Rey-Osterrieth Complex Figure Test (ROCFT)
 - Trail Making Test (TMT)
 - Wechsler Adult Intelligence Scale, 4th ed (WAIS-4)
 - Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): Similarities, Matrix Reasoning, Letter-Number Sequencing, Coding, Symbol Search, Digit Span, Vocabulary, Block Design, Figure Weights, Arithmetic, Cancellation
+- Wechsler Adult Intelligence Scale, 5th ed (WAIS-V)
 - Wechsler Individual Achievement Test, 4th ed (WIAT-4)
 - Wechsler Individual Achievement Test, 4th ed (WIAT-4): Word Reading, Reading Comprehension, Pseudoword Decoding, Orthographic Fluency, Decoding Fluency
 - Wechsler Memory Scale, 4th ed (WMS-4)
@@ -57,7 +55,6 @@
   - Judgment
 - Hare Psychopathy Checklist, Revised (PCL-R)
 - Personality Assessment Inventory (PAI)
-- Personality Assessment Inventory (PAI); not completed, digital version not allowed in the testing environment
 
 - Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
 - Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): 
@@ -66,15 +63,3 @@
 - Wide Range Achievement Test, 5th ed (WRAT-5):
   - Word Reading
   - Math Computation
-- NIH Executive Abilities--Measures and Instruments for Neurobehavioral Evaluation and Research (NIH EXAMINER):
-  - Behavioral Rating Scale
-- Advanced Clinical Solutions (ACS):
-  - Word Choice Test
-- Dot Counting Test (DCT)
-- Neuropsychological Assessment Battery (NAB):
-  - Attention Module 
-  - Language Module
-  - Memory Module
-  - Spatial Module
-  - Executive Functions Module
-- Personality Assessment Inventory (PAI)
