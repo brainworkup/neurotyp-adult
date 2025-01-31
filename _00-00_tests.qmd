@@ -56,7 +56,7 @@
 - Hare Psychopathy Checklist, Revised (PCL-R)
 - Personality Assessment Inventory (PAI)
 
-- Conners' Adult ADHD Rating Scales--Self-Report: Long Version (CAARS--S:L)
+
 - Wechsler Adult Intelligence Scale, 4th ed (WAIS-4): 
   - Similarities
   - Matrix Reasoning

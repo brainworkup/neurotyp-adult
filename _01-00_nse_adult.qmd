@@ -42,15 +42,11 @@ Patient denied having prior testing.
 
 ### Medical History
 
-::: {.block above="1.2em"}
-- **Current**: Consequat ad est amet deserunt dolor amet cillum nisi irure sit consequat officia do..
-- **Family**: Irure anim qui deserunt eu culpa aliqua ea consequat deserunt..
-- **Medications**: None.
-- **Appetite/Weight**: Stable with no significant changes recently.
-- **Sleep**: Normal, no changes.
-- **Neurological Injury**: Voluptate magna do id veniam id laborum in qui magna sint ad cillum commodo.
-- **Psychiatric**: ADHD, anxiety, and depression.
-:::
+- Frequent sinus infections.
+- Medications: None; no history of psychotropics.
+- Appetite/weight: History of not usually feeling hungry and not eating much.
+- Sleep: Normal.
+- Alcohol/tobacco: No history of abuse; denied current use.
 
 ### Behavioral/Emotional/Social
 

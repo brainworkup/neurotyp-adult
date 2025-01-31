@@ -1,5 +1,5 @@
 ---
-title: NEUROCOGNITIVE EXAMINATION
+title: "NEUROCOGNITIVE EXAMINATION"
 patient: Biggie
 name: Biggie Smalls
 doe: {{< var doe >}}
@@ -87,13 +87,13 @@ validity <- vroom::vroom("validity.csv")
 
 {{< include _00-00_tests.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
-{{< include _01-00_nse_forensic.qmd >}}
+{{< include _01-00_nse_adult.qmd >}}
 
 <!-- {{< pagebreak >}} -->
 
-{{< include _02-00_behav-obs.qmd >}}
+{{< include _02-00_behav_obs.qmd >}}
 
 # NEUROCOGNITIVE FINDINGS {#sec-nt}
 
@@ -131,6 +131,6 @@ validity <- vroom::vroom("validity.csv")
 
 {{< include _03-02_signature.qmd >}}
 
-{{< pagebreak >}}
+<!-- {{< pagebreak >}} -->
 
 {{< include _03-03_appendix.qmd >}}
