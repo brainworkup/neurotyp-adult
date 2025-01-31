@@ -99,7 +99,7 @@ validity <- vroom::vroom("validity.csv")
 
 {{< include _02-01_iq.qmd >}}
 
-{{< include _02-02_academics.qmd >}}
+<!-- {{< include _02-02_academics.qmd >}} -->
 
 {{< include _02-03_verbal.qmd >}}
 
@@ -109,7 +109,7 @@ validity <- vroom::vroom("validity.csv")
 
 {{< include _02-06_executive.qmd >}}
 
-{{< include _02-12_daily_living.qmd >}}
+<!-- {{< include _02-12_daily_living.qmd >}} -->
 
 <!-- {{< include _02-07_motor.qmd >}} -->
 

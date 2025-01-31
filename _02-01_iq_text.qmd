@@ -1,18 +1,34 @@
-<<PROMPT>>
+The patient demonstrated below-average overall neuropsychological functioning across multiple domains.
 
-## Area: General Cognitive Ability/Intelligence
+### Strengths
+- Visuoperceptual skills
+- Attention to detail
+- Visuoconstructional abilities (high average range for single domain tasks)
 
-Summarize and interpret these neuropsychological test scores related to the area denoted above. For scores that are Below Average to Exceptionally Low, give a brief example of how this could impact the patient's daily functioning. Organize your summary and interpretation in order from scores that are Exceptionally High/Above Average to Exceptionally Low/Below Average to delineate relative strengths and weaknesses, respectively. Finally, recommended additional support that the patient should receive in areas in which scores fall Below Average to Exceptionally Low, or scores that are significantly discrepant and lower than expected relative to other scores (e.g., verbal reasoning versus nonverbal reasoning).
+### Areas of Concern
+- Attention
+- Executive functioning
+- Language comprehension
+- Word-finding abilities
+- Spatial processing
+- Memory
 
-<<EXAMPLE>>
+### Composite Scores
 
-Premorbid ability was estimated to be in the High Average range. However, a comprehensive assessment of neurocognitive functioning across domains such as attention, executive functioning, language, spatial processing, and memory indicated performance in the Average range, suggesting a notable decline from his previously higher level of functioning. This cognitive decline is evident when comparing premorbid estimates to current performance, particularly in areas such as attention and executive functioning, where Mr. Peebles is performing below expectations based on prior ability. 
+- Verbal/visual memory functioning: Low average range
+- Executive skills: Low average range
+- Attentional functioning: Exceptionally low, indicating significant challenges maintaining focus and sustaining attention
 
-A composite measure of both verbal and visual memory abilities was in the High Average range. Additionally, a composite screening of visuoperceptual skills, attention to detail, and visuoconstructional abilities also fell within the High Average range. 
+### Comprehensive Index
 
-In contrast, a composite screening of language comprehension and word-finding abilities was in the Low Average range, as was a composite measure of executive functions related to planning, inhibition, speed/fluency, and generativity. 
+A comprehensive measure of neuropsychological functioning indicated below-average performance, suggesting global cognitive impairment.
 
-Finally, a global measure of attentional functioning (verbal and nonverbal attention) indicated Below Average performance. Despite these findings, the examinee demonstrated Above Average judgment and decision-making abilities in emergency situations.
+### Implications for Daily Life
 
+The below-average overall performance may impact:
 
-<<END>>
+- Activities requiring complex problem-solving
+- Effective communication
+- Learning and retention of new information
+- Concentration and focus
+- Various aspects of cognitive processing in everyday tasks

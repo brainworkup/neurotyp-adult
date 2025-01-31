@@ -1,23 +1,24 @@
 version: 0.1.0
 
 # VARIABLES
-patient: Biggie
-first_name: Biggie
-last_name: Smalls
-dob: 1991-01-01
-doe: 2024-01-01
-doe2: 2024-02-01
-doe3: 2024-03-01
-date_of_report: 2024-10-02
+case_number: BA516979
+patient: Itamar
+first_name: Itamar
+last_name: Cohen
+dob: 1987-10-31
+doe: 2024-09-08
+doe2: 2024-09-11
+doe3:
+date_of_report: 2024-11-20
 sex: male
 sex_cap: Male
-age: 18
+age: 36
 education: 12
 handedness: right
-referral: Dr. Dre
-observer: Tupac Shakur
-observer_relation: Complicated
-attorney: Johnny Cochrane
+referral: Dana Cole
+observer:
+observer_relation:
+attorney: Dana Cole
 mr_mrs: Mr.
 he_she: he
 he_she_cap: He
@@ -25,6 +26,6 @@ his_her: his
 his_her_cap: His
 him_her: him
 him_her_cap: Him
-dx1: attention-deficit/hyperactivity disorder (ADHD)
+dx1: epilepsy
 dx2: anxiety
 dx3: depression

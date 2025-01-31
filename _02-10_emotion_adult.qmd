@@ -1,4 +1,4 @@
-## [Emotional/Behavioral/Personality]{#sec-emotion .smallcaps}
+## Emotional/Behavioral/Personality {#sec-emotion}
 
 {{< include _02-10_emotion_adult_text.qmd >}}
 
@@ -184,7 +184,7 @@ bwu::cat_neuropsych_results(
 #| label: qtbl-emotion
 #| dev: tikz
 #| fig-process: pdf2png
-#| eval: true
+#| eval: false
 #| include: false
 options(tikzDefaultEngine = "xetex")
 
@@ -311,6 +311,7 @@ bwu::dotplot(
       )
   }
 ```
+
 ```{=typst}
 #let title = "Personality Assessment Scores"
 #let file_qtbl = "table_emotion.png"

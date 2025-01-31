@@ -1,6 +1,6 @@
 # APPENDIX
 
-<!-- {{< include _03-03_examiner_qualifications.qmd >}} -->
+{{< include _03-03_examiner_qualifications.qmd >}}
 
 ## Test Selection Procedures
 

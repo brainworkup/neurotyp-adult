@@ -2,14 +2,14 @@ project:
   type: default
   execute-dir: file
   render:
-    - Biggie.qmd
+    - Itamar.qmd
 
 format:
-  neurotyp-adult-typst:
+  neurotyp-forensic-typst:
     keep-typ: true
     keep-md: true
-    papersize: "us-letter"
-    bodyfont: "ScholaX"
+    papersize: "a4"
+    bodyfont: "Equity B OTF"
     sansfont: "Work Sans"
     fontsize: 12pt
     number-sections: false

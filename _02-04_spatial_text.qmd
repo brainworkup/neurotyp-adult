@@ -1,9 +1,1 @@
-{{< var patient >}} demonstrates a mix of { range } to { range } abilities in visuospatial processing.
-
-- **Perception**: { range } perceptual processing, discrimination, and pattern matching requiring close attention to visual detail.
-
-- **Reasoning**: { range } inductive reasoning and nonverbal problem-solving.
-
-- **Construction**: Constructing and recreating abstract visual designs was { range }.
-
-- **Organization**: Copying of a complex figure requiring visuospatial integration, planning and organization, and efficient encoding of visuospatial material was { range }. This indicates executive function difficulties in planning and organizing complex visuospatial material.
+The patient demonstrated high-average performance on constructing and recreating abstract visual designs (tangrams), suggesting efficient use of visuo-spatial skills for mental manipulation of flat polygons and accurate stimulus reproduction. In another perceptual processing task requiring close attention to visual detail for pattern matching and image discrimination, the patient's scores fell within average ranges, indicating generally intact complex visual information processing. However, he might face challenges under time pressure or with increased visual complexity. Overall, the patient's spatial cognitive abilities are characterized as high-average in visuo-spatial reasoning capacity and average in detailed visual processing.
