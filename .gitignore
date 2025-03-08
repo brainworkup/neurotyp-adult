@@ -8,12 +8,9 @@ _freeze/
 .DS_Store
 .env
 .env*
-.flaskenv*
 # .gitignore
 .history/
-.idea
 .prompts/
-.prompts/neurocog.prompt
 .Rproj.user
 .tmp.drivedownload/
 .tmp.driveupload/
@@ -31,18 +28,13 @@ _freeze/
 /.luarc.json
 /.quarto/
 /package/out
-/tests/cov_profile
-/tests/cov_profile.lcov
-/tests/test-out.json
+/tests/
 # _*_*.typ
 # _extensions/
 # *.jpg
 # *.pdf
 # *.png
 # *.qmd
-Biggie.qmd
-Biggie/
-bk/
 build
 cache/
 file_names.sh
@@ -68,7 +60,7 @@ run_scrape_pdf_nse.R
 secure_data
 validity.csv
 prompt.txt
-# .quartoignore
+.quartoignore
 pai.rds
 neurotyp.code-workspace
 adult.code-workspace
@@ -107,11 +99,10 @@ Temporary Items
 *.zip
 *.xlsx
 
-
 _extensions/neurotyp-adult/typst-template.pdf
 .prompts/
-.quartoignore
-adult.code-workspace
+# .quartoignore
+*.code-workspace
 gpt_neurocog_prompts.qmd
 neurotyp_functions.R
 pluck_cefi_adult_child.Rmd
@@ -122,3 +113,10 @@ test_scale_descriptions.md
 typst_packages.typ
 cognitive_domains.R
 Resources/
+
+
+# main
+_extensions/
+.history/
+.vscode/
+.src/

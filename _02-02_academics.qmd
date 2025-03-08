@@ -6,9 +6,6 @@
 #| label: setup-academics
 #| include: false
 
-# Suppress warnings from being converted to errors
-options(warn = 1) # Set warn to 1 to make warnings not halt execution
-
 # domain
 domains <- c("Academic Skills")
 
@@ -166,10 +163,6 @@ bwu::cat_neuropsych_results(data = data_academics, file = "_02-02_academics_text
 ```
 
 ```{r}
-# source("tbl_flextable.R")
-```
-
-```{r}
 #| label: qtbl-academics
 #| dev: tikz
 #| fig-process: pdf2png
@@ -268,7 +261,7 @@ bwu::dotplot(
 
 ```{=typst}
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
+  let font = (font: "Roboto Slab", size: 0.7em)
   set text(..font)
   pad(top: 0.5em)[]
   grid(
@@ -296,8 +289,8 @@ bwu::dotplot(
   )
 }
 ```
-````{=html}
-<!-- ```{=typst}
+
+```{=typst}
 #let title = "Academic Skills"
 #let file_qtbl = "table_academics.png"
 #let file_fig = "fig_academics_subdomain.svg"
@@ -306,8 +299,8 @@ bwu::dotplot(
   file_qtbl,
   file_fig,
   )
-``` -->
-````
+```
+
 
 ```{=typst}
 #let title = "Academic Skills"
