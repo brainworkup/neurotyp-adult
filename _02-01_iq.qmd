@@ -13,7 +13,7 @@ domains <- c("General Cognitive Ability")
 pheno <- "iq"
 
 # Read the CSV file into a data frame
-iq <- vroom::vroom("neurocog.csv")
+iq <- readr::read_csv("neurocog.csv")
 ```
 
 ```{r}
@@ -59,11 +59,13 @@ iq <- iq |>
   )
 
 # Write the resulting data frame to a new CSV file
-# The file name is created by concatenating the 'pheno' variable and ".csv"
-# NA values are replaced with an empty string in the output file
-# Column names are included in the output file
-# If the file already exists, it is overwritten (not appended)
-readr::write_excel_csv(iq, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
+readr::write_excel_csv(
+  iq,
+  paste0(pheno, ".csv"),
+  na = "",
+  col_names = TRUE,
+  append = FALSE
+)
 ```
 
 ```{r}
@@ -196,20 +198,35 @@ vertical_padding <- 0
 multiline <- TRUE
 
 # footnotes
-fn_standard_score <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+fn_standard_score <- gt::md(
+  "Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]"
+)
 
-source_note <- gt::md("Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]")
+source_note <- gt::md(
+  "Standard score: Mean = 100 [50th‰], SD ± 15 [16th‰, 84th‰]"
+)
 
 # Define the groups for the table
 grp_iq <- list(
   standard_score = c(
-    "Composite Scores", "Test of Premorbid Functioning", "WAIS-IV", "WAIS-4",
-    "WASI-2", "WISC-5", "WISC-V", "WRAT-5", "KTEA-3", "NAB", "NAB-S", "RBANS", "WPPSI-IV"
+    "Composite Scores",
+    "Test of Premorbid Functioning",
+    "WAIS-IV",
+    "WAIS-4",
+    "WASI-2",
+    "WISC-5",
+    "WISC-V",
+    "WRAT-5",
+    "KTEA-3",
+    "NAB",
+    "NAB-S",
+    "RBANS",
+    "WPPSI-IV"
   )
 )
 
-# Create the table using the tbl_gt function from the bwu library
-bwu::tbl_gt(
+# Create the table using the NeurotypR::tbl_gt2 function from the bwu library
+NeurotypR::tbl_gt2(
   data = data_iq,
   pheno = pheno,
   table_name = table_name,
@@ -223,7 +240,7 @@ bwu::tbl_gt(
 ```
 
 ```{r}
-#| label: fig-iq
+#| label: fig-iq-subdomain
 #| include: false
 #| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
 
@@ -231,28 +248,20 @@ bwu::tbl_gt(
 # x <- data_iq$z
 # y <- data_iq$scale
 
-# x <- data_iq$z_mean_subdomain
-# y <- data_iq$subdomain
-
-x <- data_iq$z_mean_narrow
-y <- data_iq$narrow
+x <- data_iq$z_mean_subdomain
+y <- data_iq$subdomain
 
 # plot args
 colors <- NULL
 return_plot <- TRUE
-
-# Define the filename for the plot
-filename <- "fig_iq.svg"
+filename <- "fig_iq_subdomain.svg"
 
 # Define the scales to keep
 # keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
 # data_iq <- dplyr::filter(data_iq, scale %in% keep)
 
-# Suppress warnings from being converted to errors
-options(warn = 1) # Set warn to 1 to make warnings not halt execution
-
 # Create the dotplot using the dotplot function from the bwu library
-bwu::dotplot(
+NeurotypR::dotplot2(
   data = data_iq,
   x = x,
   y = y,
@@ -261,15 +270,44 @@ bwu::dotplot(
   filename = filename,
   na.rm = TRUE
 )
+```
 
-# Reset warning options to default if needed
-options(warn = 0) # Reset to default behavior
+```{r}
+#| label: fig-iq-narrow
+#| include: false
+#| fig-cap: "_Premorbid Ability_ is an estimate of an individual's intellectual functioning prior to known or suspected onset of brain disease or dysfunction. _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic."
+
+# Define the x and y variables for the dotplot
+x <- data_iq$z_mean_narrow
+y <- data_iq$narrow
+
+# plot args
+colors <- NULL
+return_plot <- TRUE
+
+# Define the filename for the plot
+filename <- "fig_iq_narrow.svg"
+
+# Define the scales to keep
+# keep <- c("General Ability", "Crystallized Knowledge", "Fluid Reasoning")
+# data_iq <- dplyr::filter(data_iq, scale %in% keep)
+
+# Create the dotplot using the dotplot function from the NeurotypR package
+NeurotypR::dotplot2(
+  data = data_iq,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename,
+  na.rm = TRUE
+)
 ```
 
 ```{=typst}
 // Define a function to create a domain with a title, a table, and a figure
 #let domain(title: none, file_qtbl, file_fig) = {
-  let font = (font: "Roboto Slab", size: 0.5em)
+  let font = (font: "Roboto Slab", size: 0.7em)
   set text(..font)
   pad(top: 0.5em)[]
   grid(
@@ -286,7 +324,7 @@ options(warn = 0) # Reset to default behavior
       caption: figure.caption(
         position: bottom,
         [
-        The Neurocognitive Index evaluates cognitive functioning across five domains: Attention (focus, concentration, and information processing), Language (verbal communication, naming, comprehension, and fluency), Memory (immediate and delayed verbal and visual recall), Spatial (visuospatial perception, construction, and orientation), and Executive Functions (planning, problem-solving, and mental flexibility). #footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically significant and a cause for greater concern.]
+        _General Ability_ is the overall skill to reason, solve problems, and gain useful knowledge. _Crystallized Knowledge_ involves understanding the world through language and reasoning. _Fluid Reasoning_ is the logical analysis and solution of new problems, identifying underlying patterns, and applying logic. #footnote[In the figures presented here and below, scores have been converted to _z_-scores, where an average score is 0.0 and the standard deviation is 1.0. Any scores below the −1.0 ticks are moderately concerning. Scores at or beyond the −2.0 ticks are clinically significant and a cause for greater concern.]
         ],
       ),
       placement: none,
@@ -297,7 +335,6 @@ options(warn = 0) # Reset to default behavior
   )
 }
 ```
-
 ```{=typst}
 // Define the title of the domain
 #let title = "General Cognitive Ability"
@@ -306,7 +343,20 @@ options(warn = 0) # Reset to default behavior
 #let file_qtbl = "table_iq.png"
 
 // Define the file name of the figure
-#let file_fig = "fig_iq.svg"
+#let file_fig = "fig_iq_subdomain.svg"
+
+// The title is appended with ' Index Scores'
+#domain(title: [#title Scores], file_qtbl, file_fig)
+```
+```{=typst}
+// Define the title of the domain
+#let title = "General Cognitive Ability"
+
+// Define the file name of the table
+#let file_qtbl = "table_iq.png"
+
+// Define the file name of the figure
+#let file_fig = "fig_iq_narrow.svg"
 
 // The title is appended with ' Index Scores'
 #domain(title: [#title Scores], file_qtbl, file_fig)

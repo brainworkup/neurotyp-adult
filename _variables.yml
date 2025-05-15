@@ -2,9 +2,9 @@ version: 0.1.0
 
 # VARIABLES
 case_number: BA516979
-patient: Itamar
-first_name: Itamar
-last_name: Cohen
+patient: Biggie
+first_name: Biggie
+last_name: Smalls
 dob: 1987-10-31
 doe: 2024-09-08
 doe2: 2024-09-11
