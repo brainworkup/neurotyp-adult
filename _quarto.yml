@@ -1,20 +1,28 @@
 project:
   type: default
-  execute-dir: file
+  execute-dir: project
   render:
-    - Biggie.qmd
+    - template.qmd
+
+metadata-files:
+  - _variables.yml
 
 format:
-  neurotyp-forensic-typst:
+  neurotyp-adult-typst:
     keep-typ: true
     keep-md: true
     papersize: "a4"
-    bodyfont: "Equity B OTF"
-    sansfont: "Work Sans"
-    fontsize: 12pt
+    fontsize: 11pt
+    bodyfont: "Source Serif 4"
+    sansfont: "Source Sans 3"
     number-sections: false
-    citeproc: false
-    csl: src/bib/apa.csl
+    number-offset: 1
+    shift-heading-level-by: 0
+    fig-width: 6
+    fig-height: 4
+    fig-format: svg
+    bibliography: src/bib/refs.bib
+    citeproc: true
 
 execute:
   warning: false
