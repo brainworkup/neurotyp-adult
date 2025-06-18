@@ -1,6 +1,10 @@
-# APPENDIX
+```{=typst}
+= APPENDIX
+```
 
-{{< include _03-03_examiner_qualifications.qmd >}}
+<!-- {{< include _03-03a_informed_consent.qmd >}} -->
+
+<!-- {{< include _03-03b_examiner_qualifications.qmd >}} -->
 
 ## Test Selection Procedures
 
@@ -9,23 +13,21 @@ Neuropsychological tests are performance-based, and cognitive performance is sum
 ## Conversion of Test Scores
 
 ```{=typst}
-#import "@preview/tablex:0.0.6": tablex, gridx, hlinex, vlinex, colspanx, rowspanx
-#import "@preview/tablem:0.1.0": tablem
+#import "@preview/tablem:0.2.0": tablem, three-line-table
 
 #set text(10pt)
 #let three-line-table = tablem.with(
   render: (columns: auto, ..args) => {
-    tablex(
+    table(
       columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr),
-      auto-lines: false,
       align: (col, row) =>
             if row == 0 { center + horizon }
             else if col == 0 { left + horizon }
             else { center + horizon },
-      hlinex(y: 0),
-      hlinex(y: 1),
+      table.hline(y: 0),
+      table.hline(y: 1),
       ..args,
-      hlinex(),
+      table.hline(),
     )
   }
 )
