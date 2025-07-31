@@ -43,7 +43,6 @@ social <- social |>
     pass,
     verbal,
     timed,
-    description,
     result,
     z,
     z_mean_domain,
@@ -62,7 +61,7 @@ social <- social |>
 
 # Write the 'social' data frame to a CSV file
 # The file name is derived from the 'pheno' variable
-readr::write_excel_csv(social, paste0(pheno, ".csv"), na = "", col_names = TRUE, append = FALSE)
+readr::write_excel_csv(social, here::here("data", paste0(pheno, ".csv")), na = "", col_names = TRUE, append = FALSE)
 ```
 
 ```{r}

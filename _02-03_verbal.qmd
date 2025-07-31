@@ -18,7 +18,7 @@ pheno <- "verbal"
 #| include: false
 
 # Read the CSV file into a data frame
-verbal <- readr::read_csv("neurocog.csv")
+verbal <- readr::read_csv("data/neurocog.csv")
 
 # Filter the data frame to keep only rows where 'domain' equals 'domains'
 verbal <- verbal |> dplyr::filter(domain %in% domains)
@@ -39,7 +39,6 @@ verbal <- verbal |>
     pass,
     verbal,
     timed,
-    description,
     result,
     z,
     z_mean_domain,
@@ -63,7 +62,7 @@ verbal <- verbal |>
 # If the file already exists, it is overwritten (not appended)
 readr::write_excel_csv(
   verbal,
-  paste0(pheno, ".csv"),
+  here::here("data", paste0(pheno, ".csv")),
   na = "",
   col_names = TRUE,
   append = FALSE
@@ -162,10 +161,8 @@ scales <- c(
 )
 
 # Filter the data using the filter_data function from the bwu library
-# The domain is specified by the 'domains' variable
-# The scale is specified by the 'scales' variable
 data_verbal <-
-  bwu::filter_data(
+  NeurotypR::filter_data(
     data = verbal,
     domain = domains,
     scale = scales
@@ -207,6 +204,7 @@ fn_scaled_score <- gt::md(
   "Scaled score:  Mean = 10 [50th‰], SD ± 3 [16th‰, 84th‰]"
 )
 fn_t_score <- gt::md("T-score: Mean = 50 [50th‰], SD ± 10 [16th‰, 84th‰]")
+
 fn_z_score <- gt::md(
   "Score = z-score (Mean = 0 [50th‰], SD ± 1 [16th‰, 84th‰])"
 )
@@ -227,16 +225,16 @@ grp_verbal <- list(
   ),
   standard_score = c(
     # "WPPSI-IV",
-    # "NAB-S",
+    "NAB-S"
     # "CELF-5",
     # "RBANS",
-    "NAB"
+    # "NAB"
   ),
   t_score = c(
-    # "NAB-S",
-    # "NIH EXAMINER",
+    "NAB-S",
+    "NIH EXAMINER"
     # "WASI-2",
-    "NAB"
+    # "NAB"
   )
 )
 
@@ -343,6 +341,7 @@ options(warn = 0) # Reset to default behavior
         )
     }
 ```
+
 ```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
@@ -354,7 +353,7 @@ options(warn = 0) # Reset to default behavior
 )
 ```
 
-```{=typst}
+<!-- ```{=typst}
 #let title = "Verbal/Language"
 #let file_qtbl = "table_verbal.png"
 #let file_fig = "fig_verbal_narrow.svg"
@@ -363,4 +362,4 @@ options(warn = 0) # Reset to default behavior
   file_qtbl,
   file_fig
 )
-```
+``` -->
