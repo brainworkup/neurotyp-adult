@@ -96,16 +96,6 @@ scales <- c(
   "Planning",
   "Self-Monitoring",
   "Working Memory",
-  # Conners 4
-  "Inattention/Executive Dysfunction",
-  "Hyperactivity",
-  "Impulsivity",
-  "Emotional Dysregulation",
-  "Negative Self-Concept",
-  "ADHD Inattentive Symptoms",
-  "ADHD Hyperactive/Impulsive Symptoms",
-  "Total ADHD Symptoms",
-  "ADHD Index",
   # PAI
   "Inattention (INATTN) Index",
   # CAARS-2
@@ -138,7 +128,7 @@ data_adhd_self <-
       test == "cefi_self" |
       test == "caars2_self" |
       test == "brown_efa_self" |
-      test == "pai" |
+      test == "pai_inatt" |
       test == "cefi_self_12-18"
   ) |>
   dplyr::arrange(dplyr::desc(percentile)) |>
