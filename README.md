@@ -3,7 +3,7 @@
 ## Use template
 
 ```bash
-quarto use brainworkup/neurotyp-adult
+quarto use template brainworkup/neurotyp-adult
 ```
 
 This will install the format extension and create an example qmd file that you
@@ -12,7 +12,7 @@ can use as a starting place for your document.
 ## Update template
 
 ```bash
-quarto update brainworkup/neurotyp-adult
+quarto update template brainworkup/neurotyp-adult
 ```
 
 This will update to the latest version.
