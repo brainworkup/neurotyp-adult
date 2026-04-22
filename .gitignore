@@ -8,7 +8,6 @@ _freeze/
 .env*
 .flaskenv*
 .history/
-.history/
 .idea
 .Rproj.user
 .tmp.drivedownload/
