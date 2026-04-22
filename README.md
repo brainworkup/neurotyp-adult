@@ -73,21 +73,8 @@ quarto update extension brainworkup/neurotyp-adult
    ---
    ```
 
-2. **Populate section files** — the template includes the following modular `.qmd` files that you populate with patient-specific content:
 
-   | File | Section |
-   |------|---------|
-   | `_00-00_tests.qmd` | Tests administered |
-   | `_01-00_nse.qmd` | Neurological symptom evaluation |
-   | `_01-01_behav_obs.qmd` | Behavioral observations |
-   | `_domains_to_include.qmd` | Cognitive domain findings (dynamic) |
-   | `_03-00_sirf.qmd` | Summary, impressions, recommendations & findings |
-   | `_03-00_sirf_text.qmd` | SIRF narrative text |
-   | `_03-01_recs.qmd` | Clinical recommendations |
-   | `_03-02_signature.qmd` | Clinician signature |
-   | `_03-03_appendix.qmd` | Appendices |
-
-3. **Render the report:**
+1. **Render the report:**
 
    ```bash
    quarto render template.qmd
@@ -118,7 +105,7 @@ neurotyp-adult/
 - A4 page with 30 mm top margin and 25 mm side margins
 - Pages 2+ automatically display a **CONFIDENTIAL** header with patient name and date
 - Justified body text; centered level-0 headings
-- Preferred fonts: IBM Plex Sans/Serif, Source Sans 3, JetBrains Mono (falls back gracefully if unavailable)
+- Preferred fonts: Equity B, IBM Plex Sans/Serif, Source Sans 3, JetBrains Mono (falls back gracefully if unavailable)
 
 ---
 
@@ -128,7 +115,7 @@ neurotyp-adult/
 |-------------|-------|
 | [Quarto](https://quarto.org/) ≥ 1.4.0 | Document engine |
 | [Typst](https://typst.app/) | PDF rendering (bundled with Quarto) |
-| R + [`neuro2`](https://github.com/brainworkup/NeurotypR) | Data processing & visualization |
+| [cingulate](https://github.com/brainworkup/cingulate) | Data processing & visualization |
 | [Ollama](https://ollama.com/) *(optional)* | Local LLM backend for AI-assisted narratives |
 
 Key R packages used inside the template: `dplyr`, `readr`, `here`, `yaml`, `ggplot2`, `systemfonts`.
@@ -141,14 +128,14 @@ Key R packages used inside the template: `dplyr`, `readr`, `here`, `yaml`, `ggpl
 |------|-------------|
 | [`brainworkup/neurotyp-pediatric`](https://github.com/brainworkup/neurotyp-pediatric) | Pediatric report template |
 | [`brainworkup/neurotyp-forensic`](https://github.com/brainworkup/neurotyp-forensic) | Forensic evaluation template |
-| [`brainworkup/NeurotypR`](https://github.com/brainworkup/NeurotypR) | Core R package (`neuro2`) |
+| [`brainworkup/cingulate`](https://github.com/brainworkup/cingulate) | Core R package |
 
 ---
 
 ## Author
 
 **Joey W. Trampush, Ph.D.**  
-Brainworkup Institute  
+@brainworkup  
 [joey.trampush@brainworkup.org](mailto:joey.trampush@brainworkup.org)
 
 ---
