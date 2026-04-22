@@ -1,0 +1,11 @@
+{
+  "permission": {
+    "external_directory": {
+      "/Users/joey/neurotyp/*": "allow",
+      "*": "allow"
+    },
+    "edit": {
+      "*.md": "allow"
+    }
+  }
+}
