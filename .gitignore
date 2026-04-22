@@ -44,3 +44,4 @@ neuropsych_report_cache/
 package/dist/**
 quarto_cli.egg-info
 .git.archive/
+.omx/

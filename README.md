@@ -1,6 +1,6 @@
 # Neurotyp Adult — Neuropsychological Report Template
 
-A [Quarto](https://quarto.org/) extension that renders professional adult neuropsychological evaluation reports using [Typst](https://typst.app/). Part of the broader **Neurotyp** ecosystem maintained by [Brainworkup Institute](https://brainworkup.org/).
+A [Quarto](https://quarto.org/) extension that renders professional adult neuropsychological evaluation reports using [Typst](https://typst.app/). Part of the broader **Neurotyp** ecosystem maintained by [brainworkup](https://brainworkup.org/).
 
 **Version:** 0.2.0 | **Requires:** Quarto ≥ 1.4.0 | **License:** MIT
 
@@ -20,7 +20,7 @@ A [Quarto](https://quarto.org/) extension that renders professional adult neurop
 - Clinician signature block
 - Appendices
 
-The template integrates with the [`neuro2`](https://github.com/brainworkup/NeurotypR) R package for data processing, visualization, and AI-assisted narrative generation via a local [Ollama](https://ollama.com/) backend.
+The template integrates with the [`cingulate`](https://github.com/brainworkup/cingulate) R package for data processing, visualization, and AI-assisted narrative generation via a local [Ollama](https://ollama.com/) backend.
 
 ---
 
