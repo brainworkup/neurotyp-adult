@@ -34,8 +34,6 @@ _*_*.typ
 *.jpg
 *.pdf
 *.png
-*.qmd
-*.code-workspace
 build
 cache/
 local_data
