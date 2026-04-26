@@ -136,7 +136,6 @@ Key R packages used inside the template: `dplyr`, `readr`, `here`, `yaml`, `ggpl
 
 **Joey W. Trampush, Ph.D.**  
 @brainworkup  
-[joey.trampush@brainworkup.org](mailto:joey.trampush@brainworkup.org)
 
 ---
 
