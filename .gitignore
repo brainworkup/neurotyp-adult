@@ -1,2 +1,7 @@
 /.quarto/
 YAML_CONSOLIDATION.md
+.DS_Store
+.env
+.env*
+.history/
+.positai/

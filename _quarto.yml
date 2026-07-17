@@ -1,7 +1,7 @@
 project:
   type: default
-  title: "report"
-  output-dir: report
+  title: "neurotyp-adult"
+  execute-dir: project
 
   render:
     - template.qmd

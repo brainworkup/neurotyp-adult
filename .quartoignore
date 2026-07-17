@@ -30,13 +30,11 @@ _freeze/
 /tests/cov_profile.lcov
 /tests/test-out.json
 _*_*.html
-_*_*.typ
-_extensions/
-.quartoignore
-*.jpg
+
+
+
 *.pdf
-*.png
-*.qmd
+
 *.code-workspace
 build
 cache/
