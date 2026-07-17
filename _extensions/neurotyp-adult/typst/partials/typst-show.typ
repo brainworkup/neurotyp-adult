@@ -1,0 +1,26 @@
+#show: report.with(
+$if(title)$
+  title: "$title$",
+$endif$
+$if(name)$
+  name: [$name$],
+$endif$
+$if(doe)$
+  doe: [$doe$],
+$endif$
+$if(patient)$
+  patient: [$patient$],
+$endif$
+$if(papersize)$
+  paper: "$papersize$",
+$endif$
+$if(font)$
+  font: ("$font$"),
+$endif$
+$if(fontsize)$
+  fontsize: $fontsize$,
+$endif$
+$if(section-numbering)$
+  sectionnumbering: "$section-numbering$",
+$endif$
+)
