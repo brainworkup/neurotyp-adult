@@ -42,3 +42,4 @@ package/dist/**
 quarto_cli.egg-info
 .git.archive/
 .omx/
+adult.code-workspace
