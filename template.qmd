@@ -30,75 +30,12 @@ knitr::opts_knit$set(
   optipng = knitr::hook_optipng
 )
 
-# options(
-#   cingulate.llm.backend = "omlx",
-#   cingulate.llm.temperature = 0.2,
-#   cingulate.llm.model_override = NULL
-# )
-
 # Enable chunk caching for faster re-renders
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, cache.comments = FALSE)
-
-# Make render faster by default: skip regenerating assets if present,
-# suppress verbose logging, and avoid PDF duplicates of tables
-options(
-  cingulate.skip_if_exists = TRUE,
-  cingulate.verbose = FALSE,
-  cingulate.tables.pdf = FALSE
-)
 
 # Set environment variables with default values
 Sys.setenv(PATIENT = "{{< var patient >}}")
 patient <- Sys.getenv("PATIENT")
-
-# Prefer document fonts for figures (Source or IBM Plex)
-pick_font <- function(candidates) {
-  if (requireNamespace("systemfonts", quietly = TRUE)) {
-    for (f in candidates) {
-      ok <- FALSE
-      try(
-        {
-          info <- systemfonts::font_info(family = f)
-          ok <- is.data.frame(info) && nrow(info) > 0
-        },
-        silent = TRUE
-      )
-      if (ok) {
-        return(f)
-      }
-    }
-    return(utils::tail(candidates, 1))
-  }
-  candidates[[1]]
-}
-
-preferred_sans <- c("IBM Plex Sans", "Source Sans 3", "Helvetica", "Arial")
-preferred_serif <- c(
-  "Equity B",
-  "IBM Plex Serif",
-  "Source Serif 4",
-  "Times"
-)
-preferred_mono <- c("IBM Plex Mono", "Menlo", "Courier")
-
-sans_font <- pick_font(preferred_sans)
-serif_font <- pick_font(preferred_serif)
-mono_font <- pick_font(preferred_mono)
-
-# Map svglite generics to selected families so SVG text uses them
-options(
-  svglite.system_fonts = list(
-    sans = sans_font,
-    serif = serif_font,
-    mono = mono_font
-  )
-)
-
-# Set ggplot2 default text family to the selected sans family
-ggplot2::theme_set(
-  ggplot2::theme_get() +
-    ggplot2::theme(text = ggplot2::element_text(family = sans_font))
-)
 ```
 
 ```{=typst}
@@ -115,18 +52,18 @@ ggplot2::theme_set(
 *DATE OF REPORT*: {{< var date_of_report >}} \
 ]
 ```
-{{< include_00-00_tests_luria.qmd >}}
+{{< include _00-00_tests.qmd >}}
 
-{{< include_01-00_nse_luria.qmd >}}
+{{< include _01-00_nse.qmd >}}
 
-{{< include_01-01_behav_obs_luria.qmd >}}
+{{< include _01-01_behav_obs.qmd >}}
 
 ```{=typst}
 = NEUROCOGNITIVE FINDINGS
 ```
 <!-- Domain sections - dynamically included based on available data -->
 
-{{< include _domains_to_include.qmd >}}
+<!-- {{< include _domains_to_include.qmd >}} -->
 
 {{< pagebreak >}}
 
@@ -136,8 +73,8 @@ ggplot2::theme_set(
 
 {{< include _03-01_recs.qmd >}}
 
-{{< include _03-02_signature_luria.qmd >}}
+{{< include _03-02_signature.qmd >}}
 
 {{< pagebreak >}}
 
-{{< include _03-03_appendix_luria.qmd >}}
+{{< include _03-03_appendix.qmd >}}
