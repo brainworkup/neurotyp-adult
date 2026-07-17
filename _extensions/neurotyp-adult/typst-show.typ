@@ -17,6 +17,15 @@ $endif$
 $if(font)$
   font: ("$font$"),
 $endif$
+$if(mainfont)$
+  main-font: ("$mainfont$"),
+$endif$
+$if(bodyfont)$
+  body-font: ("$bodyfont$"),
+$endif$
+$if(sansfont)$
+  sans-font: ("$sansfont$"),
+$endif$
 $if(fontsize)$
   fontsize: $fontsize$,
 $endif$

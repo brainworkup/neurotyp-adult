@@ -25,7 +25,7 @@
 ) = {
   // Metadata
   set document(title: title, author: author)
-  
+
   // Set page size, margins, and header.
   // Set up page properties
   set page(
@@ -36,7 +36,7 @@
     number-align: center,
     columns: cols,
   )
-  
+
   // Add conditional header using page state
   set page(header: context {
     if counter(page).get().first() > 1 {
@@ -52,24 +52,24 @@
       ]
     }
   })
-  
+
   // align headers
   show heading.where(level: 0): set align(center)
   show heading.where(level: 1): set align(left)
-  
+
   // Set paragraph justification and leading.
   set par(justify: true)
-  
+
   // Set text and body font family.
   set text(font: font, size: fontsize, lang: lang, region: region)
   show math.equation: set text(weight: 400)
-  
+
   // Set heading numbering.
   set heading(numbering: sectionnumbering)
-  
+
   // Set heading font.
   show heading: set text(font: heading-family)
-  
+
   // Set run-in subheadings, starting at level 4.
   show heading: it => {
     if it.level > 3 {
@@ -79,26 +79,26 @@
       it
     }
   }
-  
+
   // Links
-  show link: set text(font: body-font, fill: rgb(154, 37, 60), weight: 450)
+  show link: set text(font: font, fill: rgb(154, 37, 60), weight: 450)
   show link: underline
-  
+
   // Logo
   block(figure(image("assets/logo.png")))
-  
+
   // Title row.
   align(center)[
     #block(text(font: font, weight: 600, 1.75em, title))
     #v(0em, weak: true)
   ]
-  
+
   if date != none {
     align(center)[#block(inset: 1em)[
       #date
     ]]
   }
-  
+
   if cols == 1 {
     doc
   } else {

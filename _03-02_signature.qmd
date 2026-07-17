@@ -12,7 +12,7 @@ Respectfully submitted,
 #| echo: false
 #| cache: true
 
-sig_path <- file.path(here::here("signature.png"))
+sig_path <- file.path(here::here("assets", "signature.png"))
 knitr::include_graphics(sig_path)
 ```
 
