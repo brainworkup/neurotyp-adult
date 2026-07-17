@@ -17,6 +17,42 @@
       "panel.border": "#2c4376",
       "tab.activeBorder": "#2c4376"
     },
-    "peacock.color": "#1e2e51"
+    "peacock.color": "#1e2e51",
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/CVS": true,
+      "**/.ruby-lsp": true,
+      "**/.cache": true,
+      "**/.next": true,
+      "**/node_modules/": true,
+      "**/package-lock.json": true,
+      "**/yarn.lock": true,
+      "vendor": true,
+      "**/npm-debug.log": true,
+      "**/dist": true,
+      "**/*.bs.js": true,
+      ".quarto": true,
+      ".omx": true,
+      ".history": true,
+      ".devin": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.code-search": true,
+      "**/.ruby-lsp": true,
+      "**/.git": true,
+      "dist": true,
+      "out": true,
+      "coverage": true,
+      ".quarto": true,
+      ".omx": true,
+      ".history": true,
+      ".devin": true
+    }
   }
 }

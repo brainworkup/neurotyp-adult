@@ -1,0 +1,53 @@
+project:
+  type: default
+  title: "report"
+  output-dir: report
+
+  render:
+    - template.qmd
+
+metadata-files:
+  - config.patient.yml
+  - _variables.yml
+
+execute:
+  warning: false
+  echo: false
+  eval: true
+  message: false
+  freeze: auto
+  cache: true
+  engine: knitr
+  tools:
+    r: "/usr/local/bin/R"
+
+editor:
+  markdown:
+    wrap: sentence
+    canonical: true
+fig-width: 6
+fig-asp: 0.618
+out-width: 70%
+fig-align: center
+fig-format: svg
+fig-dpi: 270
+df-print: kable
+
+format:
+  neurotyp-adult-typst:
+    keep-typ: true
+    keep-md: true
+    papersize: "us-letter"
+    font: "Equity B"
+    heading-family: "Source Sans 3"
+    fontsize: 11.5pt
+    number-sections: false
+    number-offset: 1
+    citeproc: true
+    csl: inst/resources/apa.csl
+    reference-location: document
+    bibliography: inst/resources/refs.bib
+    shift-heading-level-by: 0
+    fig-width: 6
+    fig-height: 4
+    fig-format: svg

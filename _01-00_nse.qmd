@@ -1,0 +1,64 @@
+# NEUROBEHAVIORAL STATUS EXAM
+
+## Reason for Referral
+
+<!-- Information to include in Reason for Referral Section
+• List name and position of referral source
+• Reason the individual is to be evaluated—What questions are to be addressed?
+• Concerns of parent, caregiver, teacher, or examinee (if applicable)
+• Previous diagnoses, disabilities, or medical concerns -->
+
+## Background
+
+<!-- **Information to Include in Background Information Section**
+Provide pertinent information that has been obtained from all sources, including the referral source, family members, examinee, teachers, medical records, and so on. Do not include needless details or gossip. Following are examples of information that should be included:
+• Current family dynamics (spouse, children, siblings, etc.)
+• Medical and psychiatric history
+• Developmental history
+• Educational history (note any special services)
+• Employment history (for adults)
+• Previous therapeutic intervention
+• Current stressors
+• Summary of past evaluations -->
+
+**Cognitive complaints**: {{sustained attention}}, {{working memory}}, and
+{{organization}}.
+
+## Relevant History
+
+### Past Neuropsychological Test Results
+
+{{prior_testing}}
+
+### Birth/Early Development
+
+- {{birth_early_development}}
+- {{developmental_milestones}}
+
+### Medical History
+
+::: {.block above="1.2em"}
+- **Current**: {{current_medical_conditions}}
+- **Family**: {{family_medical_history}}
+- **Medications**: {{medications}}
+- **Appetite/Weight**: {{appetite_weight}}
+- **Sleep**: {{sleep}}
+- **Neurological Injury**: {{neurological_injury}}
+- **Psychiatric**: {{psychiatric}}
+:::
+
+### Emotional/Behavioral/Social
+
+{{emotional_behavioral_social}}
+
+### Educational History
+
+{{educational_history}}
+
+### Occupational History
+
+{{occupational_history}}
+
+### Family/Cultural Context
+
+{{family_cultural_context}}

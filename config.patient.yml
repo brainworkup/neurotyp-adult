@@ -1,0 +1,78 @@
+# config.patient.yml
+# SINGLE SOURCE OF TRUTH for all patient/report config
+
+project:
+  template: neurotyp-adult-typst
+  output-dir: report
+
+patient:
+  # Identity
+  name: Biggie
+  last_name: Smalls
+  first_name: Biggie
+  age: 15
+  dob: "2010-05-15"
+  sex: male
+  sex_cap: Male
+  handedness: right
+
+  # Pronouns (derived from sex, but can override)
+  pronouns: he/him
+  he_she: he
+  he_she_cap: He
+  his_her: his
+  his_her_cap: His
+  him_her: him
+  him_her_cap: Him
+
+  # Education & demographics
+  education: "10 years"
+  age_group: child
+  case_number: ""
+
+evaluation:
+  # Dates
+  dates_of_exam:
+    - "2025-01-15"
+    - "2025-01-22"
+    - "2025-01-29"
+  doe_primary: "2025-01-15"
+  doe_secondary: "2025-01-22"
+  doe_tertiary: "2025-01-29"
+  date_of_report: "2025-02-10"
+
+provider:
+  clinician: "Joey Trampush, Ph.D."
+  clinic_name: "Brainworkup Neuropsychology, LLC"
+  clinic_address: "Marina del Rey, California 90292"
+  attorney: ""
+  referral_source: "Dr. Dre"
+  observer: "Tupac Shakur"
+  observer_relation: "friend"
+
+diagnoses:
+  primary: "ADHD, Combined Type"
+  secondary: "Anxiety Disorder"
+  tertiary: "Major Depressive Disorder"
+
+report:
+  include_summary: true
+  include_recommendations: true
+  include_scores_table: true
+  include_appendix: true
+
+data:
+  input_dir: data-raw
+  output_dir: data
+  format: all
+
+processing:
+  use_duckdb: false
+  parallel: true
+  verbose: false
+
+llm:
+  base_url: "http://localhost:8000/v1"
+  model: "dealignai/Gemma-4-12B-it-qat-JANG_4M-CRACK"
+  temperature: 0.4
+  max_tokens: 8192

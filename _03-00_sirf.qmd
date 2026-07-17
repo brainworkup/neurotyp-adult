@@ -1,0 +1,233 @@
+# SUMMARY/IMPRESSION {#sec-sirf}
+
+```{r}
+#| label: make-g
+#| include: false
+#| eval: false
+scales <- c(
+  "Academic Skills",
+  "Attention",
+  "Attention Span",
+  "Attention/Executive",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  "Cognitive Proficiency",
+  "Crystallized Knowledge",
+  "Delayed Recall",
+  "Executive Functions",
+  "Global Neurocognitive Index (G)",
+  "Verbal Fluency",
+  "Fluid Reasoning",
+  "General Ability",
+  "Learning Efficiency",
+  "Memory",
+  "Planning",
+  "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory",
+  "Reading",
+  "Math",
+  "Writing",
+  "Academic Fluency"
+)
+
+# make g
+g <- readxl::read_excel("data-raw/index_scores.xlsx") |>
+  janitor::clean_names() |>
+  dplyr::mutate(z = (index - 100) / 15) |>
+  dplyr::filter(composite_name %in% scales) |>
+  dplyr::rename(
+    scale = composite_name,
+    score = index,
+    ci_95 = x95_percent_ci
+  ) |>
+  dplyr::mutate(
+    test = "index_score",
+    test_name = "Composite Scores",
+    domain = "General Cognitive Ability",
+    subdomain = scale,
+    test_type = "npsych_test"
+  ) |>
+  cingulate::gpluck_make_score_ranges(range = "", test_type = "npsych_test") |>
+  dplyr::select(
+    scale,
+    score,
+    ci_95,
+    z,
+    percentile,
+    range,
+    test,
+    test_name,
+    domain,
+    subdomain,
+    test_type,
+    reliability,
+    composition
+  )
+
+# save g.csv
+readr::write_csv(g, "data/g.csv")
+```
+
+```{r}
+#| label: fig-g
+#| include: false
+#| eval: false
+#| fig-cap: "Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-Scores have a mean of 0 and a standard deviation of 1."
+g <- readr::read_csv("data/g.csv")
+
+# scales
+keep <- c(
+  "General Ability",
+  "Academic Skills",
+  "Fluid Reasoning",
+  # "Attention/Executive",
+  "Attention",
+  "Attention Span",
+  "Attentional Fluency",
+  "Cognitive Efficiency",
+  # "Cognitive Proficiency",
+  "Crystallized Knowledge",
+  "Executive Functions",
+  # "Global Neurocognitive Index (G)",
+  "Verbal Fluency",
+  "Delayed Recall",
+  "Learning Efficiency",
+  # "Memory",
+  "Planning",
+  # "Processing Speed",
+  "Psychomotor Speed",
+  "Verbal/Language",
+  "Visual Perception/Construction",
+  "Working Memory",
+  "Reading",
+  "Math",
+  "Writing",
+  "Academic Fluency"
+)
+
+g <- dplyr::filter(g, scale %in% keep)
+g <- g[complete.cases(g$z), ]
+
+pheno <- "g"
+data <- g
+x <- g$z
+y <- g$scale
+colors <- NULL
+return_plot <- TRUE
+filename <- "figs/fig_g.svg"
+
+# this is carry-over code; if going to keep this, then need to update to R6
+cingulate::dotplot(
+  data = g,
+  x = x,
+  y = y,
+  colors = colors,
+  return_plot = return_plot,
+  filename = filename
+)
+```
+
+```{r}
+#| label: setup-sirf
+#| include: false
+#| eval: true
+# Try to load cingulate package, if not available, source R6 classes directly
+if ("cingulate" %in% rownames(installed.packages())) {
+  library(cingulate)
+} else {
+  # When running from development, source R6 classes
+  if (dir.exists("R")) {
+    source("R/DomainProcessorR6.R")
+    source("R/ReportTemplateR6.R")
+    source("R/NeuropsychReportSystemR6.R")
+    source("R/DotplotR6.R")
+  } else {
+    stop("Cannot find R directory with R6 class files")
+  }
+}
+
+# Function to read data in available format
+read_data <- function(base_path) {
+  if (file.exists(paste0(base_path, ".parquet"))) {
+    return(arrow::read_parquet(paste0(base_path, ".parquet")))
+  } else if (file.exists(paste0(base_path, ".csv"))) {
+    return(readr::read_csv(paste0(base_path, ".csv")))
+  } else if (file.exists(paste0(base_path, ".feather"))) {
+    return(arrow::read_feather(paste0(base_path, ".feather")))
+  } else {
+    stop(paste("No data file found for", base_path))
+  }
+}
+
+# Load all domain data
+neurocog <- read_data("data/neurocog")
+
+# # Define domain variables explicitly to avoid the "object not found" error
+domain_iq <- "General Cognitive Ability"
+domain_academics <- "Academic Skills"
+domain_verbal <- "Verbal/Language"
+domain_spatial <- "Visual Perception/Construction"
+domain_memory <- "Memory"
+domain_executive <- "Attention/Executive"
+domain_motor <- "Motor"
+domain_social <- "Social Cognition"
+domain_adhd <- "ADHD/Executive Function"
+domain_emotion <- "Emotional/Behavioral/Social/Personality"
+domain_adaptive <- "Adaptive Functioning"
+domain_daily_living <- "Daily Living"
+
+# Create report system for overall summary
+report_system <- NeuropsychReportSystemR6$new(
+  config = list(patient = patient, domains = unique(neurocog$domain))
+)
+```
+
+```{r}
+#| label: fig-sirf-overall
+#| fig-cap: "Overall cognitive profile across all domains"
+#| include: false
+#| eval: true
+# Create overall summary plot
+domain_summary <- neurocog |>
+  dplyr::group_by(domain) |>
+  dplyr::summarize(
+    mean_z = mean(z, na.rm = TRUE),
+    mean_percentile = mean(percentile, na.rm = TRUE)
+  ) |>
+  dplyr::filter(!is.na(mean_z))
+
+# Create plot using R6 DotplotR6
+overall_plot <- DotplotR6$new(
+  data = domain_summary,
+  x = "mean_z",
+  y = "domain",
+  filename = "figs/fig_sirf_overall.svg",
+  theme = "fivethirtyeight",
+  point_size = 7
+)
+overall_plot$create_plot()
+```
+
+```{=typst}
+#let domain(file_fig) = {
+  let font = (font: "Roboto Slab", size: 0.7em)
+  set text(..font)
+  figure(
+    [#image(file_fig, width: 85%)],
+    placement: none,
+    caption: figure.caption(
+      position: bottom,
+      [Overall neurocognitive function subdomain plots of the patient's strengths and weaknesses. _Note:_ _z_-scores have a mean of 0 and a standard deviation of 1.],
+    ),
+    kind: "image",
+    supplement: [Figure],
+    gap: 0.5em,
+  )
+}
+
+#let file_fig = "figs/fig_sirf_overall.svg"
+#domain(file_fig)
+```
