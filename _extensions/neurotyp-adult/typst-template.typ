@@ -13,7 +13,7 @@
   font: "Equity B",
   fontsize: 11.5pt,
   title-size: 1.5em,
-  heading-family: "Equity B",
+  heading-family: "Source Sans 3",
   heading-weight: "bold",
   heading-style: "normal",
   heading-color: black,
@@ -53,7 +53,6 @@
     }
   })
   
-  
   // align headers
   show heading.where(level: 0): set align(center)
   show heading.where(level: 1): set align(left)
@@ -86,7 +85,7 @@
   show link: underline
   
   // Logo
-  block(figure(image("inst/resources/logo.png")))
+  block(figure(image("assets/logo.png")))
   
   // Title row.
   align(center)[

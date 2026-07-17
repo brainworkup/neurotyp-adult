@@ -115,11 +115,11 @@ ggplot2::theme_set(
 *DATE OF REPORT*: {{< var date_of_report >}} \
 ]
 ```
-{{< include _00-00_tests_luria.qmd >}}
+{{< include_00-00_tests_luria.qmd >}}
 
-{{< include _01-00_nse_luria.qmd >}}
+{{< include_01-00_nse_luria.qmd >}}
 
-{{< include _01-01_behav_obs_luria.qmd >}}
+{{< include_01-01_behav_obs_luria.qmd >}}
 
 ```{=typst}
 = NEUROCOGNITIVE FINDINGS

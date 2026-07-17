@@ -14,14 +14,8 @@ $endif$
 $if(papersize)$
   paper: "$papersize$",
 $endif$
-$if(mainfont)$
-  font: ("$mainfont$"),
-$endif$
-$if(bodyfont)$
-  body-font: ("$bodyfont$"),
-$endif$
-$if(sansfont)$
-  sans-font: ("$sansfont$"),
+$if(font)$
+  font: ("$font$"),
 $endif$
 $if(fontsize)$
   fontsize: $fontsize$,

@@ -1,10 +1,9 @@
 # ============================================================================
-# Concept 7: "Dual Identity" — Strategic Hybrid
+# Concept: "Dual Identity" — Strategic Hybrid
 # ============================================================================
 # Tone: Adapts to audience — warm for pediatric, authoritative for forensic
 # Best for: Practices that genuinely serve both parent and legal audiences
-# Name: Brainworkup Institute (parent brand)
-#   Sub-brands: Brainworkup Pediatric / Brainworkup Forensic
+# Name: brainworkup (always lowercase, deadmau5/bell hooks rule)
 # Tagline: Neuropsychological assessment across the lifespan
 #
 # NOTE: This is the PARENT brand. The color palette includes both "warm"
@@ -18,36 +17,34 @@
 
 meta:
   name:
-    full: "Brainworkup Institute"
-    short: "Brainworkup"
+    full: "brainworkup"
+    short: "brainworkup"
   link:
     home: https://brainworkup.org
     github: https://github.com/brainworkup/brainworkup.git
-    docs: https://docs.acmecorp.com
+    docs: https://docs.brainworkup.org
     twitter: https://twitter.com/brainworkup
-    linkedin: https://www.linkedin.com/company/brainworkup
-    facebook: https://www.facebook.com/brainworkup
+    linkedin: https://www.linkedin.com/joey.trampush?/brainworkup
+    facebook: https://www.facebook.com/brainworkup?
   description: |
-    Brainworkup Neuropsychology is a leading provider of innovative
-    neuropsychological assessments.
+    `brainworkup` is a leading provider of innovative neuropsychological assessments.
   founded: 2015
-
 
 logo:
   images:
-    icon: logos/logo.png
-    logo-light: logos/logo-transparent.png
-    logo-dark: logos/logo-transparent.png
-    favicon: logos/favicon.png
-#     header: logos/header-logo.png
-#     header-white: logos/header-logo-white.png
-#     full: logos/full-logo.svg
-  small: favicon
-#   medium:
-#     light: header
-#     dark: header-white
-  medium: logo-light
-  large: logo-light
+    icon: assets/logo-transparent.png
+    logo-light: assets/logo-transparent.png
+    logo-dark: assets/logo-transparent.png
+    favicon: assets/favicon.png
+    header: assets/logo_bwu.png
+    # header-white: assets/header-logo-white.png
+    full: assets/logo.png
+    small: assets/logo_bwu_small.png
+  medium: assets/logo-transparent-384.png #cool_logo_bwu.png
+  # medium:
+  # light: header
+  # dark: header-white
+  large: assets/logo-transparent.png
 
 color:
   palette:
@@ -155,7 +152,6 @@ defaults:
       brand-coral: "$brand-coral"
       brand-navy: "$brand-navy"
       brand-gold: "$brand-gold"
-
 
 ## <!---------------------------------------------------------------------------VERSION 2 ->
 
